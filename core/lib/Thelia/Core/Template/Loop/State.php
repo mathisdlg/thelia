@@ -28,6 +28,9 @@ use Thelia\Type\TypeCollection;
  * Country loop.
  *
  * Class Country
+ * 
+ * #doc-usage {loop type="state" name="the-loop-name" [argument="value"], [...]}
+ * #doc-desc State loop lists states.
  *
  * @author Julien Chanséaume <julien@thelia.net>
  *
@@ -44,6 +47,28 @@ class State extends BaseI18nLoop implements PropelSearchLoopInterface
 
     /**
      * @return ArgumentCollection
+	 * 
+	 * #doc-arg-name country
+	 * #doc-arg-desc A single or a list of country ids.
+	 * #doc-arg-example country="10,9", country: "500"
+	 * 
+	 * #doc-arg-name exclude
+	 * #doc-arg-desc A single or a list of state ids to exclude from the results.
+	 * #doc-arg-example exclude="2", exclude="1,4,7"
+	 * 
+	 * #doc-arg-name id
+	 * #doc-arg-desc A single or a list of state ids.
+	 * #doc-arg-example id="2", id="1,4,7"
+	 * 
+	 * #doc-arg-name order
+	 * #doc-arg-desc A list of values see sorting possible values
+	 * #doc-arg-default id
+	 * #doc-arg-example order="alpha_reverse"
+	 * 
+	 * #doc-arg-name visible
+	 * #doc-arg-desc A boolean value to return visible or not visible states (possible values : yes, no or *).
+	 * #doc-arg-default yes
+	 * #doc-arg-example visible="no"
      */
     protected function getArgDefinitions()
     {
@@ -131,6 +156,29 @@ class State extends BaseI18nLoop implements PropelSearchLoopInterface
         return $search;
     }
 
+	 /**
+	 * 
+	 * #doc-out-name $COUNTRY
+	 * #doc-out-desc the country the state belongs
+	 * 
+	 * #doc-out-name $ID
+	 * #doc-out-desc the state id
+	 * 
+	 * #doc-out-name $ISOCODE
+	 * #doc-out-desc the state ISO code
+	 * 
+	 * #doc-out-name $IS_TRANSLATED
+	 * #doc-out-desc check if the state is translated
+	 * 
+	 * #doc-out-name $LOCALE
+	 * #doc-out-desc The locale used for this research
+	 * 
+	 * #doc-out-name $TITLE
+	 * #doc-out-desc the state title
+	 * 
+	 * #doc-out-name $VISIBLE
+	 * #doc-out-desc true if the state is visible. False otherwise
+	 */
     public function parseResults(LoopResult $loopResult)
     {
         /** @var \Thelia\Model\State $state */

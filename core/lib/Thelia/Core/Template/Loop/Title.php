@@ -26,6 +26,9 @@ use Thelia\Model\CustomerTitleQuery;
  * Title loop.
  *
  * Class Title
+ * 
+ * #doc-usage {loop type="title" name="the-loop-name" [argument="value"], [...]}
+ * #doc-desc Title loop lists titles.
  *
  * @author Etienne Roudeix <eroudeix@openstudio.fr>
  *
@@ -37,6 +40,10 @@ class Title extends BaseI18nLoop implements PropelSearchLoopInterface
 
     /**
      * @return ArgumentCollection
+	 * 
+	 * #doc-arg-name id
+	 * #doc-arg-desc A single or a list of title ids.
+	 * #doc-arg-example id="2", id="1,4,7"
      */
     protected function getArgDefinitions()
     {
@@ -63,6 +70,29 @@ class Title extends BaseI18nLoop implements PropelSearchLoopInterface
         return $search;
     }
 
+	 /**
+	 * 
+	 * #doc-out-name $DEFAULT
+	 * #doc-out-desc return if the title is by default title
+	 * 
+	 * #doc-out-name $ID
+	 * #doc-out-desc the title id
+	 * 
+	 * #doc-out-name $IS_TRANSLATED
+	 * #doc-out-desc check if the content is translated
+	 * 
+	 * #doc-out-name $LOCALE
+	 * #doc-out-desc the locale (e.g. fr_FR) of the returned data
+	 * 
+	 * #doc-out-name $LONG
+	 * #doc-out-desc the full title
+	 * 
+	 * #doc-out-name $POSITION
+	 * #doc-out-desc the title position
+	 * 
+	 * #doc-out-name $SHORT
+	 * #doc-out-desc the short title
+	 */
     public function parseResults(LoopResult $loopResult)
     {
         /** @var CustomerTitleModel $title */

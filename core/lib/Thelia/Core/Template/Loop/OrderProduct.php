@@ -30,6 +30,10 @@ use Thelia\Type\BooleanOrBothType;
  * OrderProduct loop.
  *
  * Class OrderProduct
+ * 
+ * 
+ * #doc-usage {loop type="order_product" name="the-loop-name" [argument="value"], [...]}
+ * #doc-desc Order product loop displays Order products information.
  *
  * @author Etienne Roudeix <eroudeix@openstudio.fr>
  *
@@ -43,6 +47,20 @@ class OrderProduct extends BaseLoop implements PropelSearchLoopInterface
 
     /**
      * @return ArgumentCollection
+	 * 
+	 * #doc-arg-name id
+	 * #doc-arg-desc A single or a list of order product ids.
+	 * #doc-arg-example id="2", id="1,4,7"
+	 * 
+	 * #doc-arg-name order *
+	 * #doc-arg-desc A single order id.
+	 * #doc-arg-default null
+	 * #doc-arg-example order="2"
+	 * 
+	 * #doc-arg-name virtual
+	 * #doc-arg-desc A boolean value.
+	 * #doc-arg-default *
+	 * #doc-arg-example new="yes"
      */
     protected function getArgDefinitions()
     {
@@ -105,6 +123,114 @@ class OrderProduct extends BaseLoop implements PropelSearchLoopInterface
      * @throws \Propel\Runtime\Exception\PropelException
      *
      * @return LoopResult
+	 * 
+	 * #doc-out-name $CART_ITEM_ID
+	 * #doc-out-desc The related Cart Item ID of this order product
+	 * 
+	 * #doc-out-name $CHAPO
+	 * #doc-out-desc the order product short description
+	 * 
+	 * #doc-out-name $DESCRIPTION
+	 * #doc-out-desc the order product description
+	 * 
+	 * #doc-out-name $EAN_CODE
+	 * #doc-out-desc the product ean code
+	 * 
+	 * #doc-out-name $ID
+	 * #doc-out-desc the order product id
+	 * 
+	 * #doc-out-name $PRODUCT_ID
+	 * #doc-out-desc the product id
+	 * 
+	 * #doc-out-name $PARENT
+	 * #doc-out-desc the parent product in the cart, if the current product has one
+	 * 
+	 * #doc-out-name $POSTSCRIPTUM
+	 * #doc-out-desc the order product postscriptum
+	 * 
+	 * #doc-out-name $PRICE
+	 * #doc-out-desc the order product price (unit price)
+	 * 
+	 * #doc-out-name $PRICE_TAX
+	 * #doc-out-desc the order product taxes (unit price)
+	 * 
+	 * #doc-out-name $PRODUCT_SALE_ELEMENTS_ID
+	 * #doc-out-desc the order product sale elements id
+	 * 
+	 * #doc-out-name $PRODUCT_SALE_ELEMENTS_REF
+	 * #doc-out-desc the order product sale elements reference
+	 * 
+	 * #doc-out-name $PROMO_PRICE
+	 * #doc-out-desc the order product in promo price (unit price)
+	 * 
+	 * #doc-out-name $PROMO_PRICE_TAX
+	 * #doc-out-desc the order product in promo price taxes (unit price)
+	 * 
+	 * #doc-out-name $QUANTITY
+	 * #doc-out-desc the order product ordered quantity
+	 * 
+	 * #doc-out-name $REF
+	 * #doc-out-desc the order product reference
+	 * 
+	 * #doc-out-name $TAXED_PRICE
+	 * #doc-out-desc the order product price including taxes (unit price)
+	 * 
+	 * #doc-out-name $TAXED_PROMO_PRICE
+	 * #doc-out-desc the order product in promo price including taxes (unit price)
+	 * 
+	 * #doc-out-name $TAX_RULE_DESCRIPTION
+	 * #doc-out-desc the tax rule description for this item
+	 * 
+	 * #doc-out-name $TAX_RULE_TITLE
+	 * #doc-out-desc the tax rule title for this item
+	 * 
+	 * #doc-out-name $TITLE
+	 * #doc-out-desc the order product title
+	 * 
+	 * #doc-out-name $TOTAL_PRICE
+	 * #doc-out-desc the order product price (total price)
+	 * 
+	 * #doc-out-name $TOTAL_PROMO_PRICE
+	 * #doc-out-desc the order product in promo price (total price)
+	 * 
+	 * #doc-out-name $TOTAL_TAXED_PRICE
+	 * #doc-out-desc the order product price including taxes (total price)
+	 * 
+	 * #doc-out-name $TOTAL_TAXED_PROMO_PRICE
+	 * #doc-out-desc the order product in promo price including taxes (total price)
+	 * 
+	 * #doc-out-name $VIRTUAL
+	 * #doc-out-desc whatever the order product is a virtual product or not
+	 * 
+	 * #doc-out-name $VIRTUAL_DOCUMENT
+	 * #doc-out-desc the name of the file if the product is virtual.
+	 * 
+	 * #doc-out-name $WAS_IN_PROMO
+	 * #doc-out-desc whatever the order product sale elements was in promo or not
+	 * 
+	 * #doc-out-name $WAS_NEW
+	 * #doc-out-desc whatever the order product sale elements was new or not
+	 * 
+	 * #doc-out-name $WEIGHT
+	 * #doc-out-desc the order product sale elements weight
+	 * 
+	 * #doc-out-name $REAL_PRICE
+	 * #doc-out-desc the real price of the product
+	 * 
+	 * #doc-out-name $REAL_TAXED_PRICE
+	 * #doc-out-desc the real price of the product including taxes
+	 * 
+	 * #doc-out-name $REAL_PRICE_TAX
+	 * #doc-out-desc the real price of the taxe for the product
+	 * 
+	 * #doc-out-name $REAL_TOTAL_PRICE
+	 * #doc-out-desc the real total price of the product
+	 * 
+	 * #doc-out-name $REAL_TOTAL_TAXED_PRICE
+	 * #doc-out-desc the real total price of the product including taxes
+	 * 
+	 * #doc-out-name $REAL_TOTAL_PRICE_TAX
+	 * #doc-out-desc the real total price of the taxe for the product
      */
     public function parseResults(LoopResult $loopResult)
     {

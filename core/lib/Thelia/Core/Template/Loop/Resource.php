@@ -29,6 +29,9 @@ use Thelia\Type\TypeCollection;
  * Resource loop.
  *
  * Class Resource
+ * 
+ * #doc-usage {loop type="resource" name="the-loop-name" [argument="value"], [...]}
+ * #doc-desc Resource loop lists resources.
  *
  * @author Etienne Roudeix <eroudeix@openstudio.fr>
  *
@@ -42,6 +45,19 @@ class Resource extends BaseI18nLoop implements PropelSearchLoopInterface
 
     /**
      * @return ArgumentCollection
+	 * 
+	 * #doc-arg-name code
+	 * #doc-arg-desc The resource code
+	 * #doc-arg-example code="a_code"
+	 * 
+	 * #doc-arg-name order
+	 * #doc-arg-desc A list of values see sorting possible values
+	 * #doc-arg-default id
+	 * #doc-arg-example order="title"
+	 * 
+	 * #doc-arg-name profile
+	 * #doc-arg-desc The profile id
+	 * #doc-arg-example profile="4"
      */
     protected function getArgDefinitions()
     {
@@ -128,6 +144,42 @@ class Resource extends BaseI18nLoop implements PropelSearchLoopInterface
      * @throws \Propel\Runtime\Exception\PropelException
      *
      * @return LoopResult
+	 * 
+	 * #doc-out-name $CHAPO
+	 * #doc-out-desc the resource chapo
+	 * 
+	 * #doc-out-name $CODE
+	 * #doc-out-desc the resource code
+	 * 
+	 * #doc-out-name $CREATABLE
+	 * #doc-out-desc <strong>Only if profile is not null</strong>
+	 * 
+	 * #doc-out-name $DELETABLE
+	 * #doc-out-desc <strong>Only if profile is not null</strong>
+	 * 
+	 * #doc-out-name $DESCRIPTION
+	 * #doc-out-desc the resource description
+	 * 
+	 * #doc-out-name $ID
+	 * #doc-out-desc the content id
+	 * 
+	 * #doc-out-name $IS_TRANSLATED
+	 * #doc-out-desc check if the content is translated
+	 * 
+	 * #doc-out-name $LOCALE
+	 * #doc-out-desc the locale (e.g. fr_FR) of the returned data
+	 * 
+	 * #doc-out-name $POSTSCTIPTUM
+	 * #doc-out-desc the resource postscriptum
+	 * 
+	 * #doc-out-name $TITLE
+	 * #doc-out-desc the resource title
+	 * 
+	 * #doc-out-name $UPDATABLE
+	 * #doc-out-desc <strong>Only if profile is not null</strong>
+	 * 
+	 * #doc-out-name $VIEWABLE
+	 * #doc-out-desc <strong>Only if profile is not null</strong>
      */
     public function parseResults(LoopResult $loopResult)
     {

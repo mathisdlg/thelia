@@ -31,6 +31,9 @@ use Thelia\Type\TypeCollection;
  * Customer loop.
  *
  * Class Customer
+ * 
+ * #doc-usage {loop type="customer" name="the-loop-name" [argument="value"], [...]}
+ * #doc-desc Customer loop displays customers information.
  *
  * @author Etienne Roudeix <eroudeix@openstudio.fr>
  *
@@ -49,6 +52,37 @@ class Customer extends BaseLoop implements SearchLoopInterface, PropelSearchLoop
 
     /**
      * @return ArgumentCollection
+	 * 
+	 * #doc-arg-name current
+	 * #doc-arg-desc A boolean value which must be set to false if you need to display not authenticated customers information, typically if `sponsor` parameter is set.
+	 * #doc-arg-default yes
+	 * #doc-arg-example current="false"
+	 * 
+	 * #doc-arg-name Newsletter
+	 * #doc-arg-desc A boolean that represents whether the customer is subscribed to the newsletter
+	 * #doc-arg-example 
+	 * 
+	 * #doc-arg-name order
+	 * #doc-arg-desc A list of values see sorting possible values
+	 * #doc-arg-default lastname
+	 * #doc-arg-example order="firstname, lastname"
+	 * 
+	 * #doc-arg-name ref
+	 * #doc-arg-desc A single or a list of customer references.
+	 * #doc-arg-example ref="1231231241", ref="123123,789789"
+	 * 
+	 * #doc-arg-name reseller
+	 * #doc-arg-desc A boolean value.
+	 * #doc-arg-example reseller="yes"
+	 * 
+	 * #doc-arg-name sponsor
+	 * #doc-arg-desc The sponsor ID which you want the list of affiliated customers
+	 * #doc-arg-example sponsor="1"
+	 * 
+	 * #doc-arg-name with_prev_next_info
+	 * #doc-arg-desc A boolean. If set to true, $HAS_PREVIOUS, $HAS_NEXT, $PREVIOUS, and $NEXT output variables are available.
+	 * #doc-arg-default false
+	 * #doc-arg-example with_prev_next_info="yes"
      */
     protected function getArgDefinitions()
     {
@@ -229,6 +263,53 @@ class Customer extends BaseLoop implements SearchLoopInterface, PropelSearchLoop
         return $search;
     }
 
+	 /**
+	 * 
+	 * #doc-out-name $CONFIRMATION_TOKEN
+	 * #doc-out-desc the customer registration confirmation token, used when email confirmation of registration is enabled (see <strong>customer_email_confirmation</strong> configuration variable)
+	 * 
+	 * #doc-out-name $DISCOUNT
+	 * #doc-out-desc the customer discount
+	 * 
+	 * #doc-out-name $EMAIL
+	 * #doc-out-desc the customer email
+	 * 
+	 * #doc-out-name $FIRSTNAME
+	 * #doc-out-desc the customer firstname
+	 * 
+	 * #doc-out-name $HAS_NEXT
+	 * #doc-out-desc true if a customer exists after the current one, regarding the curent order. Only available if <strong>with_prev_next_info</strong> parameter is set to true
+	 * 
+	 * #doc-out-name $HAS_PREVIOUS
+	 * #doc-out-desc true if a customer exists before the current one, regarding the curent order. Only available if <strong>with_prev_next_info</strong> parameter is set to true
+	 * 
+	 * #doc-out-name $ID
+	 * #doc-out-desc the customer id
+	 * 
+	 * #doc-out-name $LASTNAME
+	 * #doc-out-desc the customer lastname
+	 * 
+	 * #doc-out-name $NEWSLETTER
+	 * #doc-out-desc true if the customer is registered in the newsletter table, false otherwise
+	 * 
+	 * #doc-out-name $NEXT
+	 * #doc-out-desc ID of the next customer, or null if non exists. Only available if <strong>with_prev_next_info</strong> parameter is set to true
+	 * 
+	 * #doc-out-name $PREVIOUS
+	 * #doc-out-desc ID of the previous customer, or null if non exists. Only available if <strong>with_prev_next_info</strong> parameter is set to true
+	 * 
+	 * #doc-out-name $REF
+	 * #doc-out-desc the customer reference
+	 * 
+	 * #doc-out-name $RESELLER
+	 * #doc-out-desc return if the customer is a reseller
+	 * 
+	 * #doc-out-name $SPONSOR
+	 * #doc-out-desc the customer sponsor which might be use in another   customer loop
+	 * 
+	 * #doc-out-name $TITLE
+	 * #doc-out-desc the customer title which might be use in title loop
+	 */
     public function parseResults(LoopResult $loopResult)
     {
         /** @var \Thelia\Model\Customer $customer */

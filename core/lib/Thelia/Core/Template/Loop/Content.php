@@ -34,6 +34,9 @@ use Thelia\Type\TypeCollection;
  * Content loop.
  *
  * Class Content
+ * 
+ * #doc-usage {loop type="content" name="the-loop-name" [argument="value"], [...]}
+ * #doc-desc Content loop lists contents from your shop.
  *
  * @author Etienne Roudeix <eroudeix@openstudio.fr>
  *
@@ -59,6 +62,58 @@ class Content extends BaseI18nLoop implements PropelSearchLoopInterface, SearchL
 
     /**
      * @return ArgumentCollection
+	 * 
+	 * #doc-arg-name current
+	 * #doc-arg-desc A boolean value which allows either to exclude current content from results either to match only this content
+	 * #doc-arg-example current="yes"
+	 * 
+	 * #doc-arg-name current_folder
+	 * #doc-arg-desc A boolean value which allows either to exclude current folder contents from results either to match only current folder contents. If a content is in multiple folders whose one is current it will not be excluded if current_folder="false" but will be included if current_folder="yes"
+	 * #doc-arg-example current_folder="yes"
+	 * 
+	 * #doc-arg-name depth
+	 * #doc-arg-desc A positive integer value which precise how many subfolder levels will be browse. Will not be consider if folder parameter is not set.
+	 * #doc-arg-default 1
+	 * #doc-arg-example depth="2"
+	 * 
+	 * #doc-arg-name exclude
+	 * #doc-arg-desc A single or a list of content ids.
+	 * #doc-arg-example exclude="2", exclude="1,4,7"
+	 * 
+	 * #doc-arg-name exclude_folder
+	 * #doc-arg-desc A single or a list of folder ids. If a content is in multiple folders which are not all excluded it will not be excluded.
+	 * #doc-arg-example exclude_folder="2", exclude_folder="1,4,7"
+	 * 
+	 * #doc-arg-name folder
+	 * #doc-arg-desc A single or a list of folder ids.
+	 * #doc-arg-example folder="3", folder="2,5,8"
+	 * 
+	 * #doc-arg-name folder_default
+	 * #doc-arg-desc A single or a list of default folder ids allowing to retrieve all content having this parameter as default folder.
+	 * #doc-arg-example folder_default="2", folder_default="1,4,7"
+	 * 
+	 * #doc-arg-name id
+	 * #doc-arg-desc A single or a list of content ids.
+	 * #doc-arg-example id="2", id="1,4,7"
+	 * 
+	 * #doc-arg-name order
+	 * #doc-arg-desc A list of values <br/> Expected values
+	 * #doc-arg-default alpha
+	 * #doc-arg-example order="random"
+	 * 
+	 * #doc-arg-name title
+	 * #doc-arg-desc A title string
+	 * #doc-arg-example title="foo"
+	 * 
+	 * #doc-arg-name visible
+	 * #doc-arg-desc A boolean value.
+	 * #doc-arg-default yes
+	 * #doc-arg-example visible="no"
+	 * 
+	 * #doc-arg-name with_prev_next_info
+	 * #doc-arg-desc A boolean. If set to true, $PREVIOUS and $NEXT output arguments are available.
+	 * #doc-arg-default false
+	 * #doc-arg-example with_prev_next_info="yes"
      */
     protected function getArgDefinitions()
     {
@@ -292,6 +347,59 @@ class Content extends BaseI18nLoop implements PropelSearchLoopInterface, SearchL
         return $search;
     }
 
+	 /**
+	 * 
+	 * #doc-out-name $CHAPO
+	 * #doc-out-desc the content chapo
+	 * 
+	 * #doc-out-name $DEFAULT_FOLDER
+	 * #doc-out-desc the default folder id for the current content
+	 * 
+	 * #doc-out-name $DESCRIPTION
+	 * #doc-out-desc the content description
+	 * 
+	 * #doc-out-name $HAS_NEXT
+	 * #doc-out-desc true if a content exists after this one in the current folder, following contents positions.
+	 * 
+	 * #doc-out-name $HAS_PREVIOUS
+	 * #doc-out-desc true if a content exists before this one in the current folder, following contents positions.
+	 * 
+	 * #doc-out-name $ID
+	 * #doc-out-desc the content id
+	 * 
+	 * #doc-out-name $IS_TRANSLATED
+	 * #doc-out-desc check if the content is translated
+	 * 
+	 * #doc-out-name $LOCALE
+	 * #doc-out-desc The locale used for this research
+	 * 
+	 * #doc-out-name $META_DESCRIPTION
+	 * #doc-out-desc the content meta description
+	 * 
+	 * #doc-out-name $META_KEYWORDS
+	 * #doc-out-desc the content meta keywords
+	 * 
+	 * #doc-out-name $META_TITLE
+	 * #doc-out-desc the content meta title
+	 * 
+	 * #doc-out-name $NEXT
+	 * #doc-out-desc The ID of content after this one in the current folder, following contents positions, or null if none exists.
+	 * 
+	 * #doc-out-name $POSITION
+	 * #doc-out-desc the content position
+	 * 
+	 * #doc-out-name $POSTSCRIPTUM
+	 * #doc-out-desc the content postscriptum
+	 * 
+	 * #doc-out-name $PREVIOUS
+	 * #doc-out-desc The ID of content before this one in the current folder, following contents positions, or null if none exists.
+	 * 
+	 * #doc-out-name $TITLE
+	 * #doc-out-desc the content title
+	 * 
+	 * #doc-out-name $URL
+	 * #doc-out-desc the content URL
+	 */
     public function parseResults(LoopResult $loopResult)
     {
         /** @var ContentModel $content */

@@ -33,6 +33,9 @@ use Thelia\Type\TypeCollection;
  * - `taxes` : list taxes for this tax rule and country/state
  *
  * Class TaxRuleCountry
+ * 
+ * #doc-usage {loop type="tax_rule_country" name="the-loop-name" [argument="value"], [...]}
+ * #doc-desc Taxes by country loop.
  *
  * @author Etienne Roudeix <eroudeix@openstudio.fr>
  *
@@ -49,6 +52,25 @@ class TaxRuleCountry extends BaseI18nLoop implements PropelSearchLoopInterface
 
     /**
      * @return ArgumentCollection
+	 * 
+	 * #doc-arg-name ask
+	 * #doc-arg-desc to choose the function provided by te loop
+	 * #doc-arg-default taxes
+	 * #doc-arg-example ask="countries"
+	 * 
+	 * #doc-arg-name country *
+	 * #doc-arg-desc the country where the tax applies
+	 * #doc-arg-default null
+	 * #doc-arg-example country="14"
+	 * 
+	 * #doc-arg-name state
+	 * #doc-arg-desc the state where the tax applies
+	 * #doc-arg-example state="45"
+	 * 
+	 * #doc-arg-name tax_rule *
+	 * #doc-arg-desc the tax rule
+	 * #doc-arg-default null
+	 * #doc-arg-example tax_rule="2"
      */
     protected function getArgDefinitions()
     {
@@ -96,6 +118,29 @@ class TaxRuleCountry extends BaseI18nLoop implements PropelSearchLoopInterface
         return $search;
     }
 
+	 /**
+	 * 
+	 * #doc-out-name $COUNTRY
+	 * #doc-out-desc the country
+	 * 
+	 * #doc-out-name $POSITION
+	 * #doc-out-desc the tax rule position
+	 * 
+	 * #doc-out-name $STATE
+	 * #doc-out-desc the state
+	 * 
+	 * #doc-out-name $TAX
+	 * #doc-out-desc the tax id
+	 * 
+	 * #doc-out-name $TAX_DESCRIPTION
+	 * #doc-out-desc the description of the tax
+	 * 
+	 * #doc-out-name $TAX_TITLE
+	 * #doc-out-desc the title of the tax
+	 * 
+	 * #doc-out-name $TAX_RULE
+	 * #doc-out-desc the tax rule
+	 */
     public function parseResults(LoopResult $loopResult)
     {
         if ($this->getAsk() === 'countries') {

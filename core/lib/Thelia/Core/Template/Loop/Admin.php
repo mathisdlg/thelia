@@ -26,6 +26,9 @@ use Thelia\Model\AdminQuery;
  * Admin loop.
  *
  * Class Admin
+ * 
+ * #doc-usage {loop type="admin" name="the-loop-name" [argument="value"], [...]}
+ * #doc-desc Admin loop displays admins information.
  *
  * @author Etienne Roudeix <eroudeix@openstudio.fr>
  *
@@ -38,6 +41,14 @@ class Admin extends BaseLoop implements PropelSearchLoopInterface
 
     /**
      * @return ArgumentCollection
+	 * 
+	 * #doc-arg-name id
+	 * #doc-arg-desc A single or a list of admin ids.
+	 * #doc-arg-example id="2", id="1,4,7"
+	 * 
+	 * #doc-arg-name profile
+	 * #doc-arg-desc A single or a list of profile ids.
+	 * #doc-arg-example profile="2", profile="1,4,7"
      */
     protected function getArgDefinitions()
     {
@@ -68,6 +79,29 @@ class Admin extends BaseLoop implements PropelSearchLoopInterface
         return $search;
     }
 
+	 /**
+	 * 
+	 * #doc-out-name $EMAIL
+	 * #doc-out-desc the admin email
+	 * 
+	 * #doc-out-name $FIRSTNAME
+	 * #doc-out-desc the admin firstname
+	 * 
+	 * #doc-out-name $ID
+	 * #doc-out-desc the admin id
+	 * 
+	 * #doc-out-name $LASTNAME
+	 * #doc-out-desc the admin lastname
+	 * 
+	 * #doc-out-name $LOCALE
+	 * #doc-out-desc the admin locale
+	 * 
+	 * #doc-out-name $LOGIN
+	 * #doc-out-desc the admin login
+	 * 
+	 * #doc-out-name $PROFILE
+	 * #doc-out-desc the admin profile id
+	 */
     public function parseResults(LoopResult $loopResult)
     {
         /** @var AdminModel $admin */

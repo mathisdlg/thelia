@@ -28,6 +28,9 @@ use Thelia\Type\TypeCollection;
  * OrderProductOrderProductAttributeCombination loop.
  *
  * Class OrderProductAttributeCombination
+ * 
+ * #doc-usage {loop type="order_product_attribute_combination" name="the-loop-name" [argument="value"], [...]}
+ * #doc-desc Order product attribute combination loop lists order product attribute combinations.
  *
  * @author Etienne Roudeix <eroudeix@openstudio.fr>
  *
@@ -41,6 +44,16 @@ class OrderProductAttributeCombination extends BaseI18nLoop implements PropelSea
 
     /**
      * @return ArgumentCollection
+	 * 
+	 * #doc-arg-name order
+	 * #doc-arg-desc See Order possible values
+	 * #doc-arg-default alpha
+	 * #doc-arg-example order="alpha_reverse"
+	 * 
+	 * #doc-arg-name order_product *
+	 * #doc-arg-desc A single order product id.
+	 * #doc-arg-default null
+	 * #doc-arg-example order_product="2"
      */
     protected function getArgDefinitions()
     {
@@ -80,6 +93,38 @@ class OrderProductAttributeCombination extends BaseI18nLoop implements PropelSea
         return $search;
     }
 
+	 /**
+	 * 
+	 * #doc-out-name $ATTRIBUTE_AVAILABILITY_CHAPO
+	 * #doc-out-desc the order product attribute availability chapo
+	 * 
+	 * #doc-out-name $ATTRIBUTE_AVAILABILITY_DESCRIPTION
+	 * #doc-out-desc the order product attribute availability description
+	 * 
+	 * #doc-out-name $ATTRIBUTE_AVAILABILITY_POSTSCRIPTUM
+	 * #doc-out-desc the order product attribute availability postscriptum
+	 * 
+	 * #doc-out-name $ATTRIBUTE_AVAILABILITY_TITLE
+	 * #doc-out-desc the order product attribute availability title
+	 * 
+	 * #doc-out-name $ATTRIBUTE_CHAPO
+	 * #doc-out-desc the order product attribute chapo
+	 * 
+	 * #doc-out-name $ATTRIBUTE_DESCRIPTION
+	 * #doc-out-desc the order product attribute description
+	 * 
+	 * #doc-out-name $ATTRIBUTE_POSTSCRIPTUM
+	 * #doc-out-desc the order product attribute postscriptum
+	 * 
+	 * #doc-out-name $ATTRIBUTE_TITLE
+	 * #doc-out-desc the order product attribute title
+	 * 
+	 * #doc-out-name $ID
+	 * #doc-out-desc the order product attribute combination ID
+	 * 
+	 * #doc-out-name $ORDER_PRODUCT_ID
+	 * #doc-out-desc the related order product ID
+	 */
     public function parseResults(LoopResult $loopResult)
     {
         /** @var OrderProductAttributeCombinationModel $orderAttributeCombination */

@@ -34,6 +34,9 @@ use Thelia\Type\TypeCollection;
  * @todo : manage attribute_availability ?
  *
  * Class ProductSaleElements
+ * 
+ * #doc-usage {loop type="product_sale_elements" name="the-loop-name" [argument="value"], [...]}
+ * #doc-desc Product sale elements loop lists product sale elements from your shop. You may need to use the attribute combination loop inside your product sale elements loop.
  *
  * @author Etienne Roudeix <eroudeix@openstudio.fr>
  *
@@ -54,6 +57,48 @@ class ProductSaleElements extends BaseLoop implements PropelSearchLoopInterface,
 
     /**
      * @return ArgumentCollection
+	 * 
+	 * #doc-arg-name attribute_availability
+	 * #doc-arg-desc A single or a list of attribute availability (may not yet be managed on the back-end ?)
+	 * #doc-arg-example attribute_availability="2,7"
+	 * 
+	 * #doc-arg-name currency
+	 * #doc-arg-desc A currency id
+	 * #doc-arg-example currency="1"
+	 * 
+	 * #doc-arg-name default
+	 * #doc-arg-desc A boolean value. If true, returns only the default product sale elements. If false, the default product sale element is not returned
+	 * #doc-arg-example default="yes"
+	 * 
+	 * #doc-arg-name id
+	 * #doc-arg-desc A comma separated list of product sale elements id. Mandatory if the 'product' parameter is not present
+	 * #doc-arg-example id="1,3,8"
+	 * 
+	 * #doc-arg-name new
+	 * #doc-arg-desc A boolean value. If true, returns only product sale elements for which promo is on. The reverse with 'false'
+	 * #doc-arg-example new="yes"
+	 * 
+	 * #doc-arg-name order
+	 * #doc-arg-desc A list of values see sorting possible values
+	 * #doc-arg-default random
+	 * #doc-arg-example order="promo,min_price"
+	 * 
+	 * #doc-arg-name product
+	 * #doc-arg-desc A single product id. Mandatory if the 'id' parameter is not present
+	 * #doc-arg-example product="2"
+	 * 
+	 * #doc-arg-name promo
+	 * #doc-arg-desc A boolean value. If true, returns only product sale elements for which new is on. The reverse with 'false'
+	 * #doc-arg-example promo="yes"
+	 * 
+	 * #doc-arg-name ref
+	 * #doc-arg-desc A product reference
+	 * #doc-arg-example ref="a_ref"
+	 * 
+	 * #doc-arg-name visible
+	 * #doc-arg-desc A boolean value, or * (the default) for ignoring this filter
+	 * #doc-arg-default *
+	 * #doc-arg-example visible="no"
      */
     protected function getArgDefinitions()
     {
@@ -232,6 +277,53 @@ class ProductSaleElements extends BaseLoop implements PropelSearchLoopInterface,
         return $search;
     }
 
+	 /**
+	 * 
+	 * #doc-out-name $EAN_CODE
+	 * #doc-out-desc the product sale element EAN Code
+	 * 
+	 * #doc-out-name $ID
+	 * #doc-out-desc the product sale element id
+	 * 
+	 * #doc-out-name $IS_DEFAULT
+	 * #doc-out-desc returns if the product sale element is the default product sale element for the product
+	 * 
+	 * #doc-out-name $IS_NEW
+	 * #doc-out-desc returns if the product sale element is new
+	 * 
+	 * #doc-out-name $IS_PROMO
+	 * #doc-out-desc returns if the product sale element is in promo
+	 * 
+	 * #doc-out-name $PRICE
+	 * #doc-out-desc the product sale element price
+	 * 
+	 * #doc-out-name $PRICE_TAX
+	 * #doc-out-desc the product sale element price tax
+	 * 
+	 * #doc-out-name $PRODUCT_ID
+	 * #doc-out-desc the related product id
+	 * 
+	 * #doc-out-name $PROMO_PRICE
+	 * #doc-out-desc the product sale element promo price
+	 * 
+	 * #doc-out-name $PROMO_PRICE_TAX
+	 * #doc-out-desc the product sale element promo price tax
+	 * 
+	 * #doc-out-name $QUANTITY
+	 * #doc-out-desc the product sale element stock quantity
+	 * 
+	 * #doc-out-name $REF
+	 * #doc-out-desc the product sale element reference
+	 * 
+	 * #doc-out-name $TAXED_PRICE
+	 * #doc-out-desc the product sale element taxed price
+	 * 
+	 * #doc-out-name $TAXED_PROMO_PRICE
+	 * #doc-out-desc the product sale element taxed promo price
+	 * 
+	 * #doc-out-name $WEIGHT
+	 * #doc-out-desc the product sale element weight
+	 */
     public function parseResults(LoopResult $loopResult)
     {
         $taxCountry = $this->container->get('thelia.taxEngine')->getDeliveryCountry();

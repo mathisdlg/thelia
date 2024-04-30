@@ -25,6 +25,9 @@ use Thelia\Type\TypeCollection;
 
 /**
  * Class ModuleHook.
+ * 
+ * #doc-usage {loop type="module_hook" name="the-loop-name" [argument="value"], [...]}
+ * #doc-desc Module hook loop lists all defined module hooks.
  *
  * @author Julien Chanséaume <jchanseaume@openstudio.fr>
  *
@@ -43,6 +46,42 @@ class ModuleHook extends BaseI18nLoop implements PropelSearchLoopInterface
 
     /**
      * @return ArgumentCollection
+	 * 
+	 * #doc-arg-name active
+	 * #doc-arg-desc Check if the hook is active
+	 * #doc-arg-default *
+	 * #doc-arg-example active="1"
+	 * 
+	 * #doc-arg-name exclude
+	 * #doc-arg-desc A single or a list of hook IDs to exclude
+	 * #doc-arg-example exclude="1,2,3"
+	 * 
+	 * #doc-arg-name hook
+	 * #doc-arg-desc The hook name
+	 * #doc-arg-example hook="displayHeader"
+	 * 
+	 * #doc-arg-name hook_active
+	 * #doc-arg-desc Check if the hook is active
+	 * #doc-arg-default *
+	 * #doc-arg-example hook_active="1"
+	 * 
+	 * #doc-arg-name id
+	 * #doc-arg-desc The hook ID
+	 * #doc-arg-example id="2"
+	 * 
+	 * #doc-arg-name module
+	 * #doc-arg-desc The module name
+	 * #doc-arg-example module="blockcart"
+	 * 
+	 * #doc-arg-name module_active
+	 * #doc-arg-desc Check if the module is active
+	 * #doc-arg-default *
+	 * #doc-arg-example module_active="1"
+	 * 
+	 * #doc-arg-name order
+	 * #doc-arg-desc a list of values see sorting possible values
+	 * #doc-arg-default manual
+	 * #doc-arg-example order="id"
      */
     protected function getArgDefinitions()
     {
@@ -139,6 +178,44 @@ class ModuleHook extends BaseI18nLoop implements PropelSearchLoopInterface
         return $search;
     }
 
+	 /**
+	 * 
+	 * #doc-out-name $ACTIVE
+	 * #doc-out-desc The hook status
+	 * 
+	 * #doc-out-name $CLASSNAME
+	 * #doc-out-desc The hook class name
+	 * 
+	 * #doc-out-name $HOOK_ACTIVE
+	 * #doc-out-desc The hook status
+	 * 
+	 * #doc-out-name $HOOK_ID
+	 * #doc-out-desc The hook ID
+	 * 
+	 * #doc-out-name $ID
+	 * #doc-out-desc The hook module id
+	 * 
+	 * #doc-out-name $METHOD
+	 * #doc-out-desc The hook method
+	 * 
+	 * #doc-out-name $MODULE_ACTIVE
+	 * #doc-out-desc The module status
+	 * 
+	 * #doc-out-name $MODULE_CODE
+	 * #doc-out-desc The module code
+	 * 
+	 * #doc-out-name $MODULE_ID
+	 * #doc-out-desc The module ID
+	 * 
+	 * #doc-out-name $MODULE_TITLE
+	 * #doc-out-desc The module title
+	 * 
+	 * #doc-out-name $POSITION
+	 * #doc-out-desc The hook position
+	 * 
+	 * #doc-out-name $TEMPLATES
+	 * #doc-out-desc The hook templates
+	 */
     public function parseResults(LoopResult $loopResult)
     {
         /** @var \Thelia\Model\ModuleHook $moduleHook */

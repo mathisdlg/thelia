@@ -26,6 +26,9 @@ use Thelia\Model\ProfileQuery;
  * Profile loop.
  *
  * Class Profile
+ * 
+ * #doc-usage {loop type="profile" name="the-loop-name" [argument="value"], [...]}
+ * #doc-desc Profile loop lists profiles.
  *
  * @author Etienne Roudeix <eroudeix@openstudio.fr>
  *
@@ -37,6 +40,10 @@ class Profile extends BaseI18nLoop implements PropelSearchLoopInterface
 
     /**
      * @return ArgumentCollection
+	 * 
+	 * #doc-arg-name id
+	 * #doc-arg-desc A single or a list of sale ids.
+	 * #doc-arg-example id="2", id="1,4,7"
      */
     protected function getArgDefinitions()
     {
@@ -63,6 +70,32 @@ class Profile extends BaseI18nLoop implements PropelSearchLoopInterface
         return $search;
     }
 
+	 /**
+	 * 
+	 * #doc-out-name $CHAPO
+	 * #doc-out-desc the chapo
+	 * 
+	 * #doc-out-name $CODE
+	 * #doc-out-desc the content code
+	 * 
+	 * #doc-out-name $DESCRIPTION
+	 * #doc-out-desc the content description
+	 * 
+	 * #doc-out-name $ID
+	 * #doc-out-desc the content id
+	 * 
+	 * #doc-out-name $IS_TRANSLATED
+	 * #doc-out-desc check if the content is translated
+	 * 
+	 * #doc-out-name $LOCALE
+	 * #doc-out-desc the locale (e.g. fr_FR) of the returned data
+	 * 
+	 * #doc-out-name $POSTSCTIPTUM
+	 * #doc-out-desc the postscriptum
+	 * 
+	 * #doc-out-name $TITLE
+	 * #doc-out-desc the title
+	 */
     public function parseResults(LoopResult $loopResult)
     {
         /** @var ProfileModel $profile */

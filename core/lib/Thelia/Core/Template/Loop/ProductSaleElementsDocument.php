@@ -23,6 +23,9 @@ use Thelia\Model\ProductSaleElementsProductDocumentQuery;
 
 /**
  * Class ProductSaleElementsDocument.
+ * 
+ * #doc-usage {loop type="product_sale_elements_document" name="the-loop-name" [argument="value"], [...]}
+ * #doc-desc Product sale elements image loop to display document of product's variations.
  *
  * @author Benjamin Perche <benjamin@thelia.net>
  *
@@ -35,6 +38,15 @@ class ProductSaleElementsDocument extends BaseLoop implements PropelSearchLoopIn
 {
     /**
      * @return LoopResult
+	 * 
+	 * #doc-out-name $ID
+	 * #doc-out-desc Product id
+	 * 
+	 * #doc-out-name $PRODUCT_DOCUMENT_ID
+	 * #doc-out-desc Product document id
+	 * 
+	 * #doc-out-name $PRODUCT_SALE_ELEMENTS_ID
+	 * #doc-out-desc Product sale element id
      */
     public function parseResults(LoopResult $loopResult)
     {
@@ -78,6 +90,23 @@ class ProductSaleElementsDocument extends BaseLoop implements PropelSearchLoopIn
      * }
      *
      * @return \Thelia\Core\Template\Loop\Argument\ArgumentCollection
+     * 
+	 * #doc-arg-name id
+	 * #doc-arg-desc A single or list of product id
+	 * #doc-arg-example id="2", id="1,4,7"
+	 * 
+	 * #doc-arg-name order
+	 * #doc-arg-desc A list of values see sorting possible values
+	 * #doc-arg-default position
+	 * #doc-arg-example order="position-reverse"
+	 * 
+	 * #doc-arg-name product_sale_elements_id
+	 * #doc-arg-desc A single or list of product sale element id
+	 * #doc-arg-example product_sale_elements_id="2", product_sale_elements_id="1,4,7"
+	 * 
+	 * #doc-arg-name product_document_id
+	 * #doc-arg-desc A single or list of product document id
+	 * #doc-arg-example product_document_id="2", product_document_id="1,4,7"
      */
     protected function getArgDefinitions()
     {

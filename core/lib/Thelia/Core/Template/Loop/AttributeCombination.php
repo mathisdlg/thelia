@@ -29,6 +29,9 @@ use Thelia\Model\Map\ProductTableMap;
  * Attribute Combination loop.
  *
  * Class AttributeCombination
+ * 
+ * #doc-usage {loop type="attribute_combination" name="the-loop-name" [argument="value"], [...]}
+ * #doc-desc Attribute combination loop lists attribute combinations.
  *
  * @author Etienne Roudeix <eroudeix@openstudio.fr>
  *
@@ -41,6 +44,15 @@ class AttributeCombination extends BaseI18nLoop implements PropelSearchLoopInter
 
     /**
      * @return ArgumentCollection
+	 * 
+	 * #doc-arg-name order
+	 * #doc-arg-desc A list of values <br/> Expected values
+	 * #doc-arg-default alpha
+	 * #doc-arg-example order="alpha_reverse"
+	 * 
+	 * #doc-arg-name product_sale_elements \*
+	 * #doc-arg-desc A single product sale elements id.
+	 * #doc-arg-example product="2"
      */
     protected function getArgDefinitions()
     {
@@ -102,6 +114,41 @@ class AttributeCombination extends BaseI18nLoop implements PropelSearchLoopInter
         return $search;
     }
 
+	 /**
+	 * 
+	 * #doc-out-name $ATTRIBUTE_AVAILABILITY_CHAPO
+	 * #doc-out-desc the attribute availability chapo
+	 * 
+	 * #doc-out-name $ATTRIBUTE_AVAILABILITY_DESCRIPTION
+	 * #doc-out-desc the attribute availability description
+	 * 
+	 * #doc-out-name $ATTRIBUTE_AVAILABILITY_ID
+	 * #doc-out-desc the attribute availability id
+	 * 
+	 * #doc-out-name $ATTRIBUTE_AVAILABILITY_POSTSCRIPTUM
+	 * #doc-out-desc the attribute availability postscriptum
+	 * 
+	 * #doc-out-name $ATTRIBUTE_AVAILABILITY_TITLE
+	 * #doc-out-desc the attribute availability title
+	 * 
+	 * #doc-out-name $ATTRIBUTE_CHAPO
+	 * #doc-out-desc the attribute chapo
+	 * 
+	 * #doc-out-name $ATTRIBUTE_DESCRIPTION
+	 * #doc-out-desc the attribute description
+	 * 
+	 * #doc-out-name $ATTRIBUTE_ID
+	 * #doc-out-desc the attribute id
+	 * 
+	 * #doc-out-name $ATTRIBUTE_POSTSCRIPTUM
+	 * #doc-out-desc the attribute postscriptum
+	 * 
+	 * #doc-out-name $ATTRIBUTE_TITLE
+	 * #doc-out-desc the attribute title
+	 * 
+	 * #doc-out-name $LOCALE
+	 * #doc-out-desc the locale used for this loop
+	 */
     public function parseResults(LoopResult $loopResult)
     {
         /** @var \Thelia\Model\AttributeCombination $attributeCombination */

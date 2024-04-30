@@ -16,6 +16,9 @@ use Thelia\Model\ImportQuery;
 
 /**
  * Class Import.
+ * 
+ * #doc-usage {loop type="import" name="the-loop-name" [argument="value"], [...]}
+ * #doc-desc Import loop lists all defined imports.
  *
  * @author Benjamin Perche <bperche@openstudio.fr>
  */

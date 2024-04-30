@@ -31,6 +31,9 @@ use Thelia\Type\TypeCollection;
  * Brand loop.
  *
  * Class Brand
+ * 
+ * #doc-usage {loop type="brand" name="the-loop-name" [argument="value"], [...]}
+ * #doc-desc Brand loop lists brands defined in your shop.
  *
  * @author Franck Allimant <franck@cqfdev.fr>
  *
@@ -51,6 +54,41 @@ class Brand extends BaseI18nLoop implements PropelSearchLoopInterface, SearchLoo
 
     /**
      * @return ArgumentCollection
+	 * 
+	 * #doc-arg-name current
+	 * #doc-arg-desc A boolean value which allows either to exclude current brand from results, or match only this brand
+	 * #doc-arg-example current="yes"
+	 * 
+	 * #doc-arg-name exclude
+	 * #doc-arg-desc A list of brand IDs to exclude from selection when running the loop
+	 * #doc-arg-example 
+	 * 
+	 * #doc-arg-name id
+	 * #doc-arg-desc A single or a list of brand ids.
+	 * #doc-arg-example id="2", id="1,4,7"
+	 * 
+	 * #doc-arg-name order
+	 * #doc-arg-desc A list of values <br/> Expected values
+	 * #doc-arg-default alpha
+	 * #doc-arg-example order="random"
+	 * 
+	 * #doc-arg-name product
+	 * #doc-arg-desc A single product id.
+	 * #doc-arg-example product="2"
+	 * 
+	 * #doc-arg-name title
+	 * #doc-arg-desc A title string
+	 * #doc-arg-example title="foo"
+	 * 
+	 * #doc-arg-name visible
+	 * #doc-arg-desc A boolean value.
+	 * #doc-arg-default yes
+	 * #doc-arg-example visible="no"
+	 * 
+	 * #doc-arg-name with_prev_next_info
+	 * #doc-arg-desc A boolean. If set to true, $PREVIOUS and $NEXT output arguments are available.
+	 * #doc-arg-default false
+	 * #doc-arg-example with_prev_next_info="yes"
      */
     protected function getArgDefinitions()
     {
@@ -215,6 +253,62 @@ class Brand extends BaseI18nLoop implements PropelSearchLoopInterface, SearchLoo
         return $search;
     }
 
+	 /**
+	 * 
+	 * #doc-out-name $CHAPO
+	 * #doc-out-desc the brand chapo
+	 * 
+	 * #doc-out-name $DESCRIPTION
+	 * #doc-out-desc the brand description
+	 * 
+	 * #doc-out-name $HAS_NEXT
+	 * #doc-out-desc true if a brand exists after this one, following brands positions.
+	 * 
+	 * #doc-out-name $HAS_PREVIOUS
+	 * #doc-out-desc true if a brand exists before this one following brands positions
+	 * 
+	 * #doc-out-name $ID
+	 * #doc-out-desc the brand id
+	 * 
+	 * #doc-out-name $IS_TRANSLATED
+	 * #doc-out-desc check if the brand is translated
+	 * 
+	 * #doc-out-name $LOCALE
+	 * #doc-out-desc The locale used for this research
+	 * 
+	 * #doc-out-name $LOGO_IMAGE_ID
+	 * #doc-out-desc ID of the brand logo image, among the brand images
+	 * 
+	 * #doc-out-name $META_DESCRIPTION
+	 * #doc-out-desc the brand meta description
+	 * 
+	 * #doc-out-name $META_KEYWORDS
+	 * #doc-out-desc the brand meta keywords
+	 * 
+	 * #doc-out-name $META_TITLE
+	 * #doc-out-desc the brand meta title
+	 * 
+	 * #doc-out-name $NEXT
+	 * #doc-out-desc The ID of brand after this one, following brands positions, or null if none exists
+	 * 
+	 * #doc-out-name $POSITION
+	 * #doc-out-desc the brand position
+	 * 
+	 * #doc-out-name $POSTSCRIPTUM
+	 * #doc-out-desc the brand postscriptum
+	 * 
+	 * #doc-out-name $PREVIOUS
+	 * #doc-out-desc The ID of brand before this one, following brands positions, or null if none exists.
+	 * 
+	 * #doc-out-name $TITLE
+	 * #doc-out-desc the brand title
+	 * 
+	 * #doc-out-name $URL
+	 * #doc-out-desc the brand URL
+	 * 
+	 * #doc-out-name $VISIBLE
+	 * #doc-out-desc true if the product is visible or not, false otherwise
+	 */
     public function parseResults(LoopResult $loopResult)
     {
         /** @var \Thelia\Model\Brand $brand */

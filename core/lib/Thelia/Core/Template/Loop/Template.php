@@ -22,7 +22,9 @@ use Thelia\Core\Template\TemplateDefinition;
 use Thelia\Type;
 
 /**
- * Template loop, to get available back-office or front-office templates.
+ * 
+ * #doc-usage {loop type="template" name="the-loop-name" [argument="value"], [...]}
+ * #doc-desc Template loop, to get available back-office or front-office templates.
  *
  * @author Franck Allimant <franck@cqfdev.fr>
  */
@@ -30,6 +32,10 @@ class Template extends BaseLoop implements ArraySearchLoopInterface
 {
     /**
      * @return ArgumentCollection
+	 * 
+	 * #doc-arg-name template-type
+	 * #doc-arg-desc the type of the template you want
+	 * #doc-arg-example template-type="pdf"
      */
     protected function getArgDefinitions()
     {
@@ -70,6 +76,17 @@ class Template extends BaseLoop implements ArraySearchLoopInterface
         return $this->container->get('thelia.template_helper')->getList($templateType);
     }
 
+	 /**
+	 * 
+	 * #doc-out-name $ABSOLUTE_PATH
+	 * #doc-out-desc absolute template path
+	 * 
+	 * #doc-out-name $NAME
+	 * #doc-out-desc template name
+	 * 
+	 * #doc-out-name $RELATIVE_PATH
+	 * #doc-out-desc relative template path
+	 */
     public function parseResults(LoopResult $loopResult)
     {
         /** @var TemplateDefinition $template */

@@ -30,6 +30,9 @@ use Thelia\Type\TypeCollection;
  * - category is the category id
  * - depth is the maximum depth to go, default unlimited
  * - visible if true or missing, only visible categories will be displayed. If false, all categories (visible or not) are returned.
+ * 
+ * #doc-usage {loop type="category_tree" name="the-loop-name" [argument="value"], [...]}
+ * #doc-desc Category tree loop, to get a category tree from a given category to a given depth.
  *
  * @author Franck Allimant <franck@cqfdev.fr>
  *
@@ -44,6 +47,32 @@ class CategoryTree extends BaseI18nLoop implements ArraySearchLoopInterface
 {
     /**
      * @return ArgumentCollection
+	 * 
+	 * #doc-arg-name category *
+	 * #doc-arg-desc A single category id.
+	 * #doc-arg-example category="2"
+	 * 
+	 * #doc-arg-name depth
+	 * #doc-arg-desc The max depth
+	 * #doc-arg-example depth="5"
+	 * 
+	 * #doc-arg-name exclude
+	 * #doc-arg-desc A single or a list of category ids to exclude for result.
+	 * #doc-arg-example exclude="5,72"
+	 * 
+	 * #doc-arg-name need_count_child
+	 * #doc-arg-desc A boolean which indicates whether the number of children in each category should be taken into account
+	 * #doc-arg-example 
+	 * 
+	 * #doc-arg-name order
+	 * #doc-arg-desc A list of values <br/> Expected values
+	 * #doc-arg-default position
+	 * #doc-arg-example order="random"
+	 * 
+	 * #doc-arg-name visible
+	 * #doc-arg-desc Whatever we consider hidden category or not.
+	 * #doc-arg-default true
+	 * #doc-arg-example 
      */
     protected function getArgDefinitions()
     {
@@ -133,6 +162,32 @@ class CategoryTree extends BaseI18nLoop implements ArraySearchLoopInterface
         }
     }
 
+	 /**
+	 * 
+	 * #doc-out-name $CHILD_COUNT
+	 * #doc-out-desc The number of direct children of a category in the tree
+	 * 
+	 * #doc-out-name $ID
+	 * #doc-out-desc the category id
+	 * 
+	 * #doc-out-name $LEVEL
+	 * #doc-out-desc The depth of the category in the tree
+	 * 
+	 * #doc-out-name $PARENT
+	 * #doc-out-desc the parent category
+	 * 
+	 * #doc-out-name $PREV_LEVEL
+	 * #doc-out-desc The depth of the direct parent category in the tree.
+	 * 
+	 * #doc-out-name $TITLE
+	 * #doc-out-desc the category title
+	 * 
+	 * #doc-out-name $URL
+	 * #doc-out-desc the category URL
+	 * 
+	 * #doc-out-name $VISIBLE
+	 * #doc-out-desc whatever the category is visible or not
+	 */
     public function parseResults(LoopResult $loopResult)
     {
         foreach ($loopResult->getResultDataCollection() as $result) {

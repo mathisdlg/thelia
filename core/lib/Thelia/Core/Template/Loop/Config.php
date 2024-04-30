@@ -33,6 +33,9 @@ use Thelia\Type\TypeCollection;
  * - hidden filters by hidden status (yes, no, both)
  * - secured filters by secured status (yes, no, both)
  * - exclude is a comma separated list of config IDs that will be excluded from output
+ * 
+ * #doc-usage {loop type="config" name="the-loop-name" [argument="value"], [...]}
+ * #doc-desc Config loop, to access configuration variables
  *
  * @author Franck Allimant <franck@cqfdev.fr>
  *
@@ -49,6 +52,31 @@ class Config extends BaseI18nLoop implements PropelSearchLoopInterface
 
     /**
      * @return ArgumentCollection
+	 * 
+	 * #doc-arg-name exclude
+	 * #doc-arg-desc A single or a list of config ids.
+	 * #doc-arg-example exclude="2", exclude="1,4,7"
+	 * 
+	 * #doc-arg-name hidden
+	 * #doc-arg-desc A boolean value.
+	 * #doc-arg-example hidden="no"
+	 * 
+	 * #doc-arg-name id
+	 * #doc-arg-desc A single of config id.
+	 * #doc-arg-example id="2"
+	 * 
+	 * #doc-arg-name order
+	 * #doc-arg-desc A list of values <br/> Expected values
+	 * #doc-arg-default name
+	 * #doc-arg-example order="id_reverse"
+	 * 
+	 * #doc-arg-name secured
+	 * #doc-arg-desc A boolean value.
+	 * #doc-arg-example secured="no"
+	 * 
+	 * #doc-arg-name variable
+	 * #doc-arg-desc Name of a variable config
+	 * #doc-arg-example variable="rewriting_enable"
      */
     protected function getArgDefinitions()
     {
@@ -140,6 +168,44 @@ class Config extends BaseI18nLoop implements PropelSearchLoopInterface
         return $search;
     }
 
+	 /**
+	 * 
+	 * #doc-out-name $CHAPO
+	 * #doc-out-desc The config variable chapo
+	 * 
+	 * #doc-out-name $DESCRIPTION
+	 * #doc-out-desc The config variable description
+	 * 
+	 * #doc-out-name $HIDDEN
+	 * #doc-out-desc check if the config variable is hidden
+	 * 
+	 * #doc-out-name $ID
+	 * #doc-out-desc the config variable id
+	 * 
+	 * #doc-out-name $IS_OVERRIDDEN_IN_ENV
+	 * #doc-out-desc check if the config is overridden
+	 * 
+	 * #doc-out-name $IS_TRANSLATED
+	 * #doc-out-desc check if the config is translated
+	 * 
+	 * #doc-out-name $LOCALE
+	 * #doc-out-desc The locale used for this research
+	 * 
+	 * #doc-out-name $NAME
+	 * #doc-out-desc The config variable name
+	 * 
+	 * #doc-out-name $POSTSCRIPTUM
+	 * #doc-out-desc The config variable postscriptum
+	 * 
+	 * #doc-out-name $SECURED
+	 * #doc-out-desc Check if the config variable is secured
+	 * 
+	 * #doc-out-name $TITLE
+	 * #doc-out-desc The config variable title
+	 * 
+	 * #doc-out-name $VALUE
+	 * #doc-out-desc The config variable value
+	 */
     public function parseResults(LoopResult $loopResult)
     {
         /** @var ConfigModel $result */

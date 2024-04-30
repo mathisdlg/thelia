@@ -24,6 +24,10 @@ use Thelia\Core\Template\Loop\Argument\ArgumentCollection;
 use TheliaMain\PropelResolver;
 
 /**
+ * 
+ * #doc-usage {loop type="generic" name="the-loop-name" [argument="value"], [...]}
+ * #doc-desc Generic loop can return any table present in your database and configured with propel. This loop is often useful on your own module table because most of the Thelia table already have dedicated loop.
+ * 
  * @method string getTableName()
  * @method string getFilters()
  * @method string getOrders()
@@ -34,6 +38,27 @@ class Generic extends BaseLoop implements PropelSearchLoopInterface
 {
     /**
      * @return ArgumentCollection
+	 * 
+	 * #doc-arg-name table_name*
+	 * #doc-arg-desc The table name you want query
+	 * #doc-arg-example 
+	 * 
+	 * #doc-arg-name filters
+	 * #doc-arg-desc A single or a list of filters to apply on columns in this format <code>column_name:value1,value2&#124;other_column:value</code>
+	 * #doc-arg-example filters="id:1,3&#124;visible:1"
+	 * 
+	 * #doc-arg-name order
+	 * #doc-arg-desc A single or a list of orders to apply on columns  in this format <code>column_name:DESC&#124;other_column:ASC</code>
+	 * #doc-arg-example order="id:DESC&#124;created_at:ASC"
+	 * 
+	 * #doc-arg-name locale
+	 * #doc-arg-desc The locale for translated columns
+	 * #doc-arg-default The current locale for session
+	 * #doc-arg-example 
+	 * 
+	 * #doc-arg-name limit
+	 * #doc-arg-desc The number of rows to return
+	 * #doc-arg-example limit="10"
      */
     protected function getArgDefinitions()
     {
@@ -107,6 +132,8 @@ class Generic extends BaseLoop implements PropelSearchLoopInterface
         return $query;
     }
 
+	 /**
+	 */
     public function parseResults(LoopResult $loopResult)
     {
         $tableMapClass = PropelResolver::getTableMapByTableName($this->getTableName());

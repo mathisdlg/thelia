@@ -24,6 +24,10 @@ use Thelia\Type\EnumListType;
 use Thelia\Type\TypeCollection;
 
 /**
+ * 
+ * #doc-usage {loop type="auth" name="the-loop-name" [argument="value"], [...]}
+ * #doc-desc The Auth loop perform authorisation checks against the current user. This loop returns nothing if the authorization fails, or the loop contents if it succeeds.You may check in the front office if an administrator is logged in, and perform specific functions in your front-office template (such as direct editing, for example).
+ * 
  * @author Franck Allimant <franck@cqfdev.fr>
  *
  * @method string[] getRole()
@@ -33,7 +37,24 @@ use Thelia\Type\TypeCollection;
  */
 class Auth extends BaseLoop implements ArraySearchLoopInterface
 {
-    public function getArgDefinitions()
+	 /**
+	 * 
+	 * #doc-arg-name access
+	 * #doc-arg-desc A comma separated list of access, . If empty or missing, the authorization is checked against the roles only <br/> Expected values
+	 * #doc-arg-example 
+	 * 
+	 * #doc-arg-name module
+	 * #doc-arg-desc A comma separated list of modules
+	 * #doc-arg-example 
+	 * 
+	 * #doc-arg-name resource
+	 * #doc-arg-desc A comma separated list of resources
+	 * #doc-arg-example 
+	 * 
+	 * #doc-arg-name role *
+	 * #doc-arg-desc A comma separated list of user roles
+	 * #doc-arg-example role="ADMIN" or can be role="CUSTOMER"
+	 */    public function getArgDefinitions()
     {
         return new ArgumentCollection(
             new Argument(
@@ -70,6 +91,8 @@ class Auth extends BaseLoop implements ArraySearchLoopInterface
         return [];
     }
 
+	 /**
+	 */
     public function parseResults(LoopResult $loopResult)
     {
         $roles = $this->getRole();

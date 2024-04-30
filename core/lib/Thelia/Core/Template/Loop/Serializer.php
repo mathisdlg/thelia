@@ -24,13 +24,26 @@ use Thelia\Type\TypeCollection;
 
 /**
  * Class Serializer.
+ * 
+ * #doc-usage {loop type="serializer" name="the-loop-name" [argument="value"], [...]}
+ * #doc-desc Serializer loop lists serializers.
  *
  * @author Benjamin Perche <bperche@openstudio.fr>
  * @author Jérôme Billiras <jbilliras@openstudio.fr>
  */
 class Serializer extends BaseLoop implements ArraySearchLoopInterface
 {
-    protected function getArgDefinitions()
+	 /**
+	 * 
+	 * #doc-arg-name order
+	 * #doc-arg-desc A list of values see sorting possible values
+	 * #doc-arg-default alpha
+	 * #doc-arg-example order=" random"
+	 * 
+	 * #doc-arg-name serializer
+	 * #doc-arg-desc A serializer
+	 * #doc-arg-example serializer="example"
+	 */    protected function getArgDefinitions()
     {
         return new ArgumentCollection(
             Argument::createAnyTypeArgument('serializer'),
@@ -68,6 +81,20 @@ class Serializer extends BaseLoop implements ArraySearchLoopInterface
         return $serializers;
     }
 
+	 /**
+	 * 
+	 * #doc-out-name $EXTENSION
+	 * #doc-out-desc the serializer extension
+	 * 
+	 * #doc-out-name $ID
+	 * #doc-out-desc the serializer id
+	 * 
+	 * #doc-out-name $MIME_TYPE
+	 * #doc-out-desc the serializer mime type
+	 * 
+	 * #doc-out-name $NAME
+	 * #doc-out-desc the serialiser name
+	 */
     public function parseResults(LoopResult $loopResult)
     {
         /** @var \Thelia\Core\Serializer\SerializerInterface $serializer */

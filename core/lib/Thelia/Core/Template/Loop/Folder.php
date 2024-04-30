@@ -29,6 +29,9 @@ use Thelia\Type\TypeCollection;
 
 /**
  * Class Folder.
+ * 
+ * #doc-usage {loop type="folder" name="the-loop-name" [argument="value"], [...]}
+ * #doc-desc Folder loop lists folders from your shop.
  *
  * @author Etienne Roudeix <eroudeix@openstudio.fr>
  *
@@ -54,6 +57,65 @@ class Folder extends BaseI18nLoop implements PropelSearchLoopInterface, SearchLo
 
     /**
      * @return ArgumentCollection
+	 * 
+	 * #doc-arg-name content
+	 * #doc-arg-desc A single content id.
+	 * #doc-arg-example content="3"
+	 * 
+	 * #doc-arg-name content_count_visible
+	 * #doc-arg-desc This parameter controls how content is counted. If 'yes' (the default) only visible contents are counted, 'no': only hidden contents are counted, '*': all contents are counted.
+	 * #doc-arg-default yes
+	 * #doc-arg-example content_count_visible="*"
+	 * 
+	 * #doc-arg-name current
+	 * #doc-arg-desc A boolean value which allows either to exclude current folder from results either to match only this folder
+	 * #doc-arg-example current="yes"
+	 * 
+	 * #doc-arg-name exclude
+	 * #doc-arg-desc A single or a list of folder ids.
+	 * #doc-arg-example exclude="2", exclude="1,4,7"
+	 * 
+	 * #doc-arg-name id
+	 * #doc-arg-desc A single or a list of folder ids.
+	 * #doc-arg-example id="2", id="1,4,7"
+	 * 
+	 * #doc-arg-name need_content_count
+	 * #doc-arg-desc A boolean. If set to true, the loop will return the number of contents in each folder and its sub-folders
+	 * #doc-arg-default true (for backward-compatibility)
+	 * #doc-arg-example need_content_count="yes"
+	 * 
+	 * #doc-arg-name need_count_child
+	 * #doc-arg-desc A boolean. If set to true, the loop will return the number of sub-folders of each folder
+	 * #doc-arg-default true (for backward-compatibility)
+	 * #doc-arg-example need_count_child="yes"
+	 * 
+	 * #doc-arg-name not_empty
+	 * #doc-arg-desc (**not implemented yet**) A boolean value. If true, only the folders which contains at leat a visible content (either directly or trough a subfolder) are returned
+	 * #doc-arg-default no
+	 * #doc-arg-example not_empty="yes"
+	 * 
+	 * #doc-arg-name order
+	 * #doc-arg-desc A list of values see sorting possible values
+	 * #doc-arg-default manual
+	 * #doc-arg-example order="random"
+	 * 
+	 * #doc-arg-name parent
+	 * #doc-arg-desc A single folder id.
+	 * #doc-arg-example folder="3"
+	 * 
+	 * #doc-arg-name title
+	 * #doc-arg-desc Title of the folder.
+	 * #doc-arg-example title="My folder"
+	 * 
+	 * #doc-arg-name visible
+	 * #doc-arg-desc A boolean value.
+	 * #doc-arg-default yes
+	 * #doc-arg-example visible="no"
+	 * 
+	 * #doc-arg-name with_prev_next_info
+	 * #doc-arg-desc A boolean. If set to true, $PREVIOUS and $NEXT output arguments are available.
+	 * #doc-arg-default false
+	 * #doc-arg-example with_prev_next_info="yes"
      */
     protected function getArgDefinitions()
     {
@@ -219,6 +281,71 @@ class Folder extends BaseI18nLoop implements PropelSearchLoopInterface, SearchLo
         return $search;
     }
 
+	 /**
+	 * 
+	 * #doc-out-name $CHAPO
+	 * #doc-out-desc the folder chapo
+	 * 
+	 * #doc-out-name $CHILD_COUNT
+	 * #doc-out-desc Number of subfolders contained by the current forlder.
+	 * 
+	 * #doc-out-name $CONTENT_COUNT
+	 * #doc-out-desc the number of visible contents for this folder.
+	 * 
+	 * #doc-out-name $DESCRIPTION
+	 * #doc-out-desc the folder description
+	 * 
+	 * #doc-out-name $HAS_NEXT
+	 * #doc-out-desc true if a folder exists after this one in the current parent folder, following folders positions.
+	 * 
+	 * #doc-out-name $HAS_PREVIOUS
+	 * #doc-out-desc true if a folder exists before this one in the current parent folder, following folders positions.
+	 * 
+	 * #doc-out-name $ID
+	 * #doc-out-desc the folder id
+	 * 
+	 * #doc-out-name $IS_TRANSLATED
+	 * #doc-out-desc check if the folder is translated
+	 * 
+	 * #doc-out-name $LOCALE
+	 * #doc-out-desc The locale used for this research
+	 * 
+	 * #doc-out-name $META_DESCRIPTION
+	 * #doc-out-desc the folder meta description
+	 * 
+	 * #doc-out-name $META_KEYWORDS
+	 * #doc-out-desc the folder meta keywords
+	 * 
+	 * #doc-out-name $META_TITLE
+	 * #doc-out-desc the folder meta title
+	 * 
+	 * #doc-out-name $NEXT
+	 * #doc-out-desc The ID of folder after this one in the current parent folder, following folders positions, or null if none exists.
+	 * 
+	 * #doc-out-name $PARENT
+	 * #doc-out-desc the parent folder
+	 * 
+	 * #doc-out-name $POSITION
+	 * #doc-out-desc the folder position
+	 * 
+	 * #doc-out-name $POSTSCRIPTUM
+	 * #doc-out-desc the folder postscriptum
+	 * 
+	 * #doc-out-name $PREVIOUS
+	 * #doc-out-desc The ID of folder before this one in the current parent folder, following folders positions, or null if none exists.
+	 * 
+	 * #doc-out-name $ROOT
+	 * #doc-out-desc Root of this folder
+	 * 
+	 * #doc-out-name $TITLE
+	 * #doc-out-desc the folder title
+	 * 
+	 * #doc-out-name $URL
+	 * #doc-out-desc the folder URL
+	 * 
+	 * #doc-out-name $VISIBLE
+	 * #doc-out-desc the folder visibility
+	 */
     public function parseResults(LoopResult $loopResult)
     {
         $needCountChild = $this->getNeedCountChild();

@@ -27,6 +27,9 @@ use Thelia\Type;
  * Cart Loop.
  *
  * Class Cart
+ * 
+ * #doc-usage {loop type="cart" name="the-loop-name" [argument="value"], [...]}
+ * #doc-desc Cart loop displays cart information.
  *
  * @method string[] getOrder()
  */
@@ -34,6 +37,11 @@ class Cart extends BaseLoop implements ArraySearchLoopInterface
 {
     /**
      * @return \Thelia\Core\Template\Loop\Argument\ArgumentCollection
+	 * 
+	 * #doc-arg-name order
+	 * #doc-arg-desc A list of values <br/> Expected values : <br/> - reverse : reverse chronological item add order
+	 * #doc-arg-default normal
+	 * #doc-arg-example order="reverse"
      */
     protected function getArgDefinitions()
     {
@@ -76,6 +84,72 @@ class Cart extends BaseLoop implements ArraySearchLoopInterface
      * @throws \Propel\Runtime\Exception\PropelException
      *
      * @return LoopResult
+	 * 
+	 * #doc-out-name $IS_PROMO
+	 * #doc-out-desc if the product sale elements is in promo or not
+	 * 
+	 * #doc-out-name $ITEM_ID
+	 * #doc-out-desc the cart item id
+	 * 
+	 * #doc-out-name $PRICE
+	 * #doc-out-desc the product sale elements price (unit price)
+	 * 
+	 * #doc-out-name $PRODUCT_ID
+	 * #doc-out-desc the product id
+	 * 
+	 * #doc-out-name $PRODUCT_SALE_ELEMENTS_ID
+	 * #doc-out-desc the product sale elements id
+	 * 
+	 * #doc-out-name $PRODUCT_SALE_ELEMENTS_REF
+	 * #doc-out-desc the sales item reference
+	 * 
+	 * #doc-out-name $PRODUCT_URL
+	 * #doc-out-desc the product url
+	 * 
+	 * #doc-out-name $PROMO_PRICE
+	 * #doc-out-desc the product sale elements in promo price (unit price)
+	 * 
+	 * #doc-out-name $PROMO_TAXED_PRICE
+	 * #doc-out-desc the product sale elements in promo price including taxes (unit price)
+	 * 
+	 * #doc-out-name $QUANTITY
+	 * #doc-out-desc the cart item quantity
+	 * 
+	 * #doc-out-name $REAL_PRICE
+	 * #doc-out-desc the actual price of item in cart
+	 * 
+	 * #doc-out-name $REAL_TAXED_PRICE
+	 * #doc-out-desc the actual price of item in cart, after taxes are applied
+	 * 
+	 * #doc-out-name $REAL_TOTAL_PRICE
+	 * #doc-out-desc the actual total price of all items in cart
+	 * 
+	 * #doc-out-name $REAL_TOTAL_TAXED_PRICE
+	 * #doc-out-desc the actual total price of all items in cart, after taxes are applied
+	 * 
+	 * #doc-out-name $REF
+	 * #doc-out-desc the product ref
+	 * 
+	 * #doc-out-name $STOCK
+	 * #doc-out-desc the product sale elements available stock
+	 * 
+	 * #doc-out-name $TAXED_PRICE
+	 * #doc-out-desc the product sale elements price including taxes (unit price)
+	 * 
+	 * #doc-out-name $TITLE
+	 * #doc-out-desc the product title
+	 * 
+	 * #doc-out-name $TOTAL_PRICE
+	 * #doc-out-desc the product sale elements price (total price)
+	 * 
+	 * #doc-out-name $TOTAL_PROMO_PRICE
+	 * #doc-out-desc the product sale elements in promo price (total price)
+	 * 
+	 * #doc-out-name $TOTAL_PROMO_TAXED_PRICE
+	 * #doc-out-desc the product sale elements in promo price including taxes (total price)
+	 * 
+	 * #doc-out-name $TOTAL_TAXED_PRICE
+	 * #doc-out-desc the product sale elements price including taxes (total price)
      */
     public function parseResults(LoopResult $loopResult)
     {

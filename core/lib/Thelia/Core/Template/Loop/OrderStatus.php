@@ -26,6 +26,9 @@ use Thelia\Model\OrderStatusQuery;
  * OrderStatus loop.
  *
  * Class OrderStatus
+ * 
+ * #doc-usage {loop type="order_status" name="the-loop-name" [argument="value"], [...]}
+ * #doc-desc Order status loop displays order status information.
  *
  * @author Etienne Roudeix <eroudeix@openstudio.fr>
  * @author Gilles Bourgeat <gbourgeat@gmail.com>
@@ -40,6 +43,19 @@ class OrderStatus extends BaseI18nLoop implements PropelSearchLoopInterface
 
     /**
      * @return ArgumentCollection
+	 * 
+	 * #doc-arg-name code
+	 * #doc-arg-desc Status code
+	 * #doc-arg-example code="a_code"
+	 * 
+	 * #doc-arg-name id
+	 * #doc-arg-desc A single or a list of order status ids
+	 * #doc-arg-example id="2", id="1,4,7"
+	 * 
+	 * #doc-arg-name order
+	 * #doc-arg-desc A list of values see Expected values
+	 * #doc-arg-default manual
+	 * #doc-arg-example order="random"
      */
     protected function getArgDefinitions()
     {
@@ -96,6 +112,41 @@ class OrderStatus extends BaseI18nLoop implements PropelSearchLoopInterface
         return $search;
     }
 
+	 /**
+	 * 
+	 * #doc-out-name $CHAPO
+	 * #doc-out-desc the order status short description
+	 * 
+	 * #doc-out-name $CODE
+	 * #doc-out-desc the order status code
+	 * 
+	 * #doc-out-name $COLOR
+	 * #doc-out-desc the order status hexadecimal color code
+	 * 
+	 * #doc-out-name $DESCRIPTION
+	 * #doc-out-desc the order status description
+	 * 
+	 * #doc-out-name $ID
+	 * #doc-out-desc the order status id
+	 * 
+	 * #doc-out-name $IS_TRANSLATED
+	 * #doc-out-desc whatever the order status is translated or not
+	 * 
+	 * #doc-out-name $LOCALE
+	 * #doc-out-desc the order status locale
+	 * 
+	 * #doc-out-name $POSITION
+	 * #doc-out-desc the order status position
+	 * 
+	 * #doc-out-name $POSTSCRIPTUM
+	 * #doc-out-desc the order status postscriptum
+	 * 
+	 * #doc-out-name $PROTECTED_STATUS
+	 * #doc-out-desc 1 if the order status is protected
+	 * 
+	 * #doc-out-name $TITLE
+	 * #doc-out-desc the order status title
+	 */
     public function parseResults(LoopResult $loopResult)
     {
         /** @var OrderStatusModel $orderStatus */

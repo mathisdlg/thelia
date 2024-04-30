@@ -31,6 +31,9 @@ use Thelia\Type\BooleanOrBothType;
  * - hidden filters by hidden status (yes, no, both)
  * - secured filters by secured status (yes, no, both)
  * - exclude is a comma separated list of message IDs that will be excluded from output
+ * 
+ * #doc-usage {loop type="message" name="the-loop-name" [argument="value"], [...]}
+ * #doc-desc Message loop lists all defined messages.
  *
  * @author Franck Allimant <franck@cqfdev.fr>
  *
@@ -46,6 +49,26 @@ class Message extends BaseI18nLoop implements PropelSearchLoopInterface
 
     /**
      * @return ArgumentCollection
+	 * 
+	 * #doc-arg-name exclude
+	 * #doc-arg-desc A list of message IDs to exclude
+	 * #doc-arg-example exclude="1,2,3"
+	 * 
+	 * #doc-arg-name hidden
+	 * #doc-arg-desc A boolean to show or hide hidden message
+	 * #doc-arg-example hidden="1"
+	 * 
+	 * #doc-arg-name id
+	 * #doc-arg-desc The message ID
+	 * #doc-arg-example id="2"
+	 * 
+	 * #doc-arg-name secured
+	 * #doc-arg-desc Boolean to show or hide secured messages
+	 * #doc-arg-example secured="1"
+	 * 
+	 * #doc-arg-name variable
+	 * #doc-arg-desc variable
+	 * #doc-arg-example variable="rewriting_enable"
      */
     protected function getArgDefinitions()
     {
@@ -98,6 +121,35 @@ class Message extends BaseI18nLoop implements PropelSearchLoopInterface
         return $search;
     }
 
+	 /**
+	 * 
+	 * #doc-out-name $ID
+	 * #doc-out-desc The message ID
+	 * 
+	 * #doc-out-name $NAME
+	 * #doc-out-desc The message name
+	 * 
+	 * #doc-out-name $IS_TRANSLATED
+	 * #doc-out-desc Check if the message is translated
+	 * 
+	 * #doc-out-name $LOCALE
+	 * #doc-out-desc The locale used for this research
+	 * 
+	 * #doc-out-name $TITLE
+	 * #doc-out-desc The message title
+	 * 
+	 * #doc-out-name $SUBJECT
+	 * #doc-out-desc The message subject
+	 * 
+	 * #doc-out-name $TEXT_MESSAGE
+	 * #doc-out-desc The text message
+	 * 
+	 * #doc-out-name $HTML_MESSAGE
+	 * #doc-out-desc The html message
+	 * 
+	 * #doc-out-name $SECURED
+	 * #doc-out-desc Check if the message is secured
+	 */
     public function parseResults(LoopResult $loopResult)
     {
         /** @var MessageModel $result */

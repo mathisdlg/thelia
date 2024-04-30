@@ -26,6 +26,9 @@ use Thelia\Model\OrderProductTaxQuery;
  * OrderProductTax loop.
  *
  * Class OrderProductTax
+ * 
+ * #doc-usage {loop type="order_product_tax" name="the-loop-name" [argument="value"], [...]}
+ * #doc-desc Order product tax loop displays taxes available.
  *
  * @author Zzuutt
  *
@@ -37,6 +40,11 @@ class OrderProductTax extends BaseLoop implements PropelSearchLoopInterface
 
     /**
      * @return ArgumentCollection
+	 * 
+	 * #doc-arg-name order_product *
+	 * #doc-arg-desc A single order product id.
+	 * #doc-arg-default null
+	 * #doc-arg-example order_product="2"
      */
     protected function getArgDefinitions()
     {
@@ -56,6 +64,23 @@ class OrderProductTax extends BaseLoop implements PropelSearchLoopInterface
         return $search;
     }
 
+	 /**
+	 * 
+	 * #doc-out-name $AMOUNT
+	 * #doc-out-desc Tax amount
+	 * 
+	 * #doc-out-name $DESCRIPTION
+	 * #doc-out-desc Tax description
+	 * 
+	 * #doc-out-name $ID
+	 * #doc-out-desc Tax id
+	 * 
+	 * #doc-out-name $PROMO_AMOUNT
+	 * #doc-out-desc Tax amount of the promo price
+	 * 
+	 * #doc-out-name $TITLE
+	 * #doc-out-desc Tax title
+	 */
     public function parseResults(LoopResult $loopResult)
     {
         /** @var OrderProductTaxModel $orderProductTax */

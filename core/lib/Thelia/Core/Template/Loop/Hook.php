@@ -26,6 +26,9 @@ use Thelia\Type\TypeCollection;
 
 /**
  * Class Hook.
+ * 
+ * #doc-usage {loop type="hook" name="the-loop-name" [argument="value"], [...]}
+ * #doc-desc Get data from the hook table.
  *
  * @author Julien Chanséaume <jchanseaume@openstudio.fr>
  *
@@ -40,7 +43,30 @@ class Hook extends BaseI18nLoop implements PropelSearchLoopInterface
 {
     protected $timestampable = true;
 
-    protected function getArgDefinitions()
+	 /**
+	 * 
+	 * #doc-arg-name active
+	 * #doc-arg-desc If the hook is active or not
+	 * #doc-arg-default *
+	 * #doc-arg-example 
+	 * 
+	 * #doc-arg-name code
+	 * #doc-arg-desc The hook code
+	 * #doc-arg-example 
+	 * 
+	 * #doc-arg-name exclude
+	 * #doc-arg-desc A single or a list of hook ids to exclude
+	 * #doc-arg-example 
+	 * 
+	 * #doc-arg-name hook_type
+	 * #doc-arg-desc The type of hook
+	 * #doc-arg-example 
+	 * 
+	 * #doc-arg-name order
+	 * #doc-arg-desc See Order possible values
+	 * #doc-arg-default id
+	 * #doc-arg-example order='code'
+	 */    protected function getArgDefinitions()
     {
         return new ArgumentCollection(
             Argument::createIntListTypeArgument('id'),
@@ -153,6 +179,47 @@ class Hook extends BaseI18nLoop implements PropelSearchLoopInterface
         return $search;
     }
 
+	 /**
+	 * 
+	 * #doc-out-name $ACTIVE
+	 * #doc-out-desc If the hook is active or not
+	 * 
+	 * #doc-out-name $BLOCK
+	 * #doc-out-desc The [block] column value
+	 * 
+	 * #doc-out-name $BY_MODULE
+	 * #doc-out-desc The value of the bt module field
+	 * 
+	 * #doc-out-name $CHAPO
+	 * #doc-out-desc Chapo
+	 * 
+	 * #doc-out-name $CODE
+	 * #doc-out-desc The hook code
+	 * 
+	 * #doc-out-name $DESCRIPTION
+	 * #doc-out-desc The hook description
+	 * 
+	 * #doc-out-name $ID
+	 * #doc-out-desc The hook ID
+	 * 
+	 * #doc-out-name $IS_TRANSLATED
+	 * #doc-out-desc Check if the hook is translated
+	 * 
+	 * #doc-out-name $LOCALE
+	 * #doc-out-desc The locale user for this loop
+	 * 
+	 * #doc-out-name $NATIVE
+	 * #doc-out-desc Naive
+	 * 
+	 * #doc-out-name $POSITION
+	 * #doc-out-desc The hook position
+	 * 
+	 * #doc-out-name $TITLE
+	 * #doc-out-desc Title
+	 * 
+	 * #doc-out-name $TYPE
+	 * #doc-out-desc Type
+	 */
     public function parseResults(LoopResult $loopResult)
     {
         /** @var \Thelia\Model\Hook $hook */

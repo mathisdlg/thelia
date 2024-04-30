@@ -21,6 +21,10 @@ use Thelia\Core\Template\Loop\Argument\Argument;
 use Thelia\Core\Template\Loop\Argument\ArgumentCollection;
 
 /**
+ * 
+ * #doc-usage {loop type="feed" name="the-loop-name" [argument="value"], [...]}
+ * #doc-desc Get data from an Atom or RSS feed.
+ * 
  * @author Franck Allimant <franck@cqfdev.fr>
  *
  * @method string getUrl()
@@ -28,7 +32,18 @@ use Thelia\Core\Template\Loop\Argument\ArgumentCollection;
  */
 class Feed extends BaseLoop implements ArraySearchLoopInterface
 {
-    public function getArgDefinitions()
+	 /**
+	 * 
+	 * #doc-arg-name timeout
+	 * #doc-arg-desc Delay in seconds after which the loop closes the connection with the remote server
+	 * #doc-arg-default 10
+	 * #doc-arg-example timeout=10
+	 * 
+	 * #doc-arg-name url *
+	 * #doc-arg-desc An Atom or RSS feed URL.
+	 * #doc-arg-default null
+	 * #doc-arg-example `url='http://thelia.net/feeds/?lang=en'`
+	 */    public function getArgDefinitions()
     {
         return new ArgumentCollection(
             Argument::createAnyTypeArgument('url', null, true),
@@ -59,6 +74,23 @@ class Feed extends BaseLoop implements ArraySearchLoopInterface
         return $cacheItem->get();
     }
 
+	 /**
+	 * 
+	 * #doc-out-name $AUTHOR
+	 * #doc-out-desc The feed item author
+	 * 
+	 * #doc-out-name $DATE
+	 * #doc-out-desc the feed item date, as a Unix timestamp
+	 * 
+	 * #doc-out-name $DESCRIPTION
+	 * #doc-out-desc the feed item description
+	 * 
+	 * #doc-out-name $TITLE
+	 * #doc-out-desc The feed item title
+	 * 
+	 * #doc-out-name $URL
+	 * #doc-out-desc the feed item URL
+	 */
     public function parseResults(LoopResult $loopResult)
     {
         /** @var \SimplePie_Item $item */

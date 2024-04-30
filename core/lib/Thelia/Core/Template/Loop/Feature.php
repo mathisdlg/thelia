@@ -35,6 +35,9 @@ use Thelia\Type\TypeCollection;
  * Feature loop.
  *
  * Class Feature
+ * 
+ * #doc-usage {loop type="feature" name="the-loop-name" [argument="value"], [...]}
+ * #doc-desc Feature loop lists features.
  *
  * @author Etienne Roudeix <eroudeix@openstudio.fr>
  *
@@ -55,6 +58,44 @@ class Feature extends BaseI18nLoop implements PropelSearchLoopInterface
 
     /**
      * @return ArgumentCollection
+	 * 
+	 * #doc-arg-name exclude
+	 * #doc-arg-desc A single or a list of feature ids to exclude.
+	 * #doc-arg-example exclude="456,123"
+	 * 
+	 * #doc-arg-name exclude_template
+	 * #doc-arg-desc A single or a list of template ids. Only features NOT attached to these templates will be returned.
+	 * #doc-arg-example id="2", id="1,4,7"
+	 * 
+	 * #doc-arg-name id
+	 * #doc-arg-desc A single or a list of feature ids.
+	 * #doc-arg-example id="2", id="1,4,7"
+	 * 
+	 * #doc-arg-name lang
+	 * #doc-arg-desc A lang id
+	 * #doc-arg-example lang="1"
+	 * 
+	 * #doc-arg-name order
+	 * #doc-arg-desc A list of values see sorting possible values
+	 * #doc-arg-default manual
+	 * #doc-arg-example order="alpha_reverse"
+	 * 
+	 * #doc-arg-name product
+	 * #doc-arg-desc A single or a list of product ids.
+	 * #doc-arg-example id="2", id="1,4,7"
+	 * 
+	 * #doc-arg-name template
+	 * #doc-arg-desc A single or a list of template ids. Only features attached to these templates will be returned.
+	 * #doc-arg-example id="2", id="1,4,7"
+	 * 
+	 * #doc-arg-name title
+	 * #doc-arg-desc A a string title
+	 * #doc-arg-example title="foo"
+	 * 
+	 * #doc-arg-name visible
+	 * #doc-arg-desc A boolean value.
+	 * #doc-arg-default yes
+	 * #doc-arg-example visible="no"
      */
     protected function getArgDefinitions()
     {
@@ -226,6 +267,30 @@ class Feature extends BaseI18nLoop implements PropelSearchLoopInterface
      * @throws \Propel\Runtime\Exception\PropelException
      *
      * @return LoopResult
+	 * 
+	 * #doc-out-name $CHAPO
+	 * #doc-out-desc the feature chapo
+	 * 
+	 * #doc-out-name $DESCRIPTION
+	 * #doc-out-desc the feature description
+	 * 
+	 * #doc-out-name $ID
+	 * #doc-out-desc the feature id
+	 * 
+	 * #doc-out-name $IS_TRANSLATED
+	 * #doc-out-desc check if the feature is translated
+	 * 
+	 * #doc-out-name $LOCALE
+	 * #doc-out-desc The locale used for this research
+	 * 
+	 * #doc-out-name $POSITION
+	 * #doc-out-desc If none of the product, template or exclude_template parameter is present, $POSITION contains the feature position. Otherwise, it contains the feature position in the product template context.
+	 * 
+	 * #doc-out-name $POSTSCRIPTUM
+	 * #doc-out-desc the feature postscriptum
+	 * 
+	 * #doc-out-name $TITLE
+	 * #doc-out-desc the feature title
      */
     public function parseResults(LoopResult $loopResult)
     {

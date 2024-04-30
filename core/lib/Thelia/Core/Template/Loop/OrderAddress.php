@@ -26,6 +26,9 @@ use Thelia\Model\OrderAddressQuery;
  * OrderAddress loop.
  *
  * Class OrderAddress
+ * 
+ * #doc-usage {loop type="order_address" name="the-loop-name" [argument="value"], [...]}
+ * #doc-desc Order address loop displays order addresses information.
  *
  * @author Etienne Roudeix <eroudeix@openstudio.fr>
  *
@@ -37,6 +40,11 @@ class OrderAddress extends BaseLoop implements PropelSearchLoopInterface
 
     /**
      * @return ArgumentCollection
+	 * 
+	 * #doc-arg-name id *
+	 * #doc-arg-desc A single order address id
+	 * #doc-arg-default null
+	 * #doc-arg-example id="2"
      */
     protected function getArgDefinitions()
     {
@@ -56,6 +64,50 @@ class OrderAddress extends BaseLoop implements PropelSearchLoopInterface
         return $search;
     }
 
+	 /**
+	 * 
+	 * #doc-out-name $ADDRESS1
+	 * #doc-out-desc the first order address line
+	 * 
+	 * #doc-out-name $ADDRESS2
+	 * #doc-out-desc the second order address line
+	 * 
+	 * #doc-out-name $ADDRESS3
+	 * #doc-out-desc the third order address line
+	 * 
+	 * #doc-out-name $CELLPHONE
+	 * #doc-out-desc the order address cellphone
+	 * 
+	 * #doc-out-name $CITY
+	 * #doc-out-desc the order address city
+	 * 
+	 * #doc-out-name $COMPANY
+	 * #doc-out-desc the order address company
+	 * 
+	 * #doc-out-name $COUNTRY
+	 * #doc-out-desc the order address country which might be use in country loop
+	 * 
+	 * #doc-out-name $FIRSTNAME
+	 * #doc-out-desc the order address firstname
+	 * 
+	 * #doc-out-name $ID
+	 * #doc-out-desc the order address id
+	 * 
+	 * #doc-out-name $LASTNAME
+	 * #doc-out-desc the order address lastname
+	 * 
+	 * #doc-out-name $PHONE
+	 * #doc-out-desc the order address phone
+	 * 
+	 * #doc-out-name $STATE
+	 * #doc-out-desc the order address state
+	 * 
+	 * #doc-out-name $TITLE
+	 * #doc-out-desc the order address title which might be use in title loop
+	 * 
+	 * #doc-out-name $ZIPCODE
+	 * #doc-out-desc the order address zipcode
+	 */
     public function parseResults(LoopResult $loopResult)
     {
         /** @var OrderAddressModel $orderAddress */

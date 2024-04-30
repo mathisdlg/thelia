@@ -28,6 +28,9 @@ use Thelia\Type\TypeCollection;
  * FeatureValue loop.
  *
  * Class FeatureValue
+ * 
+ * #doc-usage {loop type="feature_value" name="the-loop-name" [argument="value"], [...]}
+ * #doc-desc Feature value loop lists feature availabilities.
  *
  * @author Etienne Roudeix <eroudeix@openstudio.fr>
  *
@@ -45,6 +48,43 @@ class FeatureValue extends BaseI18nLoop implements PropelSearchLoopInterface
 
     /**
      * @return ArgumentCollection
+	 * 
+	 * #doc-arg-name exclude_feature_availability
+	 * #doc-arg-desc A boolean value to return only features with feature availability (no personal value).
+	 * #doc-arg-default 0
+	 * #doc-arg-example feature_availability="true"
+	 * 
+	 * #doc-arg-name exclude_free_text
+	 * #doc-arg-desc A boolean value to return only features with free text value (no feature availability).
+	 * #doc-arg-default 0
+	 * #doc-arg-example exclude_free_text="1" or exclude_free_text="true"
+	 * 
+	 * #doc-arg-name feature *
+	 * #doc-arg-desc A single feature id.
+	 * #doc-arg-default null
+	 * #doc-arg-example feature="2"
+	 * 
+	 * #doc-arg-name feature_availability
+	 * #doc-arg-desc A single or a list of feature availability ids.
+	 * #doc-arg-example feature_availability="2,5"
+	 * 
+	 * #doc-arg-name force_return
+	 * #doc-arg-desc A boolean value to return all features, even if they are not available.
+	 * #doc-arg-default true
+	 * #doc-arg-example force_return="1"
+	 * 
+	 * #doc-arg-name free_text
+	 * #doc-arg-desc A single or a list of strings.
+	 * #doc-arg-example free_text="some text,some other text"
+	 * 
+	 * #doc-arg-name order
+	 * #doc-arg-desc A list of values see sorting possible values
+	 * #doc-arg-default manual
+	 * #doc-arg-example order="alpha_reverse"
+	 * 
+	 * #doc-arg-name product
+	 * #doc-arg-desc A single product id.
+	 * #doc-arg-example product="9"
      */
     protected function getArgDefinitions()
     {
@@ -130,6 +170,47 @@ class FeatureValue extends BaseI18nLoop implements PropelSearchLoopInterface
         return $search;
     }
 
+	 /**
+	 * 
+	 * #doc-out-name $CHAPO
+	 * #doc-out-desc the feature value chapo
+	 * 
+	 * #doc-out-name $DESCRIPTION
+	 * #doc-out-desc the feature value description
+	 * 
+	 * #doc-out-name $FEATURE_AV_ID
+	 * #doc-out-desc the feature av. ID. Null if the feature ha no feature av. Use FREE_TEXT_VALUE in this case.
+	 * 
+	 * #doc-out-name $FREE_TEXT_VALUE
+	 * #doc-out-desc 1 if this feature is free text, 0 otherwise. Deprecated in 2.4
+	 * 
+	 * #doc-out-name $ID
+	 * #doc-out-desc the feature value id
+	 * 
+	 * #doc-out-name $IS_FEATURE_AV
+	 * #doc-out-desc 1 if this feature is feature av., 0 otherwise.
+	 * 
+	 * #doc-out-name $IS_FREE_TEXT
+	 * #doc-out-desc 1 if this feature is free text, 0 otherwise.
+	 * 
+	 * #doc-out-name $LOCALE
+	 * #doc-out-desc the locale of returned results
+	 * 
+	 * #doc-out-name $POSITION
+	 * #doc-out-desc the feature value position
+	 * 
+	 * #doc-out-name $POSTSCRIPTUM
+	 * #doc-out-desc the feature availability postscriptum
+	 * 
+	 * #doc-out-name $PRODUCT
+	 * #doc-out-desc the id of the product. Deprecated, please use $PRODUCT_ID instead
+	 * 
+	 * #doc-out-name $PRODUCT_ID
+	 * #doc-out-desc (2.2) the id of the product
+	 * 
+	 * #doc-out-name $TITLE
+	 * #doc-out-desc the feature availability title, or the feature value text for free text features.
+	 */
     public function parseResults(LoopResult $loopResult)
     {
         /** @var \Thelia\Model\FeatureProduct $featureValue */

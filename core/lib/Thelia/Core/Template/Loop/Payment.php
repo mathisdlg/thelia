@@ -21,18 +21,46 @@ use Thelia\Module\BaseModule;
 
 /**
  * Class Payment.
+ * 
+ * #doc-usage {loop type="payment" name="the-loop-name" [argument="value"], [...]}
+ * #doc-desc payment loop displays payment modules information.
  *
  * @author Etienne Roudeix <eroudeix@gmail.com>
  */
 class Payment extends BaseSpecificModule implements PropelSearchLoopInterface
 {
-    public function getArgDefinitions()
+	 /**
+	 * 
+	 * #doc-arg-name all base specific module arguments
+	 * #doc-arg-desc 
+	 * #doc-arg-example 
+	 */    public function getArgDefinitions()
     {
         $collection = parent::getArgDefinitions();
 
         return $collection;
     }
 
+	 /**
+	 * 
+	 * #doc-out-name $CHAPO
+	 * #doc-out-desc the payment module short description
+	 * 
+	 * #doc-out-name $CODE
+	 * #doc-out-desc the module code
+	 * 
+	 * #doc-out-name $DESCRIPTION
+	 * #doc-out-desc the payment module description
+	 * 
+	 * #doc-out-name $ID
+	 * #doc-out-desc the payment module id
+	 * 
+	 * #doc-out-name $POSTSCRIPTUM
+	 * #doc-out-desc the payment module postscriptum
+	 * 
+	 * #doc-out-name $TITLE
+	 * #doc-out-desc the payment module title
+	 */
     public function parseResults(LoopResult $loopResult)
     {
         $cart = $this->getCurrentRequest()->getSession()->getSessionCart($this->dispatcher);

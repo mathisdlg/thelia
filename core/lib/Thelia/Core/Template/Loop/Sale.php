@@ -30,6 +30,9 @@ use Thelia\Type\TypeCollection;
  * Sale loop.
  *
  * Class Sale
+ * 
+ * #doc-usage {loop type="sale" name="the-loop-name" [argument="value"], [...]}
+ * #doc-desc Sale loop provides an access to sale operations defined on your shop.
  *
  * @author Franck Allimant <thelia@cqfdev.fr>
  *
@@ -48,6 +51,33 @@ class Sale extends BaseI18nLoop implements PropelSearchLoopInterface, SearchLoop
 
     /**
      * @return ArgumentCollection
+	 * 
+	 * #doc-arg-name active
+	 * #doc-arg-desc A boolean value, to get only active (1) or inactive sales (0) or both (*)
+	 * #doc-arg-default 1
+	 * #doc-arg-example active="1"
+	 * 
+	 * #doc-arg-name currency
+	 * #doc-arg-desc A currency id, to get the price offset defined for this currency
+	 * #doc-arg-default The current shop currency
+	 * #doc-arg-example currency="1"
+	 * 
+	 * #doc-arg-name exclude
+	 * #doc-arg-desc A single or a list of sale ids to excluded from results.
+	 * #doc-arg-example exclude="2", exclude="1,4,7"
+	 * 
+	 * #doc-arg-name id
+	 * #doc-arg-desc A single or a list of sale ids.
+	 * #doc-arg-example id="2", id="1,4,7"
+	 * 
+	 * #doc-arg-name order
+	 * #doc-arg-desc A list of values see sorting possible values
+	 * #doc-arg-default start-date
+	 * #doc-arg-example order=" random"
+	 * 
+	 * #doc-arg-name product
+	 * #doc-arg-desc A single or a list of product IDs. If specified, the loop will return the sales in which these products are selected
+	 * #doc-arg-example product="2", product="1,4,7"
      */
     protected function getArgDefinitions()
     {
@@ -222,6 +252,59 @@ class Sale extends BaseI18nLoop implements PropelSearchLoopInterface, SearchLoop
         return $search;
     }
 
+	 /**
+	 * 
+	 * #doc-out-name $ACTIVE
+	 * #doc-out-desc true if the sale is active, false otherwise
+	 * 
+	 * #doc-out-name $CHAPO
+	 * #doc-out-desc the sale chapo
+	 * 
+	 * #doc-out-name $DESCRIPTION
+	 * #doc-out-desc the sale description
+	 * 
+	 * #doc-out-name $DISPLAY_INITIAL_PRICE
+	 * #doc-out-desc true if the products initial price should be displayed, false otherwise
+	 * 
+	 * #doc-out-name $END_DATE
+	 * #doc-out-desc the sale end date
+	 * 
+	 * #doc-out-name $HAS_END_DATE
+	 * #doc-out-desc true if the sale has a end date, false otherwise
+	 * 
+	 * #doc-out-name $HAS_START_DATE
+	 * #doc-out-desc true if the sale has a start date, false otherwise
+	 * 
+	 * #doc-out-name $ID
+	 * #doc-out-desc the content id
+	 * 
+	 * #doc-out-name $IS_TRANSLATED
+	 * #doc-out-desc check if the content is translated
+	 * 
+	 * #doc-out-name $LOCALE
+	 * #doc-out-desc the locale (e.g. fr_FR) of the returned data
+	 * 
+	 * #doc-out-name $POSTSCTIPTUM
+	 * #doc-out-desc the sale postscriptum
+	 * 
+	 * #doc-out-name $PRICE_OFFSET_SYMBOL
+	 * #doc-out-desc the offset unit symbol, % for a percentage, the currency symbol for an amount
+	 * 
+	 * #doc-out-name $PRICE_OFFSET_TYPE
+	 * #doc-out-desc the price offset type, P for a percentage, A for an amount
+	 * 
+	 * #doc-out-name $PRICE_OFFSET_VALUE
+	 * #doc-out-desc the price offset value, as a percentage (0-100) or a constant amount.
+	 * 
+	 * #doc-out-name $SALE_LABEL
+	 * #doc-out-desc the sale advertising label
+	 * 
+	 * #doc-out-name $START_DATE
+	 * #doc-out-desc the sale start date
+	 * 
+	 * #doc-out-name $TITLE
+	 * #doc-out-desc the sale title
+	 */
     public function parseResults(LoopResult $loopResult)
     {
         /** @var \Thelia\Model\Sale $sale */

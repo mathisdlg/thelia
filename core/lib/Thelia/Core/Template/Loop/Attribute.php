@@ -33,6 +33,9 @@ use Thelia\Type\TypeCollection;
  * Attribute loop.
  *
  * Class Attribute
+ * 
+ * #doc-usage {loop type="attribute" name="the-loop-name" [argument="value"], [...]}
+ * #doc-desc Attribute loop lists attributes.
  *
  * @author Etienne Roudeix <eroudeix@openstudio.fr>
  *
@@ -51,6 +54,31 @@ class Attribute extends BaseI18nLoop implements PropelSearchLoopInterface
 
     /**
      * @return ArgumentCollection
+	 * 
+	 * #doc-arg-name exclude
+	 * #doc-arg-desc A single or a list of attribute ids to exclude.
+	 * #doc-arg-example exclude="456,123"
+	 * 
+	 * #doc-arg-name exclude_template
+	 * #doc-arg-desc A single or a list of template ids. Only features NOT attached to these templates will be returned.
+	 * #doc-arg-example id="2", id="1,4,7"
+	 * 
+	 * #doc-arg-name id
+	 * #doc-arg-desc A single or a list of attribute ids.
+	 * #doc-arg-example id="2", id="1,4,7"
+	 * 
+	 * #doc-arg-name order
+	 * #doc-arg-desc A list of values <br/> Expected values
+	 * #doc-arg-default manual
+	 * #doc-arg-example order="alpha_reverse"
+	 * 
+	 * #doc-arg-name product
+	 * #doc-arg-desc A single or a list of product ids.
+	 * #doc-arg-example id="2", id="1,4,7"
+	 * 
+	 * #doc-arg-name template
+	 * #doc-arg-desc A single or a list of template ids. Only features attached to these templates will be returned.
+	 * #doc-arg-example id="2", id="1,4,7"
      */
     protected function getArgDefinitions()
     {
@@ -181,6 +209,32 @@ class Attribute extends BaseI18nLoop implements PropelSearchLoopInterface
         return $search;
     }
 
+	 /**
+	 * 
+	 * #doc-out-name $CHAPO
+	 * #doc-out-desc the attribute chapo
+	 * 
+	 * #doc-out-name $DESCRIPTION
+	 * #doc-out-desc the attribute description
+	 * 
+	 * #doc-out-name $ID
+	 * #doc-out-desc the attribute id
+	 * 
+	 * #doc-out-name $IS_TRANSLATED
+	 * #doc-out-desc check if the product is translated or not
+	 * 
+	 * #doc-out-name $LOCALE
+	 * #doc-out-desc the locale used for this loop
+	 * 
+	 * #doc-out-name $POSITION
+	 * #doc-out-desc If none of the product, template or exclude_template parameter is present, $POSITION contains the attribute position. Otherwise, it contains the attribute position in the product template context.
+	 * 
+	 * #doc-out-name $POSTSCRIPTUM
+	 * #doc-out-desc the attribute postscriptum
+	 * 
+	 * #doc-out-name $TITLE
+	 * #doc-out-desc the attribute title
+	 */
     public function parseResults(LoopResult $loopResult)
     {
         /** @var AttributeModel $attribute */

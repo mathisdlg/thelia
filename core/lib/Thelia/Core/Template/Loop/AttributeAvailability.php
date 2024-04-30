@@ -31,6 +31,9 @@ use Thelia\Type\TypeCollection;
  * AttributeAvailability loop.
  *
  * Class AttributeAvailability
+ * 
+ * #doc-usage {loop type="attribute_availability" name="the-loop-name" [argument="value"], [...]}
+ * #doc-desc Attribute availability loop lists attribute availabilities (e.g., attribute values).
  *
  * @author Etienne Roudeix <eroudeix@openstudio.fr>
  *
@@ -46,6 +49,27 @@ class AttributeAvailability extends BaseI18nLoop implements PropelSearchLoopInte
 
     /**
      * @return ArgumentCollection
+	 * 
+	 * #doc-arg-name attribute
+	 * #doc-arg-desc A single or a list of attribute ids.
+	 * #doc-arg-example id="2", id="1,4,7"
+	 * 
+	 * #doc-arg-name exclude
+	 * #doc-arg-desc A single or a list of attribute availability ids to exclude.
+	 * #doc-arg-example exclude="456,123"
+	 * 
+	 * #doc-arg-name id
+	 * #doc-arg-desc A single or a list of attribute availability ids.
+	 * #doc-arg-example id="2", id="1,4,7"
+	 * 
+	 * #doc-arg-name order
+	 * #doc-arg-desc A list of values <br/> Expected values
+	 * #doc-arg-default manual
+	 * #doc-arg-example order="alpha_reverse"
+	 * 
+	 * #doc-arg-name product
+	 * #doc-arg-desc A product ID. If present, only attribute values that are part of this product's combinations are returned
+	 * #doc-arg-example product="279"
      */
     protected function getArgDefinitions()
     {
@@ -146,6 +170,35 @@ class AttributeAvailability extends BaseI18nLoop implements PropelSearchLoopInte
         return $search;
     }
 
+	 /**
+	 * 
+	 * #doc-out-name $ATTRIBUTE_ID
+	 * #doc-out-desc the ID of the attribute this attribute availability belongs
+	 * 
+	 * #doc-out-name $CHAPO
+	 * #doc-out-desc the attribute availability chapo
+	 * 
+	 * #doc-out-name $DESCRIPTION
+	 * #doc-out-desc the attribute availability description
+	 * 
+	 * #doc-out-name $ID
+	 * #doc-out-desc the attribute availability id
+	 * 
+	 * #doc-out-name $IS_TRANSLATED
+	 * #doc-out-desc check if the product is translated or not
+	 * 
+	 * #doc-out-name $LOCALE
+	 * #doc-out-desc the locale used for this loop
+	 * 
+	 * #doc-out-name $POSITION
+	 * #doc-out-desc the attribute availability position
+	 * 
+	 * #doc-out-name $POSTSCRIPTUM
+	 * #doc-out-desc the attribute availability postscriptum
+	 * 
+	 * #doc-out-name $TITLE
+	 * #doc-out-desc the attribute availability title
+	 */
     public function parseResults(LoopResult $loopResult)
     {
         /** @var AttributeAvModel $attributeAv */

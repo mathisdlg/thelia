@@ -30,6 +30,9 @@ use Thelia\Type\BooleanOrBothType;
  * - visible if true or missing, only visible categories will be displayed. If false, all categories (visible or not) are returned.
  *
  * Class CategoryPath
+ * 
+ * #doc-usage {loop type="category_path" name="the-loop-name" [argument="value"], [...]}
+ * #doc-desc Category path loop provides the path through the catalog to a given category. For example if we have an "alpha" category standing in an "alpha_father" category which itseflf belong to "root" category. Category path loop for category "alpha" will return "root" then "alpha_father" then "alpha".
  *
  * @author Franck Allimant <franck@cqfdev.fr>
  *
@@ -41,6 +44,19 @@ class CategoryPath extends BaseI18nLoop implements ArraySearchLoopInterface
 {
     /**
      * @return ArgumentCollection
+	 * 
+	 * #doc-arg-name category *
+	 * #doc-arg-desc A single category id.
+	 * #doc-arg-example category="2"
+	 * 
+	 * #doc-arg-name depth
+	 * #doc-arg-desc The max depth
+	 * #doc-arg-example depth="5"
+	 * 
+	 * #doc-arg-name visible
+	 * #doc-arg-desc Whatever we consider hidden category or not.
+	 * #doc-arg-default true
+	 * #doc-arg-example visible="false"
      */
     protected function getArgDefinitions()
     {
@@ -106,6 +122,23 @@ class CategoryPath extends BaseI18nLoop implements ArraySearchLoopInterface
         return array_reverse($results);
     }
 
+	 /**
+	 * 
+	 * #doc-out-name $ID
+	 * #doc-out-desc the category id
+	 * 
+	 * #doc-out-name $LOCALE
+	 * #doc-out-desc the language in which the information will be displayed
+	 * 
+	 * #doc-out-name $PARENT
+	 * #doc-out-desc the parent category
+	 * 
+	 * #doc-out-name $TITLE
+	 * #doc-out-desc the category title
+	 * 
+	 * #doc-out-name $URL
+	 * #doc-out-desc the category URL
+	 */
     public function parseResults(LoopResult $loopResult)
     {
         foreach ($loopResult->getResultDataCollection() as $result) {

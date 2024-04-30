@@ -24,13 +24,31 @@ use Thelia\Type\TypeCollection;
 
 /**
  * Class ArchiveBuilder.
+ * 
+ * #doc-usage {loop type="archiver" name="the-loop-name" [argument="value"], [...]}
+ * #doc-desc Retrieves a list of archivers, sorts them and returns its information.
  *
  * @author Benjamin Perche <bperche@openstudio.fr>
  * @author Jérôme Billiras <jbilliras@openstudio.fr>
+ * 
  */
 class Archiver extends BaseLoop implements ArraySearchLoopInterface
 {
-    protected function getArgDefinitions()
+	 /**
+	 * 
+	 * #doc-arg-name archiver
+	 * #doc-arg-desc generic type which represents the ID of the archiver
+	 * #doc-arg-example 
+	 * 
+	 * #doc-arg-name availble
+	 * #doc-arg-desc specifies whether the archiver should be available
+	 * #doc-arg-example available ='true'
+	 * 
+	 * #doc-arg-name order
+	 * #doc-arg-desc specifies the sort order of archivers (alphabetical)
+	 * #doc-arg-default alpha
+	 * #doc-arg-example enum sort{ case alpha; case alpha_reverse; }
+	 */    protected function getArgDefinitions()
     {
         return new ArgumentCollection(
             Argument::createBooleanTypeArgument('available'),
@@ -75,6 +93,20 @@ class Archiver extends BaseLoop implements ArraySearchLoopInterface
         return $archivers;
     }
 
+	 /**
+	 * 
+	 * #doc-out-name $EXTENSION
+	 * #doc-out-desc the type of file extension associated with the archive
+	 * 
+	 * #doc-out-name $ID
+	 * #doc-out-desc ID of the archive
+	 * 
+	 * #doc-out-name $MIME
+	 * #doc-out-desc the type MIME type associated with the archive
+	 * 
+	 * #doc-out-name $NAME
+	 * #doc-out-desc Name of the archive
+	 */
     public function parseResults(LoopResult $loopResult)
     {
         /** @var \Thelia\Core\Archiver\ArchiverInterface $archiver */

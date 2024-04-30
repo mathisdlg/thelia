@@ -27,6 +27,9 @@ use Thelia\Type\TypeCollection;
  * Country Area loop.
  *
  * Class CountryArea
+ * 
+ * #doc-usage {loop type="country_area" name="the-loop-name" [argument="value"], [...]}
+ * #doc-desc Country area loop lists.
  *
  * @author Etienne Roudeix <eroudeix@openstudio.fr>
  *
@@ -42,6 +45,27 @@ class CountryArea extends BaseLoop implements PropelSearchLoopInterface
 
     /**
      * @return ArgumentCollection
+	 * 
+	 * #doc-arg-name area
+	 * #doc-arg-desc A single or a list of area ids.
+	 * #doc-arg-example area="10,9", area: "500"
+	 * 
+	 * #doc-arg-name country
+	 * #doc-arg-desc A single or a list of country ids.
+	 * #doc-arg-example country="2", country="1,4,7"
+	 * 
+	 * #doc-arg-name id
+	 * #doc-arg-desc A single or a list of country ids.
+	 * #doc-arg-example id="2", id="1,4,7"
+	 * 
+	 * #doc-arg-name order
+	 * #doc-arg-desc A list of values <br/> Expected values
+	 * #doc-arg-default id
+	 * #doc-arg-example order="alpha_reverse"
+	 * 
+	 * #doc-arg-name states
+	 * #doc-arg-desc A boolean value to return countries that have states or not (possible values : yes, no or *)
+	 * #doc-arg-example states="no"
      */
     protected function getArgDefinitions()
     {
@@ -120,6 +144,20 @@ class CountryArea extends BaseLoop implements PropelSearchLoopInterface
         return $search;
     }
 
+	 /**
+	 * 
+	 * #doc-out-name $AREA_ID
+	 * #doc-out-desc The ID of the area corresponding to the country.
+	 * 
+	 * #doc-out-name $COUNTRY_ID
+	 * #doc-out-desc The ID of the country.
+	 * 
+	 * #doc-out-name $ID
+	 * #doc-out-desc The ID of the country area.
+	 * 
+	 * #doc-out-name $STATE_ID
+	 * #doc-out-desc The ID of the state corresponding to the country.
+	 */
     public function parseResults(LoopResult $loopResult)
     {
         /** @var \Thelia\Model\CountryArea $countryArea */

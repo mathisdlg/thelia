@@ -32,6 +32,9 @@ use Thelia\Type\TypeCollection;
  * Module loop.
  *
  * Class Module
+ * 
+ * #doc-usage {loop type="module" name="the-loop-name" [argument="value"], [...]}
+ * #doc-desc The module loop retrieve module informations
  *
  * @author Etienne Roudeix <eroudeix@openstudio.fr>
  *
@@ -53,6 +56,49 @@ class Module extends BaseI18nLoop implements PropelSearchLoopInterface
 
     /**
      * @return ArgumentCollection
+	 * 
+	 * #doc-arg-name active
+	 * #doc-arg-desc A boolean value.
+	 * #doc-arg-default *
+	 * #doc-arg-example active="no"
+	 * 
+	 * #doc-arg-name area
+	 * #doc-arg-desc A single or a list of area ids. Only modules assigned to this area will be returned.
+	 * #doc-arg-example area="5", profile="3,2,17"
+	 * 
+	 * #doc-arg-name code
+	 * #doc-arg-desc Module code
+	 * #doc-arg-example code="Foo"
+	 * 
+	 * #doc-arg-name exclude
+	 * #doc-arg-desc A single or a list of module ids to exclude.
+	 * #doc-arg-example exclude="2", exclude="1,4,7"
+	 * 
+	 * #doc-arg-name hidden
+	 * #doc-arg-desc A boolean value.
+	 * #doc-arg-default *
+	 * #doc-arg-example hidden="yes"
+	 * 
+	 * #doc-arg-name id
+	 * #doc-arg-desc A single or a list of module ids.
+	 * #doc-arg-example id="2", id="1,4,7"
+	 * 
+	 * #doc-arg-name module_caegory
+	 * #doc-arg-desc A single or a list of category   ids.
+	 * #doc-arg-example module_category="classic,delivery,payment"
+	 * 
+	 * #doc-arg-name module_type
+	 * #doc-arg-desc Module type (classic, payment or delivery) <br/> Expected values : <br/> 1 : classic module <br/> 2 : delivery module <br/> 3 : payment module
+	 * #doc-arg-example module_type="1"
+	 * 
+	 * #doc-arg-name order
+	 * #doc-arg-desc A list of values see sorting possible values
+	 * #doc-arg-default manual
+	 * #doc-arg-example order="alpha_reverse"
+	 * 
+	 * #doc-arg-name profile
+	 * #doc-arg-desc A single or a list of profile ids.
+	 * #doc-arg-example profile="2", profile="1,4,7"
      */
     protected function getArgDefinitions()
     {
@@ -227,6 +273,59 @@ class Module extends BaseI18nLoop implements PropelSearchLoopInterface
         return $search;
     }
 
+	 /**
+	 * 
+	 * #doc-out-name $ACTIVE
+	 * #doc-out-desc check if the module is activated or not
+	 * 
+	 * #doc-out-name $CATEGORY
+	 * #doc-out-desc the module category
+	 * 
+	 * #doc-out-name $CHAPO
+	 * #doc-out-desc the module chapo
+	 * 
+	 * #doc-out-name $CLASS
+	 * #doc-out-desc The full namespace for the module class
+	 * 
+	 * #doc-out-name $CODE
+	 * #doc-out-desc The module code
+	 * 
+	 * #doc-out-name $DESCRIPTION
+	 * #doc-out-desc the module description
+	 * 
+	 * #doc-out-name $EXISTS
+	 * #doc-out-desc return true if the module exists
+	 * 
+	 * #doc-out-name $HIDDEN
+	 * #doc-out-desc check if the module is hidden
+	 * 
+	 * #doc-out-name $ID
+	 * #doc-out-desc the module ID
+	 * 
+	 * #doc-out-name $IS_TRANSLATED
+	 * #doc-out-desc return true if the module is translated
+	 * 
+	 * #doc-out-name $LOCALE
+	 * #doc-out-desc The locale used for this research
+	 * 
+	 * #doc-out-name $MANDATORY
+	 * #doc-out-desc check if the module is mandatory
+	 * 
+	 * #doc-out-name $POSITION
+	 * #doc-out-desc the position of this module
+	 * 
+	 * #doc-out-name $POSTSCRIPTUM
+	 * #doc-out-desc the module postscriptum
+	 * 
+	 * #doc-out-name $TITLE
+	 * #doc-out-desc the module title
+	 * 
+	 * #doc-out-name $TYPE
+	 * #doc-out-desc The module type
+	 * 
+	 * #doc-out-name $VERSION
+	 * #doc-out-desc The module version
+	 */
     public function parseResults(LoopResult $loopResult)
     {
         /** @var \Thelia\Model\Module $module */

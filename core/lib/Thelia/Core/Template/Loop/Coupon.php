@@ -32,6 +32,9 @@ use Thelia\Type\TypeCollection;
 
 /**
  * Coupon Loop.
+ * 
+ * #doc-usage {loop type="coupon" name="the-loop-name" [argument="value"], [...]}
+ * #doc-desc Return coupons information
  *
  * @author  Guillaume MOREL <gmorel@openstudio.fr>
  *
@@ -47,6 +50,27 @@ class Coupon extends BaseI18nLoop implements PropelSearchLoopInterface
      * Define all args used in your loop.
      *
      * @return ArgumentCollection
+	 * 
+	 * #doc-arg-name code
+	 * #doc-arg-desc A single or a list of coupons code.
+	 * #doc-arg-example code="THECODE", code="ACODE,ANOTHERCODE,COCODE"
+	 * 
+	 * #doc-arg-name id
+	 * #doc-arg-desc A single or a list of coupons ids.
+	 * #doc-arg-example id="2", id="1,4,7"
+	 * 
+	 * #doc-arg-name in_use
+	 * #doc-arg-desc If true, only coupons currently in use in the checkout process are returned. If false, only coupons not in use in the checkout process are returned.
+	 * #doc-arg-example in_use="true"
+	 * 
+	 * #doc-arg-name is_enabled
+	 * #doc-arg-desc If true, only enabled are returned. If false, only disabled coupons are returned.
+	 * #doc-arg-example is_enabled="true"
+	 * 
+	 * #doc-arg-name order
+	 * #doc-arg-desc A list of values see sorting possible values
+	 * #doc-arg-default code
+	 * #doc-arg-example order="alpha_reverse"
      */
     protected function getArgDefinitions()
     {
@@ -174,6 +198,75 @@ class Coupon extends BaseI18nLoop implements PropelSearchLoopInterface
      * @throws \Propel\Runtime\Exception\PropelException
      *
      * @return LoopResult
+	 * 
+	 * #doc-out-name $IS_TRANSLATED
+	 * #doc-out-desc check if the coupon is translated or not
+	 * 
+	 * #doc-out-name AMOUNT
+	 * #doc-out-desc the coupon amount. Could be a percentage, or an absolute amount
+	 * 
+	 * #doc-out-name APPLICATION_CONDITIONS
+	 * #doc-out-desc an array of usage conditions descriptions
+	 * 
+	 * #doc-out-name CODE
+	 * #doc-out-desc the coupon code
+	 * 
+	 * #doc-out-name DAY_LEFT_BEFORE_EXPIRATION
+	 * #doc-out-desc days left before coupon expiration
+	 * 
+	 * #doc-out-name DESCRIPTION
+	 * #doc-out-desc the coupon description
+	 * 
+	 * #doc-out-name DISCOUNT_AMOUNT
+	 * #doc-out-desc Amount subtracted from the cart, only if the coupon is currentrly in use
+	 * 
+	 * #doc-out-name EXPIRATION_DATE
+	 * #doc-out-desc the coupon expiration date
+	 * 
+	 * #doc-out-name FREE_SHIPPING_FOR_COUNTRIES_LIST
+	 * #doc-out-desc list of country IDs for which the shipping is free
+	 * 
+	 * #doc-out-name FREE_SHIPPING_FOR_MODULES_LIST
+	 * #doc-out-desc list of module IDs for which the shipping is free
+	 * 
+	 * #doc-out-name ID
+	 * #doc-out-desc the coupon id
+	 * 
+	 * #doc-out-name IS_AVAILABLE_ON_SPECIAL_OFFERS
+	 * #doc-out-desc true if the coupon effect applies to products currently on sale
+	 * 
+	 * #doc-out-name IS_CUMULATIVE
+	 * #doc-out-desc true if the coupon is cumulative with other coupons
+	 * 
+	 * #doc-out-name IS_ENABLED
+	 * #doc-out-desc true if the coupon is enabled
+	 * 
+	 * #doc-out-name IS_REMOVING_POSTAGE
+	 * #doc-out-desc true if the coupon removes shipping costs
+	 * 
+	 * #doc-out-name LOCALE
+	 * #doc-out-desc the coupon locale
+	 * 
+	 * #doc-out-name PER_CUSTOMER_USAGE_COUNT
+	 * #doc-out-desc true if the coupon maximum usage count is per customer
+	 * 
+	 * #doc-out-name SERVICE_ID
+	 * #doc-out-desc the coupon service id
+	 * 
+	 * #doc-out-name SHORT_DESCRIPTION
+	 * #doc-out-desc the coupon short description
+	 * 
+	 * #doc-out-name START_DATE
+	 * #doc-out-desc 
+	 * 
+	 * #doc-out-name TITLE
+	 * #doc-out-desc the coupon title
+	 * 
+	 * #doc-out-name TOOLTIP
+	 * #doc-out-desc The coupon short description
+	 * 
+	 * #doc-out-name USAGE_LEFT
+	 * #doc-out-desc number of usages left
      */
     public function parseResults(LoopResult $loopResult)
     {
