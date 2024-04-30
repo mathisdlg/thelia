@@ -109,7 +109,8 @@ class Order extends BaseLoop implements SearchLoopInterface, PropelSearchLoopInt
 	 * #doc-arg-name transaction_ref
 	 * #doc-arg-desc A single or a list of transaction references.
 	 * #doc-arg-example transaction_ref="transaction_ref"
-	 */    public function getArgDefinitions()
+	 */
+    public function getArgDefinitions()
     {
         return new ArgumentCollection(
             Argument::createIntListTypeArgument('id'),

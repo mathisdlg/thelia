@@ -81,7 +81,8 @@ class Delivery extends BaseSpecificModule
 	 * #doc-arg-name state
 	 * #doc-arg-desc A state id.
 	 * #doc-arg-example state=12
-	 */    public function getArgDefinitions()
+	 */
+    public function getArgDefinitions()
     {
         $collection = parent::getArgDefinitions();
 

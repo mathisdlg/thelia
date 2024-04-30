@@ -54,7 +54,8 @@ class Auth extends BaseLoop implements ArraySearchLoopInterface
 	 * #doc-arg-name role *
 	 * #doc-arg-desc A comma separated list of user roles
 	 * #doc-arg-example role="ADMIN" or can be role="CUSTOMER"
-	 */    public function getArgDefinitions()
+	 */
+    public function getArgDefinitions()
     {
         return new ArgumentCollection(
             new Argument(

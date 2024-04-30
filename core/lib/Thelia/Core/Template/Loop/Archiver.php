@@ -48,7 +48,8 @@ class Archiver extends BaseLoop implements ArraySearchLoopInterface
 	 * #doc-arg-desc specifies the sort order of archivers (alphabetical)
 	 * #doc-arg-default alpha
 	 * #doc-arg-example enum sort{ case alpha; case alpha_reverse; }
-	 */    protected function getArgDefinitions()
+	 */
+    protected function getArgDefinitions()
     {
         return new ArgumentCollection(
             Argument::createBooleanTypeArgument('available'),

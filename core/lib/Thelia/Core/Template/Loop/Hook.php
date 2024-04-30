@@ -66,7 +66,8 @@ class Hook extends BaseI18nLoop implements PropelSearchLoopInterface
 	 * #doc-arg-desc See Order possible values
 	 * #doc-arg-default id
 	 * #doc-arg-example order='code'
-	 */    protected function getArgDefinitions()
+	 */
+    protected function getArgDefinitions()
     {
         return new ArgumentCollection(
             Argument::createIntListTypeArgument('id'),

@@ -43,7 +43,8 @@ class Feed extends BaseLoop implements ArraySearchLoopInterface
 	 * #doc-arg-desc An Atom or RSS feed URL.
 	 * #doc-arg-default null
 	 * #doc-arg-example `url='http://thelia.net/feeds/?lang=en'`
-	 */    public function getArgDefinitions()
+	 */
+    public function getArgDefinitions()
     {
         return new ArgumentCollection(
             Argument::createAnyTypeArgument('url', null, true),

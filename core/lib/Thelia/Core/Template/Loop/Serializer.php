@@ -43,7 +43,8 @@ class Serializer extends BaseLoop implements ArraySearchLoopInterface
 	 * #doc-arg-name serializer
 	 * #doc-arg-desc A serializer
 	 * #doc-arg-example serializer="example"
-	 */    protected function getArgDefinitions()
+	 */
+    protected function getArgDefinitions()
     {
         return new ArgumentCollection(
             Argument::createAnyTypeArgument('serializer'),

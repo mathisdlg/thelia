@@ -42,7 +42,7 @@ class Accessory extends Product
      * @return ArgumentCollection
 	 * 
 	 * #doc-arg-name all product loop arguments
-	 * #doc-arg-desc 
+	 * #doc-arg-desc
 	 * #doc-arg-example order="min_price", max_price="100"
 	 * 
 	 * #doc-arg-name order

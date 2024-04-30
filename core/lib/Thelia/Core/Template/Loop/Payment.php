@@ -34,7 +34,8 @@ class Payment extends BaseSpecificModule implements PropelSearchLoopInterface
 	 * #doc-arg-name all base specific module arguments
 	 * #doc-arg-desc 
 	 * #doc-arg-example 
-	 */    public function getArgDefinitions()
+	 */
+    public function getArgDefinitions()
     {
         $collection = parent::getArgDefinitions();
 
