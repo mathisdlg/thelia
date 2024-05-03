@@ -22,7 +22,6 @@ use Thelia\Module\BaseModule;
 /**
  * Class Payment.
  * 
- * #doc-usage {loop type="payment" name="the-loop-name" [argument="value"], [...]}
  * #doc-desc payment loop displays payment modules information.
  *
  * @author Etienne Roudeix <eroudeix@gmail.com>

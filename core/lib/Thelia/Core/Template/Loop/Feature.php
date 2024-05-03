@@ -36,7 +36,6 @@ use Thelia\Type\TypeCollection;
  *
  * Class Feature
  * 
- * #doc-usage {loop type="feature" name="the-loop-name" [argument="value"], [...]}
  * #doc-desc Feature loop lists features.
  *
  * @author Etienne Roudeix <eroudeix@openstudio.fr>
@@ -77,7 +76,6 @@ class Feature extends BaseI18nLoop implements PropelSearchLoopInterface
 	 * 
 	 * #doc-arg-name order
 	 * #doc-arg-desc A list of values see sorting possible values
-	 * #doc-arg-default manual
 	 * #doc-arg-example order="alpha_reverse"
 	 * 
 	 * #doc-arg-name product
@@ -94,7 +92,6 @@ class Feature extends BaseI18nLoop implements PropelSearchLoopInterface
 	 * 
 	 * #doc-arg-name visible
 	 * #doc-arg-desc A boolean value.
-	 * #doc-arg-default yes
 	 * #doc-arg-example visible="no"
      */
     protected function getArgDefinitions()

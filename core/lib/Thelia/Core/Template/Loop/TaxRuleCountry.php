@@ -34,7 +34,6 @@ use Thelia\Type\TypeCollection;
  *
  * Class TaxRuleCountry
  * 
- * #doc-usage {loop type="tax_rule_country" name="the-loop-name" [argument="value"], [...]}
  * #doc-desc Taxes by country loop.
  *
  * @author Etienne Roudeix <eroudeix@openstudio.fr>
@@ -55,12 +54,10 @@ class TaxRuleCountry extends BaseI18nLoop implements PropelSearchLoopInterface
 	 * 
 	 * #doc-arg-name ask
 	 * #doc-arg-desc to choose the function provided by te loop
-	 * #doc-arg-default taxes
 	 * #doc-arg-example ask="countries"
 	 * 
 	 * #doc-arg-name country *
 	 * #doc-arg-desc the country where the tax applies
-	 * #doc-arg-default null
 	 * #doc-arg-example country="14"
 	 * 
 	 * #doc-arg-name state
@@ -69,7 +66,6 @@ class TaxRuleCountry extends BaseI18nLoop implements PropelSearchLoopInterface
 	 * 
 	 * #doc-arg-name tax_rule *
 	 * #doc-arg-desc the tax rule
-	 * #doc-arg-default null
 	 * #doc-arg-example tax_rule="2"
      */
     protected function getArgDefinitions()

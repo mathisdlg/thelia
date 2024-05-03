@@ -29,7 +29,6 @@ use Thelia\Type\TypeCollection;
  *
  * Class Country
  * 
- * #doc-usage {loop type="state" name="the-loop-name" [argument="value"], [...]}
  * #doc-desc State loop lists states.
  *
  * @author Julien Chanséaume <julien@thelia.net>
@@ -62,12 +61,10 @@ class State extends BaseI18nLoop implements PropelSearchLoopInterface
 	 * 
 	 * #doc-arg-name order
 	 * #doc-arg-desc A list of values see sorting possible values
-	 * #doc-arg-default id
 	 * #doc-arg-example order="alpha_reverse"
 	 * 
 	 * #doc-arg-name visible
 	 * #doc-arg-desc A boolean value to return visible or not visible states (possible values : yes, no or *).
-	 * #doc-arg-default yes
 	 * #doc-arg-example visible="no"
      */
     protected function getArgDefinitions()

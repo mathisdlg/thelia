@@ -27,7 +27,6 @@ use Thelia\Model\OrderAddressQuery;
  *
  * Class OrderAddress
  * 
- * #doc-usage {loop type="order_address" name="the-loop-name" [argument="value"], [...]}
  * #doc-desc Order address loop displays order addresses information.
  *
  * @author Etienne Roudeix <eroudeix@openstudio.fr>
@@ -43,7 +42,6 @@ class OrderAddress extends BaseLoop implements PropelSearchLoopInterface
 	 * 
 	 * #doc-arg-name id *
 	 * #doc-arg-desc A single order address id
-	 * #doc-arg-default null
 	 * #doc-arg-example id="2"
      */
     protected function getArgDefinitions()

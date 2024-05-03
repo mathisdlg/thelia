@@ -25,7 +25,6 @@ use TheliaMain\PropelResolver;
 
 /**
  * 
- * #doc-usage {loop type="generic" name="the-loop-name" [argument="value"], [...]}
  * #doc-desc Generic loop can return any table present in your database and configured with propel. This loop is often useful on your own module table because most of the Thelia table already have dedicated loop.
  * 
  * @method string getTableName()
@@ -53,7 +52,6 @@ class Generic extends BaseLoop implements PropelSearchLoopInterface
 	 * 
 	 * #doc-arg-name locale
 	 * #doc-arg-desc The locale for translated columns
-	 * #doc-arg-default The current locale for session
 	 * #doc-arg-example 
 	 * 
 	 * #doc-arg-name limit

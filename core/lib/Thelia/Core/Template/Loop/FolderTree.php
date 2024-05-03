@@ -29,7 +29,6 @@ use Thelia\Type\BooleanOrBothType;
  * - depth is the maximum depth to go, default unlimited
  * - visible if true or missing, only visible categories will be displayed. If false, all categories (visible or not) are returned.
  * 
- * #doc-usage {loop type="folder_tree" name="the-loop-name" [argument="value"], [...]}
  * #doc-desc Folder tree loop, to get a folder tree from a given folder to a given depth.
  *
  * @author Franck Allimant <franck@cqfdev.fr>
@@ -58,7 +57,6 @@ class FolderTree extends BaseI18nLoop implements ArraySearchLoopInterface
 	 * 
 	 * #doc-arg-name visible
 	 * #doc-arg-desc Whatever we consider hidden folder or not.
-	 * #doc-arg-default true
 	 * #doc-arg-example visible="false"
      */
     protected function getArgDefinitions()

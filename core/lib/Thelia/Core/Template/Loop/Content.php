@@ -35,7 +35,6 @@ use Thelia\Type\TypeCollection;
  *
  * Class Content
  * 
- * #doc-usage {loop type="content" name="the-loop-name" [argument="value"], [...]}
  * #doc-desc Content loop lists contents from your shop.
  *
  * @author Etienne Roudeix <eroudeix@openstudio.fr>
@@ -73,7 +72,6 @@ class Content extends BaseI18nLoop implements PropelSearchLoopInterface, SearchL
 	 * 
 	 * #doc-arg-name depth
 	 * #doc-arg-desc A positive integer value which precise how many subfolder levels will be browse. Will not be consider if folder parameter is not set.
-	 * #doc-arg-default 1
 	 * #doc-arg-example depth="2"
 	 * 
 	 * #doc-arg-name exclude
@@ -98,7 +96,6 @@ class Content extends BaseI18nLoop implements PropelSearchLoopInterface, SearchL
 	 * 
 	 * #doc-arg-name order
 	 * #doc-arg-desc A list of values <br/> Expected values
-	 * #doc-arg-default alpha
 	 * #doc-arg-example order="random"
 	 * 
 	 * #doc-arg-name title
@@ -107,12 +104,10 @@ class Content extends BaseI18nLoop implements PropelSearchLoopInterface, SearchL
 	 * 
 	 * #doc-arg-name visible
 	 * #doc-arg-desc A boolean value.
-	 * #doc-arg-default yes
 	 * #doc-arg-example visible="no"
 	 * 
 	 * #doc-arg-name with_prev_next_info
 	 * #doc-arg-desc A boolean. If set to true, $PREVIOUS and $NEXT output arguments are available.
-	 * #doc-arg-default false
 	 * #doc-arg-example with_prev_next_info="yes"
      */
     protected function getArgDefinitions()

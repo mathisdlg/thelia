@@ -30,7 +30,6 @@ use Thelia\Type\TypeCollection;
  *
  * Class Tax
  * 
- * #doc-usage {loop type="tax" name="the-loop-name" [argument="value"], [...]}
  * #doc-desc loop displaying taxes available.
  *
  * @author Etienne Roudeix <eroudeix@openstudio.fr>
@@ -67,7 +66,6 @@ class Tax extends BaseI18nLoop implements PropelSearchLoopInterface
 	 * 
 	 * #doc-arg-name order
 	 * #doc-arg-desc A list of values see sorting possible values
-	 * #doc-arg-default alpha
 	 * #doc-arg-example order="id"
 	 * 
 	 * #doc-arg-name tax_rule

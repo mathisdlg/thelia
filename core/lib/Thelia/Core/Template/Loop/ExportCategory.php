@@ -17,7 +17,6 @@ use Thelia\Model\ExportCategoryQuery;
 /**
  * Class ExportCategory.
  * 
- * #doc-usage {loop type="export_category" name="the-loop-name" [argument="value"], [...]}
  * #doc-desc Export category loop lists all defined export categories.
  *
  * @author Benjamin Perche <bperche@openstudio.fr>

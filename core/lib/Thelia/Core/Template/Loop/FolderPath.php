@@ -24,7 +24,6 @@ use Thelia\Type\BooleanOrBothType;
 /**
  * Class FolderPath.
  * 
- * #doc-usage {loop type="folder_path" name="the-loop-name" [argument="value"], [...]}
  * #doc-desc Folder path loop provides the path through the catalog to a given folder. For example if we have an "alpha" folder standing in an "alpha_father" folder which itseflf belong to "root" folder. Folder path loop for folder "alpha" will return "root" then "alpha_father" then "alpha".
  *
  * @author Manuel Raynaud <manu@raynaud.io>
@@ -49,7 +48,6 @@ class FolderPath extends BaseI18nLoop implements ArraySearchLoopInterface
 	 * 
 	 * #doc-arg-name visible
 	 * #doc-arg-desc Whatever we consider hidden folder or not.
-	 * #doc-arg-default true
 	 * #doc-arg-example visible="false"
      */
     protected function getArgDefinitions()

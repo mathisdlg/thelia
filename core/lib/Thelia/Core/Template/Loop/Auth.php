@@ -25,7 +25,6 @@ use Thelia\Type\TypeCollection;
 
 /**
  * 
- * #doc-usage {loop type="auth" name="the-loop-name" [argument="value"], [...]}
  * #doc-desc The Auth loop perform authorisation checks against the current user. This loop returns nothing if the authorization fails, or the loop contents if it succeeds.You may check in the front office if an administrator is logged in, and perform specific functions in your front-office template (such as direct editing, for example).
  * 
  * @author Franck Allimant <franck@cqfdev.fr>

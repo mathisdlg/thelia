@@ -29,7 +29,6 @@ use Thelia\Type\TypeCollection;
  *
  * Class Currency
  * 
- * #doc-usage {loop type="currency" name="the-loop-name" [argument="value"], [...]}
  * #doc-desc Currency loop lists currencies.
  *
  * @author Etienne Roudeix <eroudeix@openstudio.fr>
@@ -61,7 +60,6 @@ class Currency extends BaseI18nLoop implements PropelSearchLoopInterface
 	 * 
 	 * #doc-arg-name order
 	 * #doc-arg-desc A list of values see sorting possible values
-	 * #doc-arg-default manual
 	 * #doc-arg-example order="id_reverse"
      */
     protected function getArgDefinitions()

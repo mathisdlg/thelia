@@ -32,7 +32,6 @@ use Thelia\Type\BooleanOrBothType;
  * - secured filters by secured status (yes, no, both)
  * - exclude is a comma separated list of message IDs that will be excluded from output
  * 
- * #doc-usage {loop type="message" name="the-loop-name" [argument="value"], [...]}
  * #doc-desc Message loop lists all defined messages.
  *
  * @author Franck Allimant <franck@cqfdev.fr>

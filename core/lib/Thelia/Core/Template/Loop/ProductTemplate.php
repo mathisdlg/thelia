@@ -27,7 +27,6 @@ use Thelia\Model\TemplateQuery;
  *
  * Class Template
  * 
- * #doc-usage {loop type="product_template" name="the-loop-name" [argument="value"], [...]}
  * #doc-desc Product template loop to display product templates.
  *
  * @author Etienne Roudeix <eroudeix@openstudio.fr>

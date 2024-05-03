@@ -41,7 +41,6 @@ use Thelia\Type\TypeCollection;
  *
  * Class Category
  * 
- * #doc-usage {loop type="category" name="the-loop-name" [argument="value"], [...]}
  * #doc-desc Category loop lists categories from your shop.
  *
  * @author Manuel Raynaud <manu@raynaud.io>
@@ -100,22 +99,18 @@ class Category extends BaseI18nLoop implements PropelSearchLoopInterface, Search
 	 * 
 	 * #doc-arg-name need_count_child
 	 * #doc-arg-desc A boolean. If set to true, count how many subcategories contains the current category
-	 * #doc-arg-default false
 	 * #doc-arg-example need_count_child="yes"
 	 * 
 	 * #doc-arg-name need_product_count
 	 * #doc-arg-desc A boolean. If set to true, count how many products contains the current category
-	 * #doc-arg-default false
 	 * #doc-arg-example need_product_count="yes"
 	 * 
 	 * #doc-arg-name not_empty
 	 * #doc-arg-desc (**not implemented yet**) A boolean value. If true, only the categories which contains at least a visible product (either directly or through a subcategory) are returned
-	 * #doc-arg-default no
 	 * #doc-arg-example not_empty="yes"
 	 * 
 	 * #doc-arg-name order
 	 * #doc-arg-desc A list of values <br/> Expected values
-	 * #doc-arg-default manual
 	 * #doc-arg-example order="random"
 	 * 
 	 * #doc-arg-name parent
@@ -128,7 +123,6 @@ class Category extends BaseI18nLoop implements PropelSearchLoopInterface, Search
 	 * 
 	 * #doc-arg-name ProductCountVisibleOnly
 	 * #doc-arg-desc A boolean that specifies whether product counting should be performed only for visible products
-	 * #doc-arg-default false
 	 * #doc-arg-example ProductCountVisibleOnly=true
 	 * 
 	 * #doc-arg-name TemplateId
@@ -137,12 +131,10 @@ class Category extends BaseI18nLoop implements PropelSearchLoopInterface, Search
 	 * 
 	 * #doc-arg-name visible
 	 * #doc-arg-desc A boolean value.
-	 * #doc-arg-default yes
 	 * #doc-arg-example visible="no"
 	 * 
 	 * #doc-arg-name with_prev_next_info
 	 * #doc-arg-desc A boolean. If set to true, $PREVIOUS and $NEXT output arguments are available.
-	 * #doc-arg-default false
 	 * #doc-arg-example with_prev_next_info="yes"
      */
     protected function getArgDefinitions()

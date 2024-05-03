@@ -32,7 +32,6 @@ use Thelia\Type\TypeCollection;
  *
  * Class AttributeAvailability
  * 
- * #doc-usage {loop type="attribute_availability" name="the-loop-name" [argument="value"], [...]}
  * #doc-desc Attribute availability loop lists attribute availabilities (e.g., attribute values).
  *
  * @author Etienne Roudeix <eroudeix@openstudio.fr>
@@ -64,7 +63,6 @@ class AttributeAvailability extends BaseI18nLoop implements PropelSearchLoopInte
 	 * 
 	 * #doc-arg-name order
 	 * #doc-arg-desc A list of values <br/> Expected values
-	 * #doc-arg-default manual
 	 * #doc-arg-example order="alpha_reverse"
 	 * 
 	 * #doc-arg-name product

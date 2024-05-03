@@ -29,7 +29,6 @@ use Thelia\Type\TypeCollection;
  *
  * Class TaxRule
  * 
- * #doc-usage {loop type="tax_rule" name="the-loop-name" [argument="value"], [...]}
  * #doc-desc loop displaying taxes rules created.
  *
  * @author Etienne Roudeix <eroudeix@openstudio.fr>
@@ -55,7 +54,6 @@ class TaxRule extends BaseI18nLoop implements PropelSearchLoopInterface
 	 * 
 	 * #doc-arg-name order
 	 * #doc-arg-desc A list of values see sorting possible values
-	 * #doc-arg-default alpha
 	 * #doc-arg-example order="random"
      */
     protected function getArgDefinitions()

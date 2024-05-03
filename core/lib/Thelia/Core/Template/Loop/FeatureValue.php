@@ -29,7 +29,6 @@ use Thelia\Type\TypeCollection;
  *
  * Class FeatureValue
  * 
- * #doc-usage {loop type="feature_value" name="the-loop-name" [argument="value"], [...]}
  * #doc-desc Feature value loop lists feature availabilities.
  *
  * @author Etienne Roudeix <eroudeix@openstudio.fr>
@@ -51,17 +50,14 @@ class FeatureValue extends BaseI18nLoop implements PropelSearchLoopInterface
 	 * 
 	 * #doc-arg-name exclude_feature_availability
 	 * #doc-arg-desc A boolean value to return only features with feature availability (no personal value).
-	 * #doc-arg-default 0
 	 * #doc-arg-example feature_availability="true"
 	 * 
 	 * #doc-arg-name exclude_free_text
 	 * #doc-arg-desc A boolean value to return only features with free text value (no feature availability).
-	 * #doc-arg-default 0
 	 * #doc-arg-example exclude_free_text="1" or exclude_free_text="true"
 	 * 
 	 * #doc-arg-name feature *
 	 * #doc-arg-desc A single feature id.
-	 * #doc-arg-default null
 	 * #doc-arg-example feature="2"
 	 * 
 	 * #doc-arg-name feature_availability
@@ -70,7 +66,6 @@ class FeatureValue extends BaseI18nLoop implements PropelSearchLoopInterface
 	 * 
 	 * #doc-arg-name force_return
 	 * #doc-arg-desc A boolean value to return all features, even if they are not available.
-	 * #doc-arg-default true
 	 * #doc-arg-example force_return="1"
 	 * 
 	 * #doc-arg-name free_text
@@ -79,7 +74,6 @@ class FeatureValue extends BaseI18nLoop implements PropelSearchLoopInterface
 	 * 
 	 * #doc-arg-name order
 	 * #doc-arg-desc A list of values see sorting possible values
-	 * #doc-arg-default manual
 	 * #doc-arg-example order="alpha_reverse"
 	 * 
 	 * #doc-arg-name product

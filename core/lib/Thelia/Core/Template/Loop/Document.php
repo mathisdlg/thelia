@@ -33,7 +33,6 @@ use Thelia\Type\TypeCollection;
 /**
  * The document loop.
  * 
- * #doc-usage {loop type="document" name="the-loop-name" [argument="value"], [...]}
  * #doc-desc The document loop process, cache and display products, categories, contents and folders documents.
  *
  * @author Franck Allimant <franck@cqfdev.fr>
@@ -86,7 +85,6 @@ class Document extends BaseI18nLoop implements PropelSearchLoopInterface
 	 * 
 	 * #doc-arg-name force_return
 	 * #doc-arg-desc a boolean to define if the return is forced
-	 * #doc-arg-default true
 	 * #doc-arg-example force_return="no"
 	 * 
 	 * #doc-arg-name id
@@ -95,7 +93,6 @@ class Document extends BaseI18nLoop implements PropelSearchLoopInterface
 	 * 
 	 * #doc-arg-name order
 	 * #doc-arg-desc A list of values see sorting possible values
-	 * #doc-arg-default manual
 	 * #doc-arg-example order="alpha_reverse"
 	 * 
 	 * #doc-arg-name product **
@@ -104,7 +101,6 @@ class Document extends BaseI18nLoop implements PropelSearchLoopInterface
 	 * 
 	 * #doc-arg-name query_namespace
 	 * #doc-arg-desc a namespace
-	 * #doc-arg-default Thelia\\Model
 	 * #doc-arg-example 
 	 * 
 	 * #doc-arg-name source **
@@ -117,12 +113,10 @@ class Document extends BaseI18nLoop implements PropelSearchLoopInterface
 	 * 
 	 * #doc-arg-name visible
 	 * #doc-arg-desc A boolean value.
-	 * #doc-arg-default yes
 	 * #doc-arg-example visible="no"
 	 * 
 	 * #doc-arg-name with_prev_next_info
 	 * #doc-arg-desc A boolean. If set to true, $HAS_PREVIOUS, $HAS_NEXT, $PREVIOUS, and $NEXT output variables are available.
-	 * #doc-arg-default false
 	 * #doc-arg-example 
      */
     protected function getArgDefinitions()

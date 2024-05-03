@@ -24,7 +24,6 @@ use Thelia\Model\ProductAssociatedContentQuery;
  *
  * Class AssociatedContent
  * 
- * #doc-usage {loop type="associated_content" name="the-loop-name" [argument="value"], [...]}
  * #doc-desc Associated content loop lists associated contents of a product or a category. It behaves like a content loop therefore you might use all content loop arguments and outputs.
  *
  * @author Etienne Roudeix <eroudeix@openstudio.fr>
@@ -60,7 +59,6 @@ class AssociatedContent extends Content
 	 * 
 	 * #doc-arg-name order
 	 * #doc-arg-desc A list of values <br/> Expected values
-	 * #doc-arg-default associated_content
 	 * #doc-arg-example order="associated_content"
 	 * 
 	 * #doc-arg-name product \*\*

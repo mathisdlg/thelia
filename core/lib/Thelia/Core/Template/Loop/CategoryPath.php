@@ -31,7 +31,6 @@ use Thelia\Type\BooleanOrBothType;
  *
  * Class CategoryPath
  * 
- * #doc-usage {loop type="category_path" name="the-loop-name" [argument="value"], [...]}
  * #doc-desc Category path loop provides the path through the catalog to a given category. For example if we have an "alpha" category standing in an "alpha_father" category which itseflf belong to "root" category. Category path loop for category "alpha" will return "root" then "alpha_father" then "alpha".
  *
  * @author Franck Allimant <franck@cqfdev.fr>
@@ -55,7 +54,6 @@ class CategoryPath extends BaseI18nLoop implements ArraySearchLoopInterface
 	 * 
 	 * #doc-arg-name visible
 	 * #doc-arg-desc Whatever we consider hidden category or not.
-	 * #doc-arg-default true
 	 * #doc-arg-example visible="false"
      */
     protected function getArgDefinitions()

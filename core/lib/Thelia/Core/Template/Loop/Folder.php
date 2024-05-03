@@ -30,7 +30,6 @@ use Thelia\Type\TypeCollection;
 /**
  * Class Folder.
  * 
- * #doc-usage {loop type="folder" name="the-loop-name" [argument="value"], [...]}
  * #doc-desc Folder loop lists folders from your shop.
  *
  * @author Etienne Roudeix <eroudeix@openstudio.fr>
@@ -64,7 +63,6 @@ class Folder extends BaseI18nLoop implements PropelSearchLoopInterface, SearchLo
 	 * 
 	 * #doc-arg-name content_count_visible
 	 * #doc-arg-desc This parameter controls how content is counted. If 'yes' (the default) only visible contents are counted, 'no': only hidden contents are counted, '*': all contents are counted.
-	 * #doc-arg-default yes
 	 * #doc-arg-example content_count_visible="*"
 	 * 
 	 * #doc-arg-name current
@@ -81,22 +79,18 @@ class Folder extends BaseI18nLoop implements PropelSearchLoopInterface, SearchLo
 	 * 
 	 * #doc-arg-name need_content_count
 	 * #doc-arg-desc A boolean. If set to true, the loop will return the number of contents in each folder and its sub-folders
-	 * #doc-arg-default true (for backward-compatibility)
 	 * #doc-arg-example need_content_count="yes"
 	 * 
 	 * #doc-arg-name need_count_child
 	 * #doc-arg-desc A boolean. If set to true, the loop will return the number of sub-folders of each folder
-	 * #doc-arg-default true (for backward-compatibility)
 	 * #doc-arg-example need_count_child="yes"
 	 * 
 	 * #doc-arg-name not_empty
 	 * #doc-arg-desc (**not implemented yet**) A boolean value. If true, only the folders which contains at leat a visible content (either directly or trough a subfolder) are returned
-	 * #doc-arg-default no
 	 * #doc-arg-example not_empty="yes"
 	 * 
 	 * #doc-arg-name order
 	 * #doc-arg-desc A list of values see sorting possible values
-	 * #doc-arg-default manual
 	 * #doc-arg-example order="random"
 	 * 
 	 * #doc-arg-name parent
@@ -109,12 +103,10 @@ class Folder extends BaseI18nLoop implements PropelSearchLoopInterface, SearchLo
 	 * 
 	 * #doc-arg-name visible
 	 * #doc-arg-desc A boolean value.
-	 * #doc-arg-default yes
 	 * #doc-arg-example visible="no"
 	 * 
 	 * #doc-arg-name with_prev_next_info
 	 * #doc-arg-desc A boolean. If set to true, $PREVIOUS and $NEXT output arguments are available.
-	 * #doc-arg-default false
 	 * #doc-arg-example with_prev_next_info="yes"
      */
     protected function getArgDefinitions()

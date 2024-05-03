@@ -31,7 +31,6 @@ use Thelia\Module\Exception\DeliveryException;
 /**
  * Class Delivery.
  * 
- * #doc-usage {loop type="delivery" name="the-loop-name" [argument="value"], [...]}
  * #doc-desc delivery loop displays delivery modules information.
  *
  * @author Manuel Raynaud <manu@raynaud.io>
@@ -75,7 +74,6 @@ class Delivery extends BaseSpecificModule
 	 * 
 	 * #doc-arg-name order
 	 * #doc-arg-desc A list of values see sorting possible values
-	 * #doc-arg-default manual
 	 * #doc-arg-example order="id_reverse"
 	 * 
 	 * #doc-arg-name state

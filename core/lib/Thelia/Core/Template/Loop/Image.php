@@ -34,7 +34,6 @@ use Thelia\Type\TypeCollection;
 /**
  * The image loop.
  * 
- * #doc-usage {loop type="image" name="the-loop-name" [argument="value"], [...]}
  * #doc-desc The image loop process, cache and display images, categories, contents and folders images.
  *
  * @author Franck Allimant <franck@cqfdev.fr>
@@ -132,7 +131,6 @@ class Image extends BaseI18nLoop implements PropelSearchLoopInterface
 	 * 
 	 * #doc-arg-name order
 	 * #doc-arg-desc A list of values see sorting possible values
-	 * #doc-arg-default manual
 	 * #doc-arg-example order="alpha_reverse"
 	 * 
 	 * #doc-arg-name product **
@@ -145,12 +143,10 @@ class Image extends BaseI18nLoop implements PropelSearchLoopInterface
 	 * 
 	 * #doc-arg-name query_namespace
 	 * #doc-arg-desc The namespace
-	 * #doc-arg-default Thelia\Model
 	 * #doc-arg-example query_namespace="Thelia\Model"
 	 * 
 	 * #doc-arg-name resize_mode
 	 * #doc-arg-desc If 'crop', the image will have the exact specified width and height, and will be cropped if required. If the source image is smaller than the required width and/or height, you have to set allow_zoom to true, otherwise the generated image will be smaller than required. If 'borders', the image will have the exact specified width and height, and some borders may be added. The border color is the one specified by 'background_color'. If 'none' or missing, the image ratio is preserved, and depending od this ratio, may not have the exact width and height required.
-	 * #doc-arg-default none
 	 * #doc-arg-example resize_mode="crop"
 	 * 
 	 * #doc-arg-name rotation
@@ -167,7 +163,6 @@ class Image extends BaseI18nLoop implements PropelSearchLoopInterface
 	 * 
 	 * #doc-arg-name visible
 	 * #doc-arg-desc A boolean value.
-	 * #doc-arg-default yes
 	 * #doc-arg-example visible="no"
 	 * 
 	 * #doc-arg-name width

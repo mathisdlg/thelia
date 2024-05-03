@@ -30,7 +30,6 @@ use Thelia\Type\TypeCollection;
  *
  * Class Resource
  * 
- * #doc-usage {loop type="resource" name="the-loop-name" [argument="value"], [...]}
  * #doc-desc Resource loop lists resources.
  *
  * @author Etienne Roudeix <eroudeix@openstudio.fr>
@@ -52,7 +51,6 @@ class Resource extends BaseI18nLoop implements PropelSearchLoopInterface
 	 * 
 	 * #doc-arg-name order
 	 * #doc-arg-desc A list of values see sorting possible values
-	 * #doc-arg-default id
 	 * #doc-arg-example order="title"
 	 * 
 	 * #doc-arg-name profile

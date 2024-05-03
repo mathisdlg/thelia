@@ -27,7 +27,6 @@ use Thelia\Type\TypeCollection;
 /**
  * Class Area.
  * 
- * #doc-usage {loop type="area" name="the-loop-name" [argument="value"], [...]}
  * #doc-desc Area loop returns shipping zones information.
  *
  * @author Manuel Raynaud <manu@raynaud.io>
@@ -66,7 +65,6 @@ class Area extends BaseI18nLoop implements PropelSearchLoopInterface
 	 * 
 	 * #doc-arg-name order
 	 * #doc-arg-desc A list of values <br/> Expected values
-	 * #doc-arg-default name
 	 * #doc-arg-example order="alpha"
 	 * 
 	 * #doc-arg-name unassigned

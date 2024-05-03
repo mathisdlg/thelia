@@ -31,7 +31,6 @@ use Thelia\Type\TypeCollection;
  * - depth is the maximum depth to go, default unlimited
  * - visible if true or missing, only visible categories will be displayed. If false, all categories (visible or not) are returned.
  * 
- * #doc-usage {loop type="category_tree" name="the-loop-name" [argument="value"], [...]}
  * #doc-desc Category tree loop, to get a category tree from a given category to a given depth.
  *
  * @author Franck Allimant <franck@cqfdev.fr>
@@ -66,12 +65,10 @@ class CategoryTree extends BaseI18nLoop implements ArraySearchLoopInterface
 	 * 
 	 * #doc-arg-name order
 	 * #doc-arg-desc A list of values <br/> Expected values
-	 * #doc-arg-default position
 	 * #doc-arg-example order="random"
 	 * 
 	 * #doc-arg-name visible
 	 * #doc-arg-desc Whatever we consider hidden category or not.
-	 * #doc-arg-default true
 	 * #doc-arg-example 
      */
     protected function getArgDefinitions()

@@ -30,7 +30,6 @@ use Thelia\Type\TypeCollection;
  *
  * Class Country
  * 
- * #doc-usage {loop type="country" name="the-loop-name" [argument="value"], [...]}
  * #doc-desc Country loop lists countries.
  *
  * @author Etienne Roudeix <eroudeix@openstudio.fr>
@@ -65,7 +64,6 @@ class Country extends BaseI18nLoop implements PropelSearchLoopInterface
 	 * 
 	 * #doc-arg-name has_states
 	 * #doc-arg-desc A boolean value to return countries that have states or not (possible values : yes, no or *).
-	 * #doc-arg-default *
 	 * #doc-arg-example has_states="no"
 	 * 
 	 * #doc-arg-name id
@@ -74,12 +72,10 @@ class Country extends BaseI18nLoop implements PropelSearchLoopInterface
 	 * 
 	 * #doc-arg-name order
 	 * #doc-arg-desc A list of values see sorting possible values
-	 * #doc-arg-default id
 	 * #doc-arg-example order="alpha_reverse"
 	 * 
 	 * #doc-arg-name visible
 	 * #doc-arg-desc A boolean value to return visible or not visible countries (possible values : yes, no or *).
-	 * #doc-arg-default yes
 	 * #doc-arg-example visible="no"
 	 * 
 	 * #doc-arg-name with_area

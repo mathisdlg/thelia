@@ -28,7 +28,6 @@ use Thelia\Type\TypeCollection;
  *
  * Class CountryArea
  * 
- * #doc-usage {loop type="country_area" name="the-loop-name" [argument="value"], [...]}
  * #doc-desc Country area loop lists.
  *
  * @author Etienne Roudeix <eroudeix@openstudio.fr>
@@ -60,7 +59,6 @@ class CountryArea extends BaseLoop implements PropelSearchLoopInterface
 	 * 
 	 * #doc-arg-name order
 	 * #doc-arg-desc A list of values <br/> Expected values
-	 * #doc-arg-default id
 	 * #doc-arg-example order="alpha_reverse"
 	 * 
 	 * #doc-arg-name states

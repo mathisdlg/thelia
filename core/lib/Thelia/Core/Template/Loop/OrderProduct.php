@@ -32,7 +32,6 @@ use Thelia\Type\BooleanOrBothType;
  * Class OrderProduct
  * 
  * 
- * #doc-usage {loop type="order_product" name="the-loop-name" [argument="value"], [...]}
  * #doc-desc Order product loop displays Order products information.
  *
  * @author Etienne Roudeix <eroudeix@openstudio.fr>
@@ -54,12 +53,10 @@ class OrderProduct extends BaseLoop implements PropelSearchLoopInterface
 	 * 
 	 * #doc-arg-name order *
 	 * #doc-arg-desc A single order id.
-	 * #doc-arg-default null
 	 * #doc-arg-example order="2"
 	 * 
 	 * #doc-arg-name virtual
 	 * #doc-arg-desc A boolean value.
-	 * #doc-arg-default *
 	 * #doc-arg-example new="yes"
      */
     protected function getArgDefinitions()

@@ -27,7 +27,6 @@ use Thelia\Type\TypeCollection;
 /**
  * Class Hook.
  * 
- * #doc-usage {loop type="hook" name="the-loop-name" [argument="value"], [...]}
  * #doc-desc Get data from the hook table.
  *
  * @author Julien Chanséaume <jchanseaume@openstudio.fr>
@@ -47,7 +46,6 @@ class Hook extends BaseI18nLoop implements PropelSearchLoopInterface
 	 * 
 	 * #doc-arg-name active
 	 * #doc-arg-desc If the hook is active or not
-	 * #doc-arg-default *
 	 * #doc-arg-example 
 	 * 
 	 * #doc-arg-name code
@@ -64,7 +62,6 @@ class Hook extends BaseI18nLoop implements PropelSearchLoopInterface
 	 * 
 	 * #doc-arg-name order
 	 * #doc-arg-desc See Order possible values
-	 * #doc-arg-default id
 	 * #doc-arg-example order='code'
 	 */
     protected function getArgDefinitions()

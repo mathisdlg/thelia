@@ -27,7 +27,6 @@ use Thelia\Model\ModuleQuery;
  *
  * Class ModuleConfig
  * 
- * #doc-usage {loop type="module_config" name="the-loop-name" [argument="value"], [...]}
  * #doc-desc The module config loop retrieve module config informations
  *
  * @author Franck Allimant <franck@cqfdev.fr>
@@ -44,22 +43,18 @@ class ModuleConfig extends BaseLoop implements ArraySearchLoopInterface
 	 * 
 	 * #doc-arg-name default_value
 	 * #doc-arg-desc The default value
-	 * #doc-arg-default null
 	 * #doc-arg-example 
 	 * 
 	 * #doc-arg-name locale
 	 * #doc-arg-desc The locale
-	 * #doc-arg-default null
 	 * #doc-arg-example locale="en_US"
 	 * 
 	 * #doc-arg-name module*
 	 * #doc-arg-desc The module
-	 * #doc-arg-default null
 	 * #doc-arg-example module="bestseller"
 	 * 
 	 * #doc-arg-name variable*
 	 * #doc-arg-desc The variable
-	 * #doc-arg-default null
 	 * #doc-arg-example variable="rewriting_enable"
      */
     protected function getArgDefinitions()

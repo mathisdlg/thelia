@@ -34,7 +34,6 @@ use Thelia\Type\TypeCollection;
  * - secured filters by secured status (yes, no, both)
  * - exclude is a comma separated list of config IDs that will be excluded from output
  * 
- * #doc-usage {loop type="config" name="the-loop-name" [argument="value"], [...]}
  * #doc-desc Config loop, to access configuration variables
  *
  * @author Franck Allimant <franck@cqfdev.fr>
@@ -67,7 +66,6 @@ class Config extends BaseI18nLoop implements PropelSearchLoopInterface
 	 * 
 	 * #doc-arg-name order
 	 * #doc-arg-desc A list of values <br/> Expected values
-	 * #doc-arg-default name
 	 * #doc-arg-example order="id_reverse"
 	 * 
 	 * #doc-arg-name secured

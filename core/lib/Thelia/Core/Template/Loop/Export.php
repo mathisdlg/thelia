@@ -17,7 +17,6 @@ use Thelia\Model\ExportQuery;
 /**
  * Class Export.
  * 
- * #doc-usage {loop type="export" name="the-loop-name" [argument="value"], [...]}
  * #doc-desc Export loop lists all defined exports.
  *
  * @author Benjamin Perche <bperche@openstudio.fr>

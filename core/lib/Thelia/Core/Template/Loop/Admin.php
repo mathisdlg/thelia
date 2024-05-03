@@ -27,7 +27,6 @@ use Thelia\Model\AdminQuery;
  *
  * Class Admin
  * 
- * #doc-usage {loop type="admin" name="the-loop-name" [argument="value"], [...]}
  * #doc-desc Admin loop displays admins information.
  *
  * @author Etienne Roudeix <eroudeix@openstudio.fr>

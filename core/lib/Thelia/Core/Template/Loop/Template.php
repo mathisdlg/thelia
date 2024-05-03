@@ -23,7 +23,6 @@ use Thelia\Type;
 
 /**
  * 
- * #doc-usage {loop type="template" name="the-loop-name" [argument="value"], [...]}
  * #doc-desc Template loop, to get available back-office or front-office templates.
  *
  * @author Franck Allimant <franck@cqfdev.fr>

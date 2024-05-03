@@ -24,13 +24,13 @@ use Thelia\Model\AddressQuery;
 use Thelia\Type;
 use Thelia\Type\TypeCollection;
 
+
+// #doc-desc Address loop lists address addresses.
+
 /**
  * Address loop.
  *
  * Class Address
- * 
- * #doc-usage {loop type="address" name="the-loop-name" [argument="value"], [...]}
- * #doc-desc Address loop lists address addresses.
  *
  * @author Etienne Roudeix <eroudeix@openstudio.fr>
  *
@@ -48,7 +48,6 @@ class Address extends BaseLoop implements PropelSearchLoopInterface
 	 * 
 	 * #doc-arg-name customer
 	 * #doc-arg-desc Either a customer id or the keyword `current` which search for current customer addresses.
-	 * #doc-arg-default current
 	 * #doc-arg-example customer="current", customer="11"
 	 * 
 	 * #doc-arg-name default

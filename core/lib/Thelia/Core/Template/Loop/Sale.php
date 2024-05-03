@@ -31,7 +31,6 @@ use Thelia\Type\TypeCollection;
  *
  * Class Sale
  * 
- * #doc-usage {loop type="sale" name="the-loop-name" [argument="value"], [...]}
  * #doc-desc Sale loop provides an access to sale operations defined on your shop.
  *
  * @author Franck Allimant <thelia@cqfdev.fr>
@@ -54,12 +53,10 @@ class Sale extends BaseI18nLoop implements PropelSearchLoopInterface, SearchLoop
 	 * 
 	 * #doc-arg-name active
 	 * #doc-arg-desc A boolean value, to get only active (1) or inactive sales (0) or both (*)
-	 * #doc-arg-default 1
 	 * #doc-arg-example active="1"
 	 * 
 	 * #doc-arg-name currency
 	 * #doc-arg-desc A currency id, to get the price offset defined for this currency
-	 * #doc-arg-default The current shop currency
 	 * #doc-arg-example currency="1"
 	 * 
 	 * #doc-arg-name exclude
@@ -72,7 +69,6 @@ class Sale extends BaseI18nLoop implements PropelSearchLoopInterface, SearchLoop
 	 * 
 	 * #doc-arg-name order
 	 * #doc-arg-desc A list of values see sorting possible values
-	 * #doc-arg-default start-date
 	 * #doc-arg-example order=" random"
 	 * 
 	 * #doc-arg-name product

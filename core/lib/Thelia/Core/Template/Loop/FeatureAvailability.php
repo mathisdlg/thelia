@@ -29,7 +29,6 @@ use Thelia\Type\TypeCollection;
  *
  * Class FeatureAvailability
  * 
- * #doc-usage {loop type="feature_availability" name="the-loop-name" [argument="value"], [...]}
  * #doc-desc Feature availability loop lists feature availabilities.
  *
  * @author Etienne Roudeix <eroudeix@openstudio.fr>
@@ -60,7 +59,6 @@ class FeatureAvailability extends BaseI18nLoop implements PropelSearchLoopInterf
 	 * 
 	 * #doc-arg-name order
 	 * #doc-arg-desc A list of values see sorting possible values
-	 * #doc-arg-default manual
 	 * #doc-arg-example order="alpha_reverse"
      */
     protected function getArgDefinitions()

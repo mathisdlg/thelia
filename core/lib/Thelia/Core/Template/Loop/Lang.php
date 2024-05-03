@@ -29,7 +29,6 @@ use Thelia\Type;
  * - exclude is a comma separated list of lang IDs that will be excluded from output
  * - default if 1, the loop return only default lang. If 0, return all but the default language
  * 
- * #doc-usage {loop type="lang" name="the-loop-name" [argument="value"], [...]}
  * #doc-desc Lang loop.
  *
  * @author Franck Allimant <franck@cqfdev.fr>
@@ -53,7 +52,6 @@ class Lang extends BaseLoop implements PropelSearchLoopInterface
 	 * 
 	 * #doc-arg-name acive
 	 * #doc-arg-desc returns only active languages
-	 * #doc-arg-default true
 	 * #doc-arg-example active="false"
 	 * 
 	 * #doc-arg-name code
@@ -62,7 +60,6 @@ class Lang extends BaseLoop implements PropelSearchLoopInterface
 	 * 
 	 * #doc-arg-name default_only
 	 * #doc-arg-desc returns only the default language
-	 * #doc-arg-default false
 	 * #doc-arg-example default_only="true"
 	 * 
 	 * #doc-arg-name exclude
@@ -71,7 +68,6 @@ class Lang extends BaseLoop implements PropelSearchLoopInterface
 	 * 
 	 * #doc-arg-name exclude_default
 	 * #doc-arg-desc Exclude the default language from results
-	 * #doc-arg-default false
 	 * #doc-arg-example exclude_default="true"
 	 * 
 	 * #doc-arg-name id
@@ -84,12 +80,10 @@ class Lang extends BaseLoop implements PropelSearchLoopInterface
 	 * 
 	 * #doc-arg-name order
 	 * #doc-arg-desc A list of values see sorting possible values
-	 * #doc-arg-default position
 	 * #doc-arg-example order="alpha_reverse"
 	 * 
 	 * #doc-arg-name visible
 	 * #doc-arg-desc returns only visible languages
-	 * #doc-arg-default true
 	 * #doc-arg-example visible="false"
      */
     protected function getArgDefinitions()

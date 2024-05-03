@@ -45,7 +45,6 @@ use Thelia\Type\TypeCollection;
  *
  * Class Product
  * 
- * #doc-usage {loop type="product" name="the-loop-name" [argument="value"], [...]}
  * #doc-desc Product loop lists products from your shop. You very probably will have to use the product sale elements loop inside your product loop.
  *
  * @author Etienne Roudeix <eroudeix@openstudio.fr>
@@ -95,7 +94,6 @@ class Product extends BaseI18nLoop implements PropelSearchLoopInterface, SearchL
 	 * 
 	 * #doc-arg-name attribute_non_strict_match
 	 * #doc-arg-desc <strong>Only available if complex='true'</strong> <br/> promo, new, quantity, weight or price may differ in the different product sale element depending on the different attributes. This parameter allows to provide a list of non-strict attributes. <br/> list of expected values
-	 * #doc-arg-default none
 	 * #doc-arg-example attribute_non_strict_match="promo,new" : <br/> loop will return the product if it has at least a product sale element in promo and at least a product sale element as new ; even if it's not the same product sale element.
 	 * 
 	 * #doc-arg-name brand
@@ -112,7 +110,6 @@ class Product extends BaseI18nLoop implements PropelSearchLoopInterface, SearchL
 	 * 
 	 * #doc-arg-name complex
 	 * #doc-arg-desc A boolean. If set to true, product loop will consider all product sale elements else it will only consider default product sale element. Some of the arguments/outputs will not be available depending on the complex argument.
-	 * #doc-arg-default false
 	 * #doc-arg-example complex="true"
 	 * 
 	 * #doc-arg-name content
@@ -133,7 +130,6 @@ class Product extends BaseI18nLoop implements PropelSearchLoopInterface, SearchL
 	 * 
 	 * #doc-arg-name depth
 	 * #doc-arg-desc A positive integer value which precise how many subcategory levels will be browse. Will not be consider if category parameter is not set.
-	 * #doc-arg-default 1
 	 * #doc-arg-example depth="2"
 	 * 
 	 * #doc-arg-name exclude
@@ -186,7 +182,6 @@ class Product extends BaseI18nLoop implements PropelSearchLoopInterface, SearchL
 	 * 
 	 * #doc-arg-name order
 	 * #doc-arg-desc The order for sorting products, see sorting possible values
-	 * #doc-arg-default alpha
 	 * #doc-arg-example order="category,min_price"
 	 * 
 	 * #doc-arg-name promo
@@ -219,12 +214,10 @@ class Product extends BaseI18nLoop implements PropelSearchLoopInterface, SearchL
 	 * 
 	 * #doc-arg-name visible
 	 * #doc-arg-desc A boolean value.
-	 * #doc-arg-default yes
 	 * #doc-arg-example visible="no"
 	 * 
 	 * #doc-arg-name with_prev_next_info
 	 * #doc-arg-desc A boolean. If set to true, $HAS_PREVIOUS, $HAS_NEXT, $PREVIOUS, and $NEXT output variables are available.
-	 * #doc-arg-default false
 	 * #doc-arg-example with_prev_next_info="yes"
 	 * 
 	 * #doc-arg-name with_prev_next_visible

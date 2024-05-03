@@ -22,7 +22,6 @@ use Thelia\Core\Template\Loop\Argument\ArgumentCollection;
 
 /**
  * 
- * #doc-usage {loop type="feed" name="the-loop-name" [argument="value"], [...]}
  * #doc-desc Get data from an Atom or RSS feed.
  * 
  * @author Franck Allimant <franck@cqfdev.fr>
@@ -36,12 +35,10 @@ class Feed extends BaseLoop implements ArraySearchLoopInterface
 	 * 
 	 * #doc-arg-name timeout
 	 * #doc-arg-desc Delay in seconds after which the loop closes the connection with the remote server
-	 * #doc-arg-default 10
 	 * #doc-arg-example timeout=10
 	 * 
 	 * #doc-arg-name url *
 	 * #doc-arg-desc An Atom or RSS feed URL.
-	 * #doc-arg-default null
 	 * #doc-arg-example `url='http://thelia.net/feeds/?lang=en'`
 	 */
     public function getArgDefinitions()

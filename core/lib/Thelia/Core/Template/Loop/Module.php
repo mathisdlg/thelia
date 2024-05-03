@@ -33,7 +33,6 @@ use Thelia\Type\TypeCollection;
  *
  * Class Module
  * 
- * #doc-usage {loop type="module" name="the-loop-name" [argument="value"], [...]}
  * #doc-desc The module loop retrieve module informations
  *
  * @author Etienne Roudeix <eroudeix@openstudio.fr>
@@ -59,7 +58,6 @@ class Module extends BaseI18nLoop implements PropelSearchLoopInterface
 	 * 
 	 * #doc-arg-name active
 	 * #doc-arg-desc A boolean value.
-	 * #doc-arg-default *
 	 * #doc-arg-example active="no"
 	 * 
 	 * #doc-arg-name area
@@ -76,7 +74,6 @@ class Module extends BaseI18nLoop implements PropelSearchLoopInterface
 	 * 
 	 * #doc-arg-name hidden
 	 * #doc-arg-desc A boolean value.
-	 * #doc-arg-default *
 	 * #doc-arg-example hidden="yes"
 	 * 
 	 * #doc-arg-name id
@@ -93,7 +90,6 @@ class Module extends BaseI18nLoop implements PropelSearchLoopInterface
 	 * 
 	 * #doc-arg-name order
 	 * #doc-arg-desc A list of values see sorting possible values
-	 * #doc-arg-default manual
 	 * #doc-arg-example order="alpha_reverse"
 	 * 
 	 * #doc-arg-name profile

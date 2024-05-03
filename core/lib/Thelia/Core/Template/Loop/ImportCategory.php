@@ -17,7 +17,6 @@ use Thelia\Model\ImportCategoryQuery;
 /**
  * Class ImportCategory.
  * 
- * #doc-usage {loop type="import_category" name="the-loop-name" [argument="value"], [...]}
  * #doc-desc Import category loop lists all defined import categories.
  *
  * @author Benjamin Perche <bperche@openstudio.fr>

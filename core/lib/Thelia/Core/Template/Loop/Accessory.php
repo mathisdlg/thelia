@@ -23,7 +23,6 @@ use Thelia\Model\AccessoryQuery;
  *
  * Class Accessory
  * 
- * #doc-usage {loop type="accessory" name="the-loop-name" [argument="value"], [...]}
  * #doc-desc The accessory loop lists products accessories. As an accessory is itself a product, this loop behaves like a product loop. Therefore you can use all product loop arguments and outputs.
  *
  * @author Etienne Roudeix <eroudeix@openstudio.fr>
@@ -47,7 +46,6 @@ class Accessory extends Product
 	 * 
 	 * #doc-arg-name order
 	 * #doc-arg-desc A list of values <br/> Expected values
-	 * #doc-arg-default accessory
 	 * #doc-arg-example order="accessory,max_price"
 	 * 
 	 * #doc-arg-name product \*

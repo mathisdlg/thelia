@@ -28,7 +28,6 @@ use Thelia\Type;
  *
  * Class Cart
  * 
- * #doc-usage {loop type="cart" name="the-loop-name" [argument="value"], [...]}
  * #doc-desc Cart loop displays cart information.
  *
  * @method string[] getOrder()
@@ -40,7 +39,6 @@ class Cart extends BaseLoop implements ArraySearchLoopInterface
 	 * 
 	 * #doc-arg-name order
 	 * #doc-arg-desc A list of values <br/> Expected values : <br/> - reverse : reverse chronological item add order
-	 * #doc-arg-default normal
 	 * #doc-arg-example order="reverse"
      */
     protected function getArgDefinitions()

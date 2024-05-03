@@ -32,7 +32,6 @@ use Thelia\Type\TypeCollection;
 
 /**
  * 
- * #doc-usage {loop type="order" name="the-loop-name" [argument="value"], [...]}
  * #doc-desc Order loop displays orders information.
  * 
  * @author Franck Allimant <franck@cqfdev.fr>
@@ -61,7 +60,6 @@ class Order extends BaseLoop implements SearchLoopInterface, PropelSearchLoopInt
 	 * 
 	 * #doc-arg-name customer
 	 * #doc-arg-desc A single customer id or `current` keyword to get logged in user or `*` keyword to match all users.
-	 * #doc-arg-default current
 	 * #doc-arg-example customer="2", customer="current"
 	 * 
 	 * #doc-arg-name exclude_status
@@ -78,7 +76,6 @@ class Order extends BaseLoop implements SearchLoopInterface, PropelSearchLoopInt
 	 * 
 	 * #doc-arg-name order
 	 * #doc-arg-desc A list of values see sorting possible values
-	 * #doc-arg-default create-date-reverse
 	 * #doc-arg-example order="create-date-reverse"
 	 * 
 	 * #doc-arg-name status
@@ -91,7 +88,6 @@ class Order extends BaseLoop implements SearchLoopInterface, PropelSearchLoopInt
 	 * 
 	 * #doc-arg-name with_prev_next_info
 	 * #doc-arg-desc A boolean. If set to true, $PREVIOUS and $NEXT output arguments are available.
-	 * #doc-arg-default false
 	 * #doc-arg-example with_prev_next_info="yes"
 	 * 
 	 * #doc-arg-name ref

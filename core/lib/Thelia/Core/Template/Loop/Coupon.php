@@ -33,7 +33,6 @@ use Thelia\Type\TypeCollection;
 /**
  * Coupon Loop.
  * 
- * #doc-usage {loop type="coupon" name="the-loop-name" [argument="value"], [...]}
  * #doc-desc Return coupons information
  *
  * @author  Guillaume MOREL <gmorel@openstudio.fr>
@@ -69,7 +68,6 @@ class Coupon extends BaseI18nLoop implements PropelSearchLoopInterface
 	 * 
 	 * #doc-arg-name order
 	 * #doc-arg-desc A list of values see sorting possible values
-	 * #doc-arg-default code
 	 * #doc-arg-example order="alpha_reverse"
      */
     protected function getArgDefinitions()

@@ -27,7 +27,6 @@ use Thelia\Model\OrderProductTaxQuery;
  *
  * Class OrderProductTax
  * 
- * #doc-usage {loop type="order_product_tax" name="the-loop-name" [argument="value"], [...]}
  * #doc-desc Order product tax loop displays taxes available.
  *
  * @author Zzuutt
@@ -43,7 +42,6 @@ class OrderProductTax extends BaseLoop implements PropelSearchLoopInterface
 	 * 
 	 * #doc-arg-name order_product *
 	 * #doc-arg-desc A single order product id.
-	 * #doc-arg-default null
 	 * #doc-arg-example order_product="2"
      */
     protected function getArgDefinitions()

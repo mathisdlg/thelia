@@ -27,7 +27,6 @@ use Thelia\Model\OrderStatusQuery;
  *
  * Class OrderStatus
  * 
- * #doc-usage {loop type="order_status" name="the-loop-name" [argument="value"], [...]}
  * #doc-desc Order status loop displays order status information.
  *
  * @author Etienne Roudeix <eroudeix@openstudio.fr>
@@ -54,7 +53,6 @@ class OrderStatus extends BaseI18nLoop implements PropelSearchLoopInterface
 	 * 
 	 * #doc-arg-name order
 	 * #doc-arg-desc A list of values see Expected values
-	 * #doc-arg-default manual
 	 * #doc-arg-example order="random"
      */
     protected function getArgDefinitions()

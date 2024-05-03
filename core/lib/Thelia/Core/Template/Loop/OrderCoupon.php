@@ -29,7 +29,6 @@ use Thelia\Model\OrderQuery;
  *
  * Class OrderCoupon
  * 
- * #doc-usage {loop type="order_coupon" name="the-loop-name" [argument="value"], [...]}
  * #doc-desc Retrieve order coupons information for a given order
  *
  * @author Etienne Roudeix <eroudeix@openstudio.fr>
@@ -45,7 +44,6 @@ class OrderCoupon extends BaseLoop implements PropelSearchLoopInterface
 	 * 
 	 * #doc-arg-name order *
 	 * #doc-arg-desc A single order id.
-	 * #doc-arg-default null
 	 * #doc-arg-example order="2"
      */
     protected function getArgDefinitions()

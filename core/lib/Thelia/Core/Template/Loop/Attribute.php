@@ -34,7 +34,6 @@ use Thelia\Type\TypeCollection;
  *
  * Class Attribute
  * 
- * #doc-usage {loop type="attribute" name="the-loop-name" [argument="value"], [...]}
  * #doc-desc Attribute loop lists attributes.
  *
  * @author Etienne Roudeix <eroudeix@openstudio.fr>
@@ -69,7 +68,6 @@ class Attribute extends BaseI18nLoop implements PropelSearchLoopInterface
 	 * 
 	 * #doc-arg-name order
 	 * #doc-arg-desc A list of values <br/> Expected values
-	 * #doc-arg-default manual
 	 * #doc-arg-example order="alpha_reverse"
 	 * 
 	 * #doc-arg-name product

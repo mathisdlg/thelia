@@ -27,7 +27,6 @@ use Thelia\Model\CustomerTitleQuery;
  *
  * Class Title
  * 
- * #doc-usage {loop type="title" name="the-loop-name" [argument="value"], [...]}
  * #doc-desc Title loop lists titles.
  *
  * @author Etienne Roudeix <eroudeix@openstudio.fr>

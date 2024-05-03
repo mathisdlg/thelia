@@ -24,7 +24,6 @@ use Thelia\Model\ProductSaleElementsProductImageQuery;
 /**
  * Class ProductSaleElementsImage.
  * 
- * #doc-usage {loop type="product_sale_elements_image" name="the-loop-name" [argument="value"], [...]}
  * #doc-desc Product sale elements image loop to display images of product's variations.
  *
  * @author Benjamin Perche <benjamin@thelia.net>
@@ -97,7 +96,6 @@ class ProductSaleElementsImage extends BaseLoop implements PropelSearchLoopInter
 	 * 
 	 * #doc-arg-name order
 	 * #doc-arg-desc A list of values see sorting possible values
-	 * #doc-arg-default position
 	 * #doc-arg-example order="position-reverse"
 	 * 
 	 * #doc-arg-name product_sale_elements_id

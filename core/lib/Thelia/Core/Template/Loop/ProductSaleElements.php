@@ -35,7 +35,6 @@ use Thelia\Type\TypeCollection;
  *
  * Class ProductSaleElements
  * 
- * #doc-usage {loop type="product_sale_elements" name="the-loop-name" [argument="value"], [...]}
  * #doc-desc Product sale elements loop lists product sale elements from your shop. You may need to use the attribute combination loop inside your product sale elements loop.
  *
  * @author Etienne Roudeix <eroudeix@openstudio.fr>
@@ -80,7 +79,6 @@ class ProductSaleElements extends BaseLoop implements PropelSearchLoopInterface,
 	 * 
 	 * #doc-arg-name order
 	 * #doc-arg-desc A list of values see sorting possible values
-	 * #doc-arg-default random
 	 * #doc-arg-example order="promo,min_price"
 	 * 
 	 * #doc-arg-name product
@@ -97,7 +95,6 @@ class ProductSaleElements extends BaseLoop implements PropelSearchLoopInterface,
 	 * 
 	 * #doc-arg-name visible
 	 * #doc-arg-desc A boolean value, or * (the default) for ignoring this filter
-	 * #doc-arg-default *
 	 * #doc-arg-example visible="no"
      */
     protected function getArgDefinitions()

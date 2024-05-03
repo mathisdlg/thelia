@@ -29,7 +29,6 @@ use Thelia\Type\TypeCollection;
  *
  * Class OrderProductAttributeCombination
  * 
- * #doc-usage {loop type="order_product_attribute_combination" name="the-loop-name" [argument="value"], [...]}
  * #doc-desc Order product attribute combination loop lists order product attribute combinations.
  *
  * @author Etienne Roudeix <eroudeix@openstudio.fr>
@@ -47,12 +46,10 @@ class OrderProductAttributeCombination extends BaseI18nLoop implements PropelSea
 	 * 
 	 * #doc-arg-name order
 	 * #doc-arg-desc See Order possible values
-	 * #doc-arg-default alpha
 	 * #doc-arg-example order="alpha_reverse"
 	 * 
 	 * #doc-arg-name order_product *
 	 * #doc-arg-desc A single order product id.
-	 * #doc-arg-default null
 	 * #doc-arg-example order_product="2"
      */
     protected function getArgDefinitions()

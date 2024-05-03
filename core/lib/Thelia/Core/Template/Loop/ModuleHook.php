@@ -26,7 +26,6 @@ use Thelia\Type\TypeCollection;
 /**
  * Class ModuleHook.
  * 
- * #doc-usage {loop type="module_hook" name="the-loop-name" [argument="value"], [...]}
  * #doc-desc Module hook loop lists all defined module hooks.
  *
  * @author Julien Chanséaume <jchanseaume@openstudio.fr>
@@ -49,7 +48,6 @@ class ModuleHook extends BaseI18nLoop implements PropelSearchLoopInterface
 	 * 
 	 * #doc-arg-name active
 	 * #doc-arg-desc Check if the hook is active
-	 * #doc-arg-default *
 	 * #doc-arg-example active="1"
 	 * 
 	 * #doc-arg-name exclude
@@ -62,7 +60,6 @@ class ModuleHook extends BaseI18nLoop implements PropelSearchLoopInterface
 	 * 
 	 * #doc-arg-name hook_active
 	 * #doc-arg-desc Check if the hook is active
-	 * #doc-arg-default *
 	 * #doc-arg-example hook_active="1"
 	 * 
 	 * #doc-arg-name id
@@ -75,12 +72,10 @@ class ModuleHook extends BaseI18nLoop implements PropelSearchLoopInterface
 	 * 
 	 * #doc-arg-name module_active
 	 * #doc-arg-desc Check if the module is active
-	 * #doc-arg-default *
 	 * #doc-arg-example module_active="1"
 	 * 
 	 * #doc-arg-name order
 	 * #doc-arg-desc a list of values see sorting possible values
-	 * #doc-arg-default manual
 	 * #doc-arg-example order="id"
      */
     protected function getArgDefinitions()

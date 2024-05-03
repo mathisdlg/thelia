@@ -27,7 +27,6 @@ use Thelia\Model\ProfileQuery;
  *
  * Class Profile
  * 
- * #doc-usage {loop type="profile" name="the-loop-name" [argument="value"], [...]}
  * #doc-desc Profile loop lists profiles.
  *
  * @author Etienne Roudeix <eroudeix@openstudio.fr>

@@ -32,7 +32,6 @@ use Thelia\Type\TypeCollection;
  *
  * Class Customer
  * 
- * #doc-usage {loop type="customer" name="the-loop-name" [argument="value"], [...]}
  * #doc-desc Customer loop displays customers information.
  *
  * @author Etienne Roudeix <eroudeix@openstudio.fr>
@@ -55,7 +54,6 @@ class Customer extends BaseLoop implements SearchLoopInterface, PropelSearchLoop
 	 * 
 	 * #doc-arg-name current
 	 * #doc-arg-desc A boolean value which must be set to false if you need to display not authenticated customers information, typically if `sponsor` parameter is set.
-	 * #doc-arg-default yes
 	 * #doc-arg-example current="false"
 	 * 
 	 * #doc-arg-name Newsletter
@@ -64,7 +62,6 @@ class Customer extends BaseLoop implements SearchLoopInterface, PropelSearchLoop
 	 * 
 	 * #doc-arg-name order
 	 * #doc-arg-desc A list of values see sorting possible values
-	 * #doc-arg-default lastname
 	 * #doc-arg-example order="firstname, lastname"
 	 * 
 	 * #doc-arg-name ref
@@ -81,7 +78,6 @@ class Customer extends BaseLoop implements SearchLoopInterface, PropelSearchLoop
 	 * 
 	 * #doc-arg-name with_prev_next_info
 	 * #doc-arg-desc A boolean. If set to true, $HAS_PREVIOUS, $HAS_NEXT, $PREVIOUS, and $NEXT output variables are available.
-	 * #doc-arg-default false
 	 * #doc-arg-example with_prev_next_info="yes"
      */
     protected function getArgDefinitions()

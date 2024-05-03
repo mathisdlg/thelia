@@ -32,7 +32,6 @@ use Thelia\Type\TypeCollection;
  *
  * Class Brand
  * 
- * #doc-usage {loop type="brand" name="the-loop-name" [argument="value"], [...]}
  * #doc-desc Brand loop lists brands defined in your shop.
  *
  * @author Franck Allimant <franck@cqfdev.fr>
@@ -69,7 +68,6 @@ class Brand extends BaseI18nLoop implements PropelSearchLoopInterface, SearchLoo
 	 * 
 	 * #doc-arg-name order
 	 * #doc-arg-desc A list of values <br/> Expected values
-	 * #doc-arg-default alpha
 	 * #doc-arg-example order="random"
 	 * 
 	 * #doc-arg-name product
@@ -82,12 +80,10 @@ class Brand extends BaseI18nLoop implements PropelSearchLoopInterface, SearchLoo
 	 * 
 	 * #doc-arg-name visible
 	 * #doc-arg-desc A boolean value.
-	 * #doc-arg-default yes
 	 * #doc-arg-example visible="no"
 	 * 
 	 * #doc-arg-name with_prev_next_info
 	 * #doc-arg-desc A boolean. If set to true, $PREVIOUS and $NEXT output arguments are available.
-	 * #doc-arg-default false
 	 * #doc-arg-example with_prev_next_info="yes"
      */
     protected function getArgDefinitions()

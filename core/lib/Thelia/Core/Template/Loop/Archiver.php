@@ -25,7 +25,6 @@ use Thelia\Type\TypeCollection;
 /**
  * Class ArchiveBuilder.
  * 
- * #doc-usage {loop type="archiver" name="the-loop-name" [argument="value"], [...]}
  * #doc-desc Retrieves a list of archivers, sorts them and returns its information.
  *
  * @author Benjamin Perche <bperche@openstudio.fr>
@@ -46,7 +45,6 @@ class Archiver extends BaseLoop implements ArraySearchLoopInterface
 	 * 
 	 * #doc-arg-name order
 	 * #doc-arg-desc specifies the sort order of archivers (alphabetical)
-	 * #doc-arg-default alpha
 	 * #doc-arg-example enum sort{ case alpha; case alpha_reverse; }
 	 */
     protected function getArgDefinitions()

@@ -30,7 +30,6 @@ use Thelia\Model\Map\ProductTableMap;
  *
  * Class AttributeCombination
  * 
- * #doc-usage {loop type="attribute_combination" name="the-loop-name" [argument="value"], [...]}
  * #doc-desc Attribute combination loop lists attribute combinations.
  *
  * @author Etienne Roudeix <eroudeix@openstudio.fr>
@@ -47,7 +46,6 @@ class AttributeCombination extends BaseI18nLoop implements PropelSearchLoopInter
 	 * 
 	 * #doc-arg-name order
 	 * #doc-arg-desc A list of values <br/> Expected values
-	 * #doc-arg-default alpha
 	 * #doc-arg-example order="alpha_reverse"
 	 * 
 	 * #doc-arg-name product_sale_elements \*
