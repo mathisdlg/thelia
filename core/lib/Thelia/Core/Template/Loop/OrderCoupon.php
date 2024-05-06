@@ -41,10 +41,6 @@ class OrderCoupon extends BaseLoop implements PropelSearchLoopInterface
      * Define all args used in your loop.
      *
      * @return ArgumentCollection
-	 * 
-	 * #doc-arg-name order *
-	 * #doc-arg-desc A single order id.
-	 * #doc-arg-example order="2"
      */
     protected function getArgDefinitions()
     {
@@ -67,53 +63,7 @@ class OrderCoupon extends BaseLoop implements PropelSearchLoopInterface
         return $search;
     }
 
-	 /**
-	 * 
-	 * #doc-out-name $CODE
-	 * #doc-out-desc the coupon code
-	 * 
-	 * #doc-out-name $DAY_LEFT_BEFORE_EXPIRATION
-	 * #doc-out-desc days left before coupon expiration
-	 * 
-	 * #doc-out-name $DESCRIPTION
-	 * #doc-out-desc the coupon description
-	 * 
-	 * #doc-out-name $DISCOUNT_AMOUNT
-	 * #doc-out-desc the coupon discount amount
-	 * 
-	 * #doc-out-name $EXPIRATION_DATE
-	 * #doc-out-desc the coupon expiration date
-	 * 
-	 * #doc-out-name $FREE_SHIPPING_FOR_COUNTRIES_LIST
-	 * #doc-out-desc comma separated list of country IDs for which the free shipping applies
-	 * 
-	 * #doc-out-name $FREE_SHIPPING_FOR_MODULES_LIST
-	 * #doc-out-desc comma separated list of shipping module IDs for which the free shipping applies
-	 * 
-	 * #doc-out-name $ID
-	 * #doc-out-desc the coupon id
-	 * 
-	 * #doc-out-name $IS_AVAILABLE_ON_SPECIAL_OFFERS
-	 * #doc-out-desc true if the coupon applies to discounted products
-	 * 
-	 * #doc-out-name $IS_CUMULATIVE
-	 * #doc-out-desc true if the coupon is cumulative
-	 * 
-	 * #doc-out-name $IS_REMOVING_POSTAGE
-	 * #doc-out-desc true if the coupon provides free shipping
-	 * 
-	 * #doc-out-name $IS_USAGE_CANCELED
-	 * #doc-out-desc true if the usage of this coupon was canceled (probably when the related order was canceled), false otherwise
-	 * 
-	 * #doc-out-name $PER_CUSTOMER_USAGE_COUNT
-	 * #doc-out-desc Get the [per_customer_usage_count] column value.
-	 * 
-	 * #doc-out-name $SHORT_DESCRIPTION
-	 * #doc-out-desc the coupon short description
-	 * 
-	 * #doc-out-name $TITLE
-	 * #doc-out-desc the coupon title
-	 */
+
     public function parseResults(LoopResult $loopResult)
     {
         $this->container->get('thelia.condition.factory');
@@ -141,20 +91,35 @@ class OrderCoupon extends BaseLoop implements PropelSearchLoopInterface
                     $freeShippingForModulesIds[] = $couponModule->getModuleId();
                 }
 
+				// #doc-out-desc the coupon id
                 $loopResultRow->set('ID', $orderCoupon->getId())
+					// #doc-out-desc the coupon code
                     ->set('CODE', $orderCoupon->getCode())
+					// #doc-out-desc the coupon discount amount
                     ->set('DISCOUNT_AMOUNT', $orderCoupon->getAmount())
+					// #doc-out-desc the coupon title
                     ->set('TITLE', $orderCoupon->getTitle())
+					// #doc-out-desc the coupon short description
                     ->set('SHORT_DESCRIPTION', $orderCoupon->getShortDescription())
+					// #doc-out-desc the coupon description
                     ->set('DESCRIPTION', $orderCoupon->getDescription())
+					// #doc-out-desc the coupon expiration date
                     ->set('EXPIRATION_DATE', $orderCoupon->getExpirationDate($order->getLangId()))
+					// #doc-out-desc true if the coupon is cumulative
                     ->set('IS_CUMULATIVE', $orderCoupon->getIsCumulative())
+					// #doc-out-desc true if the coupon provides free shipping
                     ->set('IS_REMOVING_POSTAGE', $orderCoupon->getIsRemovingPostage())
+					// #doc-out-desc true if the coupon applies to discounted products
                     ->set('IS_AVAILABLE_ON_SPECIAL_OFFERS', $orderCoupon->getIsAvailableOnSpecialOffers())
+					// #doc-out-desc days left before coupon expiration
                     ->set('DAY_LEFT_BEFORE_EXPIRATION', $daysLeftBeforeExpiration)
+					// #doc-out-desc comma separated list of country IDs for which the free shipping applies
                     ->set('FREE_SHIPPING_FOR_COUNTRIES_LIST', implode(',', $freeShippingForCountriesIds))
+					// #doc-out-desc comma separated list of shipping module IDs for which the free shipping applies
                     ->set('FREE_SHIPPING_FOR_MODULES_LIST', implode(',', $freeShippingForModulesIds))
+					// #doc-out-desc Get the [per_customer_usage_count] column value.
                     ->set('PER_CUSTOMER_USAGE_COUNT', $orderCoupon->getPerCustomerUsageCount())
+					// #doc-out-desc true if the usage of this coupon was canceled (probably when the related order was canceled), false otherwise
                     ->set('IS_USAGE_CANCELED', $orderCoupon->getUsageCanceled())
                 ;
                 $this->addOutputFields($loopResultRow, $orderCoupon);

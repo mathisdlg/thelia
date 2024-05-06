@@ -56,65 +56,22 @@ class Order extends BaseLoop implements SearchLoopInterface, PropelSearchLoopInt
     protected $timestampable = true;
     protected $versionable = false;
 
-	 /**
-	 * 
-	 * #doc-arg-name customer
-	 * #doc-arg-desc A single customer id or `current` keyword to get logged in user or `*` keyword to match all users.
-	 * #doc-arg-example customer="2", customer="current"
-	 * 
-	 * #doc-arg-name exclude_status
-	 * #doc-arg-desc A single or a list of order status ID which are to be excluded from the results
-	 * #doc-arg-example status="*", exclude_status="1,4,7"
-	 * 
-	 * #doc-arg-name exclude_status_code
-	 * #doc-arg-desc A single or a list of order status codes which are to be excluded from the results. The valid status codes are not_paid, paid, processing, sent, canceled, or any custom status that may be defined
-	 * #doc-arg-example exclude_status_code="paid,processing"
-	 * 
-	 * #doc-arg-name id
-	 * #doc-arg-desc A single or a list of order ids.
-	 * #doc-arg-example id="2", id="1,4,7"
-	 * 
-	 * #doc-arg-name order
-	 * #doc-arg-desc A list of values see sorting possible values
-	 * #doc-arg-example order="create-date-reverse"
-	 * 
-	 * #doc-arg-name status
-	 * #doc-arg-desc A single or a list of order status ID or `*` keyword to match all
-	 * #doc-arg-example status="*", status="1,4,7"
-	 * 
-	 * #doc-arg-name status_code
-	 * #doc-arg-desc A single or a list of order status codes or `*` keyword to match all. The valid status codes are not_paid, paid, processing, sent, canceled, or any custom status that may be defined
-	 * #doc-arg-example status="*", status="not_paid,canceled"
-	 * 
-	 * #doc-arg-name with_prev_next_info
-	 * #doc-arg-desc A boolean. If set to true, $PREVIOUS and $NEXT output arguments are available.
-	 * #doc-arg-example with_prev_next_info="yes"
-	 * 
-	 * #doc-arg-name ref
-	 * #doc-arg-desc A single or a list of references.
-	 * #doc-arg-example ref="ref,ref2"
-	 * 
-	 * #doc-arg-name invoice_ref
-	 * #doc-arg-desc A single or a list of invoice references.
-	 * #doc-arg-example invoice_ref="foo,bar"
-	 * 
-	 * #doc-arg-name delivery_ref
-	 * #doc-arg-desc A single or a list of delivery references.
-	 * #doc-arg-example delivery_ref="delivery_ref"
-	 * 
-	 * #doc-arg-name transaction_ref
-	 * #doc-arg-desc A single or a list of transaction references.
-	 * #doc-arg-example transaction_ref="transaction_ref"
-	 */
     public function getArgDefinitions()
     {
         return new ArgumentCollection(
+		    // #doc-arg-desc A single or a list of order ids.
             Argument::createIntListTypeArgument('id'),
+		    // #doc-arg-desc A single or a list of references.
             Argument::createAnyListTypeArgument('ref'),
+		    // #doc-arg-desc A single or a list of invoice references.
             Argument::createAnyListTypeArgument('invoice_ref'),
+		    // #doc-arg-desc A single or a list of delivery references.
             Argument::createAnyListTypeArgument('delivery_ref'),
+		    // #doc-arg-desc A single or a list of transaction references.
             Argument::createAnyListTypeArgument('transaction_ref'),
+		    // #doc-arg-desc A boolean. If set to true, $PREVIOUS and $NEXT output arguments are available.
             Argument::createBooleanTypeArgument('with_prev_next_info', false),
+            // #doc-arg-desc A single customer id or `current` keyword to get logged in user or `*` keyword to match all users.
             new Argument(
                 'customer',
                 new TypeCollection(
@@ -123,6 +80,7 @@ class Order extends BaseLoop implements SearchLoopInterface, PropelSearchLoopInt
                 ),
                 'current'
             ),
+            // #doc-arg-desc A single or a list of order status ID or `*` keyword to match all
             new Argument(
                 'status',
                 new TypeCollection(
@@ -130,6 +88,7 @@ class Order extends BaseLoop implements SearchLoopInterface, PropelSearchLoopInt
                     new Type\EnumType(['*'])
                 )
             ),
+		    // #doc-arg-desc A single or a list of order status ID which are to be excluded from the results
             Argument::createIntListTypeArgument('exclude_status'),
             new Argument(
                 'status_code',
@@ -138,6 +97,7 @@ class Order extends BaseLoop implements SearchLoopInterface, PropelSearchLoopInt
                     new Type\EnumType(['*'])
                 )
             ),
+		    // #doc-arg-desc A single or a list of order status codes which are to be excluded from the results. The valid status codes are not_paid, paid, processing, sent, canceled, or any custom status that may be defined
             Argument::createAnyListTypeArgument('exclude_status_code'),
             new Argument(
                 'order',
@@ -366,128 +326,6 @@ class Order extends BaseLoop implements SearchLoopInterface, PropelSearchLoopInt
      *
      * @return LoopResult
 	 * 
-	 * #doc-out-name $CURRENCY
-	 * #doc-out-desc the order currency id ; you can use it in a currency loop
-	 * 
-	 * #doc-out-name $CURRENCY_RATE
-	 * #doc-out-desc the order currency rate
-	 * 
-	 * #doc-out-name $CUSTOMER
-	 * #doc-out-desc the order customer id ; you can use it in a customer loop
-	 * 
-	 * #doc-out-name $DELIVERY_ADDRESS
-	 * #doc-out-desc the order delivery address id ; you can use it in a order address loop
-	 * 
-	 * #doc-out-name $DELIVERY_MODULE
-	 * #doc-out-desc the order delivery module id ; you can use it in a module loop
-	 * 
-	 * #doc-out-name $DELIVERY_REF
-	 * #doc-out-desc the order delivery reference. It's usually use for tracking package
-	 * 
-	 * #doc-out-name $DISCOUNT
-	 * #doc-out-desc the order discount
-	 * 
-	 * #doc-out-name $HAS_NEXT
-	 * #doc-out-desc true if a order exists after this one, following orders id.
-	 * 
-	 * #doc-out-name $HAS_PAID_STATUS
-	 * #doc-out-desc True is the order has the 'paid' status, false otherwise
-	 * 
-	 * #doc-out-name $HAS_PREVIOUS
-	 * #doc-out-desc true if a order exists before this one following orders id.
-	 * 
-	 * #doc-out-name $ID
-	 * #doc-out-desc the order id
-	 * 
-	 * #doc-out-name $INVOICE_ADDRESS
-	 * #doc-out-desc the order the order invoice address id ; you can use it in a order address loop
-	 * 
-	 * #doc-out-name $INVOICE_REF
-	 * #doc-out-desc the order invoice reference
-	 * 
-	 * #doc-out-name $IS_CANCELED
-	 * #doc-out-desc True is the order has the 'canceled' status, false otherwise
-	 * 
-	 * #doc-out-name $IS_NOT_PAID
-	 * #doc-out-desc True is the order has the 'not paid' status, false otherwise
-	 * 
-	 * #doc-out-name $IS_PAID
-	 * #doc-out-desc True is the order has been paid (whatever current status is), false otherwise
-	 * 
-	 * #doc-out-name $IS_PROCESSING
-	 * #doc-out-desc True is the order has the 'processing' status, false otherwise
-	 * 
-	 * #doc-out-name $IS_SENT
-	 * #doc-out-desc True is the order has the 'sent' status, false otherwise
-	 * 
-	 * #doc-out-name $LANG
-	 * #doc-out-desc the order language id
-	 * 
-	 * #doc-out-name $NEXT
-	 * #doc-out-desc The ID of order after this one, following orders id, or null if none exists.
-	 * 
-	 * #doc-out-name $PAYMENT_MODULE
-	 * #doc-out-desc the order payment module id ; you can use it in a module loop
-	 * 
-	 * #doc-out-name $POSTAGE
-	 * #doc-out-desc the order postage
-	 * 
-	 * #doc-out-name $POSTAGE_TAX
-	 * #doc-out-desc the order postage tax
-	 * 
-	 * #doc-out-name $POSTAGE_TAX_RULE_TITLE
-	 * #doc-out-desc the tax rule used to get the postage tax amount
-	 * 
-	 * #doc-out-name $POSTAGE_UNTAXED
-	 * #doc-out-desc the order postage amount without tax
-	 * 
-	 * #doc-out-name $PREVIOUS
-	 * #doc-out-desc The ID of order before this one, following orders id, or null if none exists.
-	 * 
-	 * #doc-out-name $REF
-	 * #doc-out-desc the order reference
-	 * 
-	 * #doc-out-name $STATUS
-	 * #doc-out-desc the order status ; you can use it in a order status loop
-	 * 
-	 * #doc-out-name $STATUS_CODE
-	 * #doc-out-desc the order status code
-	 * 
-	 * #doc-out-name $TOTAL_AMOUNT
-	 * #doc-out-desc the order amount without taxes
-	 * 
-	 * #doc-out-name $TOTAL_ITEMS_AMOUNT
-	 * #doc-out-desc the total amount for ordered items, excluding taxes
-	 * 
-	 * #doc-out-name $TOTAL_ITEMS_TAX
-	 * #doc-out-desc the total tax amount for of the ordered items only, without postage tax
-	 * 
-	 * #doc-out-name $TOTAL_TAX
-	 * #doc-out-desc the order taxes amount
-	 * 
-	 * #doc-out-name $TOTAL_TAXED_AMOUNT
-	 * #doc-out-desc the order amount including taxes
-	 * 
-	 * #doc-out-name $TOTAL_TAXED_ITEMS_AMOUNT
-	 * #doc-out-desc the total amount for ordered items, including taxes
-	 * 
-	 * #doc-out-name $TRANSACTION_REF
-	 * #doc-out-desc the order transaction reference. It's usually the unique identifier shared between the e-shop and it's bank
-	 * 
-	 * #doc-out-name $VIRTUAL
-	 * #doc-out-desc the order has at least one product which is a virtual product
-	 * 
-	 * #doc-out-name $WEIGHT
-	 * #doc-out-desc The total weight of the order
-	 * 
-	 * #doc-out-name $INVOICE_DATE
-	 * #doc-out-desc the order invoice date
-	 * 
-	 * #doc-out-name $DISCOUNT_WITHOUT_TAX
-	 * #doc-out-desc the order discount without tax
-	 * 
-	 * #doc-out-name $DISCOUNT_TAX
-	 * #doc-out-desc the tax amount applied to the order discount
      */
     public function parseResults(LoopResult $loopResult)
     {
@@ -511,42 +349,79 @@ class Order extends BaseLoop implements SearchLoopInterface, PropelSearchLoopInt
 
             $loopResultRow = new LoopResultRow($order);
             $loopResultRow
+		        // #doc-out-desc the order id
                 ->set('ID', $order->getId())
+		        // #doc-out-desc the order reference
                 ->set('REF', $order->getRef())
+		        // #doc-out-desc the order customer id ; you can use it in a customer loop
                 ->set('CUSTOMER', $order->getCustomerId())
+		        // #doc-out-desc the order delivery address id ; you can use it in a order address loop
                 ->set('DELIVERY_ADDRESS', $order->getDeliveryOrderAddressId())
+		        // #doc-out-desc the order the order invoice address id ; you can use it in a order address loop
                 ->set('INVOICE_ADDRESS', $order->getInvoiceOrderAddressId())
+		        // #doc-out-desc the order invoice date
                 ->set('INVOICE_DATE', $order->getInvoiceDate())
+		        // #doc-out-desc the order currency id ; you can use it in a currency loop
                 ->set('CURRENCY', $order->getCurrencyId())
+		        // #doc-out-desc the order currency rate
                 ->set('CURRENCY_RATE', $order->getCurrencyRate())
+		        // #doc-out-desc the order transaction reference. It's usually the unique identifier shared between the e-shop and it's bank
                 ->set('TRANSACTION_REF', $order->getTransactionRef())
+		        // #doc-out-desc the order delivery reference. It's usually use for tracking package
                 ->set('DELIVERY_REF', $order->getDeliveryRef())
+		        // #doc-out-desc the order invoice reference
                 ->set('INVOICE_REF', $order->getInvoiceRef())
+		        // #doc-out-desc the order has at least one product which is a virtual product
                 ->set('VIRTUAL', $hasVirtualDownload)
+		        // #doc-out-desc the order postage
                 ->set('POSTAGE', $order->getPostage())
+		        // #doc-out-desc the order postage tax
                 ->set('POSTAGE_TAX', $order->getPostageTax())
+		        // #doc-out-desc the order postage amount without tax
                 ->set('POSTAGE_UNTAXED', $order->getUntaxedPostage())
+		        // #doc-out-desc the tax rule used to get the postage tax amount
                 ->set('POSTAGE_TAX_RULE_TITLE', $order->getPostageTaxRuleTitle())
+		        // #doc-out-desc the order payment module id ; you can use it in a module loop
                 ->set('PAYMENT_MODULE', $order->getPaymentModuleId())
+		        // #doc-out-desc the order delivery module id ; you can use it in a module loop
                 ->set('DELIVERY_MODULE', $order->getDeliveryModuleId())
+		        // #doc-out-desc the order status ; you can use it in a order status loop
                 ->set('STATUS', $order->getStatusId())
+		        // #doc-out-desc the order status code
                 ->set('STATUS_CODE', $order->getOrderStatus()->getCode())
+		        // #doc-out-desc the order language id
                 ->set('LANG', $order->getLangId())
+		        // #doc-out-desc the order discount
                 ->set('DISCOUNT', $order->getDiscount())
+		        // #doc-out-desc the order discount without tax
                 ->set('DISCOUNT_WITHOUT_TAX', $discountWithoutTax)
+		        // #doc-out-desc the tax amount applied to the order discount
                 ->set('DISCOUNT_TAX', $order->getDiscount() - $discountWithoutTax)
+		        // #doc-out-desc the total tax amount for of the ordered items only, without postage tax
                 ->set('TOTAL_ITEMS_TAX', $itemsTax)
+		        // #doc-out-desc the total amount for ordered items, excluding taxes
                 ->set('TOTAL_ITEMS_AMOUNT', $itemsAmount - $itemsTax)
+		        // #doc-out-desc the total amount for ordered items, including taxes
                 ->set('TOTAL_TAXED_ITEMS_AMOUNT', $itemsAmount)
+		        // #doc-out-desc the order taxes amount
                 ->set('TOTAL_TAX', $tax)
+		        // #doc-out-desc the order amount without taxes
                 ->set('TOTAL_AMOUNT', $amount - $tax)
+		        // #doc-out-desc the order amount including taxes
                 ->set('TOTAL_TAXED_AMOUNT', $amount)
+		        // #doc-out-desc The total weight of the order
                 ->set('WEIGHT', $order->getWeight())
+		        // #doc-out-desc True is the order has the 'paid' status, false otherwise
                 ->set('HAS_PAID_STATUS', $order->isPaid())
+		        // #doc-out-desc True is the order has been paid (whatever current status is), false otherwise
                 ->set('IS_PAID', $order->isPaid(false))
+		        // #doc-out-desc True is the order has the 'canceled' status, false otherwise
                 ->set('IS_CANCELED', $order->isCancelled())
+		        // #doc-out-desc True is the order has the 'not paid' status, false otherwise
                 ->set('IS_NOT_PAID', $order->isNotPaid())
+		        // #doc-out-desc True is the order has the 'sent' status, false otherwise
                 ->set('IS_SENT', $order->isSent())
+		        // #doc-out-desc True is the order has the 'processing' status, false otherwise
                 ->set('IS_PROCESSING', $order->isProcessing());
 
             if ($this->getWithPrevNextInfo()) {
@@ -568,9 +443,13 @@ class Order extends BaseLoop implements SearchLoopInterface, PropelSearchLoopInt
                     ->findOne();
 
                 $loopResultRow
+		            // #doc-out-desc true if a order exists before this one following orders id.
                     ->set('HAS_PREVIOUS', $previous !== null ? 1 : 0)
+		            // #doc-out-desc true if a order exists after this one, following orders id.
                     ->set('HAS_NEXT', $next !== null ? 1 : 0)
+		            // #doc-out-desc The ID of order before this one, following orders id, or null if none exists.
                     ->set('PREVIOUS', $previous !== null ? $previous->getId() : -1)
+		            // #doc-out-desc The ID of order after this one, following orders id, or null if none exists.
                     ->set('NEXT', $next !== null ? $next->getId() : -1);
             }
 

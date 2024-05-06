@@ -37,24 +37,15 @@ class FolderPath extends BaseI18nLoop implements ArraySearchLoopInterface
 {
     /**
      * @return \Thelia\Core\Template\Loop\Argument\ArgumentCollection
-	 * 
-	 * #doc-arg-name depth
-	 * #doc-arg-desc The max depth
-	 * #doc-arg-example example : depth="5"
-	 * 
-	 * #doc-arg-name folder *
-	 * #doc-arg-desc A single folder id.
-	 * #doc-arg-example folder="2"
-	 * 
-	 * #doc-arg-name visible
-	 * #doc-arg-desc Whatever we consider hidden folder or not.
-	 * #doc-arg-example visible="false"
      */
     protected function getArgDefinitions()
     {
         return new ArgumentCollection(
+            // #doc-arg-desc A single folder id.
             Argument::createIntTypeArgument('folder', null, true),
+		    // #doc-arg-desc The max depth
             Argument::createIntTypeArgument('depth', \PHP_INT_MAX),
+		    // #doc-arg-desc Whatever we consider hidden folder or not.
             Argument::createBooleanOrBothTypeArgument('visible', true, false)
         );
     }
@@ -113,20 +104,6 @@ class FolderPath extends BaseI18nLoop implements ArraySearchLoopInterface
         return array_reverse($results);
     }
 
-	 /**
-	 * 
-	 * #doc-out-name $ID
-	 * #doc-out-desc the folder id
-	 * 
-	 * #doc-out-name $LOCALE
-	 * #doc-out-desc the locale
-	 * 
-	 * #doc-out-name $TITLE
-	 * #doc-out-desc the folder title
-	 * 
-	 * #doc-out-name $URL
-	 * #doc-out-desc the folder URL
-	 */
     public function parseResults(LoopResult $loopResult)
     {
         foreach ($loopResult->getResultDataCollection() as $result) {

@@ -42,24 +42,15 @@ class OrderStatus extends BaseI18nLoop implements PropelSearchLoopInterface
 
     /**
      * @return ArgumentCollection
-	 * 
-	 * #doc-arg-name code
-	 * #doc-arg-desc Status code
-	 * #doc-arg-example code="a_code"
-	 * 
-	 * #doc-arg-name id
-	 * #doc-arg-desc A single or a list of order status ids
-	 * #doc-arg-example id="2", id="1,4,7"
-	 * 
-	 * #doc-arg-name order
-	 * #doc-arg-desc A list of values see Expected values
-	 * #doc-arg-example order="random"
      */
     protected function getArgDefinitions()
     {
         return new ArgumentCollection(
+		    // #doc-arg-desc A single or a list of order status ids
             Argument::createIntListTypeArgument('id'),
+		    // #doc-arg-desc Status code
             Argument::createAnyTypeArgument('code'),
+            // #doc-arg-desc A list of values see Expected values
             Argument::createEnumListTypeArgument(
                 'order',
                 [
@@ -110,56 +101,32 @@ class OrderStatus extends BaseI18nLoop implements PropelSearchLoopInterface
         return $search;
     }
 
-	 /**
-	 * 
-	 * #doc-out-name $CHAPO
-	 * #doc-out-desc the order status short description
-	 * 
-	 * #doc-out-name $CODE
-	 * #doc-out-desc the order status code
-	 * 
-	 * #doc-out-name $COLOR
-	 * #doc-out-desc the order status hexadecimal color code
-	 * 
-	 * #doc-out-name $DESCRIPTION
-	 * #doc-out-desc the order status description
-	 * 
-	 * #doc-out-name $ID
-	 * #doc-out-desc the order status id
-	 * 
-	 * #doc-out-name $IS_TRANSLATED
-	 * #doc-out-desc whatever the order status is translated or not
-	 * 
-	 * #doc-out-name $LOCALE
-	 * #doc-out-desc the order status locale
-	 * 
-	 * #doc-out-name $POSITION
-	 * #doc-out-desc the order status position
-	 * 
-	 * #doc-out-name $POSTSCRIPTUM
-	 * #doc-out-desc the order status postscriptum
-	 * 
-	 * #doc-out-name $PROTECTED_STATUS
-	 * #doc-out-desc 1 if the order status is protected
-	 * 
-	 * #doc-out-name $TITLE
-	 * #doc-out-desc the order status title
-	 */
     public function parseResults(LoopResult $loopResult)
     {
         /** @var OrderStatusModel $orderStatus */
         foreach ($loopResult->getResultDataCollection() as $orderStatus) {
             $loopResultRow = new LoopResultRow($orderStatus);
+		    // #doc-out-desc the order status id
             $loopResultRow->set('ID', $orderStatus->getId())
+		        // #doc-out-desc whatever the order status is translated or not
                 ->set('IS_TRANSLATED', $orderStatus->getVirtualColumn('IS_TRANSLATED'))
+		        // #doc-out-desc the order status locale
                 ->set('LOCALE', $this->locale)
+		        // #doc-out-desc the order status code
                 ->set('CODE', $orderStatus->getCode())
+		        // #doc-out-desc the order status hexadecimal color code
                 ->set('COLOR', $orderStatus->getColor())
+		        // #doc-out-desc the order status position
                 ->set('POSITION', $orderStatus->getPosition())
+		        // #doc-out-desc 1 if the order status is protected
                 ->set('PROTECTED_STATUS', $orderStatus->getProtectedStatus())
+		        // #doc-out-desc the order status title
                 ->set('TITLE', $orderStatus->getVirtualColumn('i18n_TITLE'))
+		        // #doc-out-desc the order status short description
                 ->set('CHAPO', $orderStatus->getVirtualColumn('i18n_CHAPO'))
+		        // #doc-out-desc the order status description
                 ->set('DESCRIPTION', $orderStatus->getVirtualColumn('i18n_DESCRIPTION'))
+		        // #doc-out-desc the order status postscriptum
                 ->set('POSTSCRIPTUM', $orderStatus->getVirtualColumn('i18n_POSTSCRIPTUM'))
             ;
             $this->addOutputFields($loopResultRow, $orderStatus);

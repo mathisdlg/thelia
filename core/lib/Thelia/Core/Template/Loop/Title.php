@@ -39,14 +39,11 @@ class Title extends BaseI18nLoop implements PropelSearchLoopInterface
 
     /**
      * @return ArgumentCollection
-	 * 
-	 * #doc-arg-name id
-	 * #doc-arg-desc A single or a list of title ids.
-	 * #doc-arg-example id="2", id="1,4,7"
      */
     protected function getArgDefinitions()
     {
         return new ArgumentCollection(
+		    // #doc-arg-desc A single or a list of title ids.
             Argument::createIntListTypeArgument('id')
         );
     }
@@ -69,40 +66,24 @@ class Title extends BaseI18nLoop implements PropelSearchLoopInterface
         return $search;
     }
 
-	 /**
-	 * 
-	 * #doc-out-name $DEFAULT
-	 * #doc-out-desc return if the title is by default title
-	 * 
-	 * #doc-out-name $ID
-	 * #doc-out-desc the title id
-	 * 
-	 * #doc-out-name $IS_TRANSLATED
-	 * #doc-out-desc check if the content is translated
-	 * 
-	 * #doc-out-name $LOCALE
-	 * #doc-out-desc the locale (e.g. fr_FR) of the returned data
-	 * 
-	 * #doc-out-name $LONG
-	 * #doc-out-desc the full title
-	 * 
-	 * #doc-out-name $POSITION
-	 * #doc-out-desc the title position
-	 * 
-	 * #doc-out-name $SHORT
-	 * #doc-out-desc the short title
-	 */
     public function parseResults(LoopResult $loopResult)
     {
         /** @var CustomerTitleModel $title */
         foreach ($loopResult->getResultDataCollection() as $title) {
             $loopResultRow = new LoopResultRow($title);
+		    // #doc-out-desc the title id
             $loopResultRow->set('ID', $title->getId())
+		        // #doc-out-desc check if the content is translated
                 ->set('IS_TRANSLATED', $title->getVirtualColumn('IS_TRANSLATED'))
+		        // #doc-out-desc the locale (e.g. fr_FR) of the returned data
                 ->set('LOCALE', $this->locale)
+		        // #doc-out-desc return if the title is by default title
                 ->set('DEFAULT', $title->getByDefault())
+		        // #doc-out-desc the short title
                 ->set('SHORT', $title->getVirtualColumn('i18n_SHORT'))
+		        // #doc-out-desc the full title
                 ->set('LONG', $title->getVirtualColumn('i18n_LONG'))
+		        // #doc-out-desc the title position
                 ->set('POSITION', $title->getPosition());
             $this->addOutputFields($loopResultRow, $title);
 

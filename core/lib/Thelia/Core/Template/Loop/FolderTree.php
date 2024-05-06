@@ -42,29 +42,17 @@ class FolderTree extends BaseI18nLoop implements ArraySearchLoopInterface
 {
     /**
      * @return ArgumentCollection
-	 * 
-	 * #doc-arg-name depth
-	 * #doc-arg-desc The max depth
-	 * #doc-arg-example example : depth="5"
-	 * 
-	 * #doc-arg-name exclude
-	 * #doc-arg-desc A single or a list of folder ids to exclude for result.
-	 * #doc-arg-example exclude="5,72"
-	 * 
-	 * #doc-arg-name folder *
-	 * #doc-arg-desc A single folder id.
-	 * #doc-arg-example folder="2"
-	 * 
-	 * #doc-arg-name visible
-	 * #doc-arg-desc Whatever we consider hidden folder or not.
-	 * #doc-arg-example visible="false"
      */
     protected function getArgDefinitions()
     {
         return new ArgumentCollection(
+            // #doc-arg-desc A single folder id.
             Argument::createIntTypeArgument('folder', null, true),
+		    // #doc-arg-desc The max depth
             Argument::createIntTypeArgument('depth', \PHP_INT_MAX),
+		    // #doc-arg-desc Whatever we consider hidden folder or not.
             Argument::createBooleanOrBothTypeArgument('visible', true, false),
+		    // #doc-arg-desc A single or a list of folder ids to exclude for result.
             Argument::createIntListTypeArgument('exclude', [])
         );
     }
@@ -111,29 +99,6 @@ class FolderTree extends BaseI18nLoop implements ArraySearchLoopInterface
         }
     }
 
-	 /**
-	 * 
-	 * #doc-out-name $CHILD_COUNT
-	 * #doc-out-desc the number of child folders
-	 * 
-	 * #doc-out-name $ID
-	 * #doc-out-desc the folder id
-	 * 
-	 * #doc-out-name $LEVEL
-	 * #doc-out-desc the folder level
-	 * 
-	 * #doc-out-name $PARENT
-	 * #doc-out-desc the parent folder
-	 * 
-	 * #doc-out-name $TITLE
-	 * #doc-out-desc the folder title
-	 * 
-	 * #doc-out-name $URL
-	 * #doc-out-desc the folder URL
-	 * 
-	 * #doc-out-name $VISIBLE
-	 * #doc-out-desc whatever the folder is visible or not
-	 */
     public function parseResults(LoopResult $loopResult)
     {
         foreach ($loopResult->getResultDataCollection() as $result) {

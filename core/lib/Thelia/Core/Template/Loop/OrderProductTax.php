@@ -39,14 +39,11 @@ class OrderProductTax extends BaseLoop implements PropelSearchLoopInterface
 
     /**
      * @return ArgumentCollection
-	 * 
-	 * #doc-arg-name order_product *
-	 * #doc-arg-desc A single order product id.
-	 * #doc-arg-example order_product="2"
      */
     protected function getArgDefinitions()
     {
         return new ArgumentCollection(
+            // #doc-arg-desc A single order product id.
             Argument::createIntTypeArgument('order_product', null, true)
         );
     }
@@ -62,32 +59,20 @@ class OrderProductTax extends BaseLoop implements PropelSearchLoopInterface
         return $search;
     }
 
-	 /**
-	 * 
-	 * #doc-out-name $AMOUNT
-	 * #doc-out-desc Tax amount
-	 * 
-	 * #doc-out-name $DESCRIPTION
-	 * #doc-out-desc Tax description
-	 * 
-	 * #doc-out-name $ID
-	 * #doc-out-desc Tax id
-	 * 
-	 * #doc-out-name $PROMO_AMOUNT
-	 * #doc-out-desc Tax amount of the promo price
-	 * 
-	 * #doc-out-name $TITLE
-	 * #doc-out-desc Tax title
-	 */
     public function parseResults(LoopResult $loopResult)
     {
         /** @var OrderProductTaxModel $orderProductTax */
         foreach ($loopResult->getResultDataCollection() as $orderProductTax) {
             $loopResultRow = new LoopResultRow($orderProductTax);
+		    // #doc-out-desc Tax id
             $loopResultRow->set('ID', $orderProductTax->getId())
+		        // #doc-out-desc Tax title
                 ->set('TITLE', $orderProductTax->getTitle())
+		        // #doc-out-desc Tax description
                 ->set('DESCRIPTION', $orderProductTax->getDescription())
+		        // #doc-out-desc Tax amount
                 ->set('AMOUNT', $orderProductTax->getAmount())
+		        // #doc-out-desc Tax amount of the promo price
                 ->set('PROMO_AMOUNT', $orderProductTax->getPromoAmount())
             ;
             $this->addOutputFields($loopResultRow, $orderProductTax);

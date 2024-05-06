@@ -28,12 +28,6 @@ use Thelia\Module\BaseModule;
  */
 class Payment extends BaseSpecificModule implements PropelSearchLoopInterface
 {
-	 /**
-	 * 
-	 * #doc-arg-name all base specific module arguments
-	 * #doc-arg-desc 
-	 * #doc-arg-example 
-	 */
     public function getArgDefinitions()
     {
         $collection = parent::getArgDefinitions();
@@ -41,26 +35,6 @@ class Payment extends BaseSpecificModule implements PropelSearchLoopInterface
         return $collection;
     }
 
-	 /**
-	 * 
-	 * #doc-out-name $CHAPO
-	 * #doc-out-desc the payment module short description
-	 * 
-	 * #doc-out-name $CODE
-	 * #doc-out-desc the module code
-	 * 
-	 * #doc-out-name $DESCRIPTION
-	 * #doc-out-desc the payment module description
-	 * 
-	 * #doc-out-name $ID
-	 * #doc-out-desc the payment module id
-	 * 
-	 * #doc-out-name $POSTSCRIPTUM
-	 * #doc-out-desc the payment module postscriptum
-	 * 
-	 * #doc-out-name $TITLE
-	 * #doc-out-desc the payment module title
-	 */
     public function parseResults(LoopResult $loopResult)
     {
         $cart = $this->getCurrentRequest()->getSession()->getSessionCart($this->dispatcher);
@@ -82,11 +56,17 @@ class Payment extends BaseSpecificModule implements PropelSearchLoopInterface
             }
 
             $loopResultRow
+		        // #doc-out-desc the payment module id
                 ->set('ID', $paymentModule->getId())
+		        // #doc-out-desc the module code
                 ->set('CODE', $paymentModule->getCode())
+		        // #doc-out-desc the payment module title
                 ->set('TITLE', $paymentModule->getVirtualColumn('i18n_TITLE'))
+		        // #doc-out-desc the payment module short description
                 ->set('CHAPO', $paymentModule->getVirtualColumn('i18n_CHAPO'))
+		        // #doc-out-desc the payment module description
                 ->set('DESCRIPTION', $paymentModule->getVirtualColumn('i18n_DESCRIPTION'))
+		        // #doc-out-desc the payment module postscriptum
                 ->set('POSTSCRIPTUM', $paymentModule->getVirtualColumn('i18n_POSTSCRIPTUM'))
             ;
             $this->addOutputFields($loopResultRow, $paymentModule);

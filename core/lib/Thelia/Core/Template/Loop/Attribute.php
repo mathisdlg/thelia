@@ -33,7 +33,7 @@ use Thelia\Type\TypeCollection;
  * Attribute loop.
  *
  * Class Attribute
- * 
+ *
  * #doc-desc Attribute loop lists attributes.
  *
  * @author Etienne Roudeix <eroudeix@openstudio.fr>
@@ -53,39 +53,21 @@ class Attribute extends BaseI18nLoop implements PropelSearchLoopInterface
 
     /**
      * @return ArgumentCollection
-	 * 
-	 * #doc-arg-name exclude
-	 * #doc-arg-desc A single or a list of attribute ids to exclude.
-	 * #doc-arg-example exclude="456,123"
-	 * 
-	 * #doc-arg-name exclude_template
-	 * #doc-arg-desc A single or a list of template ids. Only features NOT attached to these templates will be returned.
-	 * #doc-arg-example id="2", id="1,4,7"
-	 * 
-	 * #doc-arg-name id
-	 * #doc-arg-desc A single or a list of attribute ids.
-	 * #doc-arg-example id="2", id="1,4,7"
-	 * 
-	 * #doc-arg-name order
-	 * #doc-arg-desc A list of values <br/> Expected values
-	 * #doc-arg-example order="alpha_reverse"
-	 * 
-	 * #doc-arg-name product
-	 * #doc-arg-desc A single or a list of product ids.
-	 * #doc-arg-example id="2", id="1,4,7"
-	 * 
-	 * #doc-arg-name template
-	 * #doc-arg-desc A single or a list of template ids. Only features attached to these templates will be returned.
-	 * #doc-arg-example id="2", id="1,4,7"
      */
     protected function getArgDefinitions()
     {
         return new ArgumentCollection(
+		    // #doc-arg-desc A single or a list of attribute ids.
             Argument::createIntListTypeArgument('id'),
+		    // #doc-arg-desc A single or a list of product ids.
             Argument::createIntListTypeArgument('product'),
+		    // #doc-arg-desc A single or a list of template ids. Only features attached to these templates will be returned.
             Argument::createIntListTypeArgument('template'),
+		    // #doc-arg-desc A single or a list of template ids. Only features NOT attached to these templates will be returned.
             Argument::createIntListTypeArgument('exclude_template'),
+		    // #doc-arg-desc A single or a list of attribute ids to exclude.
             Argument::createIntListTypeArgument('exclude'),
+            // #doc-arg-desc A list of values
             new Argument(
                 'order',
                 new TypeCollection(
@@ -207,44 +189,26 @@ class Attribute extends BaseI18nLoop implements PropelSearchLoopInterface
         return $search;
     }
 
-	 /**
-	 * 
-	 * #doc-out-name $CHAPO
-	 * #doc-out-desc the attribute chapo
-	 * 
-	 * #doc-out-name $DESCRIPTION
-	 * #doc-out-desc the attribute description
-	 * 
-	 * #doc-out-name $ID
-	 * #doc-out-desc the attribute id
-	 * 
-	 * #doc-out-name $IS_TRANSLATED
-	 * #doc-out-desc check if the product is translated or not
-	 * 
-	 * #doc-out-name $LOCALE
-	 * #doc-out-desc the locale used for this loop
-	 * 
-	 * #doc-out-name $POSITION
-	 * #doc-out-desc If none of the product, template or exclude_template parameter is present, $POSITION contains the attribute position. Otherwise, it contains the attribute position in the product template context.
-	 * 
-	 * #doc-out-name $POSTSCRIPTUM
-	 * #doc-out-desc the attribute postscriptum
-	 * 
-	 * #doc-out-name $TITLE
-	 * #doc-out-desc the attribute title
-	 */
     public function parseResults(LoopResult $loopResult)
     {
         /** @var AttributeModel $attribute */
         foreach ($loopResult->getResultDataCollection() as $attribute) {
             $loopResultRow = new LoopResultRow($attribute);
+            // #doc-out-desc the attribute id
             $loopResultRow->set('ID', $attribute->getId())
+                // #doc-out-desc check if the product is translated or not
                 ->set('IS_TRANSLATED', $attribute->getVirtualColumn('IS_TRANSLATED'))
+                // #doc-out-desc the locale used for this loop
                 ->set('LOCALE', $this->locale)
+                // #doc-out-desc the attribute title
                 ->set('TITLE', $attribute->getVirtualColumn('i18n_TITLE'))
+                // #doc-out-desc the attribute chapo
                 ->set('CHAPO', $attribute->getVirtualColumn('i18n_CHAPO'))
+                // #doc-out-desc the attribute description
                 ->set('DESCRIPTION', $attribute->getVirtualColumn('i18n_DESCRIPTION'))
+                // #doc-out-desc the attribute postscriptum
                 ->set('POSTSCRIPTUM', $attribute->getVirtualColumn('i18n_POSTSCRIPTUM'))
+                // #doc-out-desc If none of the product, template or exclude_template parameter is present, $POSITION contains the attribute position. Otherwise, it contains the attribute position in the product template context.
                 ->set('POSITION', $this->useAttributePosistion ? $attribute->getPosition() : $attribute->getVirtualColumn('position'))
             ;
             $this->addOutputFields($loopResultRow, $attribute);

@@ -53,48 +53,23 @@ class Brand extends BaseI18nLoop implements PropelSearchLoopInterface, SearchLoo
 
     /**
      * @return ArgumentCollection
-	 * 
-	 * #doc-arg-name current
-	 * #doc-arg-desc A boolean value which allows either to exclude current brand from results, or match only this brand
-	 * #doc-arg-example current="yes"
-	 * 
-	 * #doc-arg-name exclude
-	 * #doc-arg-desc A list of brand IDs to exclude from selection when running the loop
-	 * #doc-arg-example 
-	 * 
-	 * #doc-arg-name id
-	 * #doc-arg-desc A single or a list of brand ids.
-	 * #doc-arg-example id="2", id="1,4,7"
-	 * 
-	 * #doc-arg-name order
-	 * #doc-arg-desc A list of values <br/> Expected values
-	 * #doc-arg-example order="random"
-	 * 
-	 * #doc-arg-name product
-	 * #doc-arg-desc A single product id.
-	 * #doc-arg-example product="2"
-	 * 
-	 * #doc-arg-name title
-	 * #doc-arg-desc A title string
-	 * #doc-arg-example title="foo"
-	 * 
-	 * #doc-arg-name visible
-	 * #doc-arg-desc A boolean value.
-	 * #doc-arg-example visible="no"
-	 * 
-	 * #doc-arg-name with_prev_next_info
-	 * #doc-arg-desc A boolean. If set to true, $PREVIOUS and $NEXT output arguments are available.
-	 * #doc-arg-example with_prev_next_info="yes"
      */
     protected function getArgDefinitions()
     {
         return new ArgumentCollection(
+		    // #doc-arg-desc A single or a list of brand ids.
             Argument::createIntListTypeArgument('id'),
+		    // #doc-arg-desc A single product id.
             Argument::createIntTypeArgument('product'),
+		    // #doc-arg-desc A boolean value.
             Argument::createBooleanOrBothTypeArgument('visible', 1),
+		    // #doc-arg-desc A title string
             Argument::createAnyTypeArgument('title'),
+		    // #doc-arg-desc A boolean value which allows either to exclude current brand from results, or match only this brand
             Argument::createBooleanTypeArgument('current'),
+		    // #doc-arg-desc A boolean. If set to true, $PREVIOUS and $NEXT output arguments are available.
             Argument::createBooleanTypeArgument('with_prev_next_info', false),
+            // A list of values
             new Argument(
                 'order',
                 new TypeCollection(
@@ -118,6 +93,7 @@ class Brand extends BaseI18nLoop implements PropelSearchLoopInterface, SearchLoo
                 ),
                 'alpha'
             ),
+		    // #doc-arg-desc A list of brand IDs to exclude from selection when running the loop
             Argument::createIntListTypeArgument('exclude')
         );
     }
@@ -249,81 +225,40 @@ class Brand extends BaseI18nLoop implements PropelSearchLoopInterface, SearchLoo
         return $search;
     }
 
-	 /**
-	 * 
-	 * #doc-out-name $CHAPO
-	 * #doc-out-desc the brand chapo
-	 * 
-	 * #doc-out-name $DESCRIPTION
-	 * #doc-out-desc the brand description
-	 * 
-	 * #doc-out-name $HAS_NEXT
-	 * #doc-out-desc true if a brand exists after this one, following brands positions.
-	 * 
-	 * #doc-out-name $HAS_PREVIOUS
-	 * #doc-out-desc true if a brand exists before this one following brands positions
-	 * 
-	 * #doc-out-name $ID
-	 * #doc-out-desc the brand id
-	 * 
-	 * #doc-out-name $IS_TRANSLATED
-	 * #doc-out-desc check if the brand is translated
-	 * 
-	 * #doc-out-name $LOCALE
-	 * #doc-out-desc The locale used for this research
-	 * 
-	 * #doc-out-name $LOGO_IMAGE_ID
-	 * #doc-out-desc ID of the brand logo image, among the brand images
-	 * 
-	 * #doc-out-name $META_DESCRIPTION
-	 * #doc-out-desc the brand meta description
-	 * 
-	 * #doc-out-name $META_KEYWORDS
-	 * #doc-out-desc the brand meta keywords
-	 * 
-	 * #doc-out-name $META_TITLE
-	 * #doc-out-desc the brand meta title
-	 * 
-	 * #doc-out-name $NEXT
-	 * #doc-out-desc The ID of brand after this one, following brands positions, or null if none exists
-	 * 
-	 * #doc-out-name $POSITION
-	 * #doc-out-desc the brand position
-	 * 
-	 * #doc-out-name $POSTSCRIPTUM
-	 * #doc-out-desc the brand postscriptum
-	 * 
-	 * #doc-out-name $PREVIOUS
-	 * #doc-out-desc The ID of brand before this one, following brands positions, or null if none exists.
-	 * 
-	 * #doc-out-name $TITLE
-	 * #doc-out-desc the brand title
-	 * 
-	 * #doc-out-name $URL
-	 * #doc-out-desc the brand URL
-	 * 
-	 * #doc-out-name $VISIBLE
-	 * #doc-out-desc true if the product is visible or not, false otherwise
-	 */
+
     public function parseResults(LoopResult $loopResult)
     {
         /** @var \Thelia\Model\Brand $brand */
         foreach ($loopResult->getResultDataCollection() as $brand) {
             $loopResultRow = new LoopResultRow($brand);
 
+		    // #doc-out-desc the brand id
             $loopResultRow->set('ID', $brand->getId())
+		        // #doc-out-desc check if the brand is translated
                 ->set('IS_TRANSLATED', $brand->getVirtualColumn('IS_TRANSLATED'))
+		        // #doc-out-desc The locale used for this research
                 ->set('LOCALE', $this->locale)
+		        // #doc-out-desc the brand title
                 ->set('TITLE', $brand->getVirtualColumn('i18n_TITLE'))
+		        // #doc-out-desc the brand chapo
                 ->set('CHAPO', $brand->getVirtualColumn('i18n_CHAPO'))
+		        // #doc-out-desc the brand description
                 ->set('DESCRIPTION', $brand->getVirtualColumn('i18n_DESCRIPTION'))
+		        // #doc-out-desc the brand postscriptum
                 ->set('POSTSCRIPTUM', $brand->getVirtualColumn('i18n_POSTSCRIPTUM'))
+		        // #doc-out-desc the brand URL
                 ->set('URL', $this->getReturnUrl() ? $brand->getUrl($this->locale) : null)
+		        // #doc-out-desc the brand meta title
                 ->set('META_TITLE', $brand->getVirtualColumn('i18n_META_TITLE'))
+		        // #doc-out-desc the brand meta description
                 ->set('META_DESCRIPTION', $brand->getVirtualColumn('i18n_META_DESCRIPTION'))
+		        // #doc-out-desc the brand meta keywords
                 ->set('META_KEYWORDS', $brand->getVirtualColumn('i18n_META_KEYWORDS'))
+		        // #doc-out-desc the brand position
                 ->set('POSITION', $brand->getPosition())
+		        // #doc-out-desc true if the product is visible or not, false otherwise
                 ->set('VISIBLE', $brand->getVisible())
+		        // #doc-out-desc ID of the brand logo image, among the brand images
                 ->set('LOGO_IMAGE_ID', $brand->getLogoImageId() ?: 0);
 
             $isBackendContext = $this->getBackendContext();
@@ -353,9 +288,13 @@ class Brand extends BaseI18nLoop implements PropelSearchLoopInterface, SearchLoo
                     ->findOne();
 
                 $loopResultRow
+		            // #doc-out-desc true if a brand exists before this one following brands positions
                     ->set('HAS_PREVIOUS', $previous != null ? 1 : 0)
+		            // #doc-out-desc true if a brand exists after this one, following brands positions.
                     ->set('HAS_NEXT', $next != null ? 1 : 0)
+		            // #doc-out-desc The ID of brand before this one, following brands positions, or null if none exists.
                     ->set('PREVIOUS', $previous != null ? $previous->getId() : -1)
+		            // #doc-out-desc The ID of brand after this one, following brands positions, or null if none exists
                     ->set('NEXT', $next != null ? $next->getId() : -1);
             }
 

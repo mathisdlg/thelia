@@ -32,20 +32,12 @@ use Thelia\Type\TypeCollection;
  */
 class Serializer extends BaseLoop implements ArraySearchLoopInterface
 {
-	 /**
-	 * 
-	 * #doc-arg-name order
-	 * #doc-arg-desc A list of values see sorting possible values
-	 * #doc-arg-example order=" random"
-	 * 
-	 * #doc-arg-name serializer
-	 * #doc-arg-desc A serializer
-	 * #doc-arg-example serializer="example"
-	 */
     protected function getArgDefinitions()
     {
         return new ArgumentCollection(
+		    // #doc-arg-desc A serializer
             Argument::createAnyTypeArgument('serializer'),
+            // #doc-arg-desc A list of values see sorting possible values
             new Argument(
                 'order',
                 new TypeCollection(
@@ -80,20 +72,6 @@ class Serializer extends BaseLoop implements ArraySearchLoopInterface
         return $serializers;
     }
 
-	 /**
-	 * 
-	 * #doc-out-name $EXTENSION
-	 * #doc-out-desc the serializer extension
-	 * 
-	 * #doc-out-name $ID
-	 * #doc-out-desc the serializer id
-	 * 
-	 * #doc-out-name $MIME_TYPE
-	 * #doc-out-desc the serializer mime type
-	 * 
-	 * #doc-out-name $NAME
-	 * #doc-out-desc the serialiser name
-	 */
     public function parseResults(LoopResult $loopResult)
     {
         /** @var \Thelia\Core\Serializer\SerializerInterface $serializer */
@@ -101,9 +79,13 @@ class Serializer extends BaseLoop implements ArraySearchLoopInterface
             $loopResultRow = new LoopResultRow();
 
             $loopResultRow
+		        // #doc-out-desc the serializer id
                 ->set('ID', $serializer->getId())
+		        // #doc-out-desc the serialiser name
                 ->set('NAME', $serializer->getName())
+		        // #doc-out-desc the serializer extension
                 ->set('EXTENSION', $serializer->getExtension())
+		        // #doc-out-desc the serializer mime type
                 ->set('MIME_TYPE', $serializer->getMimeType());
 
             $this->addOutputFields($loopResultRow, $serializer);

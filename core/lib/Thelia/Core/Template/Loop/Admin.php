@@ -26,7 +26,7 @@ use Thelia\Model\AdminQuery;
  * Admin loop.
  *
  * Class Admin
- * 
+ *
  * #doc-desc Admin loop displays admins information.
  *
  * @author Etienne Roudeix <eroudeix@openstudio.fr>
@@ -40,19 +40,15 @@ class Admin extends BaseLoop implements PropelSearchLoopInterface
 
     /**
      * @return ArgumentCollection
-	 * 
-	 * #doc-arg-name id
-	 * #doc-arg-desc A single or a list of admin ids.
-	 * #doc-arg-example id="2", id="1,4,7"
-	 * 
-	 * #doc-arg-name profile
-	 * #doc-arg-desc A single or a list of profile ids.
-	 * #doc-arg-example profile="2", profile="1,4,7"
+     *
+     *
      */
     protected function getArgDefinitions()
     {
         return new ArgumentCollection(
+		// #doc-arg-desc A single or a list of admin ids.
             Argument::createIntListTypeArgument('id'),
+		// #doc-arg-desc A single or a list of profile ids.
             Argument::createIntListTypeArgument('profile')
         );
     }
@@ -78,40 +74,24 @@ class Admin extends BaseLoop implements PropelSearchLoopInterface
         return $search;
     }
 
-	 /**
-	 * 
-	 * #doc-out-name $EMAIL
-	 * #doc-out-desc the admin email
-	 * 
-	 * #doc-out-name $FIRSTNAME
-	 * #doc-out-desc the admin firstname
-	 * 
-	 * #doc-out-name $ID
-	 * #doc-out-desc the admin id
-	 * 
-	 * #doc-out-name $LASTNAME
-	 * #doc-out-desc the admin lastname
-	 * 
-	 * #doc-out-name $LOCALE
-	 * #doc-out-desc the admin locale
-	 * 
-	 * #doc-out-name $LOGIN
-	 * #doc-out-desc the admin login
-	 * 
-	 * #doc-out-name $PROFILE
-	 * #doc-out-desc the admin profile id
-	 */
     public function parseResults(LoopResult $loopResult)
     {
         /** @var AdminModel $admin */
         foreach ($loopResult->getResultDataCollection() as $admin) {
             $loopResultRow = new LoopResultRow($admin);
+            // #doc-out-desc the admin id
             $loopResultRow->set('ID', $admin->getId())
+                // #doc-out-desc the admin profile id
                 ->set('PROFILE', $admin->getProfileId())
+                // #doc-out-desc the admin firstname
                 ->set('FIRSTNAME', $admin->getFirstname())
+                // #doc-out-desc the admin lastname
                 ->set('LASTNAME', $admin->getLastname())
+                // #doc-out-desc the admin login
                 ->set('LOGIN', $admin->getLogin())
+                // #doc-out-desc the admin locale
                 ->set('LOCALE', $admin->getLocale())
+                // #doc-out-desc the admin email
                 ->set('EMAIL', $admin->getEmail())
             ;
             $this->addOutputFields($loopResultRow, $admin);

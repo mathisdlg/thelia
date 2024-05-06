@@ -37,34 +37,19 @@ class Generic extends BaseLoop implements PropelSearchLoopInterface
 {
     /**
      * @return ArgumentCollection
-	 * 
-	 * #doc-arg-name table_name*
-	 * #doc-arg-desc The table name you want query
-	 * #doc-arg-example 
-	 * 
-	 * #doc-arg-name filters
-	 * #doc-arg-desc A single or a list of filters to apply on columns in this format <code>column_name:value1,value2&#124;other_column:value</code>
-	 * #doc-arg-example filters="id:1,3&#124;visible:1"
-	 * 
-	 * #doc-arg-name order
-	 * #doc-arg-desc A single or a list of orders to apply on columns  in this format <code>column_name:DESC&#124;other_column:ASC</code>
-	 * #doc-arg-example order="id:DESC&#124;created_at:ASC"
-	 * 
-	 * #doc-arg-name locale
-	 * #doc-arg-desc The locale for translated columns
-	 * #doc-arg-example 
-	 * 
-	 * #doc-arg-name limit
-	 * #doc-arg-desc The number of rows to return
-	 * #doc-arg-example limit="10"
      */
     protected function getArgDefinitions()
     {
         return new ArgumentCollection(
+            // #doc-arg-desc The table name you want query
             Argument::createAlphaNumStringTypeArgument('table_name', null, true),
+		    // #doc-arg-desc A single or a list of filters to apply on columns in this format <code>column_name:value1,value2&#124;other_column:value</code>
             Argument::createAnyTypeArgument('filters'),
+            // #doc-arg-desc A single or a list of orders to apply on columns 
             Argument::createAnyTypeArgument('orders'),
+		    // #doc-arg-desc The locale for translated columns
             Argument::createAnyTypeArgument('locale'),
+		    // #doc-arg-desc The number of rows to return
             Argument::createIntTypeArgument('limit', 100)
         );
     }

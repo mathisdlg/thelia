@@ -31,20 +31,12 @@ use Thelia\Core\Template\Loop\Argument\ArgumentCollection;
  */
 class Feed extends BaseLoop implements ArraySearchLoopInterface
 {
-	 /**
-	 * 
-	 * #doc-arg-name timeout
-	 * #doc-arg-desc Delay in seconds after which the loop closes the connection with the remote server
-	 * #doc-arg-example timeout=10
-	 * 
-	 * #doc-arg-name url *
-	 * #doc-arg-desc An Atom or RSS feed URL.
-	 * #doc-arg-example `url='http://thelia.net/feeds/?lang=en'`
-	 */
     public function getArgDefinitions()
     {
         return new ArgumentCollection(
+            // #doc-arg-desc An Atom or RSS feed URL.
             Argument::createAnyTypeArgument('url', null, true),
+		    // #doc-arg-desc Delay in seconds after which the loop closes the connection with the remote server
             Argument::createIntTypeArgument('timeout', 10)
         );
     }
@@ -72,23 +64,7 @@ class Feed extends BaseLoop implements ArraySearchLoopInterface
         return $cacheItem->get();
     }
 
-	 /**
-	 * 
-	 * #doc-out-name $AUTHOR
-	 * #doc-out-desc The feed item author
-	 * 
-	 * #doc-out-name $DATE
-	 * #doc-out-desc the feed item date, as a Unix timestamp
-	 * 
-	 * #doc-out-name $DESCRIPTION
-	 * #doc-out-desc the feed item description
-	 * 
-	 * #doc-out-name $TITLE
-	 * #doc-out-desc The feed item title
-	 * 
-	 * #doc-out-name $URL
-	 * #doc-out-desc the feed item URL
-	 */
+
     public function parseResults(LoopResult $loopResult)
     {
         /** @var \SimplePie_Item $item */
@@ -96,10 +72,15 @@ class Feed extends BaseLoop implements ArraySearchLoopInterface
             $loopResultRow = new LoopResultRow();
 
             $loopResultRow
+		        // #doc-out-desc the feed item URL
                 ->set('URL', $item->get_permalink())
+		        // #doc-out-desc The feed item title
                 ->set('TITLE', $item->get_title())
+		        // #doc-out-desc The feed item author
                 ->set('AUTHOR', $item->get_author())
+		        // #doc-out-desc the feed item description
                 ->set('DESCRIPTION', $item->get_description())
+		        // #doc-out-desc the feed item date, as a Unix timestamp
                 ->set('DATE', $item->get_date('U'))
             ;
             $this->addOutputFields($loopResultRow, $item);

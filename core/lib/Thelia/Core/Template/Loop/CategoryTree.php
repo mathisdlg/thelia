@@ -46,39 +46,21 @@ class CategoryTree extends BaseI18nLoop implements ArraySearchLoopInterface
 {
     /**
      * @return ArgumentCollection
-	 * 
-	 * #doc-arg-name category *
-	 * #doc-arg-desc A single category id.
-	 * #doc-arg-example category="2"
-	 * 
-	 * #doc-arg-name depth
-	 * #doc-arg-desc The max depth
-	 * #doc-arg-example depth="5"
-	 * 
-	 * #doc-arg-name exclude
-	 * #doc-arg-desc A single or a list of category ids to exclude for result.
-	 * #doc-arg-example exclude="5,72"
-	 * 
-	 * #doc-arg-name need_count_child
-	 * #doc-arg-desc A boolean which indicates whether the number of children in each category should be taken into account
-	 * #doc-arg-example 
-	 * 
-	 * #doc-arg-name order
-	 * #doc-arg-desc A list of values <br/> Expected values
-	 * #doc-arg-example order="random"
-	 * 
-	 * #doc-arg-name visible
-	 * #doc-arg-desc Whatever we consider hidden category or not.
-	 * #doc-arg-example 
      */
     protected function getArgDefinitions()
     {
         return new ArgumentCollection(
+            // #doc-arg-desc A single category id.
             Argument::createIntTypeArgument('category', null, true),
+		    // #doc-arg-desc The max depth
             Argument::createIntTypeArgument('depth', \PHP_INT_MAX),
+		    // #doc-arg-desc A boolean which indicates whether the number of children in each category should be taken into account
             Argument::createBooleanTypeArgument('need_count_child', false),
+		    // #doc-arg-desc Whatever we consider hidden category or not.
             Argument::createBooleanOrBothTypeArgument('visible', true, false),
+		    // #doc-arg-desc A single or a list of category ids to exclude for result.
             Argument::createIntListTypeArgument('exclude', []),
+            // #doc-arg-desc A list of values
             new Argument(
                 'order',
                 new TypeCollection(
@@ -159,32 +141,7 @@ class CategoryTree extends BaseI18nLoop implements ArraySearchLoopInterface
         }
     }
 
-	 /**
-	 * 
-	 * #doc-out-name $CHILD_COUNT
-	 * #doc-out-desc The number of direct children of a category in the tree
-	 * 
-	 * #doc-out-name $ID
-	 * #doc-out-desc the category id
-	 * 
-	 * #doc-out-name $LEVEL
-	 * #doc-out-desc The depth of the category in the tree
-	 * 
-	 * #doc-out-name $PARENT
-	 * #doc-out-desc the parent category
-	 * 
-	 * #doc-out-name $PREV_LEVEL
-	 * #doc-out-desc The depth of the direct parent category in the tree.
-	 * 
-	 * #doc-out-name $TITLE
-	 * #doc-out-desc the category title
-	 * 
-	 * #doc-out-name $URL
-	 * #doc-out-desc the category URL
-	 * 
-	 * #doc-out-name $VISIBLE
-	 * #doc-out-desc whatever the category is visible or not
-	 */
+
     public function parseResults(LoopResult $loopResult)
     {
         foreach ($loopResult->getResultDataCollection() as $result) {

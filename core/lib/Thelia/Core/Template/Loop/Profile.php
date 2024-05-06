@@ -39,14 +39,11 @@ class Profile extends BaseI18nLoop implements PropelSearchLoopInterface
 
     /**
      * @return ArgumentCollection
-	 * 
-	 * #doc-arg-name id
-	 * #doc-arg-desc A single or a list of sale ids.
-	 * #doc-arg-example id="2", id="1,4,7"
      */
     protected function getArgDefinitions()
     {
         return new ArgumentCollection(
+		    // #doc-arg-desc A single or a list of sale ids.
             Argument::createIntListTypeArgument('id')
         );
     }
@@ -69,43 +66,24 @@ class Profile extends BaseI18nLoop implements PropelSearchLoopInterface
         return $search;
     }
 
-	 /**
-	 * 
-	 * #doc-out-name $CHAPO
-	 * #doc-out-desc the chapo
-	 * 
-	 * #doc-out-name $CODE
-	 * #doc-out-desc the content code
-	 * 
-	 * #doc-out-name $DESCRIPTION
-	 * #doc-out-desc the content description
-	 * 
-	 * #doc-out-name $ID
-	 * #doc-out-desc the content id
-	 * 
-	 * #doc-out-name $IS_TRANSLATED
-	 * #doc-out-desc check if the content is translated
-	 * 
-	 * #doc-out-name $LOCALE
-	 * #doc-out-desc the locale (e.g. fr_FR) of the returned data
-	 * 
-	 * #doc-out-name $POSTSCTIPTUM
-	 * #doc-out-desc the postscriptum
-	 * 
-	 * #doc-out-name $TITLE
-	 * #doc-out-desc the title
-	 */
     public function parseResults(LoopResult $loopResult)
     {
         /** @var ProfileModel $profile */
         foreach ($loopResult->getResultDataCollection() as $profile) {
             $loopResultRow = new LoopResultRow($profile);
+		    // #doc-out-desc the content id
             $loopResultRow->set('ID', $profile->getId())
+		        // #doc-out-desc check if the content is translated
                 ->set('IS_TRANSLATED', $profile->getVirtualColumn('IS_TRANSLATED'))
+		        // #doc-out-desc the locale (e.g. fr_FR) of the returned data
                 ->set('LOCALE', $this->locale)
+		        // #doc-out-desc the content code
                 ->set('CODE', $profile->getCode())
+		        // #doc-out-desc the title
                 ->set('TITLE', $profile->getVirtualColumn('i18n_TITLE'))
+		        // #doc-out-desc the chapo
                 ->set('CHAPO', $profile->getVirtualColumn('i18n_CHAPO'))
+		        // #doc-out-desc the content description
                 ->set('DESCRIPTION', $profile->getVirtualColumn('i18n_DESCRIPTION'))
                 ->set('POSTSCRIPTUM', $profile->getVirtualColumn('i18n_POSTSCRIPTUM'))
             ;

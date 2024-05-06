@@ -39,42 +39,23 @@ use Thelia\Model\ModuleQuery;
 class ModuleConfig extends BaseLoop implements ArraySearchLoopInterface
 {
     /**
-     * @return ArgumentCollection
-	 * 
-	 * #doc-arg-name default_value
-	 * #doc-arg-desc The default value
-	 * #doc-arg-example 
-	 * 
-	 * #doc-arg-name locale
-	 * #doc-arg-desc The locale
-	 * #doc-arg-example locale="en_US"
-	 * 
-	 * #doc-arg-name module*
-	 * #doc-arg-desc The module
-	 * #doc-arg-example module="bestseller"
-	 * 
-	 * #doc-arg-name variable*
-	 * #doc-arg-desc The variable
-	 * #doc-arg-example variable="rewriting_enable"
-     */
+     * @return ArgumentCollection     */
     protected function getArgDefinitions()
     {
         return new ArgumentCollection(
+            // #doc-arg-desc The module
             Argument::createAnyTypeArgument('module', null, true),
+            // #doc-arg-desc The variable
             Argument::createAnyTypeArgument('variable', null, true),
+		    // #doc-arg-desc The default value
             Argument::createAnyTypeArgument('default_value', null),
+		    // #doc-arg-desc The locale
             Argument::createAnyTypeArgument('locale', null)
         );
     }
 
     /**
      * @return LoopResult
-	 * 
-	 * #doc-out-name $VALUE
-	 * #doc-out-desc The value of the variable
-	 * 
-	 * #doc-out-name $VARIABLE
-	 * #doc-out-desc The variable name
      */
     public function parseResults(LoopResult $loopResult)
     {
@@ -94,7 +75,9 @@ class ModuleConfig extends BaseLoop implements ArraySearchLoopInterface
         $loopResultRow = new LoopResultRow();
 
         $loopResultRow
+            // #doc-out-desc The variable name
             ->set('VARIABLE', $this->getVariable())
+            // #doc-out-desc The value of the variable
             ->set('VALUE', $configValue)
         ;
 

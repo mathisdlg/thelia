@@ -44,29 +44,20 @@ class Resource extends BaseI18nLoop implements PropelSearchLoopInterface
 
     /**
      * @return ArgumentCollection
-	 * 
-	 * #doc-arg-name code
-	 * #doc-arg-desc The resource code
-	 * #doc-arg-example code="a_code"
-	 * 
-	 * #doc-arg-name order
-	 * #doc-arg-desc A list of values see sorting possible values
-	 * #doc-arg-example order="title"
-	 * 
-	 * #doc-arg-name profile
-	 * #doc-arg-desc The profile id
-	 * #doc-arg-example profile="4"
      */
     protected function getArgDefinitions()
     {
         return new ArgumentCollection(
+		    // #doc-arg-desc The profile id
             Argument::createIntTypeArgument('profile'),
+            // #doc-arg-desc The resource code
             new Argument(
                 'code',
                 new Type\TypeCollection(
                     new Type\AlphaNumStringListType()
                 )
             ),
+            // #doc-arg-desc A list of values see sorting possible values
             new Argument(
                 'order',
                 new TypeCollection(
@@ -142,54 +133,25 @@ class Resource extends BaseI18nLoop implements PropelSearchLoopInterface
      * @throws \Propel\Runtime\Exception\PropelException
      *
      * @return LoopResult
-	 * 
-	 * #doc-out-name $CHAPO
-	 * #doc-out-desc the resource chapo
-	 * 
-	 * #doc-out-name $CODE
-	 * #doc-out-desc the resource code
-	 * 
-	 * #doc-out-name $CREATABLE
-	 * #doc-out-desc <strong>Only if profile is not null</strong>
-	 * 
-	 * #doc-out-name $DELETABLE
-	 * #doc-out-desc <strong>Only if profile is not null</strong>
-	 * 
-	 * #doc-out-name $DESCRIPTION
-	 * #doc-out-desc the resource description
-	 * 
-	 * #doc-out-name $ID
-	 * #doc-out-desc the content id
-	 * 
-	 * #doc-out-name $IS_TRANSLATED
-	 * #doc-out-desc check if the content is translated
-	 * 
-	 * #doc-out-name $LOCALE
-	 * #doc-out-desc the locale (e.g. fr_FR) of the returned data
-	 * 
-	 * #doc-out-name $POSTSCTIPTUM
-	 * #doc-out-desc the resource postscriptum
-	 * 
-	 * #doc-out-name $TITLE
-	 * #doc-out-desc the resource title
-	 * 
-	 * #doc-out-name $UPDATABLE
-	 * #doc-out-desc <strong>Only if profile is not null</strong>
-	 * 
-	 * #doc-out-name $VIEWABLE
-	 * #doc-out-desc <strong>Only if profile is not null</strong>
-     */
+	 */
     public function parseResults(LoopResult $loopResult)
     {
         /** @var ResourceModel $resource */
         foreach ($loopResult->getResultDataCollection() as $resource) {
             $loopResultRow = new LoopResultRow($resource);
+		    // #doc-out-desc the content id
             $loopResultRow->set('ID', $resource->getId())
+		        // #doc-out-desc check if the content is translated
                 ->set('IS_TRANSLATED', $resource->getVirtualColumn('IS_TRANSLATED'))
+		        // #doc-out-desc the locale (e.g. fr_FR) of the returned data
                 ->set('LOCALE', $this->locale)
+		        // #doc-out-desc the resource code
                 ->set('CODE', $resource->getCode())
+		        // #doc-out-desc the resource title
                 ->set('TITLE', $resource->getVirtualColumn('i18n_TITLE'))
+		        // #doc-out-desc the resource chapo
                 ->set('CHAPO', $resource->getVirtualColumn('i18n_CHAPO'))
+		        // #doc-out-desc the resource description
                 ->set('DESCRIPTION', $resource->getVirtualColumn('i18n_DESCRIPTION'))
                 ->set('POSTSCRIPTUM', $resource->getVirtualColumn('i18n_POSTSCRIPTUM'))
             ;
@@ -198,9 +160,13 @@ class Resource extends BaseI18nLoop implements PropelSearchLoopInterface
                 $accessValue = $resource->getVirtualColumn('access');
                 $manager = new AccessManager($accessValue);
 
+		        // #doc-out-desc <strong>Only if profile is not null</strong>
                 $loopResultRow->set('VIEWABLE', $manager->can(AccessManager::VIEW) ? 1 : 0)
+		            // #doc-out-desc <strong>Only if profile is not null</strong>
                     ->set('CREATABLE', $manager->can(AccessManager::CREATE) ? 1 : 0)
+		            // #doc-out-desc <strong>Only if profile is not null</strong>
                     ->set('UPDATABLE', $manager->can(AccessManager::UPDATE) ? 1 : 0)
+		            // #doc-out-desc <strong>Only if profile is not null</strong>
                     ->set('DELETABLE', $manager->can(AccessManager::DELETE) ? 1 : 0);
             }
 

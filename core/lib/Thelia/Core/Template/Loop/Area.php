@@ -26,7 +26,7 @@ use Thelia\Type\TypeCollection;
 
 /**
  * Class Area.
- * 
+ *
  * #doc-desc Area loop returns shipping zones information.
  *
  * @author Manuel Raynaud <manu@raynaud.io>
@@ -46,49 +46,25 @@ class Area extends BaseI18nLoop implements PropelSearchLoopInterface
 
     /**
      * @return ArgumentCollection
-	 * 
-	 * #doc-arg-name country
-	 * #doc-arg-desc A list of country IDs. Only zones including these countries will be returned.
-	 * #doc-arg-example 
-	 * 
-	 * #doc-arg-name GroupByCountryArea
-	 * #doc-arg-desc A boolean that specifies whether the results should be grouped by country and geographic area.
-	 * #doc-arg-example 
-	 * 
-	 * #doc-arg-name id
-	 * #doc-arg-desc A single or a list of shipping zones ids.
-	 * #doc-arg-example id="2", id="1,4,7"
-	 * 
-	 * #doc-arg-name module_id
-	 * #doc-arg-desc A comma separated list of module IDs. If not empty, only zones for the specified modules are returned.
-	 * #doc-arg-example 
-	 * 
-	 * #doc-arg-name order
-	 * #doc-arg-desc A list of values <br/> Expected values
-	 * #doc-arg-example order="alpha"
-	 * 
-	 * #doc-arg-name unassigned
-	 * #doc-arg-desc If true, returns shipping zones not assigned to any delivery module.
-	 * #doc-arg-example 
-	 * 
-	 * #doc-arg-name with_zone
-	 * #doc-arg-desc A module ID. Returns shipping zones which are assigned to this module ID
-	 * #doc-arg-example 
-	 * 
-	 * #doc-arg-name without_zone
-	 * #doc-arg-desc A module ID. Returns shipping zones which are not assigned to this module ID
-	 * #doc-arg-example 
      */
     protected function getArgDefinitions()
     {
         return new ArgumentCollection(
+		    // #doc-arg-desc A single or a list of shipping zones ids.
             Argument::createIntListTypeArgument('id'),
+		    // #doc-arg-desc A list of country IDs. Only zones including these countries will be returned.
             Argument::createIntListTypeArgument('country'),
+		    // #doc-arg-desc A module ID. Returns shipping zones which are assigned to this module ID
             Argument::createIntTypeArgument('with_zone'),
+		    // #doc-arg-desc A module ID. Returns shipping zones which are not assigned to this module ID
             Argument::createIntTypeArgument('without_zone'),
+		    // #doc-arg-desc If true, returns shipping zones not assigned to any delivery module.
             Argument::createBooleanOrBothTypeArgument('unassigned'),
+            // #doc-arg-desc A boolean that specifies whether the results should be grouped by country and geographic area.
             Argument::createBooleanOrBothTypeArgument('group_by_country_area'),
+		    // #doc-arg-desc A comma separated list of module IDs. If not empty, only zones for the specified modules are returned.
             Argument::createIntListTypeArgument('module_id'),
+            // A list of values
             new Argument(
                 'order',
                 new TypeCollection(
@@ -185,17 +161,6 @@ class Area extends BaseI18nLoop implements PropelSearchLoopInterface
         return $search;
     }
 
-	 /**
-	 * 
-	 * #doc-out-name $ID
-	 * #doc-out-desc the shipping zone id
-	 * 
-	 * #doc-out-name $NAME
-	 * #doc-out-desc the accessory name
-	 * 
-	 * #doc-out-name $POSTAGE
-	 * #doc-out-desc shipping costs associated with each geographic are
-	 */
     public function parseResults(LoopResult $loopResult)
     {
         /** @var AreaModel $area */
@@ -203,8 +168,11 @@ class Area extends BaseI18nLoop implements PropelSearchLoopInterface
             $loopResultRow = new LoopResultRow($area);
 
             $loopResultRow
+                // #doc-out-desc the shipping zone id
                 ->set('ID', $area->getId())
+                // #doc-out-desc the accessory name
                 ->set('NAME', $area->getName())
+                // #doc-out-desc shipping costs associated with each geographic are
                 ->set('POSTAGE', $area->getPostage())
             ;
             $this->addOutputFields($loopResultRow, $area);

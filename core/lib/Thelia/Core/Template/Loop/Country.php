@@ -49,49 +49,25 @@ class Country extends BaseI18nLoop implements PropelSearchLoopInterface
 
     /**
      * @return ArgumentCollection
-	 * 
-	 * #doc-arg-name area
-	 * #doc-arg-desc A single or a list of area ids.
-	 * #doc-arg-example area="10,9", area: "500"
-	 * 
-	 * #doc-arg-name exclude
-	 * #doc-arg-desc A single or a list of country ids to exclude from the results.
-	 * #doc-arg-example exclude="2", exclude="1,4,7"
-	 * 
-	 * #doc-arg-name exclude_area
-	 * #doc-arg-desc A single or list of area IDs. Countries which belongs to these areas are excluded from the results
-	 * #doc-arg-example exclude_area="7", exclude_area="3,102,14"
-	 * 
-	 * #doc-arg-name has_states
-	 * #doc-arg-desc A boolean value to return countries that have states or not (possible values : yes, no or *).
-	 * #doc-arg-example has_states="no"
-	 * 
-	 * #doc-arg-name id
-	 * #doc-arg-desc A single or a list of country ids.
-	 * #doc-arg-example id="2", id="1,4,7"
-	 * 
-	 * #doc-arg-name order
-	 * #doc-arg-desc A list of values see sorting possible values
-	 * #doc-arg-example order="alpha_reverse"
-	 * 
-	 * #doc-arg-name visible
-	 * #doc-arg-desc A boolean value to return visible or not visible countries (possible values : yes, no or *).
-	 * #doc-arg-example visible="no"
-	 * 
-	 * #doc-arg-name with_area
-	 * #doc-arg-desc A boolean value to return either countries whose area is defined either all the others.
-	 * #doc-arg-example with_area="true"
      */
     protected function getArgDefinitions()
     {
         return new ArgumentCollection(
+		    // #doc-arg-desc A single or a list of country ids.
             Argument::createIntListTypeArgument('id'),
+		    // #doc-arg-desc A single or a list of area ids.
             Argument::createIntListTypeArgument('area'),
+		    // #doc-arg-desc A single or list of area IDs. Countries which belongs to these areas are excluded from the results
             Argument::createIntListTypeArgument('exclude_area'),
+		    // #doc-arg-desc A boolean value to return either countries whose area is defined either all the others.
             Argument::createBooleanTypeArgument('with_area'),
+		    // #doc-arg-desc A single or a list of country ids to exclude from the results.
             Argument::createIntListTypeArgument('exclude'),
+		    // #doc-arg-desc A boolean value to return countries that have states or not (possible values : yes, no or
             Argument::createBooleanOrBothTypeArgument('has_states', BooleanOrBothType::ANY),
+		    // #doc-arg-desc A boolean value to return visible or not visible countries (possible values : yes, no or
             Argument::createBooleanOrBothTypeArgument('visible', 1),
+            // #doc-arg-desc A list of values
             new Argument(
                 'order',
                 new TypeCollection(
@@ -206,77 +182,44 @@ class Country extends BaseI18nLoop implements PropelSearchLoopInterface
         return $search;
     }
 
-	 /**
-	 * 
-	 * #doc-out-name $CHAPO
-	 * #doc-out-desc the country chapo
-	 * 
-	 * #doc-out-name $DESCRIPTION
-	 * #doc-out-desc the country description
-	 * 
-	 * #doc-out-name $HAS_STATES
-	 * #doc-out-desc 1 if the country has states, 0 otherwise
-	 * 
-	 * #doc-out-name $ID
-	 * #doc-out-desc the country id
-	 * 
-	 * #doc-out-name $ISOALPHA2
-	 * #doc-out-desc the ISO 2 characters country code
-	 * 
-	 * #doc-out-name $ISOALPHA3
-	 * #doc-out-desc the ISO 3 characters country code
-	 * 
-	 * #doc-out-name $ISOCODE
-	 * #doc-out-desc the ISO numeric country code
-	 * 
-	 * #doc-out-name $IS_DEFAULT
-	 * #doc-out-desc 1 if the country is the default one, 0 otherwise
-	 * 
-	 * #doc-out-name $IS_SHOP_COUNTRY
-	 * #doc-out-desc 1 if the country is the shop country, 0 otherwise
-	 * 
-	 * #doc-out-name $IS_TRANSLATED
-	 * #doc-out-desc check if the country is translated
-	 * 
-	 * #doc-out-name $LOCALE
-	 * #doc-out-desc The locale used for this research
-	 * 
-	 * #doc-out-name $NEED_ZIP_CODE
-	 * #doc-out-desc 1 if the country needs a zip code for address, 0 otherwise
-	 * 
-	 * #doc-out-name $POSTSCRIPTUM
-	 * #doc-out-desc the country postscriptum
-	 * 
-	 * #doc-out-name $TITLE
-	 * #doc-out-desc the country title
-	 * 
-	 * #doc-out-name $VISIBLE
-	 * #doc-out-desc true if the country is visible. False otherwise
-	 * 
-	 * #doc-out-name $ZIP_CODE_FORMAT
-	 * #doc-out-desc The format of the zip code for this country where N is a digit, L a letter and C a state ISO code.
-	 */
+
     public function parseResults(LoopResult $loopResult)
     {
         /** @var \Thelia\Model\Country $country */
         foreach ($loopResult->getResultDataCollection() as $country) {
             $loopResultRow = new LoopResultRow($country);
             $loopResultRow
+		        // #doc-out-desc the country id
                 ->set('ID', $country->getId())
+		        // #doc-out-desc true if the country is visible. False otherwise
                 ->set('VISIBLE', $country->getVisible())
+		        // #doc-out-desc check if the country is translated
                 ->set('IS_TRANSLATED', $country->getVirtualColumn('IS_TRANSLATED'))
+		        // #doc-out-desc The locale used for this research
                 ->set('LOCALE', $this->locale)
+		        // #doc-out-desc the country title
                 ->set('TITLE', $country->getVirtualColumn('i18n_TITLE'))
+		        // #doc-out-desc the country chapo
                 ->set('CHAPO', $country->getVirtualColumn('i18n_CHAPO'))
+		        // #doc-out-desc the country description
                 ->set('DESCRIPTION', $country->getVirtualColumn('i18n_DESCRIPTION'))
+		        // #doc-out-desc the country postscriptum
                 ->set('POSTSCRIPTUM', $country->getVirtualColumn('i18n_POSTSCRIPTUM'))
+		        // #doc-out-desc the ISO numeric country code
                 ->set('ISOCODE', sprintf('%03d', $country->getIsocode()))
+		        // #doc-out-desc the ISO 2 characters country code
                 ->set('ISOALPHA2', $country->getIsoalpha2())
+		        // #doc-out-desc the ISO 3 characters country code
                 ->set('ISOALPHA3', $country->getIsoalpha3())
+		        // #doc-out-desc 1 if the country is the default one, 0 otherwise
                 ->set('IS_DEFAULT', $country->getByDefault() ? '1' : '0')
+		        // #doc-out-desc 1 if the country is the shop country, 0 otherwise
                 ->set('IS_SHOP_COUNTRY', $country->getShopCountry() ? '1' : '0')
+		        // #doc-out-desc 1 if the country has states, 0 otherwise
                 ->set('HAS_STATES', $country->getHasStates() ? '1' : '0')
+		        // #doc-out-desc 1 if the country needs a zip code for address, 0 otherwise
                 ->set('NEED_ZIP_CODE', $country->getNeedZipCode() ? '1' : '0')
+		        // #doc-out-desc The format of the zip code for this country where N is a digit, L a letter and C a state ISO code.
                 ->set('ZIP_CODE_FORMAT', $country->getZipCodeFormat())
             ;
 

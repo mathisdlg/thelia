@@ -51,49 +51,28 @@ class Customer extends BaseLoop implements SearchLoopInterface, PropelSearchLoop
 
     /**
      * @return ArgumentCollection
-	 * 
-	 * #doc-arg-name current
-	 * #doc-arg-desc A boolean value which must be set to false if you need to display not authenticated customers information, typically if `sponsor` parameter is set.
-	 * #doc-arg-example current="false"
-	 * 
-	 * #doc-arg-name Newsletter
-	 * #doc-arg-desc A boolean that represents whether the customer is subscribed to the newsletter
-	 * #doc-arg-example 
-	 * 
-	 * #doc-arg-name order
-	 * #doc-arg-desc A list of values see sorting possible values
-	 * #doc-arg-example order="firstname, lastname"
-	 * 
-	 * #doc-arg-name ref
-	 * #doc-arg-desc A single or a list of customer references.
-	 * #doc-arg-example ref="1231231241", ref="123123,789789"
-	 * 
-	 * #doc-arg-name reseller
-	 * #doc-arg-desc A boolean value.
-	 * #doc-arg-example reseller="yes"
-	 * 
-	 * #doc-arg-name sponsor
-	 * #doc-arg-desc The sponsor ID which you want the list of affiliated customers
-	 * #doc-arg-example sponsor="1"
-	 * 
-	 * #doc-arg-name with_prev_next_info
-	 * #doc-arg-desc A boolean. If set to true, $HAS_PREVIOUS, $HAS_NEXT, $PREVIOUS, and $NEXT output variables are available.
-	 * #doc-arg-example with_prev_next_info="yes"
      */
     protected function getArgDefinitions()
     {
         return new ArgumentCollection(
+		    // #doc-arg-desc A boolean value which must be set to false if you need to display not authenticated customers information, typically if `sponsor` parameter is set.
             Argument::createBooleanTypeArgument('current', 1),
+            // #doc-arg-desc A single customer id.
             Argument::createIntListTypeArgument('id'),
+		    // #doc-arg-desc A boolean. If set to true, $HAS_PREVIOUS, $HAS_NEXT, $PREVIOUS, and $NEXT output variables are available.
             Argument::createBooleanTypeArgument('with_prev_next_info', false),
+            // #doc-arg-desc A single or a list of customer references.
             new Argument(
                 'ref',
                 new TypeCollection(
                     new Type\AlphaNumStringListType()
                 )
             ),
+		    // #doc-arg-desc A boolean value.
             Argument::createBooleanTypeArgument('reseller'),
+		    // #doc-arg-desc The sponsor ID which you want the list of affiliated customers
             Argument::createIntTypeArgument('sponsor'),
+            // #doc-arg-desc A list of values
             new Argument(
                 'order',
                 new TypeCollection(
@@ -118,6 +97,7 @@ class Customer extends BaseLoop implements SearchLoopInterface, PropelSearchLoop
                 ),
                 'lastname'
             ),
+		    // #doc-arg-desc A boolean that represents whether the customer is subscribed to the newsletter
             Argument::createBooleanOrBothTypeArgument('newsletter', Type\BooleanOrBothType::ANY)
         );
     }
@@ -259,53 +239,7 @@ class Customer extends BaseLoop implements SearchLoopInterface, PropelSearchLoop
         return $search;
     }
 
-	 /**
-	 * 
-	 * #doc-out-name $CONFIRMATION_TOKEN
-	 * #doc-out-desc the customer registration confirmation token, used when email confirmation of registration is enabled (see <strong>customer_email_confirmation</strong> configuration variable)
-	 * 
-	 * #doc-out-name $DISCOUNT
-	 * #doc-out-desc the customer discount
-	 * 
-	 * #doc-out-name $EMAIL
-	 * #doc-out-desc the customer email
-	 * 
-	 * #doc-out-name $FIRSTNAME
-	 * #doc-out-desc the customer firstname
-	 * 
-	 * #doc-out-name $HAS_NEXT
-	 * #doc-out-desc true if a customer exists after the current one, regarding the curent order. Only available if <strong>with_prev_next_info</strong> parameter is set to true
-	 * 
-	 * #doc-out-name $HAS_PREVIOUS
-	 * #doc-out-desc true if a customer exists before the current one, regarding the curent order. Only available if <strong>with_prev_next_info</strong> parameter is set to true
-	 * 
-	 * #doc-out-name $ID
-	 * #doc-out-desc the customer id
-	 * 
-	 * #doc-out-name $LASTNAME
-	 * #doc-out-desc the customer lastname
-	 * 
-	 * #doc-out-name $NEWSLETTER
-	 * #doc-out-desc true if the customer is registered in the newsletter table, false otherwise
-	 * 
-	 * #doc-out-name $NEXT
-	 * #doc-out-desc ID of the next customer, or null if non exists. Only available if <strong>with_prev_next_info</strong> parameter is set to true
-	 * 
-	 * #doc-out-name $PREVIOUS
-	 * #doc-out-desc ID of the previous customer, or null if non exists. Only available if <strong>with_prev_next_info</strong> parameter is set to true
-	 * 
-	 * #doc-out-name $REF
-	 * #doc-out-desc the customer reference
-	 * 
-	 * #doc-out-name $RESELLER
-	 * #doc-out-desc return if the customer is a reseller
-	 * 
-	 * #doc-out-name $SPONSOR
-	 * #doc-out-desc the customer sponsor which might be use in another   customer loop
-	 * 
-	 * #doc-out-name $TITLE
-	 * #doc-out-desc the customer title which might be use in title loop
-	 */
+
     public function parseResults(LoopResult $loopResult)
     {
         /** @var \Thelia\Model\Customer $customer */
@@ -313,16 +247,27 @@ class Customer extends BaseLoop implements SearchLoopInterface, PropelSearchLoop
             $loopResultRow = new LoopResultRow($customer);
 
             $loopResultRow
+		        // #doc-out-desc the customer id
                 ->set('ID', $customer->getId())
+		        // #doc-out-desc the customer reference
                 ->set('REF', $customer->getRef())
+		        // #doc-out-desc the customer title which might be use in title loop
                 ->set('TITLE', $customer->getTitleId())
+		        // #doc-out-desc the customer firstname
                 ->set('FIRSTNAME', $customer->getFirstname())
+		        // #doc-out-desc the customer lastname
                 ->set('LASTNAME', $customer->getLastname())
+		        // #doc-out-desc the customer email
                 ->set('EMAIL', $customer->getEmail())
+		        // #doc-out-desc return if the customer is a reseller
                 ->set('RESELLER', $customer->getReseller())
+		        // #doc-out-desc the customer sponsor which might be use in another   customer loop
                 ->set('SPONSOR', $customer->getSponsor())
+		        // #doc-out-desc the customer discount
                 ->set('DISCOUNT', $customer->getDiscount())
+		        // #doc-out-desc true if the customer is registered in the newsletter table, false otherwise
                 ->set('NEWSLETTER', $customer->getVirtualColumn('is_registered_to_newsletter'))
+		        // #doc-out-desc the customer registration confirmation token, used when email confirmation of registration is enabled (see <strong>customer_email_confirmation</strong> configuration variable)
                 ->set('CONFIRMATION_TOKEN', $customer->getConfirmationToken())
             ;
 
@@ -339,9 +284,13 @@ class Customer extends BaseLoop implements SearchLoopInterface, PropelSearchLoop
                     ->orderById(Criteria::ASC)
                     ->findOne();
                 $loopResultRow
+		            // #doc-out-desc true if a customer exists before the current one, regarding the curent order. Only available if <strong>with_prev_next_info</strong> parameter is set to true
                     ->set('HAS_PREVIOUS', $previous != null ? 1 : 0)
+		            // #doc-out-desc true if a customer exists after the current one, regarding the curent order. Only available if <strong>with_prev_next_info</strong> parameter is set to true
                     ->set('HAS_NEXT', $next != null ? 1 : 0)
+		            // #doc-out-desc ID of the previous customer, or null if non exists. Only available if <strong>with_prev_next_info</strong> parameter is set to true
                     ->set('PREVIOUS', $previous != null ? $previous->getId() : -1)
+		            // #doc-out-desc ID of the next customer, or null if non exists. Only available if <strong>with_prev_next_info</strong> parameter is set to true
                     ->set('NEXT', $next != null ? $next->getId() : -1);
             }
 

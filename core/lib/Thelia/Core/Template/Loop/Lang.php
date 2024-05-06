@@ -49,54 +49,27 @@ class Lang extends BaseLoop implements PropelSearchLoopInterface
 
     /**
      * @return ArgumentCollection
-	 * 
-	 * #doc-arg-name acive
-	 * #doc-arg-desc returns only active languages
-	 * #doc-arg-example active="false"
-	 * 
-	 * #doc-arg-name code
-	 * #doc-arg-desc A single or list of lang code.
-	 * #doc-arg-example code="fr", code="fr,en"
-	 * 
-	 * #doc-arg-name default_only
-	 * #doc-arg-desc returns only the default language
-	 * #doc-arg-example default_only="true"
-	 * 
-	 * #doc-arg-name exclude
-	 * #doc-arg-desc A single or list of lang ids.
-	 * #doc-arg-example exclude="2", exclude="1,3"
-	 * 
-	 * #doc-arg-name exclude_default
-	 * #doc-arg-desc Exclude the default language from results
-	 * #doc-arg-example exclude_default="true"
-	 * 
-	 * #doc-arg-name id
-	 * #doc-arg-desc A single or list of lang ids.
-	 * #doc-arg-example id="2"
-	 * 
-	 * #doc-arg-name locale
-	 * #doc-arg-desc A single or list of lang locale.
-	 * #doc-arg-example code="fr_FR", code="fr_FR,fr_CA"
-	 * 
-	 * #doc-arg-name order
-	 * #doc-arg-desc A list of values see sorting possible values
-	 * #doc-arg-example order="alpha_reverse"
-	 * 
-	 * #doc-arg-name visible
-	 * #doc-arg-desc returns only visible languages
-	 * #doc-arg-example visible="false"
      */
     protected function getArgDefinitions()
     {
         return new ArgumentCollection(
+            // #doc-arg-desc A single or list of lang ids.
             Argument::createIntListTypeArgument('id'),
+            // #doc-arg-desc A single or list of lang code.
             Argument::createAnyListTypeArgument('code'),
+            // #doc-arg-desc A single or list of lang locale.
             Argument::createAnyListTypeArgument('locale'),
+            // #doc-arg-desc A single or list of lang ids.
             Argument::createIntListTypeArgument('exclude'),
+            // #doc-arg-desc returns only active languages
             Argument::createBooleanOrBothTypeArgument('active', true),
+            // #doc-arg-desc returns only visible languages
             Argument::createBooleanOrBothTypeArgument('visible', true),
+            // #doc-arg-desc returns only the default language
             Argument::createBooleanTypeArgument('default_only', false),
+            // #doc-arg-desc Exclude the default language from results
             Argument::createBooleanTypeArgument('exclude_default', false),
+            // #doc-arg-desc A list of values see sorting possible values
             Argument::createEnumListTypeArgument(
                 'order',
                 [
@@ -173,50 +146,6 @@ class Lang extends BaseLoop implements PropelSearchLoopInterface
         return $search;
     }
 
-	 /**
-	 * 
-	 * #doc-out-name $ACTIVE
-	 * #doc-out-desc check if the lang is active or not
-	 * 
-	 * #doc-out-name $CODE
-	 * #doc-out-desc lang code, example : fr
-	 * 
-	 * #doc-out-name $DATE_FORMAT
-	 * #doc-out-desc the lang date format
-	 * 
-	 * #doc-out-name $DECIMAL_COUNT
-	 * #doc-out-desc the number of digits after the decimal separator
-	 * 
-	 * #doc-out-name $DECIMAL_SEPARATOR
-	 * #doc-out-desc the lang decimal separator, such as , or .
-	 * 
-	 * #doc-out-name $ID
-	 * #doc-out-desc the order id
-	 * 
-	 * #doc-out-name $IS_DEFAULT
-	 * #doc-out-desc check if the current result is the default one
-	 * 
-	 * #doc-out-name $LOCALE
-	 * #doc-out-desc lang locale, example : fr_FR
-	 * 
-	 * #doc-out-name $POSITION
-	 * #doc-out-desc lang position
-	 * 
-	 * #doc-out-name $THOUSANDS_SEPARATOR
-	 * #doc-out-desc the lang thousangs separator
-	 * 
-	 * #doc-out-name $TIME_FORMAT
-	 * #doc-out-desc the lang time format
-	 * 
-	 * #doc-out-name $TITLE
-	 * #doc-out-desc lang title
-	 * 
-	 * #doc-out-name $URL
-	 * #doc-out-desc the lang URL, only if a specific URL is defined for each lang
-	 * 
-	 * #doc-out-name $VISIBLE
-	 * #doc-out-desc check if the lang is visible or not
-	 */
     public function parseResults(LoopResult $loopResult)
     {
         /** @var \Thelia\Model\Lang $result */
@@ -224,19 +153,33 @@ class Lang extends BaseLoop implements PropelSearchLoopInterface
             $loopResultRow = new LoopResultRow($result);
 
             $loopResultRow
+		        // #doc-out-desc the order id
                 ->set('ID', $result->getId())
+		        // #doc-out-desc lang title
                 ->set('TITLE', $result->getTitle())
+		        // #doc-out-desc lang code, example : fr
                 ->set('CODE', $result->getCode())
+		        // #doc-out-desc lang locale, example : fr_FR
                 ->set('LOCALE', $result->getLocale())
+		        // #doc-out-desc the lang URL, only if a specific URL is defined for each lang
                 ->set('URL', $result->getUrl())
+		        // #doc-out-desc check if the lang is active or not
                 ->set('ACTIVE', $result->getActive())
+		        // #doc-out-desc check if the lang is visible or not
                 ->set('VISIBLE', $result->getVisible())
+		        // #doc-out-desc check if the current result is the default one
                 ->set('IS_DEFAULT', $result->getByDefault())
+		        // #doc-out-desc the lang date format
                 ->set('DATE_FORMAT', $result->getDateFormat())
+		        // #doc-out-desc the lang time format
                 ->set('TIME_FORMAT', $result->getTimeFormat())
+		        // #doc-out-desc the lang decimal separator, such as , or .
                 ->set('DECIMAL_SEPARATOR', $result->getDecimalSeparator())
+		        // #doc-out-desc the lang thousangs separator
                 ->set('THOUSANDS_SEPARATOR', $result->getThousandsSeparator())
+		        // #doc-out-desc the number of digits after the decimal separator
                 ->set('DECIMAL_COUNT', $result->getDecimals())
+		        // #doc-out-desc lang position
                 ->set('POSITION', $result->getPosition())
             ;
 

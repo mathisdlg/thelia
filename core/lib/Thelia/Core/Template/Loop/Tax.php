@@ -47,39 +47,21 @@ class Tax extends BaseI18nLoop implements PropelSearchLoopInterface
 
     /**
      * @return ArgumentCollection
-	 * 
-	 * #doc-arg-name country
-	 * #doc-arg-desc a country id
-	 * #doc-arg-example country="64"
-	 * 
-	 * #doc-arg-name exclude
-	 * #doc-arg-desc A single or list of tax ids to exclude
-	 * #doc-arg-example exclude="2", exclude="1,4"
-	 * 
-	 * #doc-arg-name exclude_tax_rule
-	 * #doc-arg-desc A single or list of tax_rule ids to exclude
-	 * #doc-arg-example exclude_tax_rule="2", exclude_tax_rule="1,4"
-	 * 
-	 * #doc-arg-name id
-	 * #doc-arg-desc A single or list of tax ids.
-	 * #doc-arg-example id="2", id="1,4"
-	 * 
-	 * #doc-arg-name order
-	 * #doc-arg-desc A list of values see sorting possible values
-	 * #doc-arg-example order="id"
-	 * 
-	 * #doc-arg-name tax_rule
-	 * #doc-arg-desc A single or list of tax_rule ids
-	 * #doc-arg-example tax_rule="2", tax_rule="1,4"
      */
     protected function getArgDefinitions()
     {
         return new ArgumentCollection(
+		    // #doc-arg-desc A single or list of tax ids.
             Argument::createIntListTypeArgument('id'),
+		    // #doc-arg-desc A single or list of tax ids to exclude
             Argument::createIntListTypeArgument('exclude'),
+		    // #doc-arg-desc A single or list of tax_rule ids
             Argument::createIntListTypeArgument('tax_rule'),
+		    // #doc-arg-desc A single or list of tax_rule ids to exclude
             Argument::createIntListTypeArgument('exclude_tax_rule'),
+		    // #doc-arg-desc a country id
             Argument::createIntTypeArgument('country'),
+            // #doc-arg-desc A list of values see sorting possible values
             new Argument(
                 'order',
                 new TypeCollection(
@@ -160,32 +142,6 @@ class Tax extends BaseI18nLoop implements PropelSearchLoopInterface
         return $search;
     }
 
-	 /**
-	 * 
-	 * #doc-out-name $DESCRIPTION
-	 * #doc-out-desc Tax description
-	 * 
-	 * #doc-out-name $ESCAPED_TYPE
-	 * #doc-out-desc Provides a form-and-javascript-safe version of the type, which is a fully qualified classname, with \
-	 * 
-	 * #doc-out-name $ID
-	 * #doc-out-desc the tax id
-	 * 
-	 * #doc-out-name $IS_TRANSLATED
-	 * #doc-out-desc check if the tax is translated
-	 * 
-	 * #doc-out-name $LOCALE
-	 * #doc-out-desc The locale used for this research
-	 * 
-	 * #doc-out-name $REQUIREMENTS
-	 * #doc-out-desc All requirements for this tax
-	 * 
-	 * #doc-out-name $TITLE
-	 * #doc-out-desc Tax title
-	 * 
-	 * #doc-out-name $TYPE
-	 * #doc-out-desc The tax type
-	 */
     public function parseResults(LoopResult $loopResult)
     {
         /** @var TaxModel $tax */
@@ -193,13 +149,21 @@ class Tax extends BaseI18nLoop implements PropelSearchLoopInterface
             $loopResultRow = new LoopResultRow($tax);
 
             $loopResultRow
+		        // #doc-out-desc the tax id
                 ->set('ID', $tax->getId())
+		        // #doc-out-desc The tax type
                 ->set('TYPE', $tax->getType())
+		        // #doc-out-desc Provides a form-and-javascript-safe version of the type, which is a fully qualified classname, with \
                 ->set('ESCAPED_TYPE', TaxModel::escapeTypeName($tax->getType()))
+		        // #doc-out-desc All requirements for this tax
                 ->set('REQUIREMENTS', $tax->getRequirements())
+		        // #doc-out-desc check if the tax is translated
                 ->set('IS_TRANSLATED', $tax->getVirtualColumn('IS_TRANSLATED'))
+		        // #doc-out-desc The locale used for this research
                 ->set('LOCALE', $this->locale)
+		        // #doc-out-desc Tax title
                 ->set('TITLE', $tax->getVirtualColumn('i18n_TITLE'))
+		        // #doc-out-desc Tax description
                 ->set('DESCRIPTION', $tax->getVirtualColumn('i18n_DESCRIPTION'))
             ;
             $this->addOutputFields($loopResultRow, $tax);

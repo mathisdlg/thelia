@@ -42,92 +42,22 @@ use Thelia\Module\Exception\DeliveryException;
  */
 class Delivery extends BaseSpecificModule
 {
-	 /**
-	 * 
-	 * #doc-arg-name all produspecific base module loop arguments
-	 * #doc-arg-desc 
-	 * #doc-arg-example 
-	 * 
-	 * #doc-arg-name address
-	 * #doc-arg-desc An address id.
-	 * #doc-arg-example address=21
-	 * 
-	 * #doc-arg-name code
-	 * #doc-arg-desc A module code.
-	 * #doc-arg-example code='Atos'
-	 * 
-	 * #doc-arg-name country
-	 * #doc-arg-desc A country id.
-	 * #doc-arg-example country=2
-	 * 
-	 * #doc-arg-name exclude
-	 * #doc-arg-desc A list of module IDs to exclude from the results
-	 * #doc-arg-example exclude="12, 21"
-	 * 
-	 * #doc-arg-name exclude_code
-	 * #doc-arg-desc A list of module codes to exclude from the results
-	 * #doc-arg-example exclude_code="Cheque,Atos"
-	 * 
-	 * #doc-arg-name id
-	 * #doc-arg-desc A module id.
-	 * #doc-arg-example module=4
-	 * 
-	 * #doc-arg-name order
-	 * #doc-arg-desc A list of values see sorting possible values
-	 * #doc-arg-example order="id_reverse"
-	 * 
-	 * #doc-arg-name state
-	 * #doc-arg-desc A state id.
-	 * #doc-arg-example state=12
-	 */
     public function getArgDefinitions()
     {
         $collection = parent::getArgDefinitions();
 
         $collection
+		    // #doc-arg-desc An address id.
             ->addArgument(Argument::createIntTypeArgument('address'))
+		    // #doc-arg-desc A country id.
             ->addArgument(Argument::createIntTypeArgument('country'))
+		    // #doc-arg-desc A state id.
             ->addArgument(Argument::createIntTypeArgument('state'))
         ;
 
         return $collection;
     }
 
-	 /**
-	 * 
-	 * #doc-out-name $CHAPO
-	 * #doc-out-desc the delivery module short description
-	 * 
-	 * #doc-out-name $CODE
-	 * #doc-out-desc the module code
-	 * 
-	 * #doc-out-name $DELIVERY_DATE
-	 * #doc-out-desc the expected delivery date. This output could be empty.
-	 * 
-	 * #doc-out-name $DESCRIPTION
-	 * #doc-out-desc the delivery module description
-	 * 
-	 * #doc-out-name $ID
-	 * #doc-out-desc the delivery module id
-	 * 
-	 * #doc-out-name $POSTAGE
-	 * #doc-out-desc the delivery price with taxes, expressed in the current currency
-	 * 
-	 * #doc-out-name $POSTAGE_TAX
-	 * #doc-out-desc The delivery price tax amount, expressed in the current currency
-	 * 
-	 * #doc-out-name $POSTAGE_TAX_RULE_TITLE
-	 * #doc-out-desc The tax rule title used to get delivery price tax
-	 * 
-	 * #doc-out-name $POSTAGE_UNTAXED
-	 * #doc-out-desc the delivery price without taxes, expressed in the current currency
-	 * 
-	 * #doc-out-name $POSTSCRIPTUM
-	 * #doc-out-desc the delivery module postscriptum
-	 * 
-	 * #doc-out-name $TITLE
-	 * #doc-out-desc the delivery module title
-	 */
     public function parseResults(LoopResult $loopResult)
     {
         $cart = $this->getCurrentRequest()->getSession()->getSessionCart($this->dispatcher);
@@ -188,16 +118,27 @@ class Delivery extends BaseSpecificModule
                     $postage = $deliveryPostageEvent->getPostage();
 
                     $loopResultRow
+                        // #doc-out-desc the delivery module id
                         ->set('ID', $deliveryModule->getId())
+                        // #doc-out-desc the module code
                         ->set('CODE', $deliveryModule->getCode())
+                        // #doc-out-desc the delivery module title
                         ->set('TITLE', $deliveryModule->getVirtualColumn('i18n_TITLE'))
+                        // #doc-out-desc the delivery module short description
                         ->set('CHAPO', $deliveryModule->getVirtualColumn('i18n_CHAPO'))
+                        // #doc-out-desc the delivery module description
                         ->set('DESCRIPTION', $deliveryModule->getVirtualColumn('i18n_DESCRIPTION'))
+                        // #doc-out-desc the delivery module postscriptum
                         ->set('POSTSCRIPTUM', $deliveryModule->getVirtualColumn('i18n_POSTSCRIPTUM'))
+                        // #doc-out-desc the delivery price with taxes, expressed in the current currency
                         ->set('POSTAGE', $postage->getAmount())
+                        // #doc-out-desc The delivery price tax amount, expressed in the current currency
                         ->set('POSTAGE_TAX', $postage->getAmountTax())
+                        // #doc-out-desc the delivery price without taxes, expressed in the current currency
                         ->set('POSTAGE_UNTAXED', $postage->getAmount() - $postage->getAmountTax())
+                        // #doc-out-desc The tax rule title used to get delivery price tax
                         ->set('POSTAGE_TAX_RULE_TITLE', $postage->getTaxRuleTitle())
+                        // #doc-out-desc the expected delivery date. This output could be empty.
                         ->set('DELIVERY_DATE', $deliveryPostageEvent->getDeliveryDate())
                     ;
 

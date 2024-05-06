@@ -45,30 +45,19 @@ class Currency extends BaseI18nLoop implements PropelSearchLoopInterface
 
     /**
      * @return ArgumentCollection
-	 * 
-	 * #doc-arg-name default_only
-	 * #doc-arg-desc A boolean value to display only the default currency.
-	 * #doc-arg-example default_only="true"
-	 * 
-	 * #doc-arg-name exclude
-	 * #doc-arg-desc A single or a list of currency ids.
-	 * #doc-arg-example exclude="2", exclude="1,4,7"
-	 * 
-	 * #doc-arg-name id
-	 * #doc-arg-desc A single or a list of currency ids.
-	 * #doc-arg-example id="2", id="1,4,7"
-	 * 
-	 * #doc-arg-name order
-	 * #doc-arg-desc A list of values see sorting possible values
-	 * #doc-arg-example order="id_reverse"
      */
     protected function getArgDefinitions()
     {
         return new ArgumentCollection(
+		    // #doc-arg-desc A single or a list of currency ids.
             Argument::createIntListTypeArgument('id'),
+		    // #doc-arg-desc A single or a list of currency ids.
             Argument::createIntListTypeArgument('exclude'),
+		    // #doc-arg-desc A boolean value to display only the default currency.
             Argument::createBooleanTypeArgument('default_only', false),
+            // #doc-arg-desc A boolean value to display only visible currencies.
             Argument::createBooleanOrBothTypeArgument('visible', true),
+            // #doc-arg-desc A list of values
             new Argument(
                 'order',
                 new TypeCollection(
@@ -170,57 +159,34 @@ class Currency extends BaseI18nLoop implements PropelSearchLoopInterface
         return $search;
     }
 
-	 /**
-	 * 
-	 * #doc-out-name $FORMAT
-	 * #doc-out-desc the format of the currency
-	 * 
-	 * #doc-out-name $ID
-	 * #doc-out-desc the currency id
-	 * 
-	 * #doc-out-name $ISOCODE
-	 * #doc-out-desc the ISO numeric currency code
-	 * 
-	 * #doc-out-name $IS_DEFAULT
-	 * #doc-out-desc returns if the currency is the default currency
-	 * 
-	 * #doc-out-name $IS_TRANSLATED
-	 * #doc-out-desc check if the currency is translated
-	 * 
-	 * #doc-out-name $LOCALE
-	 * #doc-out-desc The locale used for this research
-	 * 
-	 * #doc-out-name $NAME
-	 * #doc-out-desc the currency name
-	 * 
-	 * #doc-out-name $POSITION
-	 * #doc-out-desc the currency position
-	 * 
-	 * #doc-out-name $RATE
-	 * #doc-out-desc the currency rate
-	 * 
-	 * #doc-out-name $SYMBOL
-	 * #doc-out-desc the ISO numeric currency symbol
-	 * 
-	 * #doc-out-name $VISIBLE
-	 * #doc-out-desc the visibility status of the currency
-	 */
+
     public function parseResults(LoopResult $loopResult)
     {
         /** @var CurrencyModel $currency */
         foreach ($loopResult->getResultDataCollection() as $currency) {
             $loopResultRow = new LoopResultRow($currency);
             $loopResultRow
+		        // #doc-out-desc the currency id
                 ->set('ID', $currency->getId())
+		        // #doc-out-desc check if the currency is translated
                 ->set('IS_TRANSLATED', $currency->getVirtualColumn('IS_TRANSLATED'))
+		        // #doc-out-desc The locale used for this research
                 ->set('LOCALE', $this->locale)
+		        // #doc-out-desc the currency name
                 ->set('NAME', $currency->getVirtualColumn('i18n_NAME'))
+		        // #doc-out-desc the ISO numeric currency code
                 ->set('ISOCODE', $currency->getCode())
+		        // #doc-out-desc the ISO numeric currency symbol
                 ->set('SYMBOL', $currency->getSymbol())
+		        // #doc-out-desc the format of the currency
                 ->set('FORMAT', $currency->getFormat())
+		        // #doc-out-desc the currency rate
                 ->set('RATE', $currency->getRate())
+		        // #doc-out-desc the visibility status of the currency
                 ->set('VISIBLE', $currency->getVisible())
+		        // #doc-out-desc the currency position
                 ->set('POSITION', $currency->getPosition())
+		        // #doc-out-desc returns if the currency is the default currency
                 ->set('IS_DEFAULT', $currency->getByDefault())
             ;
             $this->addOutputFields($loopResultRow, $currency);

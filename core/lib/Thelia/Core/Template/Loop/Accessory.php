@@ -22,7 +22,7 @@ use Thelia\Model\AccessoryQuery;
  * Accessory loop.
  *
  * Class Accessory
- * 
+ *
  * #doc-desc The accessory loop lists products accessories. As an accessory is itself a product, this loop behaves like a product loop. Therefore you can use all product loop arguments and outputs.
  *
  * @author Etienne Roudeix <eroudeix@openstudio.fr>
@@ -39,24 +39,13 @@ class Accessory extends Product
 
     /**
      * @return ArgumentCollection
-	 * 
-	 * #doc-arg-name all product loop arguments
-	 * #doc-arg-desc
-	 * #doc-arg-example order="min_price", max_price="100"
-	 * 
-	 * #doc-arg-name order
-	 * #doc-arg-desc A list of values <br/> Expected values
-	 * #doc-arg-example order="accessory,max_price"
-	 * 
-	 * #doc-arg-name product \*
-	 * #doc-arg-desc A single product id.
-	 * #doc-arg-example product="2"
      */
     protected function getArgDefinitions()
     {
         $argumentCollection = parent::getArgDefinitions();
 
         $argumentCollection->addArgument(
+            // #doc-arg-desc A single product id.
             Argument::createIntListTypeArgument('product', null, true)
         );
 
@@ -116,20 +105,7 @@ class Accessory extends Product
         return parent::buildModelCriteria();
     }
 
-	 /**
-	 * 
-	 * #doc-out-name $ACCESSORY_ID
-	 * #doc-out-desc The product ID of the accessory
-	 * 
-	 * #doc-out-name $ID
-	 * #doc-out-desc The accessory ID
-	 * 
-	 * #doc-out-name $POSITION
-	 * #doc-out-desc The position of the accessory in the list
-	 * 
-	 * #doc-out-name all product loop outputs, except ID, which is the accessory ID
-	 * #doc-out-desc 
-	 */
+
     public function parseResults(LoopResult $results)
     {
         $results = parent::parseResults($results);
@@ -138,8 +114,11 @@ class Accessory extends Product
             $accessoryProductId = $loopResultRow->get('ID');
 
             $loopResultRow
+                // #doc-out-desc The accessory ID
                 ->set('ID', $this->accessoryId[$accessoryProductId])
+                // #doc-out-desc The position of the accessory in the list
                 ->set('POSITION', $this->accessoryPosition[$accessoryProductId])
+                // #doc-out-desc The product ID of the accessory
                 ->set('ACCESSORY_ID', $accessoryProductId)
             ;
         }

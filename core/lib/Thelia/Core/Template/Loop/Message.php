@@ -47,35 +47,19 @@ class Message extends BaseI18nLoop implements PropelSearchLoopInterface
     protected $timestampable = true;
 
     /**
-     * @return ArgumentCollection
-	 * 
-	 * #doc-arg-name exclude
-	 * #doc-arg-desc A list of message IDs to exclude
-	 * #doc-arg-example exclude="1,2,3"
-	 * 
-	 * #doc-arg-name hidden
-	 * #doc-arg-desc A boolean to show or hide hidden message
-	 * #doc-arg-example hidden="1"
-	 * 
-	 * #doc-arg-name id
-	 * #doc-arg-desc The message ID
-	 * #doc-arg-example id="2"
-	 * 
-	 * #doc-arg-name secured
-	 * #doc-arg-desc Boolean to show or hide secured messages
-	 * #doc-arg-example secured="1"
-	 * 
-	 * #doc-arg-name variable
-	 * #doc-arg-desc variable
-	 * #doc-arg-example variable="rewriting_enable"
-     */
+     * @return ArgumentCollection     */
     protected function getArgDefinitions()
     {
         return new ArgumentCollection(
+		    // #doc-arg-desc The message ID
             Argument::createIntTypeArgument('id'),
+		    // #doc-arg-desc A list of message IDs to exclude
             Argument::createIntListTypeArgument('exclude'),
+		    // #doc-arg-desc variable
             Argument::createAnyTypeArgument('variable'),
+		    // #doc-arg-desc A boolean to show or hide hidden message
             Argument::createBooleanOrBothTypeArgument('hidden'),
+		    // #doc-arg-desc Boolean to show or hide secured messages
             Argument::createBooleanOrBothTypeArgument('secured')
         );
     }
@@ -120,35 +104,6 @@ class Message extends BaseI18nLoop implements PropelSearchLoopInterface
         return $search;
     }
 
-	 /**
-	 * 
-	 * #doc-out-name $ID
-	 * #doc-out-desc The message ID
-	 * 
-	 * #doc-out-name $NAME
-	 * #doc-out-desc The message name
-	 * 
-	 * #doc-out-name $IS_TRANSLATED
-	 * #doc-out-desc Check if the message is translated
-	 * 
-	 * #doc-out-name $LOCALE
-	 * #doc-out-desc The locale used for this research
-	 * 
-	 * #doc-out-name $TITLE
-	 * #doc-out-desc The message title
-	 * 
-	 * #doc-out-name $SUBJECT
-	 * #doc-out-desc The message subject
-	 * 
-	 * #doc-out-name $TEXT_MESSAGE
-	 * #doc-out-desc The text message
-	 * 
-	 * #doc-out-name $HTML_MESSAGE
-	 * #doc-out-desc The html message
-	 * 
-	 * #doc-out-name $SECURED
-	 * #doc-out-desc Check if the message is secured
-	 */
     public function parseResults(LoopResult $loopResult)
     {
         /** @var MessageModel $result */
@@ -156,14 +111,23 @@ class Message extends BaseI18nLoop implements PropelSearchLoopInterface
             $loopResultRow = new LoopResultRow($result);
 
             $loopResultRow
+                // #doc-out-desc The message ID
                 ->set('ID', $result->getId())
+                // #doc-out-desc The message name
                 ->set('NAME', $result->getName())
+                // #doc-out-desc Check if the message is translated
                 ->set('IS_TRANSLATED', $result->getVirtualColumn('IS_TRANSLATED'))
+                // #doc-out-desc The locale used for this research
                 ->set('LOCALE', $this->locale)
+                // #doc-out-desc The message title
                 ->set('TITLE', $result->getVirtualColumn('i18n_TITLE'))
+                // #doc-out-desc The message subject
                 ->set('SUBJECT', $result->getVirtualColumn('i18n_SUBJECT'))
+                // #doc-out-desc The text message
                 ->set('TEXT_MESSAGE', $result->getVirtualColumn('i18n_TEXT_MESSAGE'))
+                // #doc-out-desc The html message
                 ->set('HTML_MESSAGE', $result->getVirtualColumn('i18n_HTML_MESSAGE'))
+                // #doc-out-desc Check if the message is secured
                 ->set('SECURED', $result->getSecured())
             ;
             $this->addOutputFields($loopResultRow, $result);

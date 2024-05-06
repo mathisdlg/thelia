@@ -23,7 +23,7 @@ use Thelia\Model\ProductAssociatedContentQuery;
  * AssociatedContent loop.
  *
  * Class AssociatedContent
- * 
+ *
  * #doc-desc Associated content loop lists associated contents of a product or a category. It behaves like a content loop therefore you might use all content loop arguments and outputs.
  *
  * @author Etienne Roudeix <eroudeix@openstudio.fr>
@@ -40,39 +40,19 @@ class AssociatedContent extends Content
 
     /**
      * @return ArgumentCollection
-	 * 
-	 * #doc-arg-name all content loop arguments
-	 * #doc-arg-desc 
-	 * #doc-arg-example exclude_folder="1,2,9"
-	 * 
-	 * #doc-arg-name category \*\*
-	 * #doc-arg-desc A single category id.
-	 * #doc-arg-example category="5"
-	 * 
-	 * #doc-arg-name exclude_category
-	 * #doc-arg-desc A single or a list of category ids. If a content is in multiple categories which are not all excluded it will not be excluded.
-	 * #doc-arg-example exclude_category="5"
-	 * 
-	 * #doc-arg-name exclude_product
-	 * #doc-arg-desc A single or a list of product ids. If a content is in multiple products which are not all excluded it will not be excluded.
-	 * #doc-arg-example exclude_product="5"
-	 * 
-	 * #doc-arg-name order
-	 * #doc-arg-desc A list of values <br/> Expected values
-	 * #doc-arg-example order="associated_content"
-	 * 
-	 * #doc-arg-name product \*\*
-	 * #doc-arg-desc A single product id.
-	 * #doc-arg-example product="2"
      */
     protected function getArgDefinitions()
     {
         $argumentCollection = parent::getArgDefinitions();
 
         $argumentCollection
+            // #doc-arg-desc A single product id.
             ->addArgument(Argument::createIntTypeArgument('product'))
+            // #doc-arg-desc A single category id.
             ->addArgument(Argument::createIntTypeArgument('category'))
+		    // #doc-arg-desc A single or a list of product ids. If a content is in multiple products which are not all excluded it will not be excluded.
             ->addArgument(Argument::createIntListTypeArgument('exclude_product'))
+		    // #doc-arg-desc A single or a list of category ids. If a content is in multiple categories which are not all excluded it will not be excluded.
             ->addArgument(Argument::createIntListTypeArgument('exclude_category'))
         ;
 
@@ -168,20 +148,6 @@ class AssociatedContent extends Content
         return parent::buildModelCriteria();
     }
 
-	 /**
-	 * 
-	 * #doc-out-name $CONTENT_ID
-	 * #doc-out-desc the associated content id
-	 * 
-	 * #doc-out-name $ID
-	 * #doc-out-desc the ID of each content
-	 * 
-	 * #doc-out-name $POSITION
-	 * #doc-out-desc the postition of each contents
-	 * 
-	 * #doc-out-name all content loop outputs, except ID, which is the ID of the relation.
-	 * #doc-out-desc 
-	 */
     public function parseResults(LoopResult $results)
     {
         $results = parent::parseResults($results);
@@ -190,8 +156,11 @@ class AssociatedContent extends Content
             $relatedContentId = $loopResultRow->get('ID');
 
             $loopResultRow
+                // #doc-out-desc the ID of each content
                 ->set('ID', $this->contentId[$relatedContentId])
+                // #doc-out-desc the associated content id
                 ->set('CONTENT_ID', $relatedContentId)
+                // #doc-out-desc the postition of each contents
                 ->set('POSITION', $this->contentPosition[$relatedContentId])
 
             ;

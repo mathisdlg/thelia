@@ -31,14 +31,12 @@ class Template extends BaseLoop implements ArraySearchLoopInterface
 {
     /**
      * @return ArgumentCollection
-	 * 
-	 * #doc-arg-name template-type
-	 * #doc-arg-desc the type of the template you want
-	 * #doc-arg-example template-type="pdf"
      */
     protected function getArgDefinitions()
     {
+
         return new ArgumentCollection(
+            // #doc-arg-desc the type of the template you want
             new Argument(
                 'template-type',
                 new Type\TypeCollection(
@@ -75,17 +73,6 @@ class Template extends BaseLoop implements ArraySearchLoopInterface
         return $this->container->get('thelia.template_helper')->getList($templateType);
     }
 
-	 /**
-	 * 
-	 * #doc-out-name $ABSOLUTE_PATH
-	 * #doc-out-desc absolute template path
-	 * 
-	 * #doc-out-name $NAME
-	 * #doc-out-desc template name
-	 * 
-	 * #doc-out-name $RELATIVE_PATH
-	 * #doc-out-desc relative template path
-	 */
     public function parseResults(LoopResult $loopResult)
     {
         /** @var TemplateDefinition $template */
@@ -93,8 +80,11 @@ class Template extends BaseLoop implements ArraySearchLoopInterface
             $loopResultRow = new LoopResultRow($template);
 
             $loopResultRow
+		        // #doc-out-desc template name
                 ->set('NAME', $template->getName())
+		        // #doc-out-desc relative template path
                 ->set('RELATIVE_PATH', $template->getPath())
+		        // #doc-out-desc absolute template path
                 ->set('ABSOLUTE_PATH', $template->getAbsolutePath())
             ;
             $this->addOutputFields($loopResultRow, $template);

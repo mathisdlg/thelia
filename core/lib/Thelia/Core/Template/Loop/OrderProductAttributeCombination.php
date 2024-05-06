@@ -43,19 +43,13 @@ class OrderProductAttributeCombination extends BaseI18nLoop implements PropelSea
 
     /**
      * @return ArgumentCollection
-	 * 
-	 * #doc-arg-name order
-	 * #doc-arg-desc See Order possible values
-	 * #doc-arg-example order="alpha_reverse"
-	 * 
-	 * #doc-arg-name order_product *
-	 * #doc-arg-desc A single order product id.
-	 * #doc-arg-example order_product="2"
      */
     protected function getArgDefinitions()
     {
         return new ArgumentCollection(
+            // #doc-arg-desc A single order product id.
             Argument::createIntTypeArgument('order_product', null, true),
+            // #doc-arg-desc See Order possible values
             new Argument(
                 'order',
                 new TypeCollection(
@@ -90,38 +84,6 @@ class OrderProductAttributeCombination extends BaseI18nLoop implements PropelSea
         return $search;
     }
 
-	 /**
-	 * 
-	 * #doc-out-name $ATTRIBUTE_AVAILABILITY_CHAPO
-	 * #doc-out-desc the order product attribute availability chapo
-	 * 
-	 * #doc-out-name $ATTRIBUTE_AVAILABILITY_DESCRIPTION
-	 * #doc-out-desc the order product attribute availability description
-	 * 
-	 * #doc-out-name $ATTRIBUTE_AVAILABILITY_POSTSCRIPTUM
-	 * #doc-out-desc the order product attribute availability postscriptum
-	 * 
-	 * #doc-out-name $ATTRIBUTE_AVAILABILITY_TITLE
-	 * #doc-out-desc the order product attribute availability title
-	 * 
-	 * #doc-out-name $ATTRIBUTE_CHAPO
-	 * #doc-out-desc the order product attribute chapo
-	 * 
-	 * #doc-out-name $ATTRIBUTE_DESCRIPTION
-	 * #doc-out-desc the order product attribute description
-	 * 
-	 * #doc-out-name $ATTRIBUTE_POSTSCRIPTUM
-	 * #doc-out-desc the order product attribute postscriptum
-	 * 
-	 * #doc-out-name $ATTRIBUTE_TITLE
-	 * #doc-out-desc the order product attribute title
-	 * 
-	 * #doc-out-name $ID
-	 * #doc-out-desc the order product attribute combination ID
-	 * 
-	 * #doc-out-name $ORDER_PRODUCT_ID
-	 * #doc-out-desc the related order product ID
-	 */
     public function parseResults(LoopResult $loopResult)
     {
         /** @var OrderProductAttributeCombinationModel $orderAttributeCombination */
@@ -129,15 +91,25 @@ class OrderProductAttributeCombination extends BaseI18nLoop implements PropelSea
             $loopResultRow = new LoopResultRow($orderAttributeCombination);
 
             $loopResultRow
+		        // #doc-out-desc the order product attribute combination ID
                 ->set('ID', $orderAttributeCombination->getId())
+		        // #doc-out-desc the related order product ID
                 ->set('ORDER_PRODUCT_ID', $orderAttributeCombination->getOrderProductId())
+		        // #doc-out-desc the order product attribute title
                 ->set('ATTRIBUTE_TITLE', $orderAttributeCombination->getAttributeTitle())
+		        // #doc-out-desc the order product attribute chapo
                 ->set('ATTRIBUTE_CHAPO', $orderAttributeCombination->getAttributeChapo())
+		        // #doc-out-desc the order product attribute description
                 ->set('ATTRIBUTE_DESCRIPTION', $orderAttributeCombination->getAttributeDescription())
+		        // #doc-out-desc the order product attribute postscriptum
                 ->set('ATTRIBUTE_POSTSCRIPTUM', $orderAttributeCombination->getAttributePostscriptum())
+		        // #doc-out-desc the order product attribute availability title
                 ->set('ATTRIBUTE_AVAILABILITY_TITLE', $orderAttributeCombination->getAttributeAvTitle())
+		        // #doc-out-desc the order product attribute availability chapo
                 ->set('ATTRIBUTE_AVAILABILITY_CHAPO', $orderAttributeCombination->getAttributeAvChapo())
+		        // #doc-out-desc the order product attribute availability description
                 ->set('ATTRIBUTE_AVAILABILITY_DESCRIPTION', $orderAttributeCombination->getAttributeAvDescription())
+		        // #doc-out-desc the order product attribute availability postscriptum
                 ->set('ATTRIBUTE_AVAILABILITY_POSTSCRIPTUM', $orderAttributeCombination->getAttributeAvPostscriptum())
             ;
             $this->addOutputFields($loopResultRow, $orderAttributeCombination);

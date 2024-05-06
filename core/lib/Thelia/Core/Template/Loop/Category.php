@@ -72,88 +72,39 @@ class Category extends BaseI18nLoop implements PropelSearchLoopInterface, Search
 
     /**
      * @return ArgumentCollection
-	 * 
-	 * #doc-arg-name content
-	 * #doc-arg-desc One or more content ID. When this parameter is set, the loop returns the categories related to the specified content IDs.
-	 * #doc-arg-example content="3"
-	 * 
-	 * #doc-arg-name current
-	 * #doc-arg-desc A boolean value which allows either to exclude current category from results either to match only this category
-	 * #doc-arg-example current="yes"
-	 * 
-	 * #doc-arg-name exclude
-	 * #doc-arg-desc A single or a list of category ids.
-	 * #doc-arg-example exclude="2", exclude="1,4,7"
-	 * 
-	 * #doc-arg-name exclude_parent
-	 * #doc-arg-desc A single or list of categories id to exclude.
-	 * #doc-arg-example exclude_parent="12,22"
-	 * 
-	 * #doc-arg-name exclude_product
-	 * #doc-arg-desc A single or list product id to exclude.
-	 * #doc-arg-example exclude_product="3"
-	 * 
-	 * #doc-arg-name id
-	 * #doc-arg-desc A single or a list of category ids.
-	 * #doc-arg-example id="2", id="1,4,7"
-	 * 
-	 * #doc-arg-name need_count_child
-	 * #doc-arg-desc A boolean. If set to true, count how many subcategories contains the current category
-	 * #doc-arg-example need_count_child="yes"
-	 * 
-	 * #doc-arg-name need_product_count
-	 * #doc-arg-desc A boolean. If set to true, count how many products contains the current category
-	 * #doc-arg-example need_product_count="yes"
-	 * 
-	 * #doc-arg-name not_empty
-	 * #doc-arg-desc (**not implemented yet**) A boolean value. If true, only the categories which contains at least a visible product (either directly or through a subcategory) are returned
-	 * #doc-arg-example not_empty="yes"
-	 * 
-	 * #doc-arg-name order
-	 * #doc-arg-desc A list of values <br/> Expected values
-	 * #doc-arg-example order="random"
-	 * 
-	 * #doc-arg-name parent
-	 * #doc-arg-desc A single or a list of category ids.
-	 * #doc-arg-example parent="3", parent="2,5,8"
-	 * 
-	 * #doc-arg-name product
-	 * #doc-arg-desc A single or list of product IDs.
-	 * #doc-arg-example product="3"
-	 * 
-	 * #doc-arg-name ProductCountVisibleOnly
-	 * #doc-arg-desc A boolean that specifies whether product counting should be performed only for visible products
-	 * #doc-arg-example ProductCountVisibleOnly=true
-	 * 
-	 * #doc-arg-name TemplateId
-	 * #doc-arg-desc IDs of template models used to filter categories
-	 * #doc-arg-example 
-	 * 
-	 * #doc-arg-name visible
-	 * #doc-arg-desc A boolean value.
-	 * #doc-arg-example visible="no"
-	 * 
-	 * #doc-arg-name with_prev_next_info
-	 * #doc-arg-desc A boolean. If set to true, $PREVIOUS and $NEXT output arguments are available.
-	 * #doc-arg-example with_prev_next_info="yes"
      */
     protected function getArgDefinitions()
     {
         return new ArgumentCollection(
+		    // #doc-arg-desc A single or a list of category ids.
             Argument::createIntListTypeArgument('id'),
+		    // #doc-arg-desc A single or a list of category ids.
             Argument::createIntListTypeArgument('parent'),
+		    // #doc-arg-desc A single or list of categories id to exclude.
             Argument::createIntListTypeArgument('exclude_parent'),
+		    // #doc-arg-desc A single or list of product IDs.
             Argument::createIntListTypeArgument('product'),
+		    // #doc-arg-desc A single or list product id to exclude.
             Argument::createIntListTypeArgument('exclude_product'),
+		    // #doc-arg-desc One or more content ID. When this parameter is set, the loop returns the categories related to the specified content IDs.
             Argument::createIntListTypeArgument('content'),
+		    // #doc-arg-desc A boolean value which allows either to exclude current category from results either to match only this category
             Argument::createBooleanTypeArgument('current'),
+		    // #doc-arg-desc (**not implemented yet**) A boolean value. If true, only the categories which contains at least a visible product (either directly or through a subcategory) are returned
             Argument::createBooleanTypeArgument('not_empty', 0),
+		    // #doc-arg-desc A boolean. If set to true, $PREVIOUS and $NEXT output arguments are available.
             Argument::createBooleanTypeArgument('with_prev_next_info', false),
+		    // #doc-arg-desc A boolean. If set to true, count how many subcategories contains the current category
             Argument::createBooleanTypeArgument('need_count_child', false),
+		    // #doc-arg-desc A boolean. If set to true, count how many products contains the current category
             Argument::createBooleanTypeArgument('need_product_count', false),
+            // #doc-arg-desc A boolean that specifies whether product counting should be performed only for visible products
             Argument::createBooleanTypeArgument('product_count_visible_only', false),
+		    // #doc-arg-desc A boolean value.
             Argument::createBooleanOrBothTypeArgument('visible', 1),
+            // #doc-arg-desc IDs of template models used to filter categories
             Argument::createIntListTypeArgument('template_id'),
+            // #doc-arg-desc A list of values
             new Argument(
                 'order',
                 new TypeCollection(
@@ -169,6 +120,7 @@ class Category extends BaseI18nLoop implements PropelSearchLoopInterface, Search
                 ),
                 'manual'
             ),
+		// #doc-arg-desc A single or a list of category ids.
             Argument::createIntListTypeArgument('exclude')
         );
     }
@@ -327,74 +279,7 @@ class Category extends BaseI18nLoop implements PropelSearchLoopInterface, Search
         return $search;
     }
 
-	 /**
-	 * 
-	 * #doc-out-name $CHAPO
-	 * #doc-out-desc The category chapo
-	 * 
-	 * #doc-out-name $CHILD_COUNT
-	 * #doc-out-desc Number of subcategories contained by the current category.<br/> **Only available if "need_count_child" is set to true**
-	 * 
-	 * #doc-out-name $DESCRIPTION
-	 * #doc-out-desc The category description
-	 * 
-	 * #doc-out-name $HAS_NEXT
-	 * #doc-out-desc True if a category exists after this one in the current parent category, following categories positions.<br/> **Only available if "with_prev_next_info" is set to true**
-	 * 
-	 * #doc-out-name $HAS_PREVIOUS
-	 * #doc-out-desc True if a category exists before this one in the current parent category, following categories positions.<br/> **Only available if "with_prev_next_info" is set to true**
-	 * 
-	 * #doc-out-name $ID
-	 * #doc-out-desc The category id
-	 * 
-	 * #doc-out-name $IS_TRANSLATED
-	 * #doc-out-desc Check if the category is translated or not
-	 * 
-	 * #doc-out-name $LOCALE
-	 * #doc-out-desc The locale used for this loop
-	 * 
-	 * #doc-out-name $META_DESCRIPTION
-	 * #doc-out-desc The category meta description
-	 * 
-	 * #doc-out-name $META_KEYWORD
-	 * #doc-out-desc The category meta keyword
-	 * 
-	 * #doc-out-name $META_TITLE
-	 * #doc-out-desc The category meta title
-	 * 
-	 * #doc-out-name $NEXT
-	 * #doc-out-desc The ID of category after this one in the current parent category, following categories positions, or null if none exists.<br/> **Only available if "with_prev_next_info" is set to true**
-	 * 
-	 * #doc-out-name $PARENT
-	 * #doc-out-desc The parent category
-	 * 
-	 * #doc-out-name $POSITION
-	 * #doc-out-desc The category position
-	 * 
-	 * #doc-out-name $POSTSCRIPTUM
-	 * #doc-out-desc The category postscriptum
-	 * 
-	 * #doc-out-name $PRODUCT_COUNT
-	 * #doc-out-desc Number of visible products contained by the current category. <br/> **Only available if "need_product_child" is set to true**
-	 * 
-	 * #doc-out-name $PREVIOUS
-	 * #doc-out-desc The ID of category before this one in the current parent category, following categories positions, or null if none exists.<br/> **Only available if "with_prev_next_info" is set to true**
-	 * 
-	 * #doc-out-name $ROOT
-	 * #doc-out-desc ID of the root category to which a category belongs
-	 * 
-	 * #doc-out-name $TEMPLATE
-	 * #doc-out-desc The template id associated to this category
-	 * 
-	 * #doc-out-name $TITLE
-	 * #doc-out-desc The category title
-	 * 
-	 * #doc-out-name $URL
-	 * #doc-out-desc The category URL
-	 * 
-	 * #doc-out-name $VISIBLE
-	 * #doc-out-desc Return if the category is visible or not
-	 */
+	
     public function parseResults(LoopResult $loopResult)
     {
         /** @var CategoryModel $category */
@@ -407,31 +292,49 @@ class Category extends BaseI18nLoop implements PropelSearchLoopInterface, Search
             $loopResultRow = new LoopResultRow($category);
 
             $loopResultRow
+		        // #doc-out-desc The category id
                 ->set('ID', $category->getId())
+		        // #doc-out-desc Check if the category is translated or not
                 ->set('IS_TRANSLATED', $category->getVirtualColumn('IS_TRANSLATED'))
+		        // #doc-out-desc The locale used for this loop
                 ->set('LOCALE', $this->locale)
+		        // #doc-out-desc The category title
                 ->set('TITLE', $category->getVirtualColumn('i18n_TITLE'))
+		        // #doc-out-desc The category chapo
                 ->set('CHAPO', $category->getVirtualColumn('i18n_CHAPO'))
+		        // #doc-out-desc The category description
                 ->set('DESCRIPTION', $category->getVirtualColumn('i18n_DESCRIPTION'))
+		        // #doc-out-desc The category postscriptum
                 ->set('POSTSCRIPTUM', $category->getVirtualColumn('i18n_POSTSCRIPTUM'))
+		        // #doc-out-desc The parent category
                 ->set('PARENT', $category->getParent())
+		        // #doc-out-desc ID of the root category to which a category belongs
                 ->set('ROOT', $category->getRoot($category->getId()))
+		        // #doc-out-desc The category URL
                 ->set('URL', $this->getReturnUrl() ? $category->getUrl($this->locale) : null)
+		        // #doc-out-desc The category meta title
                 ->set('META_TITLE', $category->getVirtualColumn('i18n_META_TITLE'))
+		        // #doc-out-desc The category meta description
                 ->set('META_DESCRIPTION', $category->getVirtualColumn('i18n_META_DESCRIPTION'))
                 ->set('META_KEYWORDS', $category->getVirtualColumn('i18n_META_KEYWORDS'))
+		        // #doc-out-desc Return if the category is visible or not
                 ->set('VISIBLE', $category->getVisible() ? '1' : '0')
+		        // #doc-out-desc The category position
                 ->set('POSITION', $category->getPosition())
+		        // #doc-out-desc The template id associated to this category
                 ->set('TEMPLATE', $category->getDefaultTemplateId());
 
             if ($this->getNeedCountChild()) {
+		        // #doc-out-desc Number of subcategories contained by the current category.<br/>
                 $loopResultRow->set('CHILD_COUNT', $category->countChild());
             }
 
             if ($this->getNeedProductCount()) {
                 if ($this->getProductCountVisibleOnly()) {
+		            // #doc-out-desc Number of visible products contained by the current category. <br/>
                     $loopResultRow->set('PRODUCT_COUNT', $category->countAllProductsVisibleOnly());
                 } else {
+		            // #doc-out-desc Number of visible products contained by the current category. <br/>
                     $loopResultRow->set('PRODUCT_COUNT', $category->countAllProducts());
                 }
             }
@@ -465,9 +368,13 @@ class Category extends BaseI18nLoop implements PropelSearchLoopInterface, Search
                     ->findOne();
 
                 $loopResultRow
+		            // #doc-out-desc True if a category exists before this one in the current parent category, following categories positions.<br/>
                     ->set('HAS_PREVIOUS', $previous != null ? 1 : 0)
+		            // #doc-out-desc True if a category exists after this one in the current parent category, following categories positions.<br/>
                     ->set('HAS_NEXT', $next != null ? 1 : 0)
+		            // #doc-out-desc The ID of category before this one in the current parent category, following categories positions, or null if none exists.<br/>
                     ->set('PREVIOUS', $previous != null ? $previous->getId() : -1)
+		            // #doc-out-desc The ID of category after this one in the current parent category, following categories positions, or null if none exists.<br/>
                     ->set('NEXT', $next != null ? $next->getId() : -1);
             }
 

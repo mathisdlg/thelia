@@ -66,65 +66,17 @@ class Document extends BaseI18nLoop implements PropelSearchLoopInterface
 
     /**
      * @return \Thelia\Core\Template\Loop\Argument\ArgumentCollection
-	 * 
-	 * #doc-arg-name category **
-	 * #doc-arg-desc a category identifier. The loop will return this category's documents
-	 * #doc-arg-example category="2"
-	 * 
-	 * #doc-arg-name content **
-	 * #doc-arg-desc a content identifier. The loop will return this content's documents
-	 * #doc-arg-example content="2"
-	 * 
-	 * #doc-arg-name exclude
-	 * #doc-arg-desc A single or a comma-separated list of document IDs to exclude from the list.
-	 * #doc-arg-example exclude="456,123"
-	 * 
-	 * #doc-arg-name folder **
-	 * #doc-arg-desc a folder identifier. The loop will return this folder's documents
-	 * #doc-arg-example folder="2"
-	 * 
-	 * #doc-arg-name force_return
-	 * #doc-arg-desc a boolean to define if the return is forced
-	 * #doc-arg-example force_return="no"
-	 * 
-	 * #doc-arg-name id
-	 * #doc-arg-desc A single or a list of document ids.
-	 * #doc-arg-example id="2", id="1,4,7"
-	 * 
-	 * #doc-arg-name order
-	 * #doc-arg-desc A list of values see sorting possible values
-	 * #doc-arg-example order="alpha_reverse"
-	 * 
-	 * #doc-arg-name product **
-	 * #doc-arg-desc a product identifier. The loop will return this product's documents
-	 * #doc-arg-example product="2"
-	 * 
-	 * #doc-arg-name query_namespace
-	 * #doc-arg-desc a namespace
-	 * #doc-arg-example 
-	 * 
-	 * #doc-arg-name source **
-	 * #doc-arg-desc see Expected values
-	 * #doc-arg-example source="category"
-	 * 
-	 * #doc-arg-name source_id
-	 * #doc-arg-desc The identifier of the object provided in the "source" parameter. Only considered if the "source" argument is present
-	 * #doc-arg-example source_id="2"
-	 * 
-	 * #doc-arg-name visible
-	 * #doc-arg-desc A boolean value.
-	 * #doc-arg-example visible="no"
-	 * 
-	 * #doc-arg-name with_prev_next_info
-	 * #doc-arg-desc A boolean. If set to true, $HAS_PREVIOUS, $HAS_NEXT, $PREVIOUS, and $NEXT output variables are available.
-	 * #doc-arg-example 
      */
     protected function getArgDefinitions()
     {
         $collection = new ArgumentCollection(
+		    // #doc-arg-desc A single or a list of document ids.
             Argument::createIntListTypeArgument('id'),
+		    // #doc-arg-desc A single or a comma-separated list of document IDs to exclude from the list.
             Argument::createIntListTypeArgument('exclude'),
+		    // #doc-arg-desc A boolean value.
             Argument::createBooleanOrBothTypeArgument('visible', 1),
+            // #doc-arg-desc A list of values
             new Argument(
                 'order',
                 new TypeCollection(
@@ -132,15 +84,25 @@ class Document extends BaseI18nLoop implements PropelSearchLoopInterface
                 ),
                 'manual'
             ),
+            // #doc-arg-desc The language
             Argument::createIntTypeArgument('lang'),
+            // #doc-arg-desc a category identifier. The loop will return this category's documents
             Argument::createIntTypeArgument('category'),
+            // #doc-arg-desc a product identifier. The loop will return this product's documents
             Argument::createIntTypeArgument('product'),
+            // #doc-arg-desc a folder identifier. The loop will return this folder's documents
             Argument::createIntTypeArgument('folder'),
+            // #doc-arg-desc a content identifier. The loop will return this content's documents
             Argument::createIntTypeArgument('content'),
+            // #doc-arg-desc see Expected values
             Argument::createAnyTypeArgument('source'),
+		    // #doc-arg-desc The identifier of the object provided in the "source" parameter. Only considered if the "source" argument is present
             Argument::createIntTypeArgument('source_id'),
+		    // #doc-arg-desc a boolean to define if the return is forced
             Argument::createBooleanTypeArgument('force_return', true),
+		    // #doc-arg-desc a namespace
             Argument::createAnyTypeArgument('query_namespace', 'Thelia\\Model'),
+		    // #doc-arg-desc A boolean. If set to true, $HAS_PREVIOUS, $HAS_NEXT, $PREVIOUS, and $NEXT output variables are available.
             Argument::createBooleanTypeArgument('with_prev_next_info', false)
         );
 
@@ -291,62 +253,7 @@ class Document extends BaseI18nLoop implements PropelSearchLoopInterface
         return $search;
     }
 
-	 /**
-	 * 
-	 * #doc-out-name $CHAPO
-	 * #doc-out-desc the document chapo
-	 * 
-	 * #doc-out-name $DESCRIPTION
-	 * #doc-out-desc the document description
-	 * 
-	 * #doc-out-name $DOCUMENT_FILE
-	 * #doc-out-desc the document file
-	 * 
-	 * #doc-out-name $DOCUMENT_PATH
-	 * #doc-out-desc The absolute path to the generated document file
-	 * 
-	 * #doc-out-name $DOCUMENT_URL
-	 * #doc-out-desc The absolute URL to the generated document
-	 * 
-	 * #doc-out-name $HAS_NEXT
-	 * #doc-out-desc Only available if <strong>with_prev_next_info</strong> parameter is set to true
-	 * 
-	 * #doc-out-name $HAS_PREVIOUS
-	 * #doc-out-desc Only available if <strong>with_prev_next_info</strong> parameter is set to true
-	 * 
-	 * #doc-out-name $ID
-	 * #doc-out-desc the document ID
-	 * 
-	 * #doc-out-name $LOCALE
-	 * #doc-out-desc the locale
-	 * 
-	 * #doc-out-name $NEXT
-	 * #doc-out-desc Only available if <strong>with_prev_next_info</strong> parameter is set to true
-	 * 
-	 * #doc-out-name $OBJECT_ID
-	 * #doc-out-desc The object ID
-	 * 
-	 * #doc-out-name $OBJECT_TYPE
-	 * #doc-out-desc The object type (e.g., produc, category, etc. see 'source' parameter for possible values)
-	 * 
-	 * #doc-out-name $ORIGINAL_DOCUMENT_PATH
-	 * #doc-out-desc The absolute path to the original document file
-	 * 
-	 * #doc-out-name $POSITION
-	 * #doc-out-desc the position of this document in the object's document list
-	 * 
-	 * #doc-out-name $POSTSCRIPTUM
-	 * #doc-out-desc the document postscriptum
-	 * 
-	 * #doc-out-name $PREVIOUS
-	 * #doc-out-desc Only available if <strong>with_prev_next_info</strong> parameter is set to true
-	 * 
-	 * #doc-out-name $TITLE
-	 * #doc-out-desc the document title
-	 * 
-	 * #doc-out-name $VISIBLE
-	 * #doc-out-desc true if the document is visible. False otherwise
-	 */
+
     public function parseResults(LoopResult $loopResult)
     {
         $baseSourceFilePath = ConfigQuery::read('documents_library_path');
@@ -379,19 +286,33 @@ class Document extends BaseI18nLoop implements PropelSearchLoopInterface
                 $loopResultRow = new LoopResultRow($result);
 
                 $loopResultRow
+		            // #doc-out-desc the document ID
                     ->set('ID', $result->getId())
+		            // #doc-out-desc the locale
                     ->set('LOCALE', $this->locale)
+		            // #doc-out-desc the document file
                     ->set('DOCUMENT_FILE', $result->getFile())
+		            // #doc-out-desc The absolute URL to the generated document
                     ->set('DOCUMENT_URL', $event->getDocumentUrl())
+		            // #doc-out-desc The absolute path to the generated document file
                     ->set('DOCUMENT_PATH', $event->getDocumentPath())
+		            // #doc-out-desc The absolute path to the original document file
                     ->set('ORIGINAL_DOCUMENT_PATH', $sourceFilePath)
+		            // #doc-out-desc the document title
                     ->set('TITLE', $result->getVirtualColumn('i18n_TITLE'))
+		            // #doc-out-desc the document chapo
                     ->set('CHAPO', $result->getVirtualColumn('i18n_CHAPO'))
+		            // #doc-out-desc the document description
                     ->set('DESCRIPTION', $result->getVirtualColumn('i18n_DESCRIPTION'))
+		            // #doc-out-desc the document postscriptum
                     ->set('POSTSCRIPTUM', $result->getVirtualColumn('i18n_POSTSCRIPTUM'))
+		            // #doc-out-desc true if the document is visible. False otherwise
                     ->set('VISIBLE', $result->getVisible())
+		            // #doc-out-desc the position of this document in the object's document list
                     ->set('POSITION', $result->getPosition())
+		            // #doc-out-desc The object type (e.g., produc, category, etc. see 'source' parameter for possible values)
                     ->set('OBJECT_TYPE', $this->objectType)
+		            // #doc-out-desc The object ID
                     ->set('OBJECT_ID', $this->objectId)
                 ;
 
@@ -414,9 +335,13 @@ class Document extends BaseI18nLoop implements PropelSearchLoopInterface
                         ->orderByPosition(Criteria::ASC)
                         ->findOne();
                     $loopResultRow
+                        // #doc-out-desc Only available if <strong>with_prev_next_info</strong> parameter is set to true
                         ->set('HAS_PREVIOUS', $previous != null ? 1 : 0)
+                        // #doc-out-desc Only available if <strong>with_prev_next_info</strong> parameter is set to true
                         ->set('HAS_NEXT', $next != null ? 1 : 0)
+                        // #doc-out-desc Only available if <strong>with_prev_next_info</strong> parameter is set to true
                         ->set('PREVIOUS', $previous != null ? $previous->getId() : -1)
+                        // #doc-out-desc Only available if <strong>with_prev_next_info</strong> parameter is set to true
                         ->set('NEXT', $next != null ? $next->getId() : -1);
                 }
 

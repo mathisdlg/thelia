@@ -37,16 +37,7 @@ class ProductSaleElementsImage extends BaseLoop implements PropelSearchLoopInter
 {
     /**
      * @return LoopResult
-	 * 
-	 * #doc-out-name $ID
-	 * #doc-out-desc Product id
-	 * 
-	 * #doc-out-name $PRODUCT_IMAGE_ID
-	 * #doc-out-desc Product image id
-	 * 
-	 * #doc-out-name $PRODUCT_SALE_ELEMENTS_ID
-	 * #doc-out-desc Product sale element id
-     */
+    */
     public function parseResults(LoopResult $loopResult)
     {
         /** @var \Thelia\Model\ProductSaleElementsProductImage $productSaleElementImage */
@@ -54,8 +45,11 @@ class ProductSaleElementsImage extends BaseLoop implements PropelSearchLoopInter
             $row = new LoopResultRow($productSaleElementImage);
 
             $row
+		        // #doc-out-desc Product id
                 ->set('ID', $productSaleElementImage->getId())
+		        // #doc-out-desc Product sale element id
                 ->set('PRODUCT_SALE_ELEMENTS_ID', $productSaleElementImage->getProductSaleElementsId())
+		        // #doc-out-desc Product image id
                 ->set('PRODUCT_IMAGE_ID', $productSaleElementImage->getProductImageId())
             ;
 
@@ -88,30 +82,17 @@ class ProductSaleElementsImage extends BaseLoop implements PropelSearchLoopInter
      *   );
      * }
      *
-     * @return \Thelia\Core\Template\Loop\Argument\ArgumentCollection
-     * 
-     * #doc-arg-name id
-	 * #doc-arg-desc A single or list of product id
-	 * #doc-arg-example id="2", id="1,4,7"
-	 * 
-	 * #doc-arg-name order
-	 * #doc-arg-desc A list of values see sorting possible values
-	 * #doc-arg-example order="position-reverse"
-	 * 
-	 * #doc-arg-name product_sale_elements_id
-	 * #doc-arg-desc A single or list of product sale element id
-	 * #doc-arg-example product_sale_elements_id="2", product_sale_elements_id="1,4,7"
-	 * 
-	 * #doc-arg-name product_image_id
-	 * #doc-arg-desc A single or list of product image id
-	 * #doc-arg-example product_image_id="2", product_image_id="1,4,7"
-     */
+     * @return \Thelia\Core\Template\Loop\Argument\ArgumentCollection     */
     protected function getArgDefinitions()
     {
         return new ArgumentCollection(
+		    // #doc-arg-desc A single or list of product id
             Argument::createIntListTypeArgument('id'),
+		    // #doc-arg-desc A single or list of product sale element id
             Argument::createIntListTypeArgument('product_sale_elements_id'),
+		    // #doc-arg-desc A single or list of product image id
             Argument::createIntListTypeArgument('product_image_id'),
+            // #doc-arg-desc A list of values see sorting possible values
             Argument::createEnumListTypeArgument(
                 'order',
                 [

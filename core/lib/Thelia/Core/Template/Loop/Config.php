@@ -51,39 +51,21 @@ class Config extends BaseI18nLoop implements PropelSearchLoopInterface
 
     /**
      * @return ArgumentCollection
-	 * 
-	 * #doc-arg-name exclude
-	 * #doc-arg-desc A single or a list of config ids.
-	 * #doc-arg-example exclude="2", exclude="1,4,7"
-	 * 
-	 * #doc-arg-name hidden
-	 * #doc-arg-desc A boolean value.
-	 * #doc-arg-example hidden="no"
-	 * 
-	 * #doc-arg-name id
-	 * #doc-arg-desc A single of config id.
-	 * #doc-arg-example id="2"
-	 * 
-	 * #doc-arg-name order
-	 * #doc-arg-desc A list of values <br/> Expected values
-	 * #doc-arg-example order="id_reverse"
-	 * 
-	 * #doc-arg-name secured
-	 * #doc-arg-desc A boolean value.
-	 * #doc-arg-example secured="no"
-	 * 
-	 * #doc-arg-name variable
-	 * #doc-arg-desc Name of a variable config
-	 * #doc-arg-example variable="rewriting_enable"
      */
     protected function getArgDefinitions()
     {
         return new ArgumentCollection(
+		    // #doc-arg-desc A single of config id.
             Argument::createIntTypeArgument('id'),
+		    // #doc-arg-desc A single or a list of config ids.
             Argument::createIntListTypeArgument('exclude'),
+		    // #doc-arg-desc Name of a variable config
             Argument::createAnyTypeArgument('variable'),
+		    // #doc-arg-desc A boolean value.
             Argument::createBooleanOrBothTypeArgument('hidden'),
+		    // #doc-arg-desc A boolean value.
             Argument::createBooleanOrBothTypeArgument('secured'),
+            // #doc-arg-desc A list of values
             new Argument(
                 'order',
                 new TypeCollection(
@@ -166,44 +148,7 @@ class Config extends BaseI18nLoop implements PropelSearchLoopInterface
         return $search;
     }
 
-	 /**
-	 * 
-	 * #doc-out-name $CHAPO
-	 * #doc-out-desc The config variable chapo
-	 * 
-	 * #doc-out-name $DESCRIPTION
-	 * #doc-out-desc The config variable description
-	 * 
-	 * #doc-out-name $HIDDEN
-	 * #doc-out-desc check if the config variable is hidden
-	 * 
-	 * #doc-out-name $ID
-	 * #doc-out-desc the config variable id
-	 * 
-	 * #doc-out-name $IS_OVERRIDDEN_IN_ENV
-	 * #doc-out-desc check if the config is overridden
-	 * 
-	 * #doc-out-name $IS_TRANSLATED
-	 * #doc-out-desc check if the config is translated
-	 * 
-	 * #doc-out-name $LOCALE
-	 * #doc-out-desc The locale used for this research
-	 * 
-	 * #doc-out-name $NAME
-	 * #doc-out-desc The config variable name
-	 * 
-	 * #doc-out-name $POSTSCRIPTUM
-	 * #doc-out-desc The config variable postscriptum
-	 * 
-	 * #doc-out-name $SECURED
-	 * #doc-out-desc Check if the config variable is secured
-	 * 
-	 * #doc-out-name $TITLE
-	 * #doc-out-desc The config variable title
-	 * 
-	 * #doc-out-name $VALUE
-	 * #doc-out-desc The config variable value
-	 */
+	
     public function parseResults(LoopResult $loopResult)
     {
         /** @var ConfigModel $result */
@@ -211,17 +156,29 @@ class Config extends BaseI18nLoop implements PropelSearchLoopInterface
             $loopResultRow = new LoopResultRow($result);
 
             $loopResultRow
+		        // #doc-out-desc the config variable id
                 ->set('ID', $result->getId())
+		        // #doc-out-desc The config variable name
                 ->set('NAME', $result->getName())
+		        // #doc-out-desc The config variable value
                 ->set('VALUE', $result->getValue())
+		        // #doc-out-desc check if the config is overridden
                 ->set('IS_OVERRIDDEN_IN_ENV', $result->isOverriddenInEnv())
+		        // #doc-out-desc check if the config is translated
                 ->set('IS_TRANSLATED', $result->getVirtualColumn('IS_TRANSLATED'))
+		        // #doc-out-desc The locale used for this research
                 ->set('LOCALE', $this->locale)
+		        // #doc-out-desc The config variable title
                 ->set('TITLE', $result->getVirtualColumn('i18n_TITLE'))
+		        // #doc-out-desc The config variable chapo
                 ->set('CHAPO', $result->getVirtualColumn('i18n_CHAPO'))
+		        // #doc-out-desc The config variable description
                 ->set('DESCRIPTION', $result->getVirtualColumn('i18n_DESCRIPTION'))
+		        // #doc-out-desc The config variable postscriptum
                 ->set('POSTSCRIPTUM', $result->getVirtualColumn('i18n_POSTSCRIPTUM'))
+		        // #doc-out-desc check if the config variable is hidden
                 ->set('HIDDEN', $result->getHidden())
+		        // #doc-out-desc Check if the config variable is secured
                 ->set('SECURED', $result->isOverriddenInEnv() ? 1 : $result->getSecured())
             ;
 

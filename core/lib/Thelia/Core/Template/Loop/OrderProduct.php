@@ -46,24 +46,15 @@ class OrderProduct extends BaseLoop implements PropelSearchLoopInterface
 
     /**
      * @return ArgumentCollection
-	 * 
-	 * #doc-arg-name id
-	 * #doc-arg-desc A single or a list of order product ids.
-	 * #doc-arg-example id="2", id="1,4,7"
-	 * 
-	 * #doc-arg-name order *
-	 * #doc-arg-desc A single order id.
-	 * #doc-arg-example order="2"
-	 * 
-	 * #doc-arg-name virtual
-	 * #doc-arg-desc A boolean value.
-	 * #doc-arg-example new="yes"
      */
     protected function getArgDefinitions()
     {
         return new ArgumentCollection(
+            // #doc-arg-desc A single order id.
             Argument::createIntTypeArgument('order', null, true),
+		    // #doc-arg-desc A single or a list of order product ids.
             Argument::createIntListTypeArgument('id'),
+		    // #doc-arg-desc A boolean value.
             Argument::createBooleanOrBothTypeArgument('virtual', BooleanOrBothType::ANY)
         );
     }
@@ -120,115 +111,7 @@ class OrderProduct extends BaseLoop implements PropelSearchLoopInterface
      * @throws \Propel\Runtime\Exception\PropelException
      *
      * @return LoopResult
-	 * 
-	 * #doc-out-name $CART_ITEM_ID
-	 * #doc-out-desc The related Cart Item ID of this order product
-	 * 
-	 * #doc-out-name $CHAPO
-	 * #doc-out-desc the order product short description
-	 * 
-	 * #doc-out-name $DESCRIPTION
-	 * #doc-out-desc the order product description
-	 * 
-	 * #doc-out-name $EAN_CODE
-	 * #doc-out-desc the product ean code
-	 * 
-	 * #doc-out-name $ID
-	 * #doc-out-desc the order product id
-	 * 
-	 * #doc-out-name $PRODUCT_ID
-	 * #doc-out-desc the product id
-	 * 
-	 * #doc-out-name $PARENT
-	 * #doc-out-desc the parent product in the cart, if the current product has one
-	 * 
-	 * #doc-out-name $POSTSCRIPTUM
-	 * #doc-out-desc the order product postscriptum
-	 * 
-	 * #doc-out-name $PRICE
-	 * #doc-out-desc the order product price (unit price)
-	 * 
-	 * #doc-out-name $PRICE_TAX
-	 * #doc-out-desc the order product taxes (unit price)
-	 * 
-	 * #doc-out-name $PRODUCT_SALE_ELEMENTS_ID
-	 * #doc-out-desc the order product sale elements id
-	 * 
-	 * #doc-out-name $PRODUCT_SALE_ELEMENTS_REF
-	 * #doc-out-desc the order product sale elements reference
-	 * 
-	 * #doc-out-name $PROMO_PRICE
-	 * #doc-out-desc the order product in promo price (unit price)
-	 * 
-	 * #doc-out-name $PROMO_PRICE_TAX
-	 * #doc-out-desc the order product in promo price taxes (unit price)
-	 * 
-	 * #doc-out-name $QUANTITY
-	 * #doc-out-desc the order product ordered quantity
-	 * 
-	 * #doc-out-name $REF
-	 * #doc-out-desc the order product reference
-	 * 
-	 * #doc-out-name $TAXED_PRICE
-	 * #doc-out-desc the order product price including taxes (unit price)
-	 * 
-	 * #doc-out-name $TAXED_PROMO_PRICE
-	 * #doc-out-desc the order product in promo price including taxes (unit price)
-	 * 
-	 * #doc-out-name $TAX_RULE_DESCRIPTION
-	 * #doc-out-desc the tax rule description for this item
-	 * 
-	 * #doc-out-name $TAX_RULE_TITLE
-	 * #doc-out-desc the tax rule title for this item
-	 * 
-	 * #doc-out-name $TITLE
-	 * #doc-out-desc the order product title
-	 * 
-	 * #doc-out-name $TOTAL_PRICE
-	 * #doc-out-desc the order product price (total price)
-	 * 
-	 * #doc-out-name $TOTAL_PROMO_PRICE
-	 * #doc-out-desc the order product in promo price (total price)
-	 * 
-	 * #doc-out-name $TOTAL_TAXED_PRICE
-	 * #doc-out-desc the order product price including taxes (total price)
-	 * 
-	 * #doc-out-name $TOTAL_TAXED_PROMO_PRICE
-	 * #doc-out-desc the order product in promo price including taxes (total price)
-	 * 
-	 * #doc-out-name $VIRTUAL
-	 * #doc-out-desc whatever the order product is a virtual product or not
-	 * 
-	 * #doc-out-name $VIRTUAL_DOCUMENT
-	 * #doc-out-desc the name of the file if the product is virtual.
-	 * 
-	 * #doc-out-name $WAS_IN_PROMO
-	 * #doc-out-desc whatever the order product sale elements was in promo or not
-	 * 
-	 * #doc-out-name $WAS_NEW
-	 * #doc-out-desc whatever the order product sale elements was new or not
-	 * 
-	 * #doc-out-name $WEIGHT
-	 * #doc-out-desc the order product sale elements weight
-	 * 
-	 * #doc-out-name $REAL_PRICE
-	 * #doc-out-desc the real price of the product
-	 * 
-	 * #doc-out-name $REAL_TAXED_PRICE
-	 * #doc-out-desc the real price of the product including taxes
-	 * 
-	 * #doc-out-name $REAL_PRICE_TAX
-	 * #doc-out-desc the real price of the taxe for the product
-	 * 
-	 * #doc-out-name $REAL_TOTAL_PRICE
-	 * #doc-out-desc the real total price of the product
-	 * 
-	 * #doc-out-name $REAL_TOTAL_TAXED_PRICE
-	 * #doc-out-desc the real total price of the product including taxes
-	 * 
-	 * #doc-out-name $REAL_TOTAL_PRICE_TAX
-	 * #doc-out-desc the real total price of the taxe for the product
-     */
+	 */
     public function parseResults(LoopResult $loopResult)
     {
         $lastLegacyRoundingOrderId = ConfigQuery::read('last_legacy_rounding_order_id', 0);
@@ -269,45 +152,81 @@ class OrderProduct extends BaseLoop implements PropelSearchLoopInterface
                 $totalTaxedPromoPrice = $taxedPromoPrice * $orderProduct->getQuantity();
             }
 
+			// #doc-out-desc the order product id
             $loopResultRow->set('ID', $orderProduct->getId())
+				// #doc-out-desc the order product reference
                 ->set('REF', $orderProduct->getProductRef())
+				// #doc-out-desc the product id
                 ->set('PRODUCT_ID', $orderProduct->getVirtualColumn('product_id'))
+				// #doc-out-desc the order product sale elements id
                 ->set('PRODUCT_SALE_ELEMENTS_ID', $orderProduct->getProductSaleElementsId())
+				// #doc-out-desc the order product sale elements reference
                 ->set('PRODUCT_SALE_ELEMENTS_REF', $orderProduct->getProductSaleElementsRef())
+				// #doc-out-desc whatever the order product sale elements was new or not
                 ->set('WAS_NEW', $orderProduct->getWasNew() === 1 ? 1 : 0)
+				// #doc-out-desc whatever the order product sale elements was in promo or not
                 ->set('WAS_IN_PROMO', $orderProduct->getWasInPromo() === 1 ? 1 : 0)
+				// #doc-out-desc the order product sale elements weight
                 ->set('WEIGHT', $orderProduct->getWeight())
+				// #doc-out-desc the order product title
                 ->set('TITLE', $orderProduct->getTitle())
+				// #doc-out-desc the order product short description
                 ->set('CHAPO', $orderProduct->getChapo())
+				// #doc-out-desc the order product description
                 ->set('DESCRIPTION', $orderProduct->getDescription())
+				// #doc-out-desc the order product postscriptum
                 ->set('POSTSCRIPTUM', $orderProduct->getPostscriptum())
+				// #doc-out-desc whatever the order product is a virtual product or not
                 ->set('VIRTUAL', $orderProduct->getVirtual())
+				// #doc-out-desc the name of the file if the product is virtual.
                 ->set('VIRTUAL_DOCUMENT', $orderProduct->getVirtualDocument())
+				// #doc-out-desc the order product ordered quantity
                 ->set('QUANTITY', $orderProduct->getQuantity())
 
+				// #doc-out-desc the order product price (unit price)
                 ->set('PRICE', $orderProduct->getPrice())
+				// #doc-out-desc the order product taxes (unit price)
                 ->set('PRICE_TAX', $tax)
+				// #doc-out-desc the order product price including taxes (unit price)
                 ->set('TAXED_PRICE', $taxedPrice)
+				// #doc-out-desc the order product in promo price (unit price)
                 ->set('PROMO_PRICE', $orderProduct->getPromoPrice())
+				// #doc-out-desc the order product in promo price taxes (unit price)
                 ->set('PROMO_PRICE_TAX', $promoTax)
+				// #doc-out-desc the order product in promo price including taxes (unit price)
                 ->set('TAXED_PROMO_PRICE', $taxedPromoPrice)
+				// #doc-out-desc the order product price (total price)
                 ->set('TOTAL_PRICE', $totalPrice)
+				// #doc-out-desc the order product price including taxes (total price)
                 ->set('TOTAL_TAXED_PRICE', $totalTaxedPrice)
+				// #doc-out-desc the order product in promo price (total price)
                 ->set('TOTAL_PROMO_PRICE', $totalPromoPrice)
+				// #doc-out-desc the order product in promo price including taxes (total price)
                 ->set('TOTAL_TAXED_PROMO_PRICE', $totalTaxedPromoPrice)
 
+				// #doc-out-desc the tax rule title for this item
                 ->set('TAX_RULE_TITLE', $orderProduct->getTaxRuleTitle())
+				// #doc-out-desc the tax rule description for this item
                 ->set('TAX_RULE_DESCRIPTION', $orderProduct->getTaxRuledescription())
+				// #doc-out-desc the parent product in the cart, if the current product has one
                 ->set('PARENT', $orderProduct->getParent())
+				// #doc-out-desc the product ean code
                 ->set('EAN_CODE', $orderProduct->getEanCode())
+				// #doc-out-desc The related Cart Item ID of this order product
                 ->set('CART_ITEM_ID', $orderProduct->getCartItemId())
 
+				// #doc-out-desc the real price of the product
                 ->set('REAL_PRICE', $orderProduct->getWasInPromo() ? $orderProduct->getPromoPrice() : $orderProduct->getPrice())
+				// #doc-out-desc the real price of the product including taxes
                 ->set('REAL_TAXED_PRICE', $orderProduct->getWasInPromo() ? $taxedPromoPrice : $taxedPrice)
+				// #doc-out-desc the real price of the taxe for the product
                 ->set('REAL_PRICE_TAX', $orderProduct->getWasInPromo() ? $promoTax : $tax)
 
+				// #doc-out-desc the real total price of the product
                 ->set('REAL_TOTAL_PRICE', $orderProduct->getWasInPromo() ? $totalPromoPrice : $totalPrice)
+				// #doc-out-desc the real total price of the product including taxes
                 ->set('REAL_TOTAL_TAXED_PRICE', $orderProduct->getWasInPromo() ? $totalTaxedPromoPrice : $totalTaxedPrice)
+				// #doc-out-desc the real total price of the taxe for the product
                 ->set('REAL_TOTAL_PRICE_TAX', $orderProduct->getWasInPromo() ? $totalPromoTax : $totalTax)
 
             ;

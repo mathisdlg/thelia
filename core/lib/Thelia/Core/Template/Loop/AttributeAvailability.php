@@ -31,7 +31,7 @@ use Thelia\Type\TypeCollection;
  * AttributeAvailability loop.
  *
  * Class AttributeAvailability
- * 
+ *
  * #doc-desc Attribute availability loop lists attribute availabilities (e.g., attribute values).
  *
  * @author Etienne Roudeix <eroudeix@openstudio.fr>
@@ -48,34 +48,19 @@ class AttributeAvailability extends BaseI18nLoop implements PropelSearchLoopInte
 
     /**
      * @return ArgumentCollection
-	 * 
-	 * #doc-arg-name attribute
-	 * #doc-arg-desc A single or a list of attribute ids.
-	 * #doc-arg-example id="2", id="1,4,7"
-	 * 
-	 * #doc-arg-name exclude
-	 * #doc-arg-desc A single or a list of attribute availability ids to exclude.
-	 * #doc-arg-example exclude="456,123"
-	 * 
-	 * #doc-arg-name id
-	 * #doc-arg-desc A single or a list of attribute availability ids.
-	 * #doc-arg-example id="2", id="1,4,7"
-	 * 
-	 * #doc-arg-name order
-	 * #doc-arg-desc A list of values <br/> Expected values
-	 * #doc-arg-example order="alpha_reverse"
-	 * 
-	 * #doc-arg-name product
-	 * #doc-arg-desc A product ID. If present, only attribute values that are part of this product's combinations are returned
-	 * #doc-arg-example product="279"
      */
     protected function getArgDefinitions()
     {
         return new ArgumentCollection(
+		    // #doc-arg-desc A single or a list of attribute availability ids.
             Argument::createIntListTypeArgument('id'),
+		    // #doc-arg-desc A single or a list of attribute ids.
             Argument::createIntListTypeArgument('attribute'),
+		    // #doc-arg-desc A product ID. If present, only attribute values that are part of this product's combinations are returned
             Argument::createIntTypeArgument('product'),
+		    // #doc-arg-desc A single or a list of attribute availability ids to exclude.
             Argument::createIntListTypeArgument('exclude'),
+            // A list of values
             new Argument(
                 'order',
                 new TypeCollection(
@@ -168,49 +153,29 @@ class AttributeAvailability extends BaseI18nLoop implements PropelSearchLoopInte
         return $search;
     }
 
-	 /**
-	 * 
-	 * #doc-out-name $ATTRIBUTE_ID
-	 * #doc-out-desc the ID of the attribute this attribute availability belongs
-	 * 
-	 * #doc-out-name $CHAPO
-	 * #doc-out-desc the attribute availability chapo
-	 * 
-	 * #doc-out-name $DESCRIPTION
-	 * #doc-out-desc the attribute availability description
-	 * 
-	 * #doc-out-name $ID
-	 * #doc-out-desc the attribute availability id
-	 * 
-	 * #doc-out-name $IS_TRANSLATED
-	 * #doc-out-desc check if the product is translated or not
-	 * 
-	 * #doc-out-name $LOCALE
-	 * #doc-out-desc the locale used for this loop
-	 * 
-	 * #doc-out-name $POSITION
-	 * #doc-out-desc the attribute availability position
-	 * 
-	 * #doc-out-name $POSTSCRIPTUM
-	 * #doc-out-desc the attribute availability postscriptum
-	 * 
-	 * #doc-out-name $TITLE
-	 * #doc-out-desc the attribute availability title
-	 */
     public function parseResults(LoopResult $loopResult)
     {
         /** @var AttributeAvModel $attributeAv */
         foreach ($loopResult->getResultDataCollection() as $attributeAv) {
             $loopResultRow = new LoopResultRow($attributeAv);
             $loopResultRow
+                // #doc-out-desc the attribute availability id
                 ->set('ID', $attributeAv->getId())
+                // #doc-out-desc the ID of the attribute this attribute availability belongs
                 ->set('ATTRIBUTE_ID', $attributeAv->getAttributeId())
+                // #doc-out-desc check if the product is translated or not
                 ->set('IS_TRANSLATED', $attributeAv->getVirtualColumn('IS_TRANSLATED'))
+                // #doc-out-desc the locale used for this loop
                 ->set('LOCALE', $this->locale)
+                // #doc-out-desc the attribute availability title
                 ->set('TITLE', $attributeAv->getVirtualColumn('i18n_TITLE'))
+                // #doc-out-desc the attribute availability chapo
                 ->set('CHAPO', $attributeAv->getVirtualColumn('i18n_CHAPO'))
+                // #doc-out-desc the attribute availability description
                 ->set('DESCRIPTION', $attributeAv->getVirtualColumn('i18n_DESCRIPTION'))
+                // #doc-out-desc the attribute availability postscriptum
                 ->set('POSTSCRIPTUM', $attributeAv->getVirtualColumn('i18n_POSTSCRIPTUM'))
+                // #doc-out-desc the attribute availability position
                 ->set('POSITION', $attributeAv->getPosition())
             ;
             $this->addOutputFields($loopResultRow, $attributeAv);

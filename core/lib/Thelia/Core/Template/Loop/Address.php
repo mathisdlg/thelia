@@ -24,7 +24,6 @@ use Thelia\Model\AddressQuery;
 use Thelia\Type;
 use Thelia\Type\TypeCollection;
 
-
 // #doc-desc Address loop lists address addresses.
 
 /**
@@ -45,26 +44,11 @@ class Address extends BaseLoop implements PropelSearchLoopInterface
 
     /**
      * @return ArgumentCollection
-	 * 
-	 * #doc-arg-name customer
-	 * #doc-arg-desc Either a customer id or the keyword `current` which search for current customer addresses.
-	 * #doc-arg-example customer="current", customer="11"
-	 * 
-	 * #doc-arg-name default
-	 * #doc-arg-desc A boolean value to return either customer default address either all the others.
-	 * #doc-arg-example default="true"
-	 * 
-	 * #doc-arg-name exclude
-	 * #doc-arg-desc A single or a list of address ids to exclude.
-	 * #doc-arg-example exclude="456,123"
-	 * 
-	 * #doc-arg-name id
-	 * #doc-arg-desc A single or a list of address ids.
-	 * #doc-arg-example id="2", id="1,4,7"
      */
     protected function getArgDefinitions()
     {
         return new ArgumentCollection(
+            // #doc-arg-desc A single or a list of address ids.
             new Argument(
                 'id',
                 new TypeCollection(
@@ -72,6 +56,7 @@ class Address extends BaseLoop implements PropelSearchLoopInterface
                     new Type\EnumType(['*', 'any'])
                 )
             ),
+            // #doc-arg-desc Either a customer id or the keyword `current` which search for current customer addresses.
             new Argument(
                 'customer',
                 new TypeCollection(
@@ -80,7 +65,9 @@ class Address extends BaseLoop implements PropelSearchLoopInterface
                 ),
                 'current'
             ),
+            // #doc-arg-desc A boolean value to return either customer default address either all the others.
             Argument::createBooleanOrBothTypeArgument('default'),
+            // #doc-arg-desc A single or a list of address ids to exclude.
             new Argument(
                 'exclude',
                 new TypeCollection(
@@ -130,81 +117,45 @@ class Address extends BaseLoop implements PropelSearchLoopInterface
         return $search;
     }
 
-	 /**
-	 * 
-	 * #doc-out-name $ADDRESS1
-	 * #doc-out-desc the first address line
-	 * 
-	 * #doc-out-name $ADDRESS2
-	 * #doc-out-desc the second address line
-	 * 
-	 * #doc-out-name $ADDRESS3
-	 * #doc-out-desc the third address line
-	 * 
-	 * #doc-out-name $CELLPHONE
-	 * #doc-out-desc the address cellphone
-	 * 
-	 * #doc-out-name $CITY
-	 * #doc-out-desc the address city
-	 * 
-	 * #doc-out-name $COMPANY
-	 * #doc-out-desc the address company
-	 * 
-	 * #doc-out-name $COUNTRY
-	 * #doc-out-desc the address country which might be use in country loop
-	 * 
-	 * #doc-out-name $CUSTOMER
-	 * #doc-out-desc the customer the address is link to which might be use in customer loop
-	 * 
-	 * #doc-out-name $DEFAULT
-	 * #doc-out-desc return if address title is by default address
-	 * 
-	 * #doc-out-name $FIRSTNAME
-	 * #doc-out-desc the address firstname
-	 * 
-	 * #doc-out-name $ID
-	 * #doc-out-desc the address id
-	 * 
-	 * #doc-out-name $LABEL
-	 * #doc-out-desc the address label
-	 * 
-	 * #doc-out-name $LASTNAME
-	 * #doc-out-desc the address lastname
-	 * 
-	 * #doc-out-name $PHONE
-	 * #doc-out-desc the address phone
-	 * 
-	 * #doc-out-name $STATE
-	 * #doc-out-desc the ID of the associated state
-	 * 
-	 * #doc-out-name $TITLE
-	 * #doc-out-desc the address title which might be use in title loop
-	 * 
-	 * #doc-out-name $ZIPCODE
-	 * #doc-out-desc the address zipcode
-	 */
     public function parseResults(LoopResult $loopResult)
     {
         /** @var AddressModel $address */
         foreach ($loopResult->getResultDataCollection() as $address) {
             $loopResultRow = new LoopResultRow($address);
             $loopResultRow
+                // #doc-out-desc the address id
                 ->set('ID', $address->getId())
+                // #doc-out-desc the address label
                 ->set('LABEL', $address->getLabel())
+                // #doc-out-desc the customer the address is link to which might be use in customer loop
                 ->set('CUSTOMER', $address->getCustomerId())
+                // #doc-out-desc the address title which might be use in title loop
                 ->set('TITLE', $address->getTitleId())
+                // #doc-out-desc the address company
                 ->set('COMPANY', $address->getCompany())
+                // #doc-out-desc the address firstname
                 ->set('FIRSTNAME', $address->getFirstname())
+                // #doc-out-desc the address lastname
                 ->set('LASTNAME', $address->getLastname())
+                // #doc-out-desc The address first line
                 ->set('ADDRESS1', $address->getAddress1())
+                // #doc-out-desc The address second line
                 ->set('ADDRESS2', $address->getAddress2())
+                // #doc-out-desc The address third line
                 ->set('ADDRESS3', $address->getAddress3())
+                // #doc-out-desc the address zipcode
                 ->set('ZIPCODE', $address->getZipcode())
+                // #doc-out-desc the address city
                 ->set('CITY', $address->getCity())
+                // #doc-out-desc the address country which might be use in country loop
                 ->set('COUNTRY', $address->getCountryId())
+                // #doc-out-desc the ID of the associated state
                 ->set('STATE', $address->getStateId())
+                // #doc-out-desc the address phone
                 ->set('PHONE', $address->getPhone())
+                // #doc-out-desc the address cellphone
                 ->set('CELLPHONE', $address->getCellphone())
+                // #doc-out-desc return if address title is by default address
                 ->set('DEFAULT', $address->getIsDefault())
             ;
             $this->addOutputFields($loopResultRow, $address);

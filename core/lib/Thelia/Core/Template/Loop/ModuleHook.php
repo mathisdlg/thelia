@@ -45,45 +45,17 @@ class ModuleHook extends BaseI18nLoop implements PropelSearchLoopInterface
 
     /**
      * @return ArgumentCollection
-	 * 
-	 * #doc-arg-name active
-	 * #doc-arg-desc Check if the hook is active
-	 * #doc-arg-example active="1"
-	 * 
-	 * #doc-arg-name exclude
-	 * #doc-arg-desc A single or a list of hook IDs to exclude
-	 * #doc-arg-example exclude="1,2,3"
-	 * 
-	 * #doc-arg-name hook
-	 * #doc-arg-desc The hook name
-	 * #doc-arg-example hook="displayHeader"
-	 * 
-	 * #doc-arg-name hook_active
-	 * #doc-arg-desc Check if the hook is active
-	 * #doc-arg-example hook_active="1"
-	 * 
-	 * #doc-arg-name id
-	 * #doc-arg-desc The hook ID
-	 * #doc-arg-example id="2"
-	 * 
-	 * #doc-arg-name module
-	 * #doc-arg-desc The module name
-	 * #doc-arg-example module="blockcart"
-	 * 
-	 * #doc-arg-name module_active
-	 * #doc-arg-desc Check if the module is active
-	 * #doc-arg-example module_active="1"
-	 * 
-	 * #doc-arg-name order
-	 * #doc-arg-desc a list of values see sorting possible values
-	 * #doc-arg-example order="id"
      */
     protected function getArgDefinitions()
     {
         return new ArgumentCollection(
+		    // #doc-arg-desc The hook ID
             Argument::createIntListTypeArgument('id'),
+		    // #doc-arg-desc The hook name
             Argument::createIntTypeArgument('hook'),
+		    // #doc-arg-desc The module name
             Argument::createIntTypeArgument('module'),
+            // #doc-arg-desc a list of values see sorting possible values
             new Argument(
                 'order',
                 new TypeCollection(
@@ -91,9 +63,13 @@ class ModuleHook extends BaseI18nLoop implements PropelSearchLoopInterface
                 ),
                 'manual'
             ),
+		    // #doc-arg-desc A single or a list of hook IDs to exclude
             Argument::createIntListTypeArgument('exclude'),
+		    // #doc-arg-desc Check if the hook is active
             Argument::createBooleanOrBothTypeArgument('active', Type\BooleanOrBothType::ANY),
+		    // #doc-arg-desc Check if the hook is active
             Argument::createBooleanOrBothTypeArgument('hook_active', Type\BooleanOrBothType::ANY),
+		    // #doc-arg-desc Check if the module is active
             Argument::createBooleanOrBothTypeArgument('module_active', Type\BooleanOrBothType::ANY)
         );
     }
@@ -173,44 +149,6 @@ class ModuleHook extends BaseI18nLoop implements PropelSearchLoopInterface
         return $search;
     }
 
-	 /**
-	 * 
-	 * #doc-out-name $ACTIVE
-	 * #doc-out-desc The hook status
-	 * 
-	 * #doc-out-name $CLASSNAME
-	 * #doc-out-desc The hook class name
-	 * 
-	 * #doc-out-name $HOOK_ACTIVE
-	 * #doc-out-desc The hook status
-	 * 
-	 * #doc-out-name $HOOK_ID
-	 * #doc-out-desc The hook ID
-	 * 
-	 * #doc-out-name $ID
-	 * #doc-out-desc The hook module id
-	 * 
-	 * #doc-out-name $METHOD
-	 * #doc-out-desc The hook method
-	 * 
-	 * #doc-out-name $MODULE_ACTIVE
-	 * #doc-out-desc The module status
-	 * 
-	 * #doc-out-name $MODULE_CODE
-	 * #doc-out-desc The module code
-	 * 
-	 * #doc-out-name $MODULE_ID
-	 * #doc-out-desc The module ID
-	 * 
-	 * #doc-out-name $MODULE_TITLE
-	 * #doc-out-desc The module title
-	 * 
-	 * #doc-out-name $POSITION
-	 * #doc-out-desc The hook position
-	 * 
-	 * #doc-out-name $TEMPLATES
-	 * #doc-out-desc The hook templates
-	 */
     public function parseResults(LoopResult $loopResult)
     {
         /** @var \Thelia\Model\ModuleHook $moduleHook */
@@ -219,17 +157,29 @@ class ModuleHook extends BaseI18nLoop implements PropelSearchLoopInterface
                 $loopResultRow = new LoopResultRow($moduleHook);
 
                 $loopResultRow
+		            // #doc-out-desc The hook module id
                     ->set('ID', $moduleHook->getId())
+		            // #doc-out-desc The hook ID
                     ->set('HOOK_ID', $moduleHook->getHookId())
+		            // #doc-out-desc The module ID
                     ->set('MODULE_ID', $moduleHook->getModuleId())
+		            // #doc-out-desc The module title
                     ->set('MODULE_TITLE', $moduleHook->getModule()->setLocale($this->locale)->getTitle())
+		            // #doc-out-desc The module code
                     ->set('MODULE_CODE', $moduleHook->getModule()->getCode())
+		            // #doc-out-desc The hook class name
                     ->set('CLASSNAME', $moduleHook->getClassname())
+		            // #doc-out-desc The hook method
                     ->set('METHOD', $moduleHook->getMethod())
+		            // #doc-out-desc The hook status
                     ->set('ACTIVE', $moduleHook->getActive())
+		            // #doc-out-desc The hook status
                     ->set('HOOK_ACTIVE', $moduleHook->getHookActive())
+		            // #doc-out-desc The module status
                     ->set('MODULE_ACTIVE', $moduleHook->getModuleActive())
+		            // #doc-out-desc The hook position
                     ->set('POSITION', $moduleHook->getPosition())
+		            // #doc-out-desc The hook templates
                     ->set('TEMPLATES', $moduleHook->getTemplates())
                 ;
 

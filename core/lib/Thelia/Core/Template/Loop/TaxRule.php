@@ -43,24 +43,15 @@ class TaxRule extends BaseI18nLoop implements PropelSearchLoopInterface
 
     /**
      * @return ArgumentCollection
-	 * 
-	 * #doc-arg-name exclude
-	 * #doc-arg-desc A single or list of tax rule ids to exclude
-	 * #doc-arg-example exclude="2", exclude="1,4"
-	 * 
-	 * #doc-arg-name id
-	 * #doc-arg-desc A single or list of tax rule ids.
-	 * #doc-arg-example id="2", id="1,4"
-	 * 
-	 * #doc-arg-name order
-	 * #doc-arg-desc A list of values see sorting possible values
-	 * #doc-arg-example order="random"
      */
     protected function getArgDefinitions()
     {
         return new ArgumentCollection(
+		    // #doc-arg-desc A single or list of tax rule ids.
             Argument::createIntListTypeArgument('id'),
+		    // #doc-arg-desc A single or list of tax rule ids to exclude
             Argument::createIntListTypeArgument('exclude'),
+            // #doc-arg-desc A list of values see sorting possible values
             new Argument(
                 'order',
                 new TypeCollection(
@@ -112,26 +103,6 @@ class TaxRule extends BaseI18nLoop implements PropelSearchLoopInterface
         return $search;
     }
 
-	 /**
-	 * 
-	 * #doc-out-name $DESCRIPTION
-	 * #doc-out-desc Tax description
-	 * 
-	 * #doc-out-name $ID
-	 * #doc-out-desc the tax id
-	 * 
-	 * #doc-out-name $IS_DEFAULT
-	 * #doc-out-desc check if it's the default tax rule
-	 * 
-	 * #doc-out-name $IS_TRANSLATED
-	 * #doc-out-desc check if the tax rule is translated
-	 * 
-	 * #doc-out-name $LOCALE
-	 * #doc-out-desc The locale used for this research
-	 * 
-	 * #doc-out-name $TITLE
-	 * #doc-out-desc Tax title
-	 */
     public function parseResults(LoopResult $loopResult)
     {
         /** @var TaxRuleModel $taxRule */
@@ -139,11 +110,17 @@ class TaxRule extends BaseI18nLoop implements PropelSearchLoopInterface
             $loopResultRow = new LoopResultRow($taxRule);
 
             $loopResultRow
+		        // #doc-out-desc the tax id
                 ->set('ID', $taxRule->getId())
+		        // #doc-out-desc check if the tax rule is translated
                 ->set('IS_TRANSLATED', $taxRule->getVirtualColumn('IS_TRANSLATED'))
+		        // #doc-out-desc The locale used for this research
                 ->set('LOCALE', $this->locale)
+		        // #doc-out-desc Tax title
                 ->set('TITLE', $taxRule->getVirtualColumn('i18n_TITLE'))
+		        // #doc-out-desc Tax description
                 ->set('DESCRIPTION', $taxRule->getVirtualColumn('i18n_DESCRIPTION'))
+		        // #doc-out-desc check if it's the default tax rule
                 ->set('IS_DEFAULT', $taxRule->getIsDefault() ? '1' : '0')
             ;
             $this->addOutputFields($loopResultRow, $taxRule);

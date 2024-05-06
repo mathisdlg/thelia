@@ -43,24 +43,15 @@ class CategoryPath extends BaseI18nLoop implements ArraySearchLoopInterface
 {
     /**
      * @return ArgumentCollection
-	 * 
-	 * #doc-arg-name category *
-	 * #doc-arg-desc A single category id.
-	 * #doc-arg-example category="2"
-	 * 
-	 * #doc-arg-name depth
-	 * #doc-arg-desc The max depth
-	 * #doc-arg-example depth="5"
-	 * 
-	 * #doc-arg-name visible
-	 * #doc-arg-desc Whatever we consider hidden category or not.
-	 * #doc-arg-example visible="false"
      */
     protected function getArgDefinitions()
     {
         return new ArgumentCollection(
+            // #doc-arg-desc A single category id.
             Argument::createIntTypeArgument('category', null, true),
+		    // #doc-arg-desc The max depth
             Argument::createIntTypeArgument('depth', \PHP_INT_MAX),
+		    // #doc-arg-desc Whatever we consider hidden category or not.
             Argument::createBooleanOrBothTypeArgument('visible', true, false)
         );
     }
@@ -120,23 +111,7 @@ class CategoryPath extends BaseI18nLoop implements ArraySearchLoopInterface
         return array_reverse($results);
     }
 
-	 /**
-	 * 
-	 * #doc-out-name $ID
-	 * #doc-out-desc the category id
-	 * 
-	 * #doc-out-name $LOCALE
-	 * #doc-out-desc the language in which the information will be displayed
-	 * 
-	 * #doc-out-name $PARENT
-	 * #doc-out-desc the parent category
-	 * 
-	 * #doc-out-name $TITLE
-	 * #doc-out-desc the category title
-	 * 
-	 * #doc-out-name $URL
-	 * #doc-out-desc the category URL
-	 */
+
     public function parseResults(LoopResult $loopResult)
     {
         foreach ($loopResult->getResultDataCollection() as $result) {

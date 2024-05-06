@@ -91,169 +91,65 @@ class Product extends BaseI18nLoop implements PropelSearchLoopInterface, SearchL
 
     /**
      * @return ArgumentCollection
-	 * 
-	 * #doc-arg-name attribute_non_strict_match
-	 * #doc-arg-desc <strong>Only available if complex='true'</strong> <br/> promo, new, quantity, weight or price may differ in the different product sale element depending on the different attributes. This parameter allows to provide a list of non-strict attributes. <br/> list of expected values
-	 * #doc-arg-example attribute_non_strict_match="promo,new" : <br/> loop will return the product if it has at least a product sale element in promo and at least a product sale element as new ; even if it's not the same product sale element.
-	 * 
-	 * #doc-arg-name brand
-	 * #doc-arg-desc A single or a list of brand ids.
-	 * #doc-arg-example page="2"
-	 * 
-	 * #doc-arg-name category
-	 * #doc-arg-desc A single or a list of category ids.
-	 * #doc-arg-example limit="10"
-	 * 
-	 * #doc-arg-name category_default
-	 * #doc-arg-desc A single or a list of default category ids allowing to retrieve all products having this parameter as default category.
-	 * #doc-arg-example offset="10"
-	 * 
-	 * #doc-arg-name complex
-	 * #doc-arg-desc A boolean. If set to true, product loop will consider all product sale elements else it will only consider default product sale element. Some of the arguments/outputs will not be available depending on the complex argument.
-	 * #doc-arg-example complex="true"
-	 * 
-	 * #doc-arg-name content
-	 * #doc-arg-desc One or more content ID. When this parameter is set, the loop returns the products related to the specified content IDs.
-	 * #doc-arg-example content="3"
-	 * 
-	 * #doc-arg-name currency
-	 * #doc-arg-desc A currency id
-	 * #doc-arg-example currency="1"
-	 * 
-	 * #doc-arg-name current
-	 * #doc-arg-desc A boolean value which allows either to exclude current product from results either to match only this product
-	 * #doc-arg-example current="yes"
-	 * 
-	 * #doc-arg-name current_category
-	 * #doc-arg-desc A boolean value which allows either to exclude current category products from results either to match only current category products. If a product is in multiple categories whose one is current it will not be excluded if current_category="false" but will be included if current_category="yes"
-	 * #doc-arg-example current_category="yes"
-	 * 
-	 * #doc-arg-name depth
-	 * #doc-arg-desc A positive integer value which precise how many subcategory levels will be browse. Will not be consider if category parameter is not set.
-	 * #doc-arg-example depth="2"
-	 * 
-	 * #doc-arg-name exclude
-	 * #doc-arg-desc A single or a list of product ids.
-	 * #doc-arg-example exclude="2", exclude="1,4,7"
-	 * 
-	 * #doc-arg-name exclude_category
-	 * #doc-arg-desc A single or a list of category ids. If a product is in multiple categories which are not all excluded it will not be excluded.
-	 * #doc-arg-example exclude_category="2", exclude_category="1,4,7"
-	 * 
-	 * #doc-arg-name exclude_tax_rule_id
-	 * #doc-arg-desc Filter products not having this tax rule ID
-	 * #doc-arg-example exclude_tax_rule_id=21
-	 * 
-	 * #doc-arg-name feature_availability
-	 * #doc-arg-desc A list of mandatory features and the feature_availability expected for these.
-	 * #doc-arg-example feature_availability="1: \(1 \
-	 * 
-	 * #doc-arg-name feature_values
-	 * #doc-arg-desc A list of mandatory features and the string value expected for these.
-	 * #doc-arg-example feature_values="1: \(foo \
-	 * 
-	 * #doc-arg-name id
-	 * #doc-arg-desc A single or a list of product ids.
-	 * #doc-arg-example id="2" or id="1,4,7"
-	 * 
-	 * #doc-arg-name max_price
-	 * #doc-arg-desc A float value. Equal value matches.
-	 * #doc-arg-example max_price="32.1"
-	 * 
-	 * #doc-arg-name max_weight
-	 * #doc-arg-desc A float value. Equal value matches.
-	 * #doc-arg-example max_weight="32.1"
-	 * 
-	 * #doc-arg-name min_price
-	 * #doc-arg-desc A float value. Equal value matches.
-	 * #doc-arg-example min_price="12.3"
-	 * 
-	 * #doc-arg-name min_stock
-	 * #doc-arg-desc An integer value. Equal value matches.
-	 * #doc-arg-example min_stock="3"
-	 * 
-	 * #doc-arg-name min_weight
-	 * #doc-arg-desc A float value. Equal value matches.
-	 * #doc-arg-example min_weight="32.1"
-	 * 
-	 * #doc-arg-name new
-	 * #doc-arg-desc A boolean value to get products by their newness
-	 * #doc-arg-example new="yes"
-	 * 
-	 * #doc-arg-name order
-	 * #doc-arg-desc The order for sorting products, see sorting possible values
-	 * #doc-arg-example order="category,min_price"
-	 * 
-	 * #doc-arg-name promo
-	 * #doc-arg-desc A boolean value.
-	 * #doc-arg-example promo="yes"
-	 * 
-	 * #doc-arg-name ref
-	 * #doc-arg-desc A single or a list of product references.
-	 * #doc-arg-example ref="PROD011" or ref="PROD011,PROD018"
-	 * 
-	 * #doc-arg-name sale
-	 * #doc-arg-desc A single or a list of a promotional campaign id
-	 * #doc-arg-example sale="2", sale="1,4,8"
-	 * 
-	 * #doc-arg-name tax_rule_id
-	 * #doc-arg-desc Filter products having this tax rule ID
-	 * #doc-arg-example tax_rule_id=21, tax_rule_id="2,6,11"
-	 * 
-	 * #doc-arg-name template_id
-	 * #doc-arg-desc A single or a list of template id
-	 * #doc-arg-example template_id="2", template_id="1,4,8"
-	 * 
-	 * #doc-arg-name title
-	 * #doc-arg-desc filter by title
-	 * #doc-arg-example title="foo"
-	 * 
-	 * #doc-arg-name virtual
-	 * #doc-arg-desc A boolean value.
-	 * #doc-arg-example virtual="yes"
-	 * 
-	 * #doc-arg-name visible
-	 * #doc-arg-desc A boolean value.
-	 * #doc-arg-example visible="no"
-	 * 
-	 * #doc-arg-name with_prev_next_info
-	 * #doc-arg-desc A boolean. If set to true, $HAS_PREVIOUS, $HAS_NEXT, $PREVIOUS, and $NEXT output variables are available.
-	 * #doc-arg-example with_prev_next_info="yes"
-	 * 
-	 * #doc-arg-name with_prev_next_visible
-	 * #doc-arg-desc A boolean value.
-	 * #doc-arg-example with_prev_next_visible="yes"
      */
     protected function getArgDefinitions()
     {
         return new ArgumentCollection(
+		    // #doc-arg-desc A boolean. If set to true, product loop will consider all product sale elements else it will only consider default product sale element. Some of the arguments/outputs will not be available depending on the complex argument.
             Argument::createBooleanTypeArgument('complex', false),
+		    // #doc-arg-desc A single or a list of product ids.
             Argument::createIntListTypeArgument('id'),
+		    // #doc-arg-desc A single or a list of product references.
             Argument::createAnyListTypeArgument('ref'),
+		    // #doc-arg-desc A single or a list of category ids.
             Argument::createIntListTypeArgument('category'),
+		    // #doc-arg-desc A single or a list of brand ids.
             Argument::createIntListTypeArgument('brand'),
+		    // #doc-arg-desc A single or a list of a promotional campaign id
             Argument::createIntListTypeArgument('sale'),
+		    // #doc-arg-desc A single or a list of default category ids allowing to retrieve all products having this parameter as default category.
             Argument::createIntListTypeArgument('category_default'),
+		    // #doc-arg-desc One or more content ID. When this parameter is set, the loop returns the products related to the specified content IDs.
             Argument::createIntListTypeArgument('content'),
+		    // #doc-arg-desc A boolean value to get products by their newness
             Argument::createBooleanTypeArgument('new'),
+		    // #doc-arg-desc A boolean value.
             Argument::createBooleanTypeArgument('promo'),
+		    // #doc-arg-desc A float value. Equal value matches.
             Argument::createFloatTypeArgument('min_price'),
+		    // #doc-arg-desc A float value. Equal value matches.
             Argument::createFloatTypeArgument('max_price'),
+		    // #doc-arg-desc An integer value. Equal value matches.
             Argument::createIntTypeArgument('min_stock'),
+		    // #doc-arg-desc A float value. Equal value matches.
             Argument::createFloatTypeArgument('min_weight'),
+		    // #doc-arg-desc A float value. Equal value matches.
             Argument::createFloatTypeArgument('max_weight'),
+		    // #doc-arg-desc A boolean. If set to true, $HAS_PREVIOUS, $HAS_NEXT, $PREVIOUS, and $NEXT output variables are available.
             Argument::createBooleanTypeArgument('with_prev_next_info', false),
+		    // #doc-arg-desc A boolean value.
             Argument::createBooleanOrBothTypeArgument('with_prev_next_visible', Type\BooleanOrBothType::ANY),
+		    // #doc-arg-desc A boolean value which allows either to exclude current product from results either to match only this product
             Argument::createBooleanTypeArgument('current'),
+		    // #doc-arg-desc A boolean value which allows either to exclude current category products from results either to match only current category products. If a product is in multiple categories whose one is current it will not be excluded if current_category="false" but will be included if current_category="yes"
             Argument::createBooleanTypeArgument('current_category'),
+		    // #doc-arg-desc A positive integer value which precise how many subcategory levels will be browse. Will not be consider if category parameter is not set.
             Argument::createIntTypeArgument('depth', 1),
+		    // #doc-arg-desc A boolean value.
             Argument::createBooleanOrBothTypeArgument('virtual', Type\BooleanOrBothType::ANY),
+		    // #doc-arg-desc A boolean value.
             Argument::createBooleanOrBothTypeArgument('visible', 1),
+		    // #doc-arg-desc A currency id
             Argument::createIntTypeArgument('currency'),
+		    // #doc-arg-desc filter by title
             Argument::createAnyTypeArgument('title'),
+		    // #doc-arg-desc A single or a list of template id
             Argument::createIntListTypeArgument('template_id'),
+		    // #doc-arg-desc Filter products having this tax rule ID
             Argument::createIntListTypeArgument('tax_rule_id'),
+		    // #doc-arg-desc Filter products not having this tax rule ID
             Argument::createIntListTypeArgument('exclude_tax_rule_id'),
+            // #doc-arg-desc The order for sorting products, see sorting possible values
             new Argument(
                 'order',
                 new TypeCollection(
@@ -277,14 +173,18 @@ class Product extends BaseI18nLoop implements PropelSearchLoopInterface, SearchL
                 ),
                 'alpha'
             ),
+		    // #doc-arg-desc A single or a list of product ids.
             Argument::createIntListTypeArgument('exclude'),
+		    // #doc-arg-desc A single or a list of category ids. If a product is in multiple categories which are not all excluded it will not be excluded.
             Argument::createIntListTypeArgument('exclude_category'),
+            // #doc-arg-desc A list of mandatory features and the feature_availability expected for these.
             new Argument(
                 'feature_availability',
                 new TypeCollection(
                     new Type\IntToCombinedIntsListType()
                 )
             ),
+            // #doc-arg-desc A list of mandatory features and the string value expected for these.
             new Argument(
                 'feature_values',
                 new TypeCollection(
@@ -301,6 +201,7 @@ class Product extends BaseI18nLoop implements PropelSearchLoopInterface, SearchL
             *
             * In order to allow such a process, we will have to make a LEFT JOIN foreach of the following case.
             */
+            // #doc-arg-desc <strong>Only available if complex='true'</strong> <br/> promo, new, quantity, weight or price may differ in the different product sale element depending on the different attributes. This parameter allows to provide a list of non-strict attributes. <br/> list of expected values
             new Argument(
                 'attribute_non_strict_match',
                 new TypeCollection(
