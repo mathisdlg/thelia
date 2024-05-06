@@ -45,11 +45,11 @@ class ProductSaleElementsImage extends BaseLoop implements PropelSearchLoopInter
             $row = new LoopResultRow($productSaleElementImage);
 
             $row
-		        // #doc-out-desc Product id
+                // #doc-out-desc Product id
                 ->set('ID', $productSaleElementImage->getId())
-		        // #doc-out-desc Product sale element id
+                // #doc-out-desc Product sale element id
                 ->set('PRODUCT_SALE_ELEMENTS_ID', $productSaleElementImage->getProductSaleElementsId())
-		        // #doc-out-desc Product image id
+                // #doc-out-desc Product image id
                 ->set('PRODUCT_IMAGE_ID', $productSaleElementImage->getProductImageId())
             ;
 
@@ -64,7 +64,7 @@ class ProductSaleElementsImage extends BaseLoop implements PropelSearchLoopInter
      * Definition of loop arguments.
      *
      * example :
-	 * 
+     * 
      * public function getArgDefinitions()
      * {
      *  return new ArgumentCollection(
@@ -86,11 +86,11 @@ class ProductSaleElementsImage extends BaseLoop implements PropelSearchLoopInter
     protected function getArgDefinitions()
     {
         return new ArgumentCollection(
-		    // #doc-arg-desc A single or list of product id
+            // #doc-arg-desc A single or list of product id
             Argument::createIntListTypeArgument('id'),
-		    // #doc-arg-desc A single or list of product sale element id
+            // #doc-arg-desc A single or list of product sale element id
             Argument::createIntListTypeArgument('product_sale_elements_id'),
-		    // #doc-arg-desc A single or list of product image id
+            // #doc-arg-desc A single or list of product image id
             Argument::createIntListTypeArgument('product_image_id'),
             // #doc-arg-desc A list of values see sorting possible values
             Argument::createEnumListTypeArgument(

@@ -91,25 +91,25 @@ class OrderProductAttributeCombination extends BaseI18nLoop implements PropelSea
             $loopResultRow = new LoopResultRow($orderAttributeCombination);
 
             $loopResultRow
-		        // #doc-out-desc the order product attribute combination ID
+                // #doc-out-desc the order product attribute combination ID
                 ->set('ID', $orderAttributeCombination->getId())
-		        // #doc-out-desc the related order product ID
+                // #doc-out-desc the related order product ID
                 ->set('ORDER_PRODUCT_ID', $orderAttributeCombination->getOrderProductId())
-		        // #doc-out-desc the order product attribute title
+                // #doc-out-desc the order product attribute title
                 ->set('ATTRIBUTE_TITLE', $orderAttributeCombination->getAttributeTitle())
-		        // #doc-out-desc the order product attribute chapo
+                // #doc-out-desc the order product attribute chapo
                 ->set('ATTRIBUTE_CHAPO', $orderAttributeCombination->getAttributeChapo())
-		        // #doc-out-desc the order product attribute description
+                // #doc-out-desc the order product attribute description
                 ->set('ATTRIBUTE_DESCRIPTION', $orderAttributeCombination->getAttributeDescription())
-		        // #doc-out-desc the order product attribute postscriptum
+                // #doc-out-desc the order product attribute postscriptum
                 ->set('ATTRIBUTE_POSTSCRIPTUM', $orderAttributeCombination->getAttributePostscriptum())
-		        // #doc-out-desc the order product attribute availability title
+                // #doc-out-desc the order product attribute availability title
                 ->set('ATTRIBUTE_AVAILABILITY_TITLE', $orderAttributeCombination->getAttributeAvTitle())
-		        // #doc-out-desc the order product attribute availability chapo
+                // #doc-out-desc the order product attribute availability chapo
                 ->set('ATTRIBUTE_AVAILABILITY_CHAPO', $orderAttributeCombination->getAttributeAvChapo())
-		        // #doc-out-desc the order product attribute availability description
+                // #doc-out-desc the order product attribute availability description
                 ->set('ATTRIBUTE_AVAILABILITY_DESCRIPTION', $orderAttributeCombination->getAttributeAvDescription())
-		        // #doc-out-desc the order product attribute availability postscriptum
+                // #doc-out-desc the order product attribute availability postscriptum
                 ->set('ATTRIBUTE_AVAILABILITY_POSTSCRIPTUM', $orderAttributeCombination->getAttributeAvPostscriptum())
             ;
             $this->addOutputFields($loopResultRow, $orderAttributeCombination);

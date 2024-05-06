@@ -61,17 +61,17 @@ class Feature extends BaseI18nLoop implements PropelSearchLoopInterface
     protected function getArgDefinitions()
     {
         return new ArgumentCollection(
-		    // #doc-arg-desc A single or a list of feature ids.
+            // #doc-arg-desc A single or a list of feature ids.
             Argument::createIntListTypeArgument('id'),
-		    // #doc-arg-desc A single or a list of product ids.
+            // #doc-arg-desc A single or a list of product ids.
             Argument::createIntListTypeArgument('product'),
-		    // #doc-arg-desc A single or a list of template ids. Only features attached to these templates will be returned.
+            // #doc-arg-desc A single or a list of template ids. Only features attached to these templates will be returned.
             Argument::createIntListTypeArgument('template'),
-		    // #doc-arg-desc A single or a list of template ids. Only features NOT attached to these templates will be returned.
+            // #doc-arg-desc A single or a list of template ids. Only features NOT attached to these templates will be returned.
             Argument::createIntListTypeArgument('exclude_template'),
-		    // #doc-arg-desc A boolean value.
+            // #doc-arg-desc A boolean value.
             Argument::createBooleanOrBothTypeArgument('visible', 1),
-		    // #doc-arg-desc A single or a list of feature ids to exclude.
+            // #doc-arg-desc A single or a list of feature ids to exclude.
             Argument::createIntListTypeArgument('exclude'),
             // #doc-arg-desc A list of values
             new Argument(
@@ -81,7 +81,7 @@ class Feature extends BaseI18nLoop implements PropelSearchLoopInterface
                 ),
                 'manual'
             ),
-		    // #doc-arg-desc A a string title
+            // #doc-arg-desc A a string title
             Argument::createAnyTypeArgument('title')
         );
     }
@@ -242,21 +242,21 @@ class Feature extends BaseI18nLoop implements PropelSearchLoopInterface
         /** @var FeatureModel $feature */
         foreach ($loopResult->getResultDataCollection() as $feature) {
             $loopResultRow = new LoopResultRow($feature);
-		    // #doc-out-desc the feature id
+            // #doc-out-desc the feature id
             $loopResultRow->set('ID', $feature->getId())
-		        // #doc-out-desc check if the feature is translated
+                // #doc-out-desc check if the feature is translated
                 ->set('IS_TRANSLATED', $feature->getVirtualColumn('IS_TRANSLATED'))
-		        // #doc-out-desc The locale used for this research
+                // #doc-out-desc The locale used for this research
                 ->set('LOCALE', $this->locale)
-		        // #doc-out-desc the feature title
+                // #doc-out-desc the feature title
                 ->set('TITLE', $feature->getVirtualColumn('i18n_TITLE'))
-		        // #doc-out-desc the feature chapo
+                // #doc-out-desc the feature chapo
                 ->set('CHAPO', $feature->getVirtualColumn('i18n_CHAPO'))
-		        // #doc-out-desc the feature description
+                // #doc-out-desc the feature description
                 ->set('DESCRIPTION', $feature->getVirtualColumn('i18n_DESCRIPTION'))
-		        // #doc-out-desc the feature postscriptum
+                // #doc-out-desc the feature postscriptum
                 ->set('POSTSCRIPTUM', $feature->getVirtualColumn('i18n_POSTSCRIPTUM'))
-		        // #doc-out-desc If none of the product, template or exclude_template parameter is present, $POSITION contains the feature position. Otherwise, it contains the feature position in the product template context.
+                // #doc-out-desc If none of the product, template or exclude_template parameter is present, $POSITION contains the feature position. Otherwise, it contains the feature position in the product template context.
                 ->set('POSITION', $this->useFeaturePosition ? $feature->getPosition() : $feature->getVirtualColumn('position'))
             ;
             $this->addOutputFields($loopResultRow, $feature);

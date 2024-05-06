@@ -53,13 +53,13 @@ class Coupon extends BaseI18nLoop implements PropelSearchLoopInterface
     protected function getArgDefinitions()
     {
         return new ArgumentCollection(
-		    // #doc-arg-desc A single or a list of coupons ids.
+            // #doc-arg-desc A single or a list of coupons ids.
             Argument::createIntListTypeArgument('id'),
-		    // #doc-arg-desc If true, only enabled are returned. If false, only disabled coupons are returned.
+            // #doc-arg-desc If true, only enabled are returned. If false, only disabled coupons are returned.
             Argument::createBooleanOrBothTypeArgument('is_enabled'),
-		    // #doc-arg-desc If true, only coupons currently in use in the checkout process are returned. If false, only coupons not in use in the checkout process are returned.
+            // #doc-arg-desc If true, only coupons currently in use in the checkout process are returned. If false, only coupons not in use in the checkout process are returned.
             Argument::createBooleanTypeArgument('in_use'),
-		    // #doc-arg-desc A single or a list of coupons code.
+            // #doc-arg-desc A single or a list of coupons code.
             Argument::createAnyListTypeArgument('code'),
             // #doc-arg-desc A list of values
             new Argument(
@@ -243,51 +243,51 @@ class Coupon extends BaseI18nLoop implements PropelSearchLoopInterface
             $discount = $couponManager->isInUse() ? $couponManager->exec() : 0;
 
             $loopResultRow
-		        // #doc-out-desc the coupon id
+                // #doc-out-desc the coupon id
                 ->set('ID', $coupon->getId())
-		        // #doc-out-desc check if the coupon is translated or not
+                // #doc-out-desc check if the coupon is translated or not
                 ->set('IS_TRANSLATED', $coupon->getVirtualColumn('IS_TRANSLATED'))
-		        // #doc-out-desc the coupon locale
+                // #doc-out-desc the coupon locale
                 ->set('LOCALE', $this->locale)
-		        // #doc-out-desc the coupon code
+                // #doc-out-desc the coupon code
                 ->set('CODE', $coupon->getCode())
-		        // #doc-out-desc the coupon title
+                // #doc-out-desc the coupon title
                 ->set('TITLE', $coupon->getVirtualColumn('i18n_TITLE'))
-		        // #doc-out-desc the coupon short description
+                // #doc-out-desc the coupon short description
                 ->set('SHORT_DESCRIPTION', $coupon->getVirtualColumn('i18n_SHORT_DESCRIPTION'))
-		        // #doc-out-desc the coupon description
+                // #doc-out-desc the coupon description
                 ->set('DESCRIPTION', $coupon->getVirtualColumn('i18n_DESCRIPTION'))
-		        // #doc-out-desc
+                // #doc-out-desc
                 ->set('START_DATE', $coupon->getStartDate())
-		        // #doc-out-desc the coupon expiration date
+                // #doc-out-desc the coupon expiration date
                 ->set('EXPIRATION_DATE', $coupon->getExpirationDate())
-		        // #doc-out-desc number of usages left
+                // #doc-out-desc number of usages left
                 ->set('USAGE_LEFT', $coupon->getMaxUsage())
-		        // #doc-out-desc true if the coupon maximum usage count is per customer
+                // #doc-out-desc true if the coupon maximum usage count is per customer
                 ->set('PER_CUSTOMER_USAGE_COUNT', $coupon->getPerCustomerUsageCount())
-		        // #doc-out-desc true if the coupon is cumulative with other coupons
+                // #doc-out-desc true if the coupon is cumulative with other coupons
                 ->set('IS_CUMULATIVE', $coupon->getIsCumulative())
-		        // #doc-out-desc true if the coupon removes shipping costs
+                // #doc-out-desc true if the coupon removes shipping costs
                 ->set('IS_REMOVING_POSTAGE', $coupon->getIsRemovingPostage())
-		        // #doc-out-desc true if the coupon effect applies to products currently on sale
+                // #doc-out-desc true if the coupon effect applies to products currently on sale
                 ->set('IS_AVAILABLE_ON_SPECIAL_OFFERS', $coupon->getIsAvailableOnSpecialOffers())
-		        // #doc-out-desc true if the coupon is enabled
+                // #doc-out-desc true if the coupon is enabled
                 ->set('IS_ENABLED', $coupon->getIsEnabled())
-		        // #doc-out-desc the coupon amount. Could be a percentage, or an absolute amount
+                // #doc-out-desc the coupon amount. Could be a percentage, or an absolute amount
                 ->set('AMOUNT', $coupon->getAmount())
-		        // #doc-out-desc an array of usage conditions descriptions
+                // #doc-out-desc an array of usage conditions descriptions
                 ->set('APPLICATION_CONDITIONS', $cleanedConditions)
-		        // #doc-out-desc The coupon short description
+                // #doc-out-desc The coupon short description
                 ->set('TOOLTIP', $couponManager->getToolTip())
-		        // #doc-out-desc days left before coupon expiration
+                // #doc-out-desc days left before coupon expiration
                 ->set('DAY_LEFT_BEFORE_EXPIRATION', max(0, $coupon->getVirtualColumn('days_left')))
-		        // #doc-out-desc the coupon service id
+                // #doc-out-desc the coupon service id
                 ->set('SERVICE_ID', $couponManager->getServiceId())
-		        // #doc-out-desc list of country IDs for which the shipping is free
+                // #doc-out-desc list of country IDs for which the shipping is free
                 ->set('FREE_SHIPPING_FOR_COUNTRIES_LIST', implode(',', $freeShippingForCountriesIds))
-		        // #doc-out-desc list of module IDs for which the shipping is free
+                // #doc-out-desc list of module IDs for which the shipping is free
                 ->set('FREE_SHIPPING_FOR_MODULES_LIST', implode(',', $freeShippingForModulesIds))
-		        // #doc-out-desc Amount subtracted from the cart, only if the coupon is currentrly in use
+                // #doc-out-desc Amount subtracted from the cart, only if the coupon is currentrly in use
                 ->set('DISCOUNT_AMOUNT', $discount)
             ;
             $this->addOutputFields($loopResultRow, $coupon);

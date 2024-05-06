@@ -106,7 +106,7 @@ class AttributeCombination extends BaseI18nLoop implements PropelSearchLoopInter
         return $search;
     }
 
-	 
+     
     public function parseResults(LoopResult $loopResult)
     {
         /** @var \Thelia\Model\AttributeCombination $attributeCombination */
@@ -114,29 +114,29 @@ class AttributeCombination extends BaseI18nLoop implements PropelSearchLoopInter
             $loopResultRow = new LoopResultRow($attributeCombination);
 
             $loopResultRow
-		        // #doc-out-desc the locale used for this loop
+                // #doc-out-desc the locale used for this loop
                 ->set('LOCALE', $this->locale)
 
-		        // #doc-out-desc the attribute id
+                // #doc-out-desc the attribute id
                 ->set('ATTRIBUTE_ID', $attributeCombination->getAttributeId())
-		        // #doc-out-desc the attribute title
+                // #doc-out-desc the attribute title
                 ->set('ATTRIBUTE_TITLE', $attributeCombination->getVirtualColumn(AttributeTableMap::TABLE_NAME.'_i18n_TITLE'))
-		        // #doc-out-desc the attribute chapo
+                // #doc-out-desc the attribute chapo
                 ->set('ATTRIBUTE_CHAPO', $attributeCombination->getVirtualColumn(AttributeTableMap::TABLE_NAME.'_i18n_CHAPO'))
-		        // #doc-out-desc the attribute description
+                // #doc-out-desc the attribute description
                 ->set('ATTRIBUTE_DESCRIPTION', $attributeCombination->getVirtualColumn(AttributeTableMap::TABLE_NAME.'_i18n_DESCRIPTION'))
-		        // #doc-out-desc the attribute postscriptum
+                // #doc-out-desc the attribute postscriptum
                 ->set('ATTRIBUTE_POSTSCRIPTUM', $attributeCombination->getVirtualColumn(AttributeTableMap::TABLE_NAME.'_i18n_POSTSCRIPTUM'))
 
-		        // #doc-out-desc the attribute availability id
+                // #doc-out-desc the attribute availability id
                 ->set('ATTRIBUTE_AVAILABILITY_ID', $attributeCombination->getAttributeAvId())
-		        // #doc-out-desc the attribute availability title
+                // #doc-out-desc the attribute availability title
                 ->set('ATTRIBUTE_AVAILABILITY_TITLE', $attributeCombination->getVirtualColumn(AttributeAvTableMap::TABLE_NAME.'_i18n_TITLE'))
-		        // #doc-out-desc the attribute availability chapo
+                // #doc-out-desc the attribute availability chapo
                 ->set('ATTRIBUTE_AVAILABILITY_CHAPO', $attributeCombination->getVirtualColumn(AttributeAvTableMap::TABLE_NAME.'_i18n_CHAPO'))
-		        // #doc-out-desc the attribute availability description
+                // #doc-out-desc the attribute availability description
                 ->set('ATTRIBUTE_AVAILABILITY_DESCRIPTION', $attributeCombination->getVirtualColumn(AttributeAvTableMap::TABLE_NAME.'_i18n_DESCRIPTION'))
-		        // #doc-out-desc the attribute availability postscriptum
+                // #doc-out-desc the attribute availability postscriptum
                 ->set('ATTRIBUTE_AVAILABILITY_POSTSCRIPTUM', $attributeCombination->getVirtualColumn(AttributeAvTableMap::TABLE_NAME.'_i18n_POSTSCRIPTUM'));
             $this->addOutputFields($loopResultRow, $attributeCombination);
             $loopResult->addRow($loopResultRow);

@@ -153,33 +153,33 @@ class Lang extends BaseLoop implements PropelSearchLoopInterface
             $loopResultRow = new LoopResultRow($result);
 
             $loopResultRow
-		        // #doc-out-desc the order id
+                // #doc-out-desc the order id
                 ->set('ID', $result->getId())
-		        // #doc-out-desc lang title
+                // #doc-out-desc lang title
                 ->set('TITLE', $result->getTitle())
-		        // #doc-out-desc lang code, example : fr
+                // #doc-out-desc lang code, example : fr
                 ->set('CODE', $result->getCode())
-		        // #doc-out-desc lang locale, example : fr_FR
+                // #doc-out-desc lang locale, example : fr_FR
                 ->set('LOCALE', $result->getLocale())
-		        // #doc-out-desc the lang URL, only if a specific URL is defined for each lang
+                // #doc-out-desc the lang URL, only if a specific URL is defined for each lang
                 ->set('URL', $result->getUrl())
-		        // #doc-out-desc check if the lang is active or not
+                // #doc-out-desc check if the lang is active or not
                 ->set('ACTIVE', $result->getActive())
-		        // #doc-out-desc check if the lang is visible or not
+                // #doc-out-desc check if the lang is visible or not
                 ->set('VISIBLE', $result->getVisible())
-		        // #doc-out-desc check if the current result is the default one
+                // #doc-out-desc check if the current result is the default one
                 ->set('IS_DEFAULT', $result->getByDefault())
-		        // #doc-out-desc the lang date format
+                // #doc-out-desc the lang date format
                 ->set('DATE_FORMAT', $result->getDateFormat())
-		        // #doc-out-desc the lang time format
+                // #doc-out-desc the lang time format
                 ->set('TIME_FORMAT', $result->getTimeFormat())
-		        // #doc-out-desc the lang decimal separator, such as , or .
+                // #doc-out-desc the lang decimal separator, such as , or .
                 ->set('DECIMAL_SEPARATOR', $result->getDecimalSeparator())
-		        // #doc-out-desc the lang thousangs separator
+                // #doc-out-desc the lang thousangs separator
                 ->set('THOUSANDS_SEPARATOR', $result->getThousandsSeparator())
-		        // #doc-out-desc the number of digits after the decimal separator
+                // #doc-out-desc the number of digits after the decimal separator
                 ->set('DECIMAL_COUNT', $result->getDecimals())
-		        // #doc-out-desc lang position
+                // #doc-out-desc lang position
                 ->set('POSITION', $result->getPosition())
             ;
 

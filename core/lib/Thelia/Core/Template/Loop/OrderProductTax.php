@@ -64,15 +64,15 @@ class OrderProductTax extends BaseLoop implements PropelSearchLoopInterface
         /** @var OrderProductTaxModel $orderProductTax */
         foreach ($loopResult->getResultDataCollection() as $orderProductTax) {
             $loopResultRow = new LoopResultRow($orderProductTax);
-		    // #doc-out-desc Tax id
+            // #doc-out-desc Tax id
             $loopResultRow->set('ID', $orderProductTax->getId())
-		        // #doc-out-desc Tax title
+                // #doc-out-desc Tax title
                 ->set('TITLE', $orderProductTax->getTitle())
-		        // #doc-out-desc Tax description
+                // #doc-out-desc Tax description
                 ->set('DESCRIPTION', $orderProductTax->getDescription())
-		        // #doc-out-desc Tax amount
+                // #doc-out-desc Tax amount
                 ->set('AMOUNT', $orderProductTax->getAmount())
-		        // #doc-out-desc Tax amount of the promo price
+                // #doc-out-desc Tax amount of the promo price
                 ->set('PROMO_AMOUNT', $orderProductTax->getPromoAmount())
             ;
             $this->addOutputFields($loopResultRow, $orderProductTax);

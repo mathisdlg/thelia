@@ -49,11 +49,11 @@ class ModuleHook extends BaseI18nLoop implements PropelSearchLoopInterface
     protected function getArgDefinitions()
     {
         return new ArgumentCollection(
-		    // #doc-arg-desc The hook ID
+            // #doc-arg-desc The hook ID
             Argument::createIntListTypeArgument('id'),
-		    // #doc-arg-desc The hook name
+            // #doc-arg-desc The hook name
             Argument::createIntTypeArgument('hook'),
-		    // #doc-arg-desc The module name
+            // #doc-arg-desc The module name
             Argument::createIntTypeArgument('module'),
             // #doc-arg-desc a list of values see sorting possible values
             new Argument(
@@ -63,13 +63,13 @@ class ModuleHook extends BaseI18nLoop implements PropelSearchLoopInterface
                 ),
                 'manual'
             ),
-		    // #doc-arg-desc A single or a list of hook IDs to exclude
+            // #doc-arg-desc A single or a list of hook IDs to exclude
             Argument::createIntListTypeArgument('exclude'),
-		    // #doc-arg-desc Check if the hook is active
+            // #doc-arg-desc Check if the hook is active
             Argument::createBooleanOrBothTypeArgument('active', Type\BooleanOrBothType::ANY),
-		    // #doc-arg-desc Check if the hook is active
+            // #doc-arg-desc Check if the hook is active
             Argument::createBooleanOrBothTypeArgument('hook_active', Type\BooleanOrBothType::ANY),
-		    // #doc-arg-desc Check if the module is active
+            // #doc-arg-desc Check if the module is active
             Argument::createBooleanOrBothTypeArgument('module_active', Type\BooleanOrBothType::ANY)
         );
     }
@@ -157,29 +157,29 @@ class ModuleHook extends BaseI18nLoop implements PropelSearchLoopInterface
                 $loopResultRow = new LoopResultRow($moduleHook);
 
                 $loopResultRow
-		            // #doc-out-desc The hook module id
+                    // #doc-out-desc The hook module id
                     ->set('ID', $moduleHook->getId())
-		            // #doc-out-desc The hook ID
+                    // #doc-out-desc The hook ID
                     ->set('HOOK_ID', $moduleHook->getHookId())
-		            // #doc-out-desc The module ID
+                    // #doc-out-desc The module ID
                     ->set('MODULE_ID', $moduleHook->getModuleId())
-		            // #doc-out-desc The module title
+                    // #doc-out-desc The module title
                     ->set('MODULE_TITLE', $moduleHook->getModule()->setLocale($this->locale)->getTitle())
-		            // #doc-out-desc The module code
+                    // #doc-out-desc The module code
                     ->set('MODULE_CODE', $moduleHook->getModule()->getCode())
-		            // #doc-out-desc The hook class name
+                    // #doc-out-desc The hook class name
                     ->set('CLASSNAME', $moduleHook->getClassname())
-		            // #doc-out-desc The hook method
+                    // #doc-out-desc The hook method
                     ->set('METHOD', $moduleHook->getMethod())
-		            // #doc-out-desc The hook status
+                    // #doc-out-desc The hook status
                     ->set('ACTIVE', $moduleHook->getActive())
-		            // #doc-out-desc The hook status
+                    // #doc-out-desc The hook status
                     ->set('HOOK_ACTIVE', $moduleHook->getHookActive())
-		            // #doc-out-desc The module status
+                    // #doc-out-desc The module status
                     ->set('MODULE_ACTIVE', $moduleHook->getModuleActive())
-		            // #doc-out-desc The hook position
+                    // #doc-out-desc The hook position
                     ->set('POSITION', $moduleHook->getPosition())
-		            // #doc-out-desc The hook templates
+                    // #doc-out-desc The hook templates
                     ->set('TEMPLATES', $moduleHook->getTemplates())
                 ;
 

@@ -52,13 +52,13 @@ class CategoryTree extends BaseI18nLoop implements ArraySearchLoopInterface
         return new ArgumentCollection(
             // #doc-arg-desc A single category id.
             Argument::createIntTypeArgument('category', null, true),
-		    // #doc-arg-desc The max depth
+            // #doc-arg-desc The max depth
             Argument::createIntTypeArgument('depth', \PHP_INT_MAX),
-		    // #doc-arg-desc A boolean which indicates whether the number of children in each category should be taken into account
+            // #doc-arg-desc A boolean which indicates whether the number of children in each category should be taken into account
             Argument::createBooleanTypeArgument('need_count_child', false),
-		    // #doc-arg-desc Whatever we consider hidden category or not.
+            // #doc-arg-desc Whatever we consider hidden category or not.
             Argument::createBooleanOrBothTypeArgument('visible', true, false),
-		    // #doc-arg-desc A single or a list of category ids to exclude for result.
+            // #doc-arg-desc A single or a list of category ids to exclude for result.
             Argument::createIntListTypeArgument('exclude', []),
             // #doc-arg-desc A list of values
             new Argument(

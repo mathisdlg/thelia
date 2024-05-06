@@ -48,11 +48,11 @@ class CountryArea extends BaseLoop implements PropelSearchLoopInterface
     protected function getArgDefinitions()
     {
         return new ArgumentCollection(
-		    // #doc-arg-desc A single or a list of country ids.
+            // #doc-arg-desc A single or a list of country ids.
             Argument::createIntListTypeArgument('id'),
-		    // #doc-arg-desc A single or a list of area ids.
+            // #doc-arg-desc A single or a list of area ids.
             Argument::createIntListTypeArgument('area'),
-		    // #doc-arg-desc A single or a list of country ids.
+            // #doc-arg-desc A single or a list of country ids.
             Argument::createIntListTypeArgument('country'),
             // #doc-arg-desc A boolean value to return countries that have states or not (possible values : yes, no or *)
             Argument::createIntListTypeArgument('state'),
@@ -134,13 +134,13 @@ class CountryArea extends BaseLoop implements PropelSearchLoopInterface
         foreach ($loopResult->getResultDataCollection() as $countryArea) {
             $loopResultRow = new LoopResultRow($countryArea);
             $loopResultRow
-		        // #doc-out-desc The ID of the country area.
+                // #doc-out-desc The ID of the country area.
                 ->set('ID', $countryArea->getId())
-		        // #doc-out-desc The ID of the area corresponding to the country.
+                // #doc-out-desc The ID of the area corresponding to the country.
                 ->set('AREA_ID', $countryArea->getAreaId())
-		        // #doc-out-desc The ID of the country.
+                // #doc-out-desc The ID of the country.
                 ->set('COUNTRY_ID', $countryArea->getCountryId())
-		        // #doc-out-desc The ID of the state corresponding to the country.
+                // #doc-out-desc The ID of the state corresponding to the country.
                 ->set('STATE_ID', $countryArea->getStateId())
             ;
 

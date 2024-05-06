@@ -75,9 +75,9 @@ class Hook extends BaseI18nLoop implements PropelSearchLoopInterface
                 ),
                 'id'
             ),
-		    // #doc-arg-desc A single or a list of hook ids to exclude
+            // #doc-arg-desc A single or a list of hook ids to exclude
             Argument::createIntListTypeArgument('exclude'),
-		    // #doc-arg-desc If the hook is active or not
+            // #doc-arg-desc If the hook is active or not
             Argument::createBooleanOrBothTypeArgument('active', Type\BooleanOrBothType::ANY)
         );
     }
@@ -169,31 +169,31 @@ class Hook extends BaseI18nLoop implements PropelSearchLoopInterface
                 $loopResultRow = new LoopResultRow($hook);
 
                 $loopResultRow
-		            // #doc-out-desc The hook ID
+                    // #doc-out-desc The hook ID
                     ->set('ID', $hook->getId())
-		            // #doc-out-desc Check if the hook is translated
+                    // #doc-out-desc Check if the hook is translated
                     ->set('IS_TRANSLATED', $hook->getVirtualColumn('IS_TRANSLATED'))
-		            // #doc-out-desc The locale user for this loop
+                    // #doc-out-desc The locale user for this loop
                     ->set('LOCALE', $this->locale)
-		            // #doc-out-desc Title
+                    // #doc-out-desc Title
                     ->set('TITLE', $hook->getVirtualColumn('i18n_TITLE'))
-		            // #doc-out-desc Chapo
+                    // #doc-out-desc Chapo
                     ->set('CHAPO', $hook->getVirtualColumn('i18n_CHAPO'))
-		            // #doc-out-desc The hook description
+                    // #doc-out-desc The hook description
                     ->set('DESCRIPTION', $hook->getVirtualColumn('i18n_DESCRIPTION'))
-		            // #doc-out-desc The hook code
+                    // #doc-out-desc The hook code
                     ->set('CODE', $hook->getCode())
-		            // #doc-out-desc Type
+                    // #doc-out-desc Type
                     ->set('TYPE', $hook->getType())
-		            // #doc-out-desc Naive
+                    // #doc-out-desc Naive
                     ->set('NATIVE', $hook->getNative())
-		            // #doc-out-desc If the hook is active or not
+                    // #doc-out-desc If the hook is active or not
                     ->set('ACTIVE', $hook->getActivate())
-		            // #doc-out-desc The value of the bt module field
+                    // #doc-out-desc The value of the bt module field
                     ->set('BY_MODULE', $hook->getByModule())
-		            // #doc-out-desc The [block] column value
+                    // #doc-out-desc The [block] column value
                     ->set('BLOCK', $hook->getBlock())
-		            // #doc-out-desc The hook position
+                    // #doc-out-desc The hook position
                     ->set('POSITION', $hook->getPosition())
                 ;
 

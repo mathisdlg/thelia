@@ -52,15 +52,15 @@ class FeatureValue extends BaseI18nLoop implements PropelSearchLoopInterface
     {
         return new ArgumentCollection(
             Argument::createIntTypeArgument('feature', null, true),
-		    // #doc-arg-desc A single product id.
+            // #doc-arg-desc A single product id.
             Argument::createIntTypeArgument('product'),
-		    // #doc-arg-desc A single or a list of feature availability ids.
+            // #doc-arg-desc A single or a list of feature availability ids.
             Argument::createIntListTypeArgument('feature_availability'),
-		    // #doc-arg-desc A single or a list of strings.
+            // #doc-arg-desc A single or a list of strings.
             Argument::createAnyListTypeArgument('free_text'),
-		    // #doc-arg-desc A boolean value to return only features with feature availability (no personal value).
+            // #doc-arg-desc A boolean value to return only features with feature availability (no personal value).
             Argument::createBooleanTypeArgument('exclude_feature_availability', 0),
-		    // #doc-arg-desc A boolean value to return only features with free text value (no feature availability).
+            // #doc-arg-desc A boolean value to return only features with free text value (no feature availability).
             Argument::createBooleanTypeArgument('exclude_free_text', 0),
             // #doc-arg-desc A list of values
             new Argument(
@@ -70,7 +70,7 @@ class FeatureValue extends BaseI18nLoop implements PropelSearchLoopInterface
                 ),
                 'manual'
             ),
-		    // #doc-arg-desc A boolean value to return all features, even if they are not available.
+            // #doc-arg-desc A boolean value to return all features, even if they are not available.
             Argument::createBooleanTypeArgument('force_return', true)
         );
     }
@@ -147,31 +147,31 @@ class FeatureValue extends BaseI18nLoop implements PropelSearchLoopInterface
             $loopResultRow = new LoopResultRow($featureValue);
 
             $loopResultRow
-		        // #doc-out-desc the feature value id
+                // #doc-out-desc the feature value id
                 ->set('ID', $featureValue->getId())
-		        // #doc-out-desc the id of the product. Deprecated, please use $PRODUCT_ID instead
+                // #doc-out-desc the id of the product. Deprecated, please use $PRODUCT_ID instead
                 ->set('PRODUCT', $featureValue->getProductId())
-		        // #doc-out-desc (2.2) the id of the product
+                // #doc-out-desc (2.2) the id of the product
                 ->set('PRODUCT_ID', $featureValue->getProductId())
-		        // #doc-out-desc the feature av. ID. Null if the feature ha no feature av. Use FREE_TEXT_VALUE in this case.
+                // #doc-out-desc the feature av. ID. Null if the feature ha no feature av. Use FREE_TEXT_VALUE in this case.
                 ->set('FEATURE_AV_ID', $featureValue->getFeatureAvId())
-		        // #doc-out-desc 1 if this feature is free text, 0 otherwise. Deprecated in 2.4
+                // #doc-out-desc 1 if this feature is free text, 0 otherwise. Deprecated in 2.4
                 ->set('FREE_TEXT_VALUE', $featureValue->getFreeTextValue())
-		        // #doc-out-desc 1 if this feature is free text, 0 otherwise.
+                // #doc-out-desc 1 if this feature is free text, 0 otherwise.
                 ->set('IS_FREE_TEXT', null === $featureValue->getFeatureAvId() ? 1 : 0)
-		        // #doc-out-desc 1 if this feature is feature av., 0 otherwise.
+                // #doc-out-desc 1 if this feature is feature av., 0 otherwise.
                 ->set('IS_FEATURE_AV', null === $featureValue->getFeatureAvId() ? 0 : 1)
-		        // #doc-out-desc the locale of returned results
+                // #doc-out-desc the locale of returned results
                 ->set('LOCALE', $this->locale)
-		        // #doc-out-desc the feature availability title, or the feature value text for free text features.
+                // #doc-out-desc the feature availability title, or the feature value text for free text features.
                 ->set('TITLE', $featureValue->getVirtualColumn(FeatureAvTableMap::TABLE_NAME.'_i18n_TITLE'))
-		        // #doc-out-desc the feature value chapo
+                // #doc-out-desc the feature value chapo
                 ->set('CHAPO', $featureValue->getVirtualColumn(FeatureAvTableMap::TABLE_NAME.'_i18n_CHAPO'))
-		        // #doc-out-desc the feature value description
+                // #doc-out-desc the feature value description
                 ->set('DESCRIPTION', $featureValue->getVirtualColumn(FeatureAvTableMap::TABLE_NAME.'_i18n_DESCRIPTION'))
-		        // #doc-out-desc the feature availability postscriptum
+                // #doc-out-desc the feature availability postscriptum
                 ->set('POSTSCRIPTUM', $featureValue->getVirtualColumn(FeatureAvTableMap::TABLE_NAME.'_i18n_POSTSCRIPTUM'))
-		        // #doc-out-desc the feature value position
+                // #doc-out-desc the feature value position
                 ->set('POSITION', $featureValue->getPosition())
             ;
             $this->addOutputFields($loopResultRow, $featureValue);

@@ -60,21 +60,21 @@ class ProductSaleElements extends BaseLoop implements PropelSearchLoopInterface,
     protected function getArgDefinitions()
     {
         return new ArgumentCollection(
-		    // #doc-arg-desc A comma separated list of product sale elements id. Mandatory if the 'product' parameter is not present
+            // #doc-arg-desc A comma separated list of product sale elements id. Mandatory if the 'product' parameter is not present
             Argument::createIntListTypeArgument('id'),
-		    // #doc-arg-desc A currency id
+            // #doc-arg-desc A currency id
             Argument::createIntTypeArgument('currency'),
-		    // #doc-arg-desc A single product id. Mandatory if the 'id' parameter is not present
+            // #doc-arg-desc A single product id. Mandatory if the 'id' parameter is not present
             Argument::createIntTypeArgument('product'),
-		    // #doc-arg-desc A boolean value. If true, returns only product sale elements for which new is on. The reverse with 'false'
+            // #doc-arg-desc A boolean value. If true, returns only product sale elements for which new is on. The reverse with 'false'
             Argument::createBooleanTypeArgument('promo'),
-		    // #doc-arg-desc A boolean value. If true, returns only product sale elements for which promo is on. The reverse with 'false'
+            // #doc-arg-desc A boolean value. If true, returns only product sale elements for which promo is on. The reverse with 'false'
             Argument::createBooleanTypeArgument('new'),
-		    // #doc-arg-desc A boolean value. If true, returns only the default product sale elements. If false, the default product sale element is not returned
+            // #doc-arg-desc A boolean value. If true, returns only the default product sale elements. If false, the default product sale element is not returned
             Argument::createBooleanTypeArgument('default'),
-		    // #doc-arg-desc A boolean value, or
+            // #doc-arg-desc A boolean value, or
             Argument::createBooleanOrBothTypeArgument('visible', Type\BooleanOrBothType::ANY),
-		    // #doc-arg-desc A product reference
+            // #doc-arg-desc A product reference
             Argument::createAnyTypeArgument('ref'),
             // #doc-arg-desc A single or a list of attribute availability (may not yet be managed on the back-end ?)
             new Argument(
@@ -282,35 +282,35 @@ class ProductSaleElements extends BaseLoop implements PropelSearchLoopInterface,
             }
 
             $loopResultRow
-		        // #doc-out-desc the product sale element id
+                // #doc-out-desc the product sale element id
                 ->set('ID', $PSEValue->getId())
-		        // #doc-out-desc the product sale element stock quantity
+                // #doc-out-desc the product sale element stock quantity
                 ->set('QUANTITY', $PSEValue->getQuantity())
-		        // #doc-out-desc returns if the product sale element is in promo
+                // #doc-out-desc returns if the product sale element is in promo
                 ->set('IS_PROMO', $PSEValue->getPromo() === 1 ? 1 : 0)
-		        // #doc-out-desc returns if the product sale element is new
+                // #doc-out-desc returns if the product sale element is new
                 ->set('IS_NEW', $PSEValue->getNewness() === 1 ? 1 : 0)
-		        // #doc-out-desc returns if the product sale element is the default product sale element for the product
+                // #doc-out-desc returns if the product sale element is the default product sale element for the product
                 ->set('IS_DEFAULT', $PSEValue->getIsDefault() ? 1 : 0)
-		        // #doc-out-desc the product sale element weight
+                // #doc-out-desc the product sale element weight
                 ->set('WEIGHT', $PSEValue->getWeight())
-		        // #doc-out-desc the product sale element reference
+                // #doc-out-desc the product sale element reference
                 ->set('REF', $PSEValue->getRef())
-		        // #doc-out-desc the product sale element EAN Code
+                // #doc-out-desc the product sale element EAN Code
                 ->set('EAN_CODE', $PSEValue->getEanCode())
-		        // #doc-out-desc the related product id
+                // #doc-out-desc the related product id
                 ->set('PRODUCT_ID', $PSEValue->getProductId())
-		        // #doc-out-desc the product sale element price
+                // #doc-out-desc the product sale element price
                 ->set('PRICE', $price)
-		        // #doc-out-desc the product sale element price tax
+                // #doc-out-desc the product sale element price tax
                 ->set('PRICE_TAX', $taxedPrice - $price)
-		        // #doc-out-desc the product sale element taxed price
+                // #doc-out-desc the product sale element taxed price
                 ->set('TAXED_PRICE', $taxedPrice)
-		        // #doc-out-desc the product sale element promo price
+                // #doc-out-desc the product sale element promo price
                 ->set('PROMO_PRICE', $promoPrice)
-		        // #doc-out-desc the product sale element promo price tax
+                // #doc-out-desc the product sale element promo price tax
                 ->set('PROMO_PRICE_TAX', $taxedPromoPrice - $promoPrice)
-		        // #doc-out-desc the product sale element taxed promo price
+                // #doc-out-desc the product sale element taxed promo price
                 ->set('TAXED_PROMO_PRICE', $taxedPromoPrice);
 
             $this->addOutputFields($loopResultRow, $PSEValue);

@@ -52,13 +52,13 @@ class AttributeAvailability extends BaseI18nLoop implements PropelSearchLoopInte
     protected function getArgDefinitions()
     {
         return new ArgumentCollection(
-		    // #doc-arg-desc A single or a list of attribute availability ids.
+            // #doc-arg-desc A single or a list of attribute availability ids.
             Argument::createIntListTypeArgument('id'),
-		    // #doc-arg-desc A single or a list of attribute ids.
+            // #doc-arg-desc A single or a list of attribute ids.
             Argument::createIntListTypeArgument('attribute'),
-		    // #doc-arg-desc A product ID. If present, only attribute values that are part of this product's combinations are returned
+            // #doc-arg-desc A product ID. If present, only attribute values that are part of this product's combinations are returned
             Argument::createIntTypeArgument('product'),
-		    // #doc-arg-desc A single or a list of attribute availability ids to exclude.
+            // #doc-arg-desc A single or a list of attribute availability ids to exclude.
             Argument::createIntListTypeArgument('exclude'),
             // A list of values
             new Argument(

@@ -80,11 +80,11 @@ class Template extends BaseLoop implements ArraySearchLoopInterface
             $loopResultRow = new LoopResultRow($template);
 
             $loopResultRow
-		        // #doc-out-desc template name
+                // #doc-out-desc template name
                 ->set('NAME', $template->getName())
-		        // #doc-out-desc relative template path
+                // #doc-out-desc relative template path
                 ->set('RELATIVE_PATH', $template->getPath())
-		        // #doc-out-desc absolute template path
+                // #doc-out-desc absolute template path
                 ->set('ABSOLUTE_PATH', $template->getAbsolutePath())
             ;
             $this->addOutputFields($loopResultRow, $template);

@@ -58,39 +58,39 @@ class OrderAddress extends BaseLoop implements PropelSearchLoopInterface
         return $search;
     }
 
-	public function parseResults(LoopResult $loopResult)
+    public function parseResults(LoopResult $loopResult)
     {
         /** @var OrderAddressModel $orderAddress */
         foreach ($loopResult->getResultDataCollection() as $orderAddress) {
             $loopResultRow = new LoopResultRow($orderAddress);
             $loopResultRow
-				// #doc-out-desc the order address id
+                // #doc-out-desc the order address id
                 ->set('ID', $orderAddress->getId())
-				// #doc-out-desc the order address title which might be use in title loop
+                // #doc-out-desc the order address title which might be use in title loop
                 ->set('TITLE', $orderAddress->getCustomerTitleId())
-				// #doc-out-desc the order address company
+                // #doc-out-desc the order address company
                 ->set('COMPANY', $orderAddress->getCompany())
-				// #doc-out-desc the order address firstname
+                // #doc-out-desc the order address firstname
                 ->set('FIRSTNAME', $orderAddress->getFirstname())
-				// #doc-out-desc the order address lastname
+                // #doc-out-desc the order address lastname
                 ->set('LASTNAME', $orderAddress->getLastname())
-				// #doc-out-desc the first order address line
+                // #doc-out-desc the first order address line
                 ->set('ADDRESS1', $orderAddress->getAddress1())
-				// #doc-out-desc the second order address line
+                // #doc-out-desc the second order address line
                 ->set('ADDRESS2', $orderAddress->getAddress2())
-				// #doc-out-desc the third order address line
+                // #doc-out-desc the third order address line
                 ->set('ADDRESS3', $orderAddress->getAddress3())
-				// #doc-out-desc the order address zipcode
+                // #doc-out-desc the order address zipcode
                 ->set('ZIPCODE', $orderAddress->getZipcode())
-				// #doc-out-desc the order address city
+                // #doc-out-desc the order address city
                 ->set('CITY', $orderAddress->getCity())
-				// #doc-out-desc the order address country which might be use in country loop
+                // #doc-out-desc the order address country which might be use in country loop
                 ->set('COUNTRY', $orderAddress->getCountryId())
-				// #doc-out-desc the order address state
+                // #doc-out-desc the order address state
                 ->set('STATE', $orderAddress->getStateId())
-				// #doc-out-desc the order address phone
+                // #doc-out-desc the order address phone
                 ->set('PHONE', $orderAddress->getPhone())
-				// #doc-out-desc the order address cellphone
+                // #doc-out-desc the order address cellphone
                 ->set('CELLPHONE', $orderAddress->getCellphone())
             ;
             $this->addOutputFields($loopResultRow, $orderAddress);

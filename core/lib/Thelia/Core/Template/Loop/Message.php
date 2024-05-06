@@ -51,15 +51,15 @@ class Message extends BaseI18nLoop implements PropelSearchLoopInterface
     protected function getArgDefinitions()
     {
         return new ArgumentCollection(
-		    // #doc-arg-desc The message ID
+            // #doc-arg-desc The message ID
             Argument::createIntTypeArgument('id'),
-		    // #doc-arg-desc A list of message IDs to exclude
+            // #doc-arg-desc A list of message IDs to exclude
             Argument::createIntListTypeArgument('exclude'),
-		    // #doc-arg-desc variable
+            // #doc-arg-desc variable
             Argument::createAnyTypeArgument('variable'),
-		    // #doc-arg-desc A boolean to show or hide hidden message
+            // #doc-arg-desc A boolean to show or hide hidden message
             Argument::createBooleanOrBothTypeArgument('hidden'),
-		    // #doc-arg-desc Boolean to show or hide secured messages
+            // #doc-arg-desc Boolean to show or hide secured messages
             Argument::createBooleanOrBothTypeArgument('secured')
         );
     }

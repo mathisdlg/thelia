@@ -35,7 +35,7 @@ class Serializer extends BaseLoop implements ArraySearchLoopInterface
     protected function getArgDefinitions()
     {
         return new ArgumentCollection(
-		    // #doc-arg-desc A serializer
+            // #doc-arg-desc A serializer
             Argument::createAnyTypeArgument('serializer'),
             // #doc-arg-desc A list of values see sorting possible values
             new Argument(
@@ -79,13 +79,13 @@ class Serializer extends BaseLoop implements ArraySearchLoopInterface
             $loopResultRow = new LoopResultRow();
 
             $loopResultRow
-		        // #doc-out-desc the serializer id
+                // #doc-out-desc the serializer id
                 ->set('ID', $serializer->getId())
-		        // #doc-out-desc the serialiser name
+                // #doc-out-desc the serialiser name
                 ->set('NAME', $serializer->getName())
-		        // #doc-out-desc the serializer extension
+                // #doc-out-desc the serializer extension
                 ->set('EXTENSION', $serializer->getExtension())
-		        // #doc-out-desc the serializer mime type
+                // #doc-out-desc the serializer mime type
                 ->set('MIME_TYPE', $serializer->getMimeType());
 
             $this->addOutputFields($loopResultRow, $serializer);

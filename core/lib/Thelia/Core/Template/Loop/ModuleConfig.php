@@ -47,9 +47,9 @@ class ModuleConfig extends BaseLoop implements ArraySearchLoopInterface
             Argument::createAnyTypeArgument('module', null, true),
             // #doc-arg-desc The variable
             Argument::createAnyTypeArgument('variable', null, true),
-		    // #doc-arg-desc The default value
+            // #doc-arg-desc The default value
             Argument::createAnyTypeArgument('default_value', null),
-		    // #doc-arg-desc The locale
+            // #doc-arg-desc The locale
             Argument::createAnyTypeArgument('locale', null)
         );
     }

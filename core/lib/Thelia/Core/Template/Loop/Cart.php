@@ -36,7 +36,7 @@ class Cart extends BaseLoop implements ArraySearchLoopInterface
 {
     /**
      * @return \Thelia\Core\Template\Loop\Argument\ArgumentCollection
-	 * 
+     * 
      */
     protected function getArgDefinitions()
     {
@@ -95,23 +95,23 @@ class Cart extends BaseLoop implements ArraySearchLoopInterface
 
             $loopResultRow = new LoopResultRow($cartItem);
 
-		    // #doc-out-desc the cart item id
+            // #doc-out-desc the cart item id
             $loopResultRow->set('ITEM_ID', $cartItem->getId());
-		    // #doc-out-desc the product title
+            // #doc-out-desc the product title
             $loopResultRow->set('TITLE', $product->getTitle());
-		    // #doc-out-desc the product ref
+            // #doc-out-desc the product ref
             $loopResultRow->set('REF', $product->getRef());
-		    // #doc-out-desc the cart item quantity
+            // #doc-out-desc the cart item quantity
             $loopResultRow->set('QUANTITY', $cartItem->getQuantity());
-		    // #doc-out-desc the product id
+            // #doc-out-desc the product id
             $loopResultRow->set('PRODUCT_ID', $product->getId());
-		    // #doc-out-desc the product url
+            // #doc-out-desc the product url
             $loopResultRow->set('PRODUCT_URL', $product->getUrl($this->getCurrentRequest()->getSession()->getLang()->getLocale()));
             if (!$checkAvailability || $product->getVirtual() === 1) {
-		        // #doc-out-desc the product sale elements available stock
+                // #doc-out-desc the product sale elements available stock
                 $loopResultRow->set('STOCK', $defaultAvailability);
             } else {
-		        // #doc-out-desc the product sale elements available stock
+                // #doc-out-desc the product sale elements available stock
                 $loopResultRow->set('STOCK', $productSaleElement->getQuantity());
             }
             $loopResultRow
@@ -128,30 +128,30 @@ class Cart extends BaseLoop implements ArraySearchLoopInterface
             ;
 
             $loopResultRow
-		        // #doc-out-desc the product sale elements price (total price)
+                // #doc-out-desc the product sale elements price (total price)
                 ->set('TOTAL_PRICE', $cartItem->getTotalPrice())
-		        // #doc-out-desc the product sale elements in promo price (total price)
+                // #doc-out-desc the product sale elements in promo price (total price)
                 ->set('TOTAL_PROMO_PRICE', $cartItem->getTotalPromoPrice())
-		        // #doc-out-desc the product sale elements price including taxes (total price)
+                // #doc-out-desc the product sale elements price including taxes (total price)
                 ->set('TOTAL_TAXED_PRICE', $cartItem->getTotalTaxedPrice($taxCountry))
-		        // #doc-out-desc the product sale elements in promo price including taxes (total price)
+                // #doc-out-desc the product sale elements in promo price including taxes (total price)
                 ->set('TOTAL_PROMO_TAXED_PRICE', $cartItem->getTotalTaxedPromoPrice($taxCountry))
             ;
 
             $loopResultRow
-		        // #doc-out-desc the actual price of item in cart
+                // #doc-out-desc the actual price of item in cart
                 ->set('REAL_PRICE', $cartItem->getRealPrice())
-		        // #doc-out-desc the actual price of item in cart, after taxes are applied
+                // #doc-out-desc the actual price of item in cart, after taxes are applied
                 ->set('REAL_TAXED_PRICE', $cartItem->getRealTaxedPrice($taxCountry))
-		        // #doc-out-desc the actual total price of all items in cart
+                // #doc-out-desc the actual total price of all items in cart
                 ->set('REAL_TOTAL_PRICE', $cartItem->getTotalRealPrice($taxCountry))
-		        // #doc-out-desc the actual total price of all items in cart, after taxes are applied
+                // #doc-out-desc the actual total price of all items in cart, after taxes are applied
                 ->set('REAL_TOTAL_TAXED_PRICE', $cartItem->getTotalRealTaxedPrice($taxCountry))
             ;
 
-		    // #doc-out-desc the product sale elements id
+            // #doc-out-desc the product sale elements id
             $loopResultRow->set('PRODUCT_SALE_ELEMENTS_ID', $productSaleElement->getId());
-		    // #doc-out-desc the sales item reference
+            // #doc-out-desc the sales item reference
             $loopResultRow->set('PRODUCT_SALE_ELEMENTS_REF', $productSaleElement->getRef());
             $this->addOutputFields($loopResultRow, $cartItem);
             $loopResult->addRow($loopResultRow);

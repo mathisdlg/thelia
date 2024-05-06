@@ -45,11 +45,11 @@ class ProductSaleElementsDocument extends BaseLoop implements PropelSearchLoopIn
             $row = new LoopResultRow($productSaleElementDocument);
 
             $row
-		        // #doc-out-desc Product id
+                // #doc-out-desc Product id
                 ->set('ID', $productSaleElementDocument->getId())
-		        // #doc-out-desc Product sale element id
+                // #doc-out-desc Product sale element id
                 ->set('PRODUCT_SALE_ELEMENTS_ID', $productSaleElementDocument->getProductSaleElementsId())
-		        // #doc-out-desc Product document id
+                // #doc-out-desc Product document id
                 ->set('PRODUCT_DOCUMENT_ID', $productSaleElementDocument->getProductDocumentId())
             ;
 
@@ -87,11 +87,11 @@ class ProductSaleElementsDocument extends BaseLoop implements PropelSearchLoopIn
     protected function getArgDefinitions()
     {
         return new ArgumentCollection(
-		    // #doc-arg-desc A single or list of product id
+            // #doc-arg-desc A single or list of product id
             Argument::createIntListTypeArgument('id'),
-		    // #doc-arg-desc A single or list of product sale element id
+            // #doc-arg-desc A single or list of product sale element id
             Argument::createIntListTypeArgument('product_sale_elements_id'),
-		    // #doc-arg-desc A single or list of product document id
+            // #doc-arg-desc A single or list of product document id
             Argument::createIntListTypeArgument('product_document_id'),
             // #doc-arg-desc A list of values see sorting possible values
             Argument::createEnumListTypeArgument(

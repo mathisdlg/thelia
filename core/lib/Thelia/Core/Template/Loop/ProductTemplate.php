@@ -44,9 +44,9 @@ class ProductTemplate extends BaseI18nLoop implements PropelSearchLoopInterface
     protected function getArgDefinitions()
     {
         return new ArgumentCollection(
-		    // #doc-arg-desc A single or a list of sale ids.
+            // #doc-arg-desc A single or a list of sale ids.
             Argument::createIntListTypeArgument('id'),
-		    // #doc-arg-desc A single or a list of sale ids to excluded from results.
+            // #doc-arg-desc A single or a list of sale ids to excluded from results.
             Argument::createIntListTypeArgument('exclude')
         );
     }
@@ -80,13 +80,13 @@ class ProductTemplate extends BaseI18nLoop implements PropelSearchLoopInterface
             $loopResultRow = new LoopResultRow($template);
 
             $loopResultRow
-		        // #doc-out-desc the content id
+                // #doc-out-desc the content id
                 ->set('ID', $template->getId())
-		        // #doc-out-desc check if the content is translated
+                // #doc-out-desc check if the content is translated
                 ->set('IS_TRANSLATED', $template->getVirtualColumn('IS_TRANSLATED'))
-		        // #doc-out-desc the locale (e.g. fr_FR) of the returned data
+                // #doc-out-desc the locale (e.g. fr_FR) of the returned data
                 ->set('LOCALE', $this->locale)
-		        // #doc-out-desc the template name
+                // #doc-out-desc the template name
                 ->set('NAME', $template->getVirtualColumn('i18n_NAME'))
             ;
             $this->addOutputFields($loopResultRow, $template);

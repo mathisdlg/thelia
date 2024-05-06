@@ -65,23 +65,23 @@ class Content extends BaseI18nLoop implements PropelSearchLoopInterface, SearchL
     protected function getArgDefinitions()
     {
         return new ArgumentCollection(
-		    // #doc-arg-desc A single or a list of content ids.
+            // #doc-arg-desc A single or a list of content ids.
             Argument::createIntListTypeArgument('id'),
-		    // #doc-arg-desc A single or a list of folder ids.
+            // #doc-arg-desc A single or a list of folder ids.
             Argument::createIntListTypeArgument('folder'),
-		    // #doc-arg-desc A single or a list of default folder ids allowing to retrieve all content having this parameter as default folder.
+            // #doc-arg-desc A single or a list of default folder ids allowing to retrieve all content having this parameter as default folder.
             Argument::createIntListTypeArgument('folder_default'),
-		    // #doc-arg-desc A boolean value which allows either to exclude current content from results either to match only this content
+            // #doc-arg-desc A boolean value which allows either to exclude current content from results either to match only this content
             Argument::createBooleanTypeArgument('current'),
-		    // #doc-arg-desc A boolean value which allows either to exclude current folder contents from results either to match only current folder contents. If a content is in multiple folders whose one is current it will not be excluded if current_folder="false" but will be included if current_folder="yes"
+            // #doc-arg-desc A boolean value which allows either to exclude current folder contents from results either to match only current folder contents. If a content is in multiple folders whose one is current it will not be excluded if current_folder="false" but will be included if current_folder="yes"
             Argument::createBooleanTypeArgument('current_folder'),
-		    // #doc-arg-desc A boolean. If set to true, $PREVIOUS and $NEXT output arguments are available.
+            // #doc-arg-desc A boolean. If set to true, $PREVIOUS and $NEXT output arguments are available.
             Argument::createBooleanTypeArgument('with_prev_next_info', false),
-		    // #doc-arg-desc A positive integer value which precise how many subfolder levels will be browse. Will not be consider if folder parameter is not set.
+            // #doc-arg-desc A positive integer value which precise how many subfolder levels will be browse. Will not be consider if folder parameter is not set.
             Argument::createIntTypeArgument('depth', 1),
-		    // #doc-arg-desc A boolean value.
+            // #doc-arg-desc A boolean value.
             Argument::createBooleanOrBothTypeArgument('visible', 1),
-		    // #doc-arg-desc A title string
+            // #doc-arg-desc A title string
             Argument::createAnyTypeArgument('title'),
             // #doc-arg-desc A list of value
             new Argument(
@@ -103,9 +103,9 @@ class Content extends BaseI18nLoop implements PropelSearchLoopInterface, SearchL
                 ),
                 'alpha'
             ),
-		    // #doc-arg-desc A single or a list of content ids.
+            // #doc-arg-desc A single or a list of content ids.
             Argument::createIntListTypeArgument('exclude'),
-		    // #doc-arg-desc A single or a list of folder ids. If a content is in multiple folders which are not all excluded it will not be excluded.
+            // #doc-arg-desc A single or a list of folder ids. If a content is in multiple folders which are not all excluded it will not be excluded.
             Argument::createIntListTypeArgument('exclude_folder')
         );
     }
@@ -318,31 +318,31 @@ class Content extends BaseI18nLoop implements PropelSearchLoopInterface, SearchL
                 $defaultFolderId = $content->getDefaultFolderId();
             }
 
-		    // #doc-out-desc the content id
+            // #doc-out-desc the content id
             $loopResultRow->set('ID', $content->getId())
-		        // #doc-out-desc check if the content is translated
+                // #doc-out-desc check if the content is translated
                 ->set('IS_TRANSLATED', $content->getVirtualColumn('IS_TRANSLATED'))
-		        // #doc-out-desc The locale used for this research
+                // #doc-out-desc The locale used for this research
                 ->set('LOCALE', $this->locale)
-		        // #doc-out-desc the content title
+                // #doc-out-desc the content title
                 ->set('TITLE', $content->getVirtualColumn('i18n_TITLE'))
-		        // #doc-out-desc the content chapo
+                // #doc-out-desc the content chapo
                 ->set('CHAPO', $content->getVirtualColumn('i18n_CHAPO'))
-		        // #doc-out-desc the content description
+                // #doc-out-desc the content description
                 ->set('DESCRIPTION', $content->getVirtualColumn('i18n_DESCRIPTION'))
-		        // #doc-out-desc the content postscriptum
+                // #doc-out-desc the content postscriptum
                 ->set('POSTSCRIPTUM', $content->getVirtualColumn('i18n_POSTSCRIPTUM'))
-		        // #doc-out-desc the content URL
+                // #doc-out-desc the content URL
                 ->set('URL', $this->getReturnUrl() ? $content->getUrl($this->locale) : null)
-		        // #doc-out-desc the content meta title
+                // #doc-out-desc the content meta title
                 ->set('META_TITLE', $content->getVirtualColumn('i18n_META_TITLE'))
-		        // #doc-out-desc the content meta description
+                // #doc-out-desc the content meta description
                 ->set('META_DESCRIPTION', $content->getVirtualColumn('i18n_META_DESCRIPTION'))
-		        // #doc-out-desc the content meta keywords
+                // #doc-out-desc the content meta keywords
                 ->set('META_KEYWORDS', $content->getVirtualColumn('i18n_META_KEYWORDS'))
-		        // #doc-out-desc the content position
+                // #doc-out-desc the content position
                 ->set('POSITION', $content->getVirtualColumn('position_delegate'))
-		        // #doc-out-desc the default folder id for the current content
+                // #doc-out-desc the default folder id for the current content
                 ->set('DEFAULT_FOLDER', $defaultFolderId)
                 ->set('VISIBLE', $content->getVisible());
             $this->addOutputFields($loopResultRow, $content);
@@ -396,13 +396,13 @@ class Content extends BaseI18nLoop implements PropelSearchLoopInterface, SearchL
                 ->findOne();
 
             $loopResultRow
-		// #doc-out-desc true if a content exists before this one in the current folder, following contents positions.
+        // #doc-out-desc true if a content exists before this one in the current folder, following contents positions.
                 ->set('HAS_PREVIOUS', $previous != null ? 1 : 0)
-		// #doc-out-desc true if a content exists after this one in the current folder, following contents positions.
+        // #doc-out-desc true if a content exists after this one in the current folder, following contents positions.
                 ->set('HAS_NEXT', $next != null ? 1 : 0)
-		// #doc-out-desc The ID of content before this one in the current folder, following contents positions, or null if none exists.
+        // #doc-out-desc The ID of content before this one in the current folder, following contents positions, or null if none exists.
                 ->set('PREVIOUS', $previous != null ? $previous->getContentId() : -1)
-		// #doc-out-desc The ID of content after this one in the current folder, following contents positions, or null if none exists.
+        // #doc-out-desc The ID of content after this one in the current folder, following contents positions, or null if none exists.
                 ->set('NEXT', $next != null ? $next->getContentId() : -1);
         }
     }

@@ -50,9 +50,9 @@ class AssociatedContent extends Content
             ->addArgument(Argument::createIntTypeArgument('product'))
             // #doc-arg-desc A single category id.
             ->addArgument(Argument::createIntTypeArgument('category'))
-		    // #doc-arg-desc A single or a list of product ids. If a content is in multiple products which are not all excluded it will not be excluded.
+            // #doc-arg-desc A single or a list of product ids. If a content is in multiple products which are not all excluded it will not be excluded.
             ->addArgument(Argument::createIntListTypeArgument('exclude_product'))
-		    // #doc-arg-desc A single or a list of category ids. If a content is in multiple categories which are not all excluded it will not be excluded.
+            // #doc-arg-desc A single or a list of category ids. If a content is in multiple categories which are not all excluded it will not be excluded.
             ->addArgument(Argument::createIntListTypeArgument('exclude_category'))
         ;
 

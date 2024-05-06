@@ -47,9 +47,9 @@ class TaxRule extends BaseI18nLoop implements PropelSearchLoopInterface
     protected function getArgDefinitions()
     {
         return new ArgumentCollection(
-		    // #doc-arg-desc A single or list of tax rule ids.
+            // #doc-arg-desc A single or list of tax rule ids.
             Argument::createIntListTypeArgument('id'),
-		    // #doc-arg-desc A single or list of tax rule ids to exclude
+            // #doc-arg-desc A single or list of tax rule ids to exclude
             Argument::createIntListTypeArgument('exclude'),
             // #doc-arg-desc A list of values see sorting possible values
             new Argument(
@@ -110,17 +110,17 @@ class TaxRule extends BaseI18nLoop implements PropelSearchLoopInterface
             $loopResultRow = new LoopResultRow($taxRule);
 
             $loopResultRow
-		        // #doc-out-desc the tax id
+                // #doc-out-desc the tax id
                 ->set('ID', $taxRule->getId())
-		        // #doc-out-desc check if the tax rule is translated
+                // #doc-out-desc check if the tax rule is translated
                 ->set('IS_TRANSLATED', $taxRule->getVirtualColumn('IS_TRANSLATED'))
-		        // #doc-out-desc The locale used for this research
+                // #doc-out-desc The locale used for this research
                 ->set('LOCALE', $this->locale)
-		        // #doc-out-desc Tax title
+                // #doc-out-desc Tax title
                 ->set('TITLE', $taxRule->getVirtualColumn('i18n_TITLE'))
-		        // #doc-out-desc Tax description
+                // #doc-out-desc Tax description
                 ->set('DESCRIPTION', $taxRule->getVirtualColumn('i18n_DESCRIPTION'))
-		        // #doc-out-desc check if it's the default tax rule
+                // #doc-out-desc check if it's the default tax rule
                 ->set('IS_DEFAULT', $taxRule->getIsDefault() ? '1' : '0')
             ;
             $this->addOutputFields($loopResultRow, $taxRule);

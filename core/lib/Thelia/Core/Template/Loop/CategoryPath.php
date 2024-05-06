@@ -49,9 +49,9 @@ class CategoryPath extends BaseI18nLoop implements ArraySearchLoopInterface
         return new ArgumentCollection(
             // #doc-arg-desc A single category id.
             Argument::createIntTypeArgument('category', null, true),
-		    // #doc-arg-desc The max depth
+            // #doc-arg-desc The max depth
             Argument::createIntTypeArgument('depth', \PHP_INT_MAX),
-		    // #doc-arg-desc Whatever we consider hidden category or not.
+            // #doc-arg-desc Whatever we consider hidden category or not.
             Argument::createBooleanOrBothTypeArgument('visible', true, false)
         );
     }

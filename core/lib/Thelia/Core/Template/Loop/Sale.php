@@ -54,15 +54,15 @@ class Sale extends BaseI18nLoop implements PropelSearchLoopInterface, SearchLoop
     protected function getArgDefinitions()
     {
         return new ArgumentCollection(
-		    // #doc-arg-desc A single or a list of sale ids.
+            // #doc-arg-desc A single or a list of sale ids.
             Argument::createIntListTypeArgument('id'),
-		    // #doc-arg-desc A single or a list of sale ids to excluded from results.
+            // #doc-arg-desc A single or a list of sale ids to excluded from results.
             Argument::createIntListTypeArgument('exclude'),
-		    // #doc-arg-desc A boolean value, to get only active (1) or inactive sales (0) or both (
+            // #doc-arg-desc A boolean value, to get only active (1) or inactive sales (0) or both (
             Argument::createBooleanOrBothTypeArgument('active', 1),
-		    // #doc-arg-desc A single or a list of product IDs. If specified, the loop will return the sales in which these products are selected
+            // #doc-arg-desc A single or a list of product IDs. If specified, the loop will return the sales in which these products are selected
             Argument::createIntListTypeArgument('product'),
-		    // #doc-arg-desc A currency id, to get the price offset defined for this currency
+            // #doc-arg-desc A currency id, to get the price offset defined for this currency
             Argument::createIntTypeArgument('currency', $this->getCurrentRequest()->getSession()->getCurrency()->getId()),
             // #doc-arg-desc A list of values see sorting possible values
             new Argument(
@@ -249,38 +249,38 @@ class Sale extends BaseI18nLoop implements PropelSearchLoopInterface, SearchLoop
                     $priceOffsetType = $priceOffsetSymbol = '?';
             }
 
-		    // #doc-out-desc the content id
+            // #doc-out-desc the content id
             $loopResultRow->set('ID', $sale->getId())
-		        // #doc-out-desc check if the content is translated
+                // #doc-out-desc check if the content is translated
                 ->set('IS_TRANSLATED', $sale->getVirtualColumn('IS_TRANSLATED'))
-		        // #doc-out-desc the locale (e.g. fr_FR) of the returned data
+                // #doc-out-desc the locale (e.g. fr_FR) of the returned data
                 ->set('LOCALE', $this->locale)
-		        // #doc-out-desc the sale title
+                // #doc-out-desc the sale title
                 ->set('TITLE', $sale->getVirtualColumn('i18n_TITLE'))
-		        // #doc-out-desc the sale advertising label
+                // #doc-out-desc the sale advertising label
                 ->set('SALE_LABEL', $sale->getVirtualColumn('i18n_SALE_LABEL'))
-		        // #doc-out-desc the sale description
+                // #doc-out-desc the sale description
                 ->set('DESCRIPTION', $sale->getVirtualColumn('i18n_DESCRIPTION'))
-		        // #doc-out-desc the sale chapo
+                // #doc-out-desc the sale chapo
                 ->set('CHAPO', $sale->getVirtualColumn('i18n_CHAPO'))
                 ->set('POSTSCRIPTUM', $sale->getVirtualColumn('i18n_POSTSCRIPTUM'))
-		        // #doc-out-desc true if the sale is active, false otherwise
+                // #doc-out-desc true if the sale is active, false otherwise
                 ->set('ACTIVE', $sale->getActive())
-		        // #doc-out-desc true if the products initial price should be displayed, false otherwise
+                // #doc-out-desc true if the products initial price should be displayed, false otherwise
                 ->set('DISPLAY_INITIAL_PRICE', $sale->getDisplayInitialPrice())
-		        // #doc-out-desc the sale start date
+                // #doc-out-desc the sale start date
                 ->set('START_DATE', $sale->getStartDate())
-		        // #doc-out-desc true if the sale has a start date, false otherwise
+                // #doc-out-desc true if the sale has a start date, false otherwise
                 ->set('HAS_START_DATE', $sale->hasStartDate() ? 1 : 0)
-		        // #doc-out-desc the sale end date
+                // #doc-out-desc the sale end date
                 ->set('END_DATE', $sale->getEndDate())
-		        // #doc-out-desc true if the sale has a end date, false otherwise
+                // #doc-out-desc true if the sale has a end date, false otherwise
                 ->set('HAS_END_DATE', $sale->hasEndDate() ? 1 : 0)
-		        // #doc-out-desc the price offset type, P for a percentage, A for an amount
+                // #doc-out-desc the price offset type, P for a percentage, A for an amount
                 ->set('PRICE_OFFSET_TYPE', $priceOffsetType)
-		        // #doc-out-desc the offset unit symbol, % for a percentage, the currency symbol for an amount
+                // #doc-out-desc the offset unit symbol, % for a percentage, the currency symbol for an amount
                 ->set('PRICE_OFFSET_SYMBOL', $priceOffsetSymbol)
-		        // #doc-out-desc the price offset value, as a percentage (0-100) or a constant amount.
+                // #doc-out-desc the price offset value, as a percentage (0-100) or a constant amount.
                 ->set('PRICE_OFFSET_VALUE', $sale->getVirtualColumn('price_offset_value'))
             ;
 

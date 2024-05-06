@@ -50,13 +50,13 @@ class State extends BaseI18nLoop implements PropelSearchLoopInterface
     protected function getArgDefinitions()
     {
         return new ArgumentCollection(
-		    // #doc-arg-desc A single or a list of state ids.
+            // #doc-arg-desc A single or a list of state ids.
             Argument::createIntListTypeArgument('id'),
-		    // #doc-arg-desc A single or a list of country ids.
+            // #doc-arg-desc A single or a list of country ids.
             Argument::createIntListTypeArgument('country'),
-		    // #doc-arg-desc A single or a list of state ids to exclude from the results.
+            // #doc-arg-desc A single or a list of state ids to exclude from the results.
             Argument::createIntListTypeArgument('exclude'),
-		    // #doc-arg-desc A boolean value to return visible or not visible states (possible values : yes, no or
+            // #doc-arg-desc A boolean value to return visible or not visible states (possible values : yes, no or
             Argument::createBooleanOrBothTypeArgument('visible', 1),
             // #doc-arg-desc A list of values see sorting possible values
             new Argument(
@@ -144,19 +144,19 @@ class State extends BaseI18nLoop implements PropelSearchLoopInterface
         foreach ($loopResult->getResultDataCollection() as $state) {
             $loopResultRow = new LoopResultRow($state);
             $loopResultRow
-		        // #doc-out-desc the state id
+                // #doc-out-desc the state id
                 ->set('ID', $state->getId())
-		        // #doc-out-desc the country the state belongs
+                // #doc-out-desc the country the state belongs
                 ->set('COUNTRY', $state->getCountryId())
-		        // #doc-out-desc true if the state is visible. False otherwise
+                // #doc-out-desc true if the state is visible. False otherwise
                 ->set('VISIBLE', $state->getVisible())
-		        // #doc-out-desc check if the state is translated
+                // #doc-out-desc check if the state is translated
                 ->set('IS_TRANSLATED', $state->getVirtualColumn('IS_TRANSLATED'))
-		        // #doc-out-desc The locale used for this research
+                // #doc-out-desc The locale used for this research
                 ->set('LOCALE', $this->locale)
-		        // #doc-out-desc the state title
+                // #doc-out-desc the state title
                 ->set('TITLE', $state->getVirtualColumn('i18n_TITLE'))
-		        // #doc-out-desc the state ISO code
+                // #doc-out-desc the state ISO code
                 ->set('ISOCODE', $state->getIsocode())
             ;
 

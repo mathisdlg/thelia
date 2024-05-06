@@ -57,15 +57,15 @@ class Attribute extends BaseI18nLoop implements PropelSearchLoopInterface
     protected function getArgDefinitions()
     {
         return new ArgumentCollection(
-		    // #doc-arg-desc A single or a list of attribute ids.
+            // #doc-arg-desc A single or a list of attribute ids.
             Argument::createIntListTypeArgument('id'),
-		    // #doc-arg-desc A single or a list of product ids.
+            // #doc-arg-desc A single or a list of product ids.
             Argument::createIntListTypeArgument('product'),
-		    // #doc-arg-desc A single or a list of template ids. Only features attached to these templates will be returned.
+            // #doc-arg-desc A single or a list of template ids. Only features attached to these templates will be returned.
             Argument::createIntListTypeArgument('template'),
-		    // #doc-arg-desc A single or a list of template ids. Only features NOT attached to these templates will be returned.
+            // #doc-arg-desc A single or a list of template ids. Only features NOT attached to these templates will be returned.
             Argument::createIntListTypeArgument('exclude_template'),
-		    // #doc-arg-desc A single or a list of attribute ids to exclude.
+            // #doc-arg-desc A single or a list of attribute ids to exclude.
             Argument::createIntListTypeArgument('exclude'),
             // #doc-arg-desc A list of values
             new Argument(

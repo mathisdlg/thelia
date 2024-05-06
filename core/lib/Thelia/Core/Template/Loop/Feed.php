@@ -36,7 +36,7 @@ class Feed extends BaseLoop implements ArraySearchLoopInterface
         return new ArgumentCollection(
             // #doc-arg-desc An Atom or RSS feed URL.
             Argument::createAnyTypeArgument('url', null, true),
-		    // #doc-arg-desc Delay in seconds after which the loop closes the connection with the remote server
+            // #doc-arg-desc Delay in seconds after which the loop closes the connection with the remote server
             Argument::createIntTypeArgument('timeout', 10)
         );
     }
@@ -72,15 +72,15 @@ class Feed extends BaseLoop implements ArraySearchLoopInterface
             $loopResultRow = new LoopResultRow();
 
             $loopResultRow
-		        // #doc-out-desc the feed item URL
+                // #doc-out-desc the feed item URL
                 ->set('URL', $item->get_permalink())
-		        // #doc-out-desc The feed item title
+                // #doc-out-desc The feed item title
                 ->set('TITLE', $item->get_title())
-		        // #doc-out-desc The feed item author
+                // #doc-out-desc The feed item author
                 ->set('AUTHOR', $item->get_author())
-		        // #doc-out-desc the feed item description
+                // #doc-out-desc the feed item description
                 ->set('DESCRIPTION', $item->get_description())
-		        // #doc-out-desc the feed item date, as a Unix timestamp
+                // #doc-out-desc the feed item date, as a Unix timestamp
                 ->set('DATE', $item->get_date('U'))
             ;
             $this->addOutputFields($loopResultRow, $item);

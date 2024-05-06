@@ -111,17 +111,17 @@ class TaxRuleCountry extends BaseI18nLoop implements PropelSearchLoopInterface
         foreach ($loopResult->getResultDataCollection() as $taxRuleCountry) {
             $loopResultRow = new LoopResultRow($taxRuleCountry);
             $loopResultRow
-		        // #doc-out-desc the tax rule
+                // #doc-out-desc the tax rule
                 ->set('TAX_RULE', $taxRuleCountry->getTaxRuleId())
-		        // #doc-out-desc the country
+                // #doc-out-desc the country
                 ->set('COUNTRY', $taxRuleCountry->getCountryId())
-		        // #doc-out-desc the state
+                // #doc-out-desc the state
                 ->set('STATE', $taxRuleCountry->getStateId())
-		        // #doc-out-desc the tax id
+                // #doc-out-desc the tax id
                 ->set('TAX', $taxRuleCountry->getTaxId())
-		        // #doc-out-desc the tax rule position
+                // #doc-out-desc the tax rule position
                 ->set('POSITION', $taxRuleCountry->getPosition())
-		        // #doc-out-desc the title of the tax
+                // #doc-out-desc the title of the tax
                 ->set('TAX_TITLE', $taxRuleCountry->getVirtualColumn(TaxTableMap::TABLE_NAME.'_i18n_TITLE'))
                 // #doc-out-desc the description of the tax
                 ->set(

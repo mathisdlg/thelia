@@ -47,11 +47,11 @@ class Delivery extends BaseSpecificModule
         $collection = parent::getArgDefinitions();
 
         $collection
-		    // #doc-arg-desc An address id.
+            // #doc-arg-desc An address id.
             ->addArgument(Argument::createIntTypeArgument('address'))
-		    // #doc-arg-desc A country id.
+            // #doc-arg-desc A country id.
             ->addArgument(Argument::createIntTypeArgument('country'))
-		    // #doc-arg-desc A state id.
+            // #doc-arg-desc A state id.
             ->addArgument(Argument::createIntTypeArgument('state'))
         ;
 

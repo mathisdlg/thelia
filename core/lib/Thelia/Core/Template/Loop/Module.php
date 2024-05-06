@@ -59,11 +59,11 @@ class Module extends BaseI18nLoop implements PropelSearchLoopInterface
     protected function getArgDefinitions()
     {
         return new ArgumentCollection(
-		    // #doc-arg-desc A single or a list of module ids.
+            // #doc-arg-desc A single or a list of module ids.
             Argument::createIntListTypeArgument('id'),
-		    // #doc-arg-desc A single or a list of profile ids.
+            // #doc-arg-desc A single or a list of profile ids.
             Argument::createIntTypeArgument('profile'),
-		    // #doc-arg-desc A single or a list of area ids. Only modules assigned to this area will be returned.
+            // #doc-arg-desc A single or a list of area ids. Only modules assigned to this area will be returned.
             Argument::createIntListTypeArgument('area'),
             // #doc-arg-desc Module code
             new Argument(
@@ -111,11 +111,11 @@ class Module extends BaseI18nLoop implements PropelSearchLoopInterface
                 ),
                 'manual'
             ),
-		    // #doc-arg-desc A single or a list of module ids to exclude.
+            // #doc-arg-desc A single or a list of module ids to exclude.
             Argument::createIntListTypeArgument('exclude'),
-		    // #doc-arg-desc A boolean value.
+            // #doc-arg-desc A boolean value.
             Argument::createBooleanOrBothTypeArgument('active', Type\BooleanOrBothType::ANY),
-		    // #doc-arg-desc A boolean value.
+            // #doc-arg-desc A boolean value.
             Argument::createBooleanOrBothTypeArgument('hidden', Type\BooleanOrBothType::ANY),
             // #doc-arg-desc A boolean value fo mandatory
             Argument::createBooleanOrBothTypeArgument('mandatory', Type\BooleanOrBothType::ANY)
@@ -256,39 +256,39 @@ class Module extends BaseI18nLoop implements PropelSearchLoopInterface
                 $loopResultRow = new LoopResultRow($module);
 
                 $loopResultRow
-		            // #doc-out-desc the module ID
+                    // #doc-out-desc the module ID
                     ->set('ID', $module->getId())
-		            // #doc-out-desc return true if the module is translated
+                    // #doc-out-desc return true if the module is translated
                     ->set('IS_TRANSLATED', $module->getVirtualColumn('IS_TRANSLATED'))
-		            // #doc-out-desc The locale used for this research
+                    // #doc-out-desc The locale used for this research
                     ->set('LOCALE', $this->locale)
-		            // #doc-out-desc the module title
+                    // #doc-out-desc the module title
                     ->set('TITLE', $module->getVirtualColumn('i18n_TITLE'))
-		            // #doc-out-desc the module chapo
+                    // #doc-out-desc the module chapo
                     ->set('CHAPO', $module->getVirtualColumn('i18n_CHAPO'))
-		            // #doc-out-desc the module description
+                    // #doc-out-desc the module description
                     ->set('DESCRIPTION', $module->getVirtualColumn('i18n_DESCRIPTION'))
-		            // #doc-out-desc the module postscriptum
+                    // #doc-out-desc the module postscriptum
                     ->set('POSTSCRIPTUM', $module->getVirtualColumn('i18n_POSTSCRIPTUM'))
-		            // #doc-out-desc The module code
+                    // #doc-out-desc The module code
                     ->set('CODE', $module->getCode())
-		            // #doc-out-desc The module type
+                    // #doc-out-desc The module type
                     ->set('TYPE', $module->getType())
-		            // #doc-out-desc the module category
+                    // #doc-out-desc the module category
                     ->set('CATEGORY', $module->getCategory())
-		            // #doc-out-desc check if the module is activated or not
+                    // #doc-out-desc check if the module is activated or not
                     ->set('ACTIVE', $module->getActivate())
-		            // #doc-out-desc The module version
+                    // #doc-out-desc The module version
                     ->set('VERSION', $module->getVersion())
-		            // #doc-out-desc The full namespace for the module class
+                    // #doc-out-desc The full namespace for the module class
                     ->set('CLASS', $module->getFullNamespace())
-		            // #doc-out-desc the position of this module
+                    // #doc-out-desc the position of this module
                     ->set('POSITION', $module->getPosition())
-		            // #doc-out-desc check if the module is mandatory
+                    // #doc-out-desc check if the module is mandatory
                     ->set('MANDATORY', $module->getMandatory())
-		            // #doc-out-desc check if the module is hidden
+                    // #doc-out-desc check if the module is hidden
                     ->set('HIDDEN', $module->getHidden())
-		            // #doc-out-desc return true if the module exists
+                    // #doc-out-desc return true if the module exists
                     ->set('EXISTS', $exists);
 
                 $loopResultRow->set('CONFIGURABLE', $this->moduleHasConfigurationInterface($module));

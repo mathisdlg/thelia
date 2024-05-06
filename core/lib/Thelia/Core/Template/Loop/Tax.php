@@ -51,15 +51,15 @@ class Tax extends BaseI18nLoop implements PropelSearchLoopInterface
     protected function getArgDefinitions()
     {
         return new ArgumentCollection(
-		    // #doc-arg-desc A single or list of tax ids.
+            // #doc-arg-desc A single or list of tax ids.
             Argument::createIntListTypeArgument('id'),
-		    // #doc-arg-desc A single or list of tax ids to exclude
+            // #doc-arg-desc A single or list of tax ids to exclude
             Argument::createIntListTypeArgument('exclude'),
-		    // #doc-arg-desc A single or list of tax_rule ids
+            // #doc-arg-desc A single or list of tax_rule ids
             Argument::createIntListTypeArgument('tax_rule'),
-		    // #doc-arg-desc A single or list of tax_rule ids to exclude
+            // #doc-arg-desc A single or list of tax_rule ids to exclude
             Argument::createIntListTypeArgument('exclude_tax_rule'),
-		    // #doc-arg-desc a country id
+            // #doc-arg-desc a country id
             Argument::createIntTypeArgument('country'),
             // #doc-arg-desc A list of values see sorting possible values
             new Argument(
@@ -149,21 +149,21 @@ class Tax extends BaseI18nLoop implements PropelSearchLoopInterface
             $loopResultRow = new LoopResultRow($tax);
 
             $loopResultRow
-		        // #doc-out-desc the tax id
+                // #doc-out-desc the tax id
                 ->set('ID', $tax->getId())
-		        // #doc-out-desc The tax type
+                // #doc-out-desc The tax type
                 ->set('TYPE', $tax->getType())
-		        // #doc-out-desc Provides a form-and-javascript-safe version of the type, which is a fully qualified classname, with \
+                // #doc-out-desc Provides a form-and-javascript-safe version of the type, which is a fully qualified classname, with \
                 ->set('ESCAPED_TYPE', TaxModel::escapeTypeName($tax->getType()))
-		        // #doc-out-desc All requirements for this tax
+                // #doc-out-desc All requirements for this tax
                 ->set('REQUIREMENTS', $tax->getRequirements())
-		        // #doc-out-desc check if the tax is translated
+                // #doc-out-desc check if the tax is translated
                 ->set('IS_TRANSLATED', $tax->getVirtualColumn('IS_TRANSLATED'))
-		        // #doc-out-desc The locale used for this research
+                // #doc-out-desc The locale used for this research
                 ->set('LOCALE', $this->locale)
-		        // #doc-out-desc Tax title
+                // #doc-out-desc Tax title
                 ->set('TITLE', $tax->getVirtualColumn('i18n_TITLE'))
-		        // #doc-out-desc Tax description
+                // #doc-out-desc Tax description
                 ->set('DESCRIPTION', $tax->getVirtualColumn('i18n_DESCRIPTION'))
             ;
             $this->addOutputFields($loopResultRow, $tax);

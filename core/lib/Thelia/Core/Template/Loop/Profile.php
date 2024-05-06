@@ -43,7 +43,7 @@ class Profile extends BaseI18nLoop implements PropelSearchLoopInterface
     protected function getArgDefinitions()
     {
         return new ArgumentCollection(
-		    // #doc-arg-desc A single or a list of sale ids.
+            // #doc-arg-desc A single or a list of sale ids.
             Argument::createIntListTypeArgument('id')
         );
     }
@@ -71,19 +71,19 @@ class Profile extends BaseI18nLoop implements PropelSearchLoopInterface
         /** @var ProfileModel $profile */
         foreach ($loopResult->getResultDataCollection() as $profile) {
             $loopResultRow = new LoopResultRow($profile);
-		    // #doc-out-desc the content id
+            // #doc-out-desc the content id
             $loopResultRow->set('ID', $profile->getId())
-		        // #doc-out-desc check if the content is translated
+                // #doc-out-desc check if the content is translated
                 ->set('IS_TRANSLATED', $profile->getVirtualColumn('IS_TRANSLATED'))
-		        // #doc-out-desc the locale (e.g. fr_FR) of the returned data
+                // #doc-out-desc the locale (e.g. fr_FR) of the returned data
                 ->set('LOCALE', $this->locale)
-		        // #doc-out-desc the content code
+                // #doc-out-desc the content code
                 ->set('CODE', $profile->getCode())
-		        // #doc-out-desc the title
+                // #doc-out-desc the title
                 ->set('TITLE', $profile->getVirtualColumn('i18n_TITLE'))
-		        // #doc-out-desc the chapo
+                // #doc-out-desc the chapo
                 ->set('CHAPO', $profile->getVirtualColumn('i18n_CHAPO'))
-		        // #doc-out-desc the content description
+                // #doc-out-desc the content description
                 ->set('DESCRIPTION', $profile->getVirtualColumn('i18n_DESCRIPTION'))
                 ->set('POSTSCRIPTUM', $profile->getVirtualColumn('i18n_POSTSCRIPTUM'))
             ;

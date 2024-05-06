@@ -52,9 +52,9 @@ class OrderProduct extends BaseLoop implements PropelSearchLoopInterface
         return new ArgumentCollection(
             // #doc-arg-desc A single order id.
             Argument::createIntTypeArgument('order', null, true),
-		    // #doc-arg-desc A single or a list of order product ids.
+            // #doc-arg-desc A single or a list of order product ids.
             Argument::createIntListTypeArgument('id'),
-		    // #doc-arg-desc A boolean value.
+            // #doc-arg-desc A boolean value.
             Argument::createBooleanOrBothTypeArgument('virtual', BooleanOrBothType::ANY)
         );
     }
@@ -111,7 +111,7 @@ class OrderProduct extends BaseLoop implements PropelSearchLoopInterface
      * @throws \Propel\Runtime\Exception\PropelException
      *
      * @return LoopResult
-	 */
+     */
     public function parseResults(LoopResult $loopResult)
     {
         $lastLegacyRoundingOrderId = ConfigQuery::read('last_legacy_rounding_order_id', 0);
@@ -152,81 +152,81 @@ class OrderProduct extends BaseLoop implements PropelSearchLoopInterface
                 $totalTaxedPromoPrice = $taxedPromoPrice * $orderProduct->getQuantity();
             }
 
-			// #doc-out-desc the order product id
+            // #doc-out-desc the order product id
             $loopResultRow->set('ID', $orderProduct->getId())
-				// #doc-out-desc the order product reference
+                // #doc-out-desc the order product reference
                 ->set('REF', $orderProduct->getProductRef())
-				// #doc-out-desc the product id
+                // #doc-out-desc the product id
                 ->set('PRODUCT_ID', $orderProduct->getVirtualColumn('product_id'))
-				// #doc-out-desc the order product sale elements id
+                // #doc-out-desc the order product sale elements id
                 ->set('PRODUCT_SALE_ELEMENTS_ID', $orderProduct->getProductSaleElementsId())
-				// #doc-out-desc the order product sale elements reference
+                // #doc-out-desc the order product sale elements reference
                 ->set('PRODUCT_SALE_ELEMENTS_REF', $orderProduct->getProductSaleElementsRef())
-				// #doc-out-desc whatever the order product sale elements was new or not
+                // #doc-out-desc whatever the order product sale elements was new or not
                 ->set('WAS_NEW', $orderProduct->getWasNew() === 1 ? 1 : 0)
-				// #doc-out-desc whatever the order product sale elements was in promo or not
+                // #doc-out-desc whatever the order product sale elements was in promo or not
                 ->set('WAS_IN_PROMO', $orderProduct->getWasInPromo() === 1 ? 1 : 0)
-				// #doc-out-desc the order product sale elements weight
+                // #doc-out-desc the order product sale elements weight
                 ->set('WEIGHT', $orderProduct->getWeight())
-				// #doc-out-desc the order product title
+                // #doc-out-desc the order product title
                 ->set('TITLE', $orderProduct->getTitle())
-				// #doc-out-desc the order product short description
+                // #doc-out-desc the order product short description
                 ->set('CHAPO', $orderProduct->getChapo())
-				// #doc-out-desc the order product description
+                // #doc-out-desc the order product description
                 ->set('DESCRIPTION', $orderProduct->getDescription())
-				// #doc-out-desc the order product postscriptum
+                // #doc-out-desc the order product postscriptum
                 ->set('POSTSCRIPTUM', $orderProduct->getPostscriptum())
-				// #doc-out-desc whatever the order product is a virtual product or not
+                // #doc-out-desc whatever the order product is a virtual product or not
                 ->set('VIRTUAL', $orderProduct->getVirtual())
-				// #doc-out-desc the name of the file if the product is virtual.
+                // #doc-out-desc the name of the file if the product is virtual.
                 ->set('VIRTUAL_DOCUMENT', $orderProduct->getVirtualDocument())
-				// #doc-out-desc the order product ordered quantity
+                // #doc-out-desc the order product ordered quantity
                 ->set('QUANTITY', $orderProduct->getQuantity())
 
-				// #doc-out-desc the order product price (unit price)
+                // #doc-out-desc the order product price (unit price)
                 ->set('PRICE', $orderProduct->getPrice())
-				// #doc-out-desc the order product taxes (unit price)
+                // #doc-out-desc the order product taxes (unit price)
                 ->set('PRICE_TAX', $tax)
-				// #doc-out-desc the order product price including taxes (unit price)
+                // #doc-out-desc the order product price including taxes (unit price)
                 ->set('TAXED_PRICE', $taxedPrice)
-				// #doc-out-desc the order product in promo price (unit price)
+                // #doc-out-desc the order product in promo price (unit price)
                 ->set('PROMO_PRICE', $orderProduct->getPromoPrice())
-				// #doc-out-desc the order product in promo price taxes (unit price)
+                // #doc-out-desc the order product in promo price taxes (unit price)
                 ->set('PROMO_PRICE_TAX', $promoTax)
-				// #doc-out-desc the order product in promo price including taxes (unit price)
+                // #doc-out-desc the order product in promo price including taxes (unit price)
                 ->set('TAXED_PROMO_PRICE', $taxedPromoPrice)
-				// #doc-out-desc the order product price (total price)
+                // #doc-out-desc the order product price (total price)
                 ->set('TOTAL_PRICE', $totalPrice)
-				// #doc-out-desc the order product price including taxes (total price)
+                // #doc-out-desc the order product price including taxes (total price)
                 ->set('TOTAL_TAXED_PRICE', $totalTaxedPrice)
-				// #doc-out-desc the order product in promo price (total price)
+                // #doc-out-desc the order product in promo price (total price)
                 ->set('TOTAL_PROMO_PRICE', $totalPromoPrice)
-				// #doc-out-desc the order product in promo price including taxes (total price)
+                // #doc-out-desc the order product in promo price including taxes (total price)
                 ->set('TOTAL_TAXED_PROMO_PRICE', $totalTaxedPromoPrice)
 
-				// #doc-out-desc the tax rule title for this item
+                // #doc-out-desc the tax rule title for this item
                 ->set('TAX_RULE_TITLE', $orderProduct->getTaxRuleTitle())
-				// #doc-out-desc the tax rule description for this item
+                // #doc-out-desc the tax rule description for this item
                 ->set('TAX_RULE_DESCRIPTION', $orderProduct->getTaxRuledescription())
-				// #doc-out-desc the parent product in the cart, if the current product has one
+                // #doc-out-desc the parent product in the cart, if the current product has one
                 ->set('PARENT', $orderProduct->getParent())
-				// #doc-out-desc the product ean code
+                // #doc-out-desc the product ean code
                 ->set('EAN_CODE', $orderProduct->getEanCode())
-				// #doc-out-desc The related Cart Item ID of this order product
+                // #doc-out-desc The related Cart Item ID of this order product
                 ->set('CART_ITEM_ID', $orderProduct->getCartItemId())
 
-				// #doc-out-desc the real price of the product
+                // #doc-out-desc the real price of the product
                 ->set('REAL_PRICE', $orderProduct->getWasInPromo() ? $orderProduct->getPromoPrice() : $orderProduct->getPrice())
-				// #doc-out-desc the real price of the product including taxes
+                // #doc-out-desc the real price of the product including taxes
                 ->set('REAL_TAXED_PRICE', $orderProduct->getWasInPromo() ? $taxedPromoPrice : $taxedPrice)
-				// #doc-out-desc the real price of the taxe for the product
+                // #doc-out-desc the real price of the taxe for the product
                 ->set('REAL_PRICE_TAX', $orderProduct->getWasInPromo() ? $promoTax : $tax)
 
-				// #doc-out-desc the real total price of the product
+                // #doc-out-desc the real total price of the product
                 ->set('REAL_TOTAL_PRICE', $orderProduct->getWasInPromo() ? $totalPromoPrice : $totalPrice)
-				// #doc-out-desc the real total price of the product including taxes
+                // #doc-out-desc the real total price of the product including taxes
                 ->set('REAL_TOTAL_TAXED_PRICE', $orderProduct->getWasInPromo() ? $totalTaxedPromoPrice : $totalTaxedPrice)
-				// #doc-out-desc the real total price of the taxe for the product
+                // #doc-out-desc the real total price of the taxe for the product
                 ->set('REAL_TOTAL_PRICE_TAX', $orderProduct->getWasInPromo() ? $totalPromoTax : $totalTax)
 
             ;

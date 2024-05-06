@@ -80,11 +80,11 @@ class Image extends BaseI18nLoop implements PropelSearchLoopInterface
     protected function getArgDefinitions()
     {
         $collection = new ArgumentCollection(
-		    // #doc-arg-desc A single or a list of image ids.
+            // #doc-arg-desc A single or a list of image ids.
             Argument::createIntListTypeArgument('id'),
-		    // #doc-arg-desc A single or a comma-separated list of image IDs to exclude from the list.
+            // #doc-arg-desc A single or a comma-separated list of image IDs to exclude from the list.
             Argument::createIntListTypeArgument('exclude'),
-		    // #doc-arg-desc A boolean value.
+            // #doc-arg-desc A boolean value.
             Argument::createBooleanOrBothTypeArgument('visible', 1),
             // #doc-arg-desc A list of values see sorting possible values
             new Argument(
@@ -94,15 +94,15 @@ class Image extends BaseI18nLoop implements PropelSearchLoopInterface
                 ),
                 'manual'
             ),
-		    // #doc-arg-desc A width in pixels, for resizing image. If only the width is provided, the image ratio is preserved.
+            // #doc-arg-desc A width in pixels, for resizing image. If only the width is provided, the image ratio is preserved.
             Argument::createIntTypeArgument('width'),
-		    // #doc-arg-desc A height in pixels, for resizing image. If only the height is provided, the image ratio is preserved.
+            // #doc-arg-desc A height in pixels, for resizing image. If only the height is provided, the image ratio is preserved.
             Argument::createIntTypeArgument('height'),
-		    // #doc-arg-desc The rotation angle in degrees (positive or negative) applied to the image. The background color of the empty areas is the one specified by 'background_color'
+            // #doc-arg-desc The rotation angle in degrees (positive or negative) applied to the image. The background color of the empty areas is the one specified by 'background_color'
             Argument::createIntTypeArgument('rotation', 0),
-		    // #doc-arg-desc The color applied to empty image parts during processing. Use rgb or rrggbb color format
+            // #doc-arg-desc The color applied to empty image parts during processing. Use rgb or rrggbb color format
             Argument::createAnyTypeArgument('background_color'),
-		    // #doc-arg-desc The generated image quality, from 0(!) to 100%. The default value is 75% (you can hange this in the Administration panel)
+            // #doc-arg-desc The generated image quality, from 0(!) to 100%. The default value is 75% (you can hange this in the Administration panel)
             Argument::createIntTypeArgument('quality'),
             // #doc-arg-desc If 'crop', the image will have the exact specified width and height, and will be cropped if required. If the source image is smaller than the required width and/or height, you have to set allow_zoom to true, otherwise the generated image will be smaller than required. If 'borders', the image will have the exact specified width and height, and some borders may be added. The border color is the one specified by 'background_color'. If 'none' or missing, the image ratio is preserved, and depending od this ratio, may not have the exact width and height required.
             new Argument(
@@ -112,7 +112,7 @@ class Image extends BaseI18nLoop implements PropelSearchLoopInterface
                 ),
                 'none'
             ),
-		    // #doc-arg-desc One or more comma separated effects definitions, that will be applied to the image in the specified order. Please see below a detailed description of available effects <br/> Expected values
+            // #doc-arg-desc One or more comma separated effects definitions, that will be applied to the image in the specified order. Please see below a detailed description of available effects <br/> Expected values
             Argument::createAnyTypeArgument('effects'),
             // #doc-arg-desc a category identifier. The loop will return this category's images
             Argument::createIntTypeArgument('category'),
@@ -124,21 +124,21 @@ class Image extends BaseI18nLoop implements PropelSearchLoopInterface
             Argument::createIntTypeArgument('content'),
             // #doc-arg-desc see Expected values
             Argument::createAnyTypeArgument('source'),
-		    // #doc-arg-desc The identifier of the object provided in the "source" parameter. Only considered if the "source" argument is present
+            // #doc-arg-desc The identifier of the object provided in the "source" parameter. Only considered if the "source" argument is present
             Argument::createIntTypeArgument('source_id'),
             // #doc-arg-desc force return 
             Argument::createBooleanTypeArgument('force_return', true),
-		    // #doc-arg-desc If true, the loop will return a result even if the image processing fails, and set the PROCESSING_ERROR variable to true if an error occurs. If false, images for which the processing fails are not returned.
+            // #doc-arg-desc If true, the loop will return a result even if the image processing fails, and set the PROCESSING_ERROR variable to true if an error occurs. If false, images for which the processing fails are not returned.
             Argument::createBooleanTypeArgument('ignore_processing_errors', true),
-		    // #doc-arg-desc The namespace
+            // #doc-arg-desc The namespace
             Argument::createAnyTypeArgument('query_namespace', 'Thelia\\Model'),
-		    // #doc-arg-desc If true, the loop il allowed to resize an image to match the required width and height, causing, in most cases, a quality loss. If false, the image will never be zoomed. Default is false.
+            // #doc-arg-desc If true, the loop il allowed to resize an image to match the required width and height, causing, in most cases, a quality loss. If false, the image will never be zoomed. Default is false.
             Argument::createBooleanTypeArgument('allow_zoom', false),
-		    // #doc-arg-desc If true, the loop will have a new output with the image in base64
+            // #doc-arg-desc If true, the loop will have a new output with the image in base64
             Argument::createBooleanTypeArgument('base64', false),
-		    // #doc-arg-desc
+            // #doc-arg-desc
             Argument::createBooleanTypeArgument('with_prev_next_info', false),
-		    // #doc-arg-desc The format of the image.
+            // #doc-arg-desc The format of the image.
             Argument::createAnyTypeArgument('format')
         );
 
@@ -374,27 +374,27 @@ class Image extends BaseI18nLoop implements PropelSearchLoopInterface
             $loopResultRow = new LoopResultRow($result);
 
             $loopResultRow
-		        // #doc-out-desc the image ID
+                // #doc-out-desc the image ID
                 ->set('ID', $result->getId())
-		        // #doc-out-desc The locale used for this research
+                // #doc-out-desc The locale used for this research
                 ->set('LOCALE', $this->locale)
-		        // #doc-out-desc The absolute path to the original image file
+                // #doc-out-desc The absolute path to the original image file
                 ->set('ORIGINAL_IMAGE_PATH', $sourceFilePath)
-		        // #doc-out-desc the image title
+                // #doc-out-desc the image title
                 ->set('TITLE', $result->getVirtualColumn('i18n_TITLE'))
-		        // #doc-out-desc the image chapo
+                // #doc-out-desc the image chapo
                 ->set('CHAPO', $result->getVirtualColumn('i18n_CHAPO'))
-		        // #doc-out-desc the image description
+                // #doc-out-desc the image description
                 ->set('DESCRIPTION', $result->getVirtualColumn('i18n_DESCRIPTION'))
-		        // #doc-out-desc the image postscriptum
+                // #doc-out-desc the image postscriptum
                 ->set('POSTSCRIPTUM', $result->getVirtualColumn('i18n_POSTSCRIPTUM'))
-		        // #doc-out-desc true if the image is visible. False otherwise
+                // #doc-out-desc true if the image is visible. False otherwise
                 ->set('VISIBLE', $result->getVisible())
-		        // #doc-out-desc the position of this image in the object's image list
+                // #doc-out-desc the position of this image in the object's image list
                 ->set('POSITION', $result->getPosition())
-		        // #doc-out-desc The object type (e.g., produc, category, etc. see 'source' parameter for possible values)
+                // #doc-out-desc The object type (e.g., produc, category, etc. see 'source' parameter for possible values)
                 ->set('OBJECT_TYPE', $this->objectType)
-		        // #doc-out-desc The object ID
+                // #doc-out-desc The object ID
                 ->set('OBJECT_ID', $this->objectId)
             ;
 
@@ -409,23 +409,23 @@ class Image extends BaseI18nLoop implements PropelSearchLoopInterface
                 $imageExt = pathinfo($event->getSourceFilepath(), \PATHINFO_EXTENSION);
 
                 $loopResultRow
-		            // #doc-out-desc The absolute URL to the generated image.
+                    // #doc-out-desc The absolute URL to the generated image.
                     ->set('IMAGE_URL', $event->getFileUrl())
-		            // #doc-out-desc The absolute URL to the original image
+                    // #doc-out-desc The absolute URL to the original image
                     ->set('ORIGINAL_IMAGE_URL', $event->getOriginalFileUrl())
-		            // #doc-out-desc The absolute path to the generated image file
+                    // #doc-out-desc The absolute path to the generated image file
                     ->set('IMAGE_PATH', $event->getCacheFilepath())
-		            // #doc-out-desc true if the image processing fails. In this case, $IMAGE_URL, $ORIGINAL_IMAGE_URL, and $IMAGE_PATH will be empty.
+                    // #doc-out-desc true if the image processing fails. In this case, $IMAGE_URL, $ORIGINAL_IMAGE_URL, and $IMAGE_PATH will be empty.
                     ->set('PROCESSING_ERROR', false)
-		            // #doc-out-desc true if the image is an SVG image
+                    // #doc-out-desc true if the image is an SVG image
                     ->set('IS_SVG', 'svg' === $imageExt)
-		            // #doc-out-desc the image height
+                    // #doc-out-desc the image height
                     ->set('IMAGE_HEIGHT', $event->getImageObject()->getSize()->getHeight())
-		            // #doc-out-desc the image width
+                    // #doc-out-desc the image width
                     ->set('IMAGE_WIDTH', $event->getImageObject()->getSize()->getWidth())
                 ;
                 if ($this->getBase64()) {
-		            // #doc-out-desc only available if base64 param is set to true
+                    // #doc-out-desc only available if base64 param is set to true
                     $loopResultRow->set('IMAGE_BASE64', $this->toBase64($event->getCacheFilepath()));
                 }
             } catch (\Exception $ex) {
@@ -434,17 +434,17 @@ class Image extends BaseI18nLoop implements PropelSearchLoopInterface
 
                 if ($returnErroredImages) {
                     $loopResultRow
-		                // #doc-out-desc The absolute URL to the generated image.
+                        // #doc-out-desc The absolute URL to the generated image.
                         ->set('IMAGE_URL', '')
-		                // #doc-out-desc The absolute URL to the original image
+                        // #doc-out-desc The absolute URL to the original image
                         ->set('ORIGINAL_IMAGE_URL', '')
-		                // #doc-out-desc The absolute path to the generated image file
+                        // #doc-out-desc The absolute path to the generated image file
                         ->set('IMAGE_PATH', '')
-		                // #doc-out-desc true if the image processing fails. In this case, $IMAGE_URL, $ORIGINAL_IMAGE_URL, and $IMAGE_PATH will be empty.
+                        // #doc-out-desc true if the image processing fails. In this case, $IMAGE_URL, $ORIGINAL_IMAGE_URL, and $IMAGE_PATH will be empty.
                         ->set('PROCESSING_ERROR', true)
-		                // #doc-out-desc the image height
+                        // #doc-out-desc the image height
                         ->set('IMAGE_HEIGHT', '')
-		                // #doc-out-desc the image width
+                        // #doc-out-desc the image width
                         ->set('IMAGE_WIDTH', '')
                     ;
                 } else {
@@ -470,13 +470,13 @@ class Image extends BaseI18nLoop implements PropelSearchLoopInterface
                     ->orderByPosition(Criteria::ASC)
                     ->findOne();
                 $loopResultRow
-		            // #doc-out-desc If the loop has a previous image
+                    // #doc-out-desc If the loop has a previous image
                     ->set('HAS_PREVIOUS', $previous != null ? 1 : 0)
-		            // #doc-out-desc If the loop has a next image
+                    // #doc-out-desc If the loop has a next image
                     ->set('HAS_NEXT', $next != null ? 1 : 0)
-		            // #doc-out-desc The previous image ID
+                    // #doc-out-desc The previous image ID
                     ->set('PREVIOUS', $previous != null ? $previous->getId() : -1)
-		            // #doc-out-desc The next image ID
+                    // #doc-out-desc The next image ID
                     ->set('NEXT', $next != null ? $next->getId() : -1);
             }
 

@@ -60,23 +60,23 @@ class Folder extends BaseI18nLoop implements PropelSearchLoopInterface, SearchLo
     protected function getArgDefinitions()
     {
         return new ArgumentCollection(
-		    // #doc-arg-desc A single or a list of folder ids.
+            // #doc-arg-desc A single or a list of folder ids.
             Argument::createIntListTypeArgument('id'),
-		    // #doc-arg-desc A single folder id.
+            // #doc-arg-desc A single folder id.
             Argument::createIntTypeArgument('parent'),
-		    // #doc-arg-desc A single content id.
+            // #doc-arg-desc A single content id.
             Argument::createIntTypeArgument('content'),
-		    // #doc-arg-desc A boolean value which allows either to exclude current folder from results either to match only this folder
+            // #doc-arg-desc A boolean value which allows either to exclude current folder from results either to match only this folder
             Argument::createBooleanTypeArgument('current'),
-		    // #doc-arg-desc (**not implemented yet**) A boolean value. If true, only the folders which contains at leat a visible content (either directly or trough a subfolder) are returned
+            // #doc-arg-desc (**not implemented yet**) A boolean value. If true, only the folders which contains at leat a visible content (either directly or trough a subfolder) are returned
             Argument::createBooleanTypeArgument('not_empty', 0),
-		    // #doc-arg-desc A boolean value.
+            // #doc-arg-desc A boolean value.
             Argument::createBooleanOrBothTypeArgument('visible', 1),
-		    // #doc-arg-desc Title of the folder.
+            // #doc-arg-desc Title of the folder.
             Argument::createAnyTypeArgument('title'),
-		    // #doc-arg-desc A boolean. If set to true, the loop will return the number of sub-folders of each folder
+            // #doc-arg-desc A boolean. If set to true, the loop will return the number of sub-folders of each folder
             Argument::createBooleanTypeArgument('need_count_child', true),
-		    // #doc-arg-desc A boolean. If set to true, the loop will return the number of contents in each folder and its sub-folders
+            // #doc-arg-desc A boolean. If set to true, the loop will return the number of contents in each folder and its sub-folders
             Argument::createBooleanTypeArgument('need_content_count', true),
             // #doc-arg-desc A list of values
             new Argument(
@@ -96,11 +96,11 @@ class Folder extends BaseI18nLoop implements PropelSearchLoopInterface, SearchLo
                 ),
                 'manual'
             ),
-		    // #doc-arg-desc A single or a list of folder ids.
+            // #doc-arg-desc A single or a list of folder ids.
             Argument::createIntListTypeArgument('exclude'),
-		    // #doc-arg-desc A boolean. If set to true, $PREVIOUS and $NEXT output arguments are available.
+            // #doc-arg-desc A boolean. If set to true, $PREVIOUS and $NEXT output arguments are available.
             Argument::createBooleanTypeArgument('with_prev_next_info', false),
-		    // #doc-arg-desc This parameter controls how content is counted. If 'yes' (the default) only visible contents are counted, 'no': only hidden contents are counted, '
+            // #doc-arg-desc This parameter controls how content is counted. If 'yes' (the default) only visible contents are counted, 'no': only hidden contents are counted, '
             Argument::createBooleanOrBothTypeArgument('content_count_visible', true)
         );
     }
@@ -250,44 +250,44 @@ class Folder extends BaseI18nLoop implements PropelSearchLoopInterface, SearchLo
             $loopResultRow = new LoopResultRow($folder);
 
             $loopResultRow
-		        // #doc-out-desc the folder id
+                // #doc-out-desc the folder id
                 ->set('ID', $folder->getId())
-		        // #doc-out-desc check if the folder is translated
+                // #doc-out-desc check if the folder is translated
                 ->set('IS_TRANSLATED', $folder->getVirtualColumn('IS_TRANSLATED'))
-		        // #doc-out-desc The locale used for this research
+                // #doc-out-desc The locale used for this research
                 ->set('LOCALE', $this->locale)
-		        // #doc-out-desc the folder title
+                // #doc-out-desc the folder title
                 ->set('TITLE', $folder->getVirtualColumn('i18n_TITLE'))
-		        // #doc-out-desc the folder chapo
+                // #doc-out-desc the folder chapo
                 ->set('CHAPO', $folder->getVirtualColumn('i18n_CHAPO'))
-		        // #doc-out-desc the folder description
+                // #doc-out-desc the folder description
                 ->set('DESCRIPTION', $folder->getVirtualColumn('i18n_DESCRIPTION'))
-		        // #doc-out-desc the folder postscriptum
+                // #doc-out-desc the folder postscriptum
                 ->set('POSTSCRIPTUM', $folder->getVirtualColumn('i18n_POSTSCRIPTUM'))
-		        // #doc-out-desc the parent folder
+                // #doc-out-desc the parent folder
                 ->set('PARENT', $folder->getParent())
-		        // #doc-out-desc Root of this folder
+                // #doc-out-desc Root of this folder
                 ->set('ROOT', $folder->getRoot($folder->getId()))
-		        // #doc-out-desc the folder URL
+                // #doc-out-desc the folder URL
                 ->set('URL', $this->getReturnUrl() ? $folder->getUrl($this->locale) : null)
-		        // #doc-out-desc the folder meta title
+                // #doc-out-desc the folder meta title
                 ->set('META_TITLE', $folder->getVirtualColumn('i18n_META_TITLE'))
-		        // #doc-out-desc the folder meta description
+                // #doc-out-desc the folder meta description
                 ->set('META_DESCRIPTION', $folder->getVirtualColumn('i18n_META_DESCRIPTION'))
-		        // #doc-out-desc the folder meta keywords
+                // #doc-out-desc the folder meta keywords
                 ->set('META_KEYWORDS', $folder->getVirtualColumn('i18n_META_KEYWORDS'))
-		        // #doc-out-desc the folder visibility
+                // #doc-out-desc the folder visibility
                 ->set('VISIBLE', $folder->getVisible() ? '1' : '0')
-		        // #doc-out-desc the folder position
+                // #doc-out-desc the folder position
                 ->set('POSITION', $folder->getPosition());
 
             if ($needCountChild) {
-		        // #doc-out-desc Number of subfolders contained by the current forlder.
+                // #doc-out-desc Number of subfolders contained by the current forlder.
                 $loopResultRow->set('CHILD_COUNT', $folder->countChild());
             }
 
             if ($needContentCount) {
-		        // #doc-out-desc the number of visible contents for this folder.
+                // #doc-out-desc the number of visible contents for this folder.
                 $loopResultRow->set('CONTENT_COUNT', $folder->countAllContents($contentCountVisiblility));
             }
 
@@ -320,13 +320,13 @@ class Folder extends BaseI18nLoop implements PropelSearchLoopInterface, SearchLo
                     ->findOne();
 
                 $loopResultRow
-		            // #doc-out-desc true if a folder exists before this one in the current parent folder, following folders positions.
+                    // #doc-out-desc true if a folder exists before this one in the current parent folder, following folders positions.
                     ->set('HAS_PREVIOUS', $previous != null ? 1 : 0)
-		            // #doc-out-desc true if a folder exists after this one in the current parent folder, following folders positions.
+                    // #doc-out-desc true if a folder exists after this one in the current parent folder, following folders positions.
                     ->set('HAS_NEXT', $next != null ? 1 : 0)
-		            // #doc-out-desc The ID of folder before this one in the current parent folder, following folders positions, or null if none exists.
+                    // #doc-out-desc The ID of folder before this one in the current parent folder, following folders positions, or null if none exists.
                     ->set('PREVIOUS', $previous != null ? $previous->getId() : -1)
-		            // #doc-out-desc The ID of folder after this one in the current parent folder, following folders positions, or null if none exists.
+                    // #doc-out-desc The ID of folder after this one in the current parent folder, following folders positions, or null if none exists.
                     ->set('NEXT', $next != null ? $next->getId() : -1);
             }
 

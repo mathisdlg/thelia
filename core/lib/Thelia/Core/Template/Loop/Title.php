@@ -43,7 +43,7 @@ class Title extends BaseI18nLoop implements PropelSearchLoopInterface
     protected function getArgDefinitions()
     {
         return new ArgumentCollection(
-		    // #doc-arg-desc A single or a list of title ids.
+            // #doc-arg-desc A single or a list of title ids.
             Argument::createIntListTypeArgument('id')
         );
     }
@@ -71,19 +71,19 @@ class Title extends BaseI18nLoop implements PropelSearchLoopInterface
         /** @var CustomerTitleModel $title */
         foreach ($loopResult->getResultDataCollection() as $title) {
             $loopResultRow = new LoopResultRow($title);
-		    // #doc-out-desc the title id
+            // #doc-out-desc the title id
             $loopResultRow->set('ID', $title->getId())
-		        // #doc-out-desc check if the content is translated
+                // #doc-out-desc check if the content is translated
                 ->set('IS_TRANSLATED', $title->getVirtualColumn('IS_TRANSLATED'))
-		        // #doc-out-desc the locale (e.g. fr_FR) of the returned data
+                // #doc-out-desc the locale (e.g. fr_FR) of the returned data
                 ->set('LOCALE', $this->locale)
-		        // #doc-out-desc return if the title is by default title
+                // #doc-out-desc return if the title is by default title
                 ->set('DEFAULT', $title->getByDefault())
-		        // #doc-out-desc the short title
+                // #doc-out-desc the short title
                 ->set('SHORT', $title->getVirtualColumn('i18n_SHORT'))
-		        // #doc-out-desc the full title
+                // #doc-out-desc the full title
                 ->set('LONG', $title->getVirtualColumn('i18n_LONG'))
-		        // #doc-out-desc the title position
+                // #doc-out-desc the title position
                 ->set('POSITION', $title->getPosition());
             $this->addOutputFields($loopResultRow, $title);
 

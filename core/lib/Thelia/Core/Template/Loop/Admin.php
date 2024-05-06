@@ -46,9 +46,9 @@ class Admin extends BaseLoop implements PropelSearchLoopInterface
     protected function getArgDefinitions()
     {
         return new ArgumentCollection(
-		// #doc-arg-desc A single or a list of admin ids.
+            // #doc-arg-desc A single or a list of admin ids.
             Argument::createIntListTypeArgument('id'),
-		// #doc-arg-desc A single or a list of profile ids.
+            // #doc-arg-desc A single or a list of profile ids.
             Argument::createIntListTypeArgument('profile')
         );
     }

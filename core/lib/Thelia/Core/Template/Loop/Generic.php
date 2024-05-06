@@ -43,13 +43,13 @@ class Generic extends BaseLoop implements PropelSearchLoopInterface
         return new ArgumentCollection(
             // #doc-arg-desc The table name you want query
             Argument::createAlphaNumStringTypeArgument('table_name', null, true),
-		    // #doc-arg-desc A single or a list of filters to apply on columns in this format <code>column_name:value1,value2&#124;other_column:value</code>
+            // #doc-arg-desc A single or a list of filters to apply on columns in this format <code>column_name:value1,value2&#124;other_column:value</code>
             Argument::createAnyTypeArgument('filters'),
             // #doc-arg-desc A single or a list of orders to apply on columns 
             Argument::createAnyTypeArgument('orders'),
-		    // #doc-arg-desc The locale for translated columns
+            // #doc-arg-desc The locale for translated columns
             Argument::createAnyTypeArgument('locale'),
-		    // #doc-arg-desc The number of rows to return
+            // #doc-arg-desc The number of rows to return
             Argument::createIntTypeArgument('limit', 100)
         );
     }
@@ -115,8 +115,8 @@ class Generic extends BaseLoop implements PropelSearchLoopInterface
         return $query;
     }
 
-	 /**
-	 */
+     /**
+     */
     public function parseResults(LoopResult $loopResult)
     {
         $tableMapClass = PropelResolver::getTableMapByTableName($this->getTableName());

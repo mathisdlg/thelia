@@ -95,59 +95,59 @@ class Product extends BaseI18nLoop implements PropelSearchLoopInterface, SearchL
     protected function getArgDefinitions()
     {
         return new ArgumentCollection(
-		    // #doc-arg-desc A boolean. If set to true, product loop will consider all product sale elements else it will only consider default product sale element. Some of the arguments/outputs will not be available depending on the complex argument.
+            // #doc-arg-desc A boolean. If set to true, product loop will consider all product sale elements else it will only consider default product sale element. Some of the arguments/outputs will not be available depending on the complex argument.
             Argument::createBooleanTypeArgument('complex', false),
-		    // #doc-arg-desc A single or a list of product ids.
+            // #doc-arg-desc A single or a list of product ids.
             Argument::createIntListTypeArgument('id'),
-		    // #doc-arg-desc A single or a list of product references.
+            // #doc-arg-desc A single or a list of product references.
             Argument::createAnyListTypeArgument('ref'),
-		    // #doc-arg-desc A single or a list of category ids.
+            // #doc-arg-desc A single or a list of category ids.
             Argument::createIntListTypeArgument('category'),
-		    // #doc-arg-desc A single or a list of brand ids.
+            // #doc-arg-desc A single or a list of brand ids.
             Argument::createIntListTypeArgument('brand'),
-		    // #doc-arg-desc A single or a list of a promotional campaign id
+            // #doc-arg-desc A single or a list of a promotional campaign id
             Argument::createIntListTypeArgument('sale'),
-		    // #doc-arg-desc A single or a list of default category ids allowing to retrieve all products having this parameter as default category.
+            // #doc-arg-desc A single or a list of default category ids allowing to retrieve all products having this parameter as default category.
             Argument::createIntListTypeArgument('category_default'),
-		    // #doc-arg-desc One or more content ID. When this parameter is set, the loop returns the products related to the specified content IDs.
+            // #doc-arg-desc One or more content ID. When this parameter is set, the loop returns the products related to the specified content IDs.
             Argument::createIntListTypeArgument('content'),
-		    // #doc-arg-desc A boolean value to get products by their newness
+            // #doc-arg-desc A boolean value to get products by their newness
             Argument::createBooleanTypeArgument('new'),
-		    // #doc-arg-desc A boolean value.
+            // #doc-arg-desc A boolean value.
             Argument::createBooleanTypeArgument('promo'),
-		    // #doc-arg-desc A float value. Equal value matches.
+            // #doc-arg-desc A float value. Equal value matches.
             Argument::createFloatTypeArgument('min_price'),
-		    // #doc-arg-desc A float value. Equal value matches.
+            // #doc-arg-desc A float value. Equal value matches.
             Argument::createFloatTypeArgument('max_price'),
-		    // #doc-arg-desc An integer value. Equal value matches.
+            // #doc-arg-desc An integer value. Equal value matches.
             Argument::createIntTypeArgument('min_stock'),
-		    // #doc-arg-desc A float value. Equal value matches.
+            // #doc-arg-desc A float value. Equal value matches.
             Argument::createFloatTypeArgument('min_weight'),
-		    // #doc-arg-desc A float value. Equal value matches.
+            // #doc-arg-desc A float value. Equal value matches.
             Argument::createFloatTypeArgument('max_weight'),
-		    // #doc-arg-desc A boolean. If set to true, $HAS_PREVIOUS, $HAS_NEXT, $PREVIOUS, and $NEXT output variables are available.
+            // #doc-arg-desc A boolean. If set to true, $HAS_PREVIOUS, $HAS_NEXT, $PREVIOUS, and $NEXT output variables are available.
             Argument::createBooleanTypeArgument('with_prev_next_info', false),
-		    // #doc-arg-desc A boolean value.
+            // #doc-arg-desc A boolean value.
             Argument::createBooleanOrBothTypeArgument('with_prev_next_visible', Type\BooleanOrBothType::ANY),
-		    // #doc-arg-desc A boolean value which allows either to exclude current product from results either to match only this product
+            // #doc-arg-desc A boolean value which allows either to exclude current product from results either to match only this product
             Argument::createBooleanTypeArgument('current'),
-		    // #doc-arg-desc A boolean value which allows either to exclude current category products from results either to match only current category products. If a product is in multiple categories whose one is current it will not be excluded if current_category="false" but will be included if current_category="yes"
+            // #doc-arg-desc A boolean value which allows either to exclude current category products from results either to match only current category products. If a product is in multiple categories whose one is current it will not be excluded if current_category="false" but will be included if current_category="yes"
             Argument::createBooleanTypeArgument('current_category'),
-		    // #doc-arg-desc A positive integer value which precise how many subcategory levels will be browse. Will not be consider if category parameter is not set.
+            // #doc-arg-desc A positive integer value which precise how many subcategory levels will be browse. Will not be consider if category parameter is not set.
             Argument::createIntTypeArgument('depth', 1),
-		    // #doc-arg-desc A boolean value.
+            // #doc-arg-desc A boolean value.
             Argument::createBooleanOrBothTypeArgument('virtual', Type\BooleanOrBothType::ANY),
-		    // #doc-arg-desc A boolean value.
+            // #doc-arg-desc A boolean value.
             Argument::createBooleanOrBothTypeArgument('visible', 1),
-		    // #doc-arg-desc A currency id
+            // #doc-arg-desc A currency id
             Argument::createIntTypeArgument('currency'),
-		    // #doc-arg-desc filter by title
+            // #doc-arg-desc filter by title
             Argument::createAnyTypeArgument('title'),
-		    // #doc-arg-desc A single or a list of template id
+            // #doc-arg-desc A single or a list of template id
             Argument::createIntListTypeArgument('template_id'),
-		    // #doc-arg-desc Filter products having this tax rule ID
+            // #doc-arg-desc Filter products having this tax rule ID
             Argument::createIntListTypeArgument('tax_rule_id'),
-		    // #doc-arg-desc Filter products not having this tax rule ID
+            // #doc-arg-desc Filter products not having this tax rule ID
             Argument::createIntListTypeArgument('exclude_tax_rule_id'),
             // #doc-arg-desc The order for sorting products, see sorting possible values
             new Argument(
@@ -173,9 +173,9 @@ class Product extends BaseI18nLoop implements PropelSearchLoopInterface, SearchL
                 ),
                 'alpha'
             ),
-		    // #doc-arg-desc A single or a list of product ids.
+            // #doc-arg-desc A single or a list of product ids.
             Argument::createIntListTypeArgument('exclude'),
-		    // #doc-arg-desc A single or a list of category ids. If a product is in multiple categories which are not all excluded it will not be excluded.
+            // #doc-arg-desc A single or a list of category ids. If a product is in multiple categories which are not all excluded it will not be excluded.
             Argument::createIntListTypeArgument('exclude_category'),
             // #doc-arg-desc A list of mandatory features and the feature_availability expected for these.
             new Argument(
