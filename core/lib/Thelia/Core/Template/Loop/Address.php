@@ -24,7 +24,7 @@ use Thelia\Model\AddressQuery;
 use Thelia\Type;
 use Thelia\Type\TypeCollection;
 
-// #doc-desc Address loop lists address addresses.
+// #doc-desc Address loop lists.
 
 /**
  * Address loop.
