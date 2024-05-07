@@ -322,21 +322,37 @@ class Product extends BaseI18nLoop implements PropelSearchLoopInterface, SearchL
             $defaultCategoryId = $this->getDefaultCategoryId($product);
 
             $loopResultRow
+                // #doc-out-desc the weight of the product
                 ->set('WEIGHT', $product->getVirtualColumn('weight'))
+                // #doc-out-desc the quantity of the product
                 ->set('QUANTITY', $product->getVirtualColumn('quantity'))
+                // #doc-out-desc the ean code of the product
                 ->set('EAN_CODE', $product->getVirtualColumn('ean_code'))
+                // #doc-out-desc the best price of the product
                 ->set('BEST_PRICE', $product->getVirtualColumn('is_promo') ? $promoPrice : $price)
+                // #doc-out-desc the best price of of tax for the product
                 ->set('BEST_PRICE_TAX', $taxedPrice - $product->getVirtualColumn('is_promo') ? $taxedPromoPrice - $promoPrice : $taxedPrice - $price)
+                // #doc-out-desc the best price of the product with tax
                 ->set('BEST_TAXED_PRICE', $product->getVirtualColumn('is_promo') ? $taxedPromoPrice : $taxedPrice)
+                // #doc-out-desc the promo price of the product
                 ->set('PRICE', $price)
+                // #doc-out-desc the tax
                 ->set('PRICE_TAX', $taxedPrice - $price)
+                // #doc-out-desc the price of the product with tax
                 ->set('TAXED_PRICE', $taxedPrice)
+                // #doc-out-desc the promo price of the product
                 ->set('PROMO_PRICE', $promoPrice)
+                // #doc-out-desc the tax of the promo price
                 ->set('PROMO_PRICE_TAX', $taxedPromoPrice - $promoPrice)
+                // #doc-out-desc the promo price of the product with tax
                 ->set('TAXED_PROMO_PRICE', $taxedPromoPrice)
+                // #doc-out-desc if the product is in promo
                 ->set('IS_PROMO', $product->getVirtualColumn('is_promo'))
+                // #doc-out-desc if the product is new
                 ->set('IS_NEW', $product->getVirtualColumn('is_new'))
+                // #doc-out-desc the product sale element id
                 ->set('PRODUCT_SALE_ELEMENT', $product->getVirtualColumn('pse_id'))
+                // #doc-out-desc the product sale element count
                 ->set('PSE_COUNT', $product->getVirtualColumn('pse_count'));
 
             $this->associateValues($loopResultRow, $product, $defaultCategoryId);
@@ -387,10 +403,15 @@ class Product extends BaseI18nLoop implements PropelSearchLoopInterface, SearchL
             $defaultCategoryId = $this->getDefaultCategoryId($product);
 
             $loopResultRow
+                // #doc-out-desc the best price
                 ->set('BEST_PRICE', $price)
+                // #doc-out-desc the best price of tax
                 ->set('BEST_PRICE_TAX', $taxedPrice - $price)
+                // #doc-out-desc the best price with tax
                 ->set('BEST_TAXED_PRICE', $taxedPrice)
+                // #doc-out-desc if the product is in promo
                 ->set('IS_PROMO', $product->getVirtualColumn('main_product_is_promo'))
+                // #doc-out-desc if the product is new
                 ->set('IS_NEW', $product->getVirtualColumn('main_product_is_new'));
 
             $this->associateValues($loopResultRow, $product, $defaultCategoryId);
@@ -418,25 +439,45 @@ class Product extends BaseI18nLoop implements PropelSearchLoopInterface, SearchL
         }
 
         $loopResultRow
+            // #doc-out-desc the product ID
             ->set('ID', $product->getId())
+            // #doc-out-desc the product reference
             ->set('REF', $product->getRef())
+            // #doc-out-desc if the product is translated
             ->set('IS_TRANSLATED', $product->getVirtualColumn('IS_TRANSLATED'))
+            // #doc-out-desc the language
             ->set('LOCALE', $this->locale)
+            // #doc-out-desc the product title in the current language
             ->set('TITLE', $product->getVirtualColumn('i18n_TITLE'))
+            // #doc-out-desc the product chapo in the current language
             ->set('CHAPO', $product->getVirtualColumn('i18n_CHAPO'))
+            // #doc-out-desc the product description in the current language
             ->set('DESCRIPTION', $product->getVirtualColumn('i18n_DESCRIPTION'))
+            // #doc-out-desc the product postscriptum in the current language
             ->set('POSTSCRIPTUM', $product->getVirtualColumn('i18n_POSTSCRIPTUM'))
+            // #doc-out-desc the product URL
             ->set('URL', $this->getReturnUrl() ? $product->getUrl($this->locale) : null)
+            // #doc-out-desc the product meta title in the current language
             ->set('META_TITLE', $product->getVirtualColumn('i18n_META_TITLE'))
+            // #doc-out-desc the product meta description in the current language
             ->set('META_DESCRIPTION', $product->getVirtualColumn('i18n_META_DESCRIPTION'))
+            // #doc-out-desc the product meta keywords in the current language
             ->set('META_KEYWORDS', $product->getVirtualColumn('i18n_META_KEYWORDS'))
+            // #doc-out-desc the product position in the category
             ->set('POSITION', $product->getVirtualColumn('position_delegate'))
+            // #doc-out-desc virtual
             ->set('VIRTUAL', $product->getVirtual() ? '1' : '0')
+            // #doc-out-desc if the product is visible
             ->set('VISIBLE', $product->getVisible() ? '1' : '0')
+            // #doc-out-desc the default category ID
             ->set('TEMPLATE', $product->getTemplateId())
+            // #doc-out-desc the default category ID
             ->set('DEFAULT_CATEGORY', $defaultCategoryId)
+            // #doc-out-desc the tax rule id
             ->set('TAX_RULE_ID', $product->getTaxRuleId())
+            // #doc-out-desc the brand id
             ->set('BRAND_ID', $product->getBrandId() ?: 0)
+            // #doc-out-desc the original price
             ->set('SHOW_ORIGINAL_PRICE', $display_initial_price);
 
         $this->findNextPrev($loopResultRow, $product, $defaultCategoryId);
@@ -483,9 +524,13 @@ class Product extends BaseI18nLoop implements PropelSearchLoopInterface, SearchL
                 ->findOne();
 
             $loopResultRow
+                // #doc-out-desc if the product has a previous product
                 ->set('HAS_PREVIOUS', $previous != null ? 1 : 0)
+                // #doc-out-desc if the product has a next product
                 ->set('HAS_NEXT', $next != null ? 1 : 0)
+                // #doc-out-desc the previous product ID
                 ->set('PREVIOUS', $previous != null ? $previous->getProductId() : -1)
+                // #doc-out-desc the next product ID
                 ->set('NEXT', $next != null ? $next->getProductId() : -1);
         }
     }
