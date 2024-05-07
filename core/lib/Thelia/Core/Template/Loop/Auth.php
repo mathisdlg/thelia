@@ -36,12 +36,6 @@ use Thelia\Type\TypeCollection;
  */
 class Auth extends BaseLoop implements ArraySearchLoopInterface
 {
-     /**
-     *
-     *
-     *
-     *
-     */
     public function getArgDefinitions()
     {
         return new ArgumentCollection(
